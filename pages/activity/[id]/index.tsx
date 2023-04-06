@@ -11,8 +11,18 @@ const Activity: NextPage = () => {
   const id = router.query.id as string
 
   useEffect(() => {
-    query({});
-  }, [query])
+    if (id) {
+      query({
+        url: `http://0.0.0.0:4000/api/activity/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+    }
+  }, [id])
+
+  console.log('----- >', error, state, id);
 
   return (
     <EntryWrapper>
@@ -22,9 +32,12 @@ const Activity: NextPage = () => {
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
       </Head>
-      Activity {id}
-      {data} - {error} - {state}
-
+      <hr />
+      {data.id}
+      <hr />
+      {data.title}
+      <hr />
+      {data.text}
     </EntryWrapper>
   );
 };

@@ -20,6 +20,7 @@ import { NotificationsProvider } from '../src/contexts/Notifications';
 import { TooltipProvider } from '../src/contexts/Tooltip';
 import { Notifications } from '../src/lib/Notifications';
 import { APIProvider } from '../src/contexts/Api';
+import { BodyInterfaceWrapper, MainInterfaceWrapper } from '../src/lib/Wrappers';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -62,12 +63,16 @@ const wagmiClient = createClient({
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
-        <Notifications />
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <BodyInterfaceWrapper>
+      <MainInterfaceWrapper>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
+            <Notifications />
+            <Component {...pageProps} />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </MainInterfaceWrapper>
+    </BodyInterfaceWrapper>
   );
 }
 

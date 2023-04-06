@@ -32,13 +32,12 @@ export const MainInterfaceWrapper = styled.div`
  */
 export const EntryWrapper = styled.div`
   background-size: 100% 100%;
-  width: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   display: flex;
   flex-flow: column nowrap;
-  height: 100vh;
   overflow: scroll;
   flex-grow: 1;
+  padding: 60px;
 `;
