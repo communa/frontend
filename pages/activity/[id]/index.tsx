@@ -1,10 +1,17 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react';
+import { APIContext } from '../../../src/contexts/Api';
 
 const Activity: NextPage = () => {
   const router = useRouter();
+  const { data, error, state, query } = useContext(APIContext);
   const id = router.query.id as string
+
+  useEffect(() => {
+    query({});
+  }, [query])
 
   return (
     <div>
@@ -15,6 +22,7 @@ const Activity: NextPage = () => {
         <meta name="description" content="About page" />
       </Head>
       Activity {id}
+      {data} - {error} - {state}
 
     </div >
   );

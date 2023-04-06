@@ -8,5 +8,5 @@ export interface AuthContextInterface {
 export const defaultAuthContext: AuthContextInterface = {
   authStatus: 'unauthenticated',
   // eslint-disable-next-line
-  connect: (s: AuthenticationStatus) => {},
+  connect: (s: AuthenticationStatus) => { },
 };

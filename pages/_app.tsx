@@ -1,4 +1,4 @@
-import '../styles/global.css';
+import '../src/assets/global.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 import {
@@ -19,6 +19,7 @@ import { withProviders } from '../src/lib/Hooks';
 import { NotificationsProvider } from '../src/contexts/Notifications';
 import { TooltipProvider } from '../src/contexts/Tooltip';
 import { Notifications } from '../src/lib/Notifications';
+import { APIProvider } from '../src/contexts/Api';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -59,7 +60,7 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider appInfo={demoAppInfo} chains={chains}>
@@ -70,10 +71,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-// export default MyApp;
-
 export default withProviders(
   NotificationsProvider,
   AuthProvider,
+  APIProvider,
   TooltipProvider
-)(MyApp);
+)(App);
