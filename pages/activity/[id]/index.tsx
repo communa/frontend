@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react';
 import { APIContext } from '../../../src/contexts/Api';
+import { EntryWrapper } from '../../../src/lib/Wrappers';
 
 const Activity: NextPage = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const Activity: NextPage = () => {
   }, [query])
 
   return (
-    <div>
+    <EntryWrapper>
       <Head>
         <title>Activity - Communa.Network</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -24,7 +25,7 @@ const Activity: NextPage = () => {
       Activity {id}
       {data} - {error} - {state}
 
-    </div >
+    </EntryWrapper>
   );
 };
 
