@@ -12,6 +12,6 @@ export interface APIContextInterface {
 export const defaultApiContext: APIContextInterface = {
   data: null,
   error: null,
-  state: 'ready',
+  state: 'progress',
   query: (config: AxiosRequestConfig) => { }
 };

@@ -1,7 +1,8 @@
+import { useContext, useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react';
+
 import { APIContext } from '../../../src/contexts/Api';
 import { EntryWrapper } from '../../../src/lib/Wrappers';
 
@@ -13,11 +14,8 @@ const Activity: NextPage = () => {
   useEffect(() => {
     if (id) {
       query({
-        url: `http://0.0.0.0:4000/api/activity/${id}`,
+        url: `/api/activity/${id}`,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
       });
     }
   }, [id])
