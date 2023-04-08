@@ -7,11 +7,12 @@ import { request } from 'src/Utils';
 import Header from 'src/lib/layout/Header';
 import { ActivityPageWrapper } from 'src/lib/Wrappers';
 import { useNotifications } from 'src/contexts/Notifications';
+import { API_HOST, APP_NAME } from 'src/config/consts';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
   const response = await request({
-    url: `http://0.0.0.0:4000/api/activity/${id}`,
+    url: `${API_HOST}/api/activity/${id}`,
     method: 'GET'
   });
 
@@ -35,7 +36,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
   return (
     <ActivityPageWrapper>
       <Head>
-        <title>{activity.title} - Communa.Network</title>
+        <title>{activity.title} - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />

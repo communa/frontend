@@ -23,6 +23,7 @@ import { TooltipProvider } from 'src/contexts/Tooltip';
 import { Notifications } from 'src/lib/Notifications';
 import { APIProvider } from 'src/contexts/Api';
 import { BodyInterfaceWrapper, MainInterfaceWrapper } from 'src/lib/Wrappers';
+import { APP_NAME } from 'src/config/consts';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -36,12 +37,12 @@ const { chains, provider, webSocketProvider } = configureChains(
 );
 
 const { wallets } = getDefaultWallets({
-  appName: 'RainbowKit demo',
+  appName: APP_NAME,
   chains,
 });
 
 const demoAppInfo = {
-  appName: 'Rainbowkit Demo',
+  appName: APP_NAME,
 };
 
 const connectors = connectorsForWallets([

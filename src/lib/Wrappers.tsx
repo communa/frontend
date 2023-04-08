@@ -19,42 +19,34 @@ export const MainInterfaceWrapper = styled.div`
 `;
 
 export const HomePageWrapper = styled.div`
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
   display: flex;
   flex-flow: column nowrap;
-  overflow: scroll;
   flex-grow: 1;
-  padding: 60px;
-  
+
   main {
+    height: calc(100vh - 120px);
+    overflow: scroll;
+
     display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    
-    section {
-      display: flex;
-      flex-direction: column;
-      flex: 10;
-      article {
-        margin-bottom: 20px;
-        
-        a {
-          margin-bottom: 10px;
-          font-size: 40px;
-          display: flex;
-          font-weight: 600;
-          color: #000;
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
+    flex-direction: column;
+    padding: 60px;
+
+    article {
+      margin-bottom: 20px;
+      
+      a {
+        margin-bottom: 10px;
+        font-size: 40px;
+        display: flex;
+        font-weight: 600;
+        color: #000;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
         }
-        .body {
-          padding: 20px 0;
-        }
+      }
+      .body {
+        padding: 20px 0;
       }
     }
   }
@@ -69,7 +61,7 @@ export const ActivityPageWrapper = styled.div`
   flex-flow: column nowrap;
   overflow: scroll;
   flex-grow: 1;
-  padding: 60px;
+  padding: 30px;
   
   article {
     margin-top: 20px;
