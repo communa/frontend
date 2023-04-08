@@ -1,15 +1,15 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { InferGetServerSidePropsType } from 'next'
 import { GetServerSideProps } from 'next'
 import { useContext } from 'react';
 import Head from 'next/head';
+import Link from 'next/link'
 
 import { request } from '../src/Utils';
 import { AuthContext } from '../src/contexts/Auth';
 import { EntryWrapper } from '../src/lib/Wrappers';
 import { useNotifications } from '../src/contexts/Notifications';
 import { IActivityCollection } from '../src/interface/IActivity';
-
+import Header from '../src/lib/layout/Header';
 
 export const getServerSideProps: GetServerSideProps<{ data: IActivityCollection }> = async () => {
   const response = await request({
@@ -31,9 +31,6 @@ export const getServerSideProps: GetServerSideProps<{ data: IActivityCollection 
 }
 
 const Home = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { authStatus, connect } = useContext(AuthContext);
-  const { addNotification } = useNotifications();
-
   console.log(data);
 
   return (
@@ -45,27 +42,20 @@ const Home = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
         <meta name="description" content="About page" />
       </Head>
 
-      <ConnectButton />
-      Home - {authStatus}
-      <button onClick={() => connect('authenticated')}>
-        Connect
-      </button>
-      <button onClick={() => {
-        addNotification({
-          title: `Test`,
-          subtitle: '',
-        });
-      }}>
-        Trigger Notification
-      </button>
+      <Header />
       <hr />
       {
         data[0].map(activity => {
           return (
             <>
-              {activity.id}
-              <hr />
-              {activity.title}
+              <Link href={`/activity/${activity.id}`}>
+                <h1>
+                  {activity.title}
+                </h1>
+              </Link>
+              <h2>
+                {activity.position}
+              </h2>
               <hr />
               {activity.text}
               <hr />

@@ -1,50 +1,43 @@
-import { useContext, useEffect } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router'
-import Error from 'next/error'
 
-import { APIContext } from '../../../src/contexts/Api';
 import { EntryWrapper } from '../../../src/lib/Wrappers';
+import { IActivity } from '../../../src/interface/IActivity';
+import { request } from '../../../src/Utils';
+import Header from '../../../src/lib/layout/Header';
 
-const Activity: NextPage = () => {
-  const router = useRouter();
-  const { data, error, state, query } = useContext(APIContext);
-  const id = router.query.id as string
+export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
+  const { id } = context.query;
+  const response = await request({
+    url: `http://0.0.0.0:4000/api/activity/${id}`,
+    method: 'GET'
+  });
 
-  useEffect(() => {
-    if (id) {
-      query({
-        url: `/api/activity/${id}`,
-        method: 'GET',
-      });
-    }
-  }, [id])
-
-  console.log('----- >', error, state, id);
-
-  if (error) {
-    return (
-      <EntryWrapper>
-        <Error statusCode={404} title="This page could not be found." />
-      </EntryWrapper>
-    );
+  return {
+    props: {
+      activity: response.data,
+    },
   }
+}
 
+const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(activity);
   return (
     <EntryWrapper>
       <Head>
-        <title>{data.title} - Communa.Network</title>
+        <title>{activity.title} - Communa.Network</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
       </Head>
+
+      <Header />
+
+      <h1>{activity.title}</h1>
+      <h2>{activity.position}</h2>
+      <h2>{activity.salary}</h2>
       <hr />
-      {data.id}
-      <hr />
-      {data.title}
-      <hr />
-      {data.text}
+      {activity.text}
     </EntryWrapper>
   );
 };
