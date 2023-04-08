@@ -11,11 +11,6 @@ export const BodyInterfaceWrapper = styled.div`
   flex-grow: 1;
 `;
 
-/* MainInterfaceWrapper
- *
- * A column flex wrapper that hosts the main page content.
- * Used once in Router.
- */
 export const MainInterfaceWrapper = styled.div`
   flex: 1;
   display: flex;
@@ -56,6 +51,9 @@ export const HomePageWrapper = styled.div`
           &:hover {
             text-decoration: underline;
           }
+        }
+        .body {
+          padding: 20px 0;
         }
       }
     }

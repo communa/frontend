@@ -1,4 +1,4 @@
-import '../src/assets/global.css';
+import 'src/assets/global.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 import {
@@ -15,13 +15,14 @@ import {
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
-import { AuthProvider } from '../src/contexts/Auth';
-import { withProviders } from '../src/lib/Hooks';
-import { NotificationsProvider } from '../src/contexts/Notifications';
-import { TooltipProvider } from '../src/contexts/Tooltip';
-import { Notifications } from '../src/lib/Notifications';
-import { APIProvider } from '../src/contexts/Api';
-import { BodyInterfaceWrapper, MainInterfaceWrapper } from '../src/lib/Wrappers';
+
+import { AuthProvider } from 'src/contexts/Auth';
+import { withProviders } from 'src/lib/Hooks';
+import { NotificationsProvider } from 'src/contexts/Notifications';
+import { TooltipProvider } from 'src/contexts/Tooltip';
+import { Notifications } from 'src/lib/Notifications';
+import { APIProvider } from 'src/contexts/Api';
+import { BodyInterfaceWrapper, MainInterfaceWrapper } from 'src/lib/Wrappers';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [

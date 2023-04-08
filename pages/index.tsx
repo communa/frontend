@@ -3,10 +3,10 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import Link from 'next/link'
 
-import { request } from '../src/Utils';
-import { HomePageWrapper } from '../src/lib/Wrappers';
-import { IActivitySearch } from '../src/interface/IActivity';
-import Header from '../src/lib/layout/Header';
+import { request } from 'src/Utils';
+import { HomePageWrapper } from 'src/lib/Wrappers';
+import { IActivitySearch } from 'src/interface/IActivity';
+import Header from 'src/lib/layout/Header';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
   const response = await request({
@@ -46,10 +46,14 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
                   <Link href={`/activity/${activity.id}`}>
                     {activity.title}
                   </Link>
-                  <h2>
-                    {activity.position}
-                  </h2>
-                  {activity.text}
+                  {activity.position && (
+                    <h2>
+                      {activity.position}
+                    </h2>
+                  )}
+                  <div className="body">
+                    {activity.text}
+                  </div>
                 </article>
               )
             })

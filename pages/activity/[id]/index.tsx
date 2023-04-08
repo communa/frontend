@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
-import { IActivity } from '../../../src/interface/IActivity';
-import { request } from '../../../src/Utils';
-import Header from '../../../src/lib/layout/Header';
-import { ActivityPageWrapper } from '../../../src/lib/Wrappers';
-import { useEffect } from 'react';
-import { useNotifications } from '../../../src/contexts/Notifications';
+import { IActivity } from 'src/interface/IActivity';
+import { request } from 'src/Utils';
+import Header from 'src/lib/layout/Header';
+import { ActivityPageWrapper } from 'src/lib/Wrappers';
+import { useNotifications } from 'src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -49,6 +49,9 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <div className="body">
           {activity.text}
         </div>
+        <a href={activity.jobUrl} target='_blank' rel="noreferrer">
+          {activity.jobUrl}
+        </a>
       </article>
     </ActivityPageWrapper>
   );

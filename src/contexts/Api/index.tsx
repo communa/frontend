@@ -3,8 +3,8 @@ import * as defaults from './defaults';
 
 import type { APIContextInterface } from './defaults';
 import { AxiosRequestConfig } from 'axios';
-import { request } from '../../Utils';
-import * as consts from '../../config/consts';
+import { request } from 'src/Utils';
+import * as consts from 'src/config/consts';
 
 export const APIContext = React.createContext<APIContextInterface>(
   defaults.defaultApiContext
