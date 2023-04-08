@@ -1,32 +1,40 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import type { NextPage } from 'next';
-import { useContext, useEffect } from 'react';
+import { InferGetServerSidePropsType } from 'next'
+import { GetServerSideProps } from 'next'
+import { useContext } from 'react';
 import Head from 'next/head';
 
+import { request } from '../src/Utils';
 import { AuthContext } from '../src/contexts/Auth';
 import { EntryWrapper } from '../src/lib/Wrappers';
 import { useNotifications } from '../src/contexts/Notifications';
-import { APIContext } from '../src/contexts/Api';
+import { IActivityCollection } from '../src/interface/IActivity';
 
-const Home: NextPage = () => {
+
+export const getServerSideProps: GetServerSideProps<{ data: IActivityCollection }> = async () => {
+  const response = await request({
+    url: `http://0.0.0.0:4000/api/activity/search`,
+    method: 'POST',
+    data: {
+      filter: {
+      },
+      sort: { createdAt: 'DESC' },
+      page: 0,
+    }
+  });
+
+  return {
+    props: {
+      data: response.data,
+    },
+  }
+}
+
+const Home = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { authStatus, connect } = useContext(AuthContext);
-  const { data, state, query } = useContext(APIContext);
   const { addNotification } = useNotifications();
 
-  useEffect(() => {
-    query({
-      url: `/api/activity/search`,
-      method: 'POST',
-      data: {
-        filter: {
-        },
-        sort: { createdAt: 'DESC' },
-        page: 0,
-      }
-    });
-  }, [])
-
-  console.log(data[0], state);
+  console.log(data);
 
   return (
     <EntryWrapper>
@@ -50,18 +58,21 @@ const Home: NextPage = () => {
       }}>
         Trigger Notification
       </button>
-      {data[0].map(activity => {
-        return (
-          <>
-            {activity.id}
-            <hr />
-            {activity.title}
-            <hr />
-            {activity.text}
-            <hr />
-          </>
-        )
-      })}
+      <hr />
+      {
+        data[0].map(activity => {
+          return (
+            <>
+              {activity.id}
+              <hr />
+              {activity.title}
+              <hr />
+              {activity.text}
+              <hr />
+            </>
+          )
+        })
+      }
     </EntryWrapper >
   );
 };
