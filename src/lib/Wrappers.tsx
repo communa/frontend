@@ -41,3 +41,22 @@ export const EntryWrapper = styled.div`
   flex-grow: 1;
   padding: 60px;
 `;
+
+export const ActivityPageWrapper = styled.div`
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: scroll;
+  flex-grow: 1;
+  padding: 60px;
+  
+  article {
+    margin-top: 20px;
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+`;
