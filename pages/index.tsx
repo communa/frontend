@@ -8,7 +8,6 @@ import { request } from 'src/Utils';
 import { HomePageWrapper } from 'src/lib/Wrappers';
 import { IActivitySearch } from 'src/interface/IActivity';
 import { API_HOST, APP_NAME } from 'src/config/consts';
-import Header from 'src/lib/layout/Header';
 import { useState } from 'react';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
@@ -34,6 +33,8 @@ export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }>
 
 const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [activities, setActivities] = useState(search[0]);
+  const [page, setPage] = useState(0);
+
   const onScroll = (e: any) => {
     const {
       scrollTop,
@@ -42,15 +43,23 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     } = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight < scrollHeight;
 
-    // console.log('.... canFetch', canFetch, search[0].length);
+    console.log('.... canFetch', canFetch);
 
     if (!canFetch) {
-      setActivities(
-        [
-          ...activities,
-          ...activities
-        ]
-      )
+      setPage(page + 1);
+
+      // const response = await request({
+      //   url: `${API_HOST}/api/activity/search`,
+      //   method: 'POST',
+      //   data: {
+      //     filter: {
+      //     },
+      //     sort: {
+      //       createdAt: 'DESC'
+      //     },
+      //     page: 0,
+      //   }
+      // });
     }
   }
 
@@ -63,7 +72,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <meta name="description" content="About page" />
       </Head>
       <main onScroll={(e) => onScroll(e)}>
-        {/* <Header /> */}
+        {page}
         {
           activities.map(activity => {
             return (
