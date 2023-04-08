@@ -13,14 +13,14 @@ export const Wrapper = styled.ul`
   justify-content: flex-end;
   z-index: 10;
   background: #000;
-  width: 400px;
+  width: 500px;
 
   li {
     background: var(--background-primary);
     margin: 0.4rem 1.2rem;
     position: relative;
     border-radius: 10px;
-    padding: 1rem 1.5rem;
+    padding: 20px;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;

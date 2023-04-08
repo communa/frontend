@@ -21,16 +21,9 @@ export const MainInterfaceWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   position: relative;
-  padding-bottom: 100px;
 `;
 
-/* EntryWrapper
- *
- * Highest level app component.
- * Provides global styling for headers and other global
- * classes used throughout the app and possibly the library.
- */
-export const EntryWrapper = styled.div`
+export const HomePageWrapper = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -40,6 +33,33 @@ export const EntryWrapper = styled.div`
   overflow: scroll;
   flex-grow: 1;
   padding: 60px;
+  
+  main {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    
+    section {
+      display: flex;
+      flex-direction: column;
+      flex: 10;
+      article {
+        margin-bottom: 20px;
+        
+        a {
+          margin-bottom: 10px;
+          font-size: 40px;
+          display: flex;
+          font-weight: 600;
+          color: #000;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const ActivityPageWrapper = styled.div`
@@ -56,7 +76,15 @@ export const ActivityPageWrapper = styled.div`
   article {
     margin-top: 20px;
     h1 {
-      margin-bottom: 10px;
+      margin-top: 5px;
+      font-size: 30px;
+    }
+    h2 {
+      margin-top: 5px;
+      font-size: 20px;
+    }
+    .body {
+      padding: 20px 0;
     }
   }
 `;

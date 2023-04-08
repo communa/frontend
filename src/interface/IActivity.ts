@@ -1,4 +1,4 @@
-export type IActivityCollection = [
+export type IActivitySearch = [
   IActivity[],
   number,
 ]

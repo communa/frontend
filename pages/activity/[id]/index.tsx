@@ -5,6 +5,8 @@ import { IActivity } from '../../../src/interface/IActivity';
 import { request } from '../../../src/Utils';
 import Header from '../../../src/lib/layout/Header';
 import { ActivityPageWrapper } from '../../../src/lib/Wrappers';
+import { useEffect } from 'react';
+import { useNotifications } from '../../../src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -21,7 +23,15 @@ export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = a
 }
 
 const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(activity);
+  const { addNotification } = useNotifications();
+
+  useEffect(() => {
+    addNotification({
+      title: `You're checking ${activity.title}`,
+      subtitle: '',
+    });
+  }, []);
+
   return (
     <ActivityPageWrapper>
       <Head>
@@ -36,7 +46,9 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <h1>{activity.title}</h1>
         <h2>{activity.position}</h2>
         <h2>{activity.salary}</h2>
-        {activity.text}
+        <div className="body">
+          {activity.text}
+        </div>
       </article>
     </ActivityPageWrapper>
   );
