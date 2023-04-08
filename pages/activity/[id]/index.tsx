@@ -41,8 +41,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
       </Head>
-      <Header />
-
+      {/* <Header /> */}
       <article>
         <h1>{activity.title}</h1>
         <h2>{activity.position}</h2>

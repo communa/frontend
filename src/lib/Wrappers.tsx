@@ -53,15 +53,9 @@ export const HomePageWrapper = styled.div`
 `;
 
 export const ActivityPageWrapper = styled.div`
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
   display: flex;
   flex-flow: column nowrap;
-  overflow: scroll;
-  flex-grow: 1;
-  padding: 30px;
+  padding: 60px;
   
   article {
     margin-top: 20px;

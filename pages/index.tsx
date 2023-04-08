@@ -8,6 +8,8 @@ import { request } from 'src/Utils';
 import { HomePageWrapper } from 'src/lib/Wrappers';
 import { IActivitySearch } from 'src/interface/IActivity';
 import { API_HOST, APP_NAME } from 'src/config/consts';
+import Header from 'src/lib/layout/Header';
+import { useState } from 'react';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
   const response = await request({
@@ -31,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }>
 }
 
 const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-
+  const [activities, setActivities] = useState(search[0]);
   const onScroll = (e: any) => {
     const {
       scrollTop,
@@ -40,7 +42,16 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     } = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight < scrollHeight;
 
-    console.log('.... canFetch', canFetch);
+    // console.log('.... canFetch', canFetch, search[0].length);
+
+    if (!canFetch) {
+      setActivities(
+        [
+          ...activities,
+          ...activities
+        ]
+      )
+    }
   }
 
   return (
@@ -51,10 +62,10 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
       </Head>
-      {/* <Header /> */}
       <main onScroll={(e) => onScroll(e)}>
+        {/* <Header /> */}
         {
-          search[0].map(activity => {
+          activities.map(activity => {
             return (
               <article key={activity.id}>
                 <Link href={`/activity/${activity.id}`}>
