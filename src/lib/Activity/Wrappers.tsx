@@ -10,7 +10,7 @@ export const ActivityWrapper = styled.div`
     .date {
       color: #555;
     }
-    a {
+    >a {
       margin-bottom: 10px;
       font-size: 40px;
       display: flex;
@@ -22,19 +22,39 @@ export const ActivityWrapper = styled.div`
         text-decoration: underline;
       }
     }
+
     .apply {
-      color: #1337ff;
+      margin-top: 20px;
+      background: #1337ff;
+      color: #fff;
+      width: fit-content;
+      padding: 15px 20px;
+      height: auto;
     }
     .body {
       padding: 20px 0 20px;
+      h1, h2, h3 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+      }
+      ul {
+        margin-left: 20px;
+        padding: 0;
+        li {
+
+        }
+      }
     }
+    .info,
     .keywords {
       flex: 1;
-      color: #555;
-      font-size: 16px;
+      font-size: 14px;
       margin-top: 10px;
       span {
         margin-right: 10px;
+        background: #555;
+        color: #fff;
+        padding: 3px 5px;
       }
     }
   }

@@ -9,6 +9,13 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const ActivityFull = ({ activity }: ActivityShortProps) => {
+  const info = [
+    activity.position,
+    activity.employment,
+    activity.location,
+    activity.salary,
+  ].filter(n => n).flat();
+
   return (
     <ActivityWrapper>
       <article key={activity.id}>
@@ -18,10 +25,12 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
         <Link href={`/activity/${activity.id}`}>
           {activity.title}
         </Link>
-        {activity.position && <p>{activity.position}</p>}
-        {activity.employment && <p>{activity.employment}</p>}
-        {activity.location && <p>{activity.location}</p>}
-        {activity.salary && <p>{activity.salary}</p>}
+
+        {info.length > 0 && (
+          <p className="info">
+            {info.map(text => <span key={text}>{text}</span>)}
+          </p>
+        )}
 
         {activity.keywords && (
           <p className="keywords">
@@ -32,9 +41,9 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
             })}
           </p>
         )}
-        <div className="body">
-          {activity.text}
-        </div>
+        <div className="body" dangerouslySetInnerHTML={{
+          __html: activity.text
+        }} />
         <a href={activity.jobUrl} className="apply">
           Apply Now
         </a>

@@ -74,7 +74,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   return (
     <HomePageWrapper>
       <Head>
-        <title>Jobs - {APP_NAME}</title>
+        <title>All Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
