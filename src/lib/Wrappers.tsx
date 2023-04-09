@@ -37,19 +37,4 @@ export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   padding: 60px;
-  
-  article {
-    margin-top: 20px;
-    h1 {
-      margin-top: 5px;
-      font-size: 30px;
-    }
-    h2 {
-      margin-top: 5px;
-      font-size: 20px;
-    }
-    .body {
-      padding: 20px 0;
-    }
-  }
 `;
