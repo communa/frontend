@@ -43,7 +43,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     } = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight < scrollHeight;
 
-    console.log('.... canFetch', canFetch);
+    // console.log('.... canFetch', canFetch);
 
     if (!canFetch) {
       (async () => {
@@ -56,14 +56,14 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
             sort: {
               createdAt: 'DESC'
             },
-            page: 0,
+            page: page + 1,
           }
         });
-        setPage(page + 1);
         setActivities([
           ...activities,
           ...response.data[0],
         ]);
+        setPage(page + 1);
       })();
     }
   }
