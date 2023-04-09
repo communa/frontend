@@ -4,10 +4,10 @@ import Head from 'next/head';
 
 import { IActivity } from 'src/interface/IActivity';
 import { request } from 'src/Utils';
-import Header from 'src/lib/layout/Header';
 import { ActivityPageWrapper } from 'src/lib/Wrappers';
 import { useNotifications } from 'src/contexts/Notifications';
 import { API_HOST, APP_NAME } from 'src/config/consts';
+import ActivityFull from 'src/lib/Activity/ActivityFull';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -41,18 +41,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
       </Head>
-      {/* <Header /> */}
-      <article>
-        <h1>{activity.title}</h1>
-        <h2>{activity.position}</h2>
-        <h2>{activity.salary}</h2>
-        <div className="body">
-          {activity.text}
-        </div>
-        <a href={activity.jobUrl} target='_blank' rel="noreferrer">
-          {activity.jobUrl}
-        </a>
-      </article>
+      <ActivityFull activity={activity} />
     </ActivityPageWrapper>
   );
 };

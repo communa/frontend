@@ -20,7 +20,7 @@ export const APIProvider = ({ children }: { children: React.ReactNode }) => {
   const query = async (config: AxiosRequestConfig) => {
     setState('progress');
 
-    config.url = `${consts.api.development}${config.url}`;
+    config.url = `${consts.API_HOST}${config.url}`;
 
     try {
       const response = await request(config);

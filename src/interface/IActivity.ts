@@ -9,7 +9,10 @@ export interface IActivity {
   text: string;
   jobUrl: string;
   salary: string;
+  keywords: string[];
   position: string;
+  location: string;
+  employment: string;
   createdAt: Date,
   updatedAt: Date,
   cancelledAt: Date,

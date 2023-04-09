@@ -30,25 +30,6 @@ export const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 60px;
-
-    article {
-      margin-bottom: 20px;
-      
-      a {
-        margin-bottom: 10px;
-        font-size: 40px;
-        display: flex;
-        font-weight: 600;
-        color: #000;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      .body {
-        padding: 20px 0;
-      }
-    }
   }
 `;
 
