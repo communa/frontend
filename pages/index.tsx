@@ -3,12 +3,12 @@ import { GetServerSideProps } from 'next'
 import moment from 'moment'
 import Head from 'next/head';
 import Link from 'next/link'
+import { useState } from 'react';
 
 import { request } from 'src/Utils';
 import { HomePageWrapper } from 'src/lib/Wrappers';
 import { IActivitySearch } from 'src/interface/IActivity';
 import { API_HOST, APP_NAME } from 'src/config/consts';
-import { useState } from 'react';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
   const response = await request({
@@ -46,22 +46,28 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     console.log('.... canFetch', canFetch);
 
     if (!canFetch) {
-      setPage(page + 1);
-
-      // const response = await request({
-      //   url: `${API_HOST}/api/activity/search`,
-      //   method: 'POST',
-      //   data: {
-      //     filter: {
-      //     },
-      //     sort: {
-      //       createdAt: 'DESC'
-      //     },
-      //     page: 0,
-      //   }
-      // });
+      (async () => {
+        const response = await request({
+          url: `${API_HOST}/api/activity/search`,
+          method: 'POST',
+          data: {
+            filter: {
+            },
+            sort: {
+              createdAt: 'DESC'
+            },
+            page: 0,
+          }
+        });
+        setPage(page + 1);
+        setActivities([
+          ...activities,
+          ...response.data[0],
+        ]);
+      })();
     }
   }
+
 
   return (
     <HomePageWrapper>
