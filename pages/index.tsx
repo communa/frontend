@@ -78,6 +78,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="About page" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main onScroll={(e) => onScroll(e)}>
         {activities.map(activity => {
