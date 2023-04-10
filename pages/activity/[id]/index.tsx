@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { IActivity } from 'src/interface/IActivity';
 import { request } from 'src/Utils';
 import { ActivityPageWrapper } from 'src/lib/Wrappers';
-import { useNotifications } from 'src/contexts/Notifications';
+// import { useNotifications } from 'src/contexts/Notifications';
 import { API_HOST, APP_NAME } from 'src/config/consts';
 import ActivityFull from 'src/lib/Activity/ActivityFull';
 
@@ -24,14 +24,14 @@ export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = a
 }
 
 const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { addNotification } = useNotifications();
+  // const { addNotification } = useNotifications();
 
-  useEffect(() => {
-    addNotification({
-      title: `You're checking ${activity.title}`,
-      subtitle: '',
-    });
-  }, []);
+  // useEffect(() => {
+  //   addNotification({
+  //     title: `You're checking ${activity.title}`,
+  //     subtitle: '',
+  //   });
+  // }, []);
 
   return (
     <ActivityPageWrapper>

@@ -37,12 +37,10 @@ export const ActivityWrapper = styled.div`
         margin-top: 20px;
         margin-bottom: 5px;
       }
+      ol,
       ul {
         margin-left: 20px;
         padding: 0;
-        li {
-
-        }
       }
     }
     .info,
@@ -52,7 +50,7 @@ export const ActivityWrapper = styled.div`
       margin-top: 10px;
       span {
         margin-right: 10px;
-        background: #555;
+        background: #1337ff;
         color: #fff;
         padding: 3px 5px;
       }
