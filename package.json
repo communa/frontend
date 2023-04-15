@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.43",
   "scripts": {
+    "pm2": "NODE_ENV=production pm2 start npm --  start",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

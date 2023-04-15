@@ -5,7 +5,7 @@ import styled from 'styled-components';
  * An element that houses SideInterface and MainInterface.
  * Used once in Router.
  */
-export const BodyInterfaceWrapper = styled.div`
+export const BodyInterfaceWrapper = styled.body`
   display: flex;
   position: relative;
   flex-grow: 1;
@@ -31,10 +31,20 @@ export const HomePageWrapper = styled.div`
     flex-direction: column;
     padding: 60px;
   }
+  @media only screen and (max-width: 700px) {
+    main {
+      height: calc(100vh - 40px);
+      padding: 20px;
+    }
+  }
 `;
 
 export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   padding: 60px;
+
+  @media only screen and (max-width: 700px) {
+    padding: 20px;
+  }
 `;

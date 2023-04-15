@@ -22,7 +22,6 @@ export const ActivityWrapper = styled.div`
         text-decoration: underline;
       }
     }
-
     .apply {
       margin-top: 20px;
       background: #1337ff;
@@ -47,12 +46,25 @@ export const ActivityWrapper = styled.div`
     .keywords {
       flex: 1;
       font-size: 14px;
-      margin-top: 10px;
+      margin-top: 5px;
+      gap: 5px;
+      flex-wrap: wrap;
+      display: flex;
       span {
-        margin-right: 10px;
         background: #1337ff;
         color: #fff;
         padding: 3px 5px;
+        flex: none;
+      }
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    article {
+      >a {
+        font-size: 35px;
+      }
+      .body {
+        padding: 10px 0 20px;
       }
     }
   }
