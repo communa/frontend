@@ -22,7 +22,7 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
         <p className="date">
           {moment(activity.createdAt).format('LLL')}
         </p>
-        <Link href={`/job/${activity.id}`}>
+        <Link href={`/activity/${activity.id}`}>
           {activity.title}
         </Link>
 
