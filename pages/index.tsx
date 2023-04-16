@@ -37,6 +37,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   const { data, state, query } = useContext(APIContext);
 
   useEffect(() => {
+    // console.log(state, data);
     if (state === 'ready' && data) {
       setActivities([
         ...activities,
@@ -74,10 +75,10 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   return (
     <HomePageWrapper>
       <Head>
-        <title>All Jobs - {APP_NAME}</title>
+        <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <meta name="description" content="About page" />
+        <meta name="description" content={APP_NAME} />
         <link rel="icon" href="/logo.png" />
       </Head>
       <main onScroll={(e) => onScroll(e)}>
