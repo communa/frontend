@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import type { AppProps } from 'next/app';
 import {
   RainbowKitProvider,
@@ -71,6 +72,20 @@ function App({ Component, pageProps }: AppProps) {
         <RainbowKitProvider appInfo={demoAppInfo} theme={darkTheme()} chains={chains}>
           <Notifications />
           <Component {...pageProps} />
+
+          <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
+              strategy="afterInteractive"
+            />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-59QX73S7GV');
+            `}
+          </Script>
+
         </RainbowKitProvider>
       </WagmiConfig>
     </MainInterfaceWrapper>
