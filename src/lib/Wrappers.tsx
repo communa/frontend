@@ -22,6 +22,10 @@ export const HomePageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
+  width: 1000px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 
   main {
     height: calc(100vh - 120px);
@@ -29,7 +33,6 @@ export const HomePageWrapper = styled.div`
 
     display: flex;
     flex-direction: column;
-    padding: 60px;
   }
   @media only screen and (max-width: 700px) {
     main {
@@ -39,12 +42,92 @@ export const HomePageWrapper = styled.div`
   }
 `;
 
+export const LoginPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  display: flex;
+  flex-direction: row;
+  padding: 60px;
+
+  .banner {
+    padding: 0 60px;
+    background-image: url('/login.png');
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: calc(100vh - 120px);
+    flex: 1;
+  }
+  .login {
+    background: #eee;
+    padding: 60px;
+    flex: 1;
+  }
+`;
+
+export const AboutPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  display: flex;
+  flex-direction: column;
+
+  .banner {
+    background-image: url('/jo-wroten-_ocWTLxYhTU-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    flex: 1;
+    color: #fff;
+    flex-direction: column;
+    padding: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .middle {
+      width: 1000px;
+
+      h2 {
+        font-size: 42px;
+        margin-bottom: 10px;;
+      }
+      p {
+        font-size: 18px;
+      }
+      ul {
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+    }
+  }
+  article {
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    padding: 0 60px 100px;
+    margin: 0 auto;
+
+    h2 {
+      margin-top: 30px;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+  }
+`;
+
+
 export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  padding: 60px;
-
-  @media only screen and (max-width: 700px) {
-    padding: 20px;
+  width: 1000px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  
+  article {
+    /* padding: 60px; */
   }
 `;

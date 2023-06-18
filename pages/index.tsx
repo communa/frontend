@@ -9,6 +9,7 @@ import { IActivitySearch } from 'src/interface/IActivity';
 import { API_HOST, APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
+import Header from 'src/lib/Layout/Header';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
   const response = await request({
@@ -81,6 +82,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <meta name="description" content={APP_NAME} />
         <link rel="icon" href="/logo.png" />
       </Head>
+      <Header />
       <main onScroll={(e) => onScroll(e)}>
         {activities.map(activity => {
           return <ActivityShort key={activity.id} activity={activity} />

@@ -25,6 +25,7 @@ import { MainInterfaceWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 
 import 'src/assets/global.css';
+import '@rainbow-me/rainbowkit/styles.css';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -74,9 +75,9 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
 
           <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
-              strategy="afterInteractive"
-            />
+            src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
+            strategy="afterInteractive"
+          />
           <Script id="google-analytics" strategy="afterInteractive">
             {`
             window.dataLayer = window.dataLayer || [];
