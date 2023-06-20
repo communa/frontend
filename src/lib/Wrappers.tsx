@@ -22,23 +22,17 @@ export const HomePageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  width: 1000px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  width: 100%;
+  /* align-items: center;
+  justify-content: center; */
+  height: 100vh;
+  overflow: scroll;
 
   main {
-    height: calc(100vh - 120px);
-    overflow: scroll;
-
+    margin: 0 auto;
+    width: 1000px;
     display: flex;
     flex-direction: column;
-  }
-  @media only screen and (max-width: 700px) {
-    main {
-      height: calc(100vh - 40px);
-      padding: 20px;
-    }
   }
 `;
 
@@ -128,6 +122,5 @@ export const ActivityPageWrapper = styled.div`
   margin: 0 auto;
   
   article {
-    /* padding: 60px; */
   }
 `;

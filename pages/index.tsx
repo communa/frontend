@@ -56,6 +56,8 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     } = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight < scrollHeight;
 
+    console.log(canFetch);
+
     if (!canFetch) {
       query({
         url: `/api/activity/search`,
@@ -74,7 +76,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   console.log(activities);
 
   return (
-    <HomePageWrapper>
+    <HomePageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -82,8 +84,8 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <meta name="description" content={APP_NAME} />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <Header />
-      <main onScroll={(e) => onScroll(e)}>
+      <main>
+        <Header />
         {activities.map(activity => {
           return <ActivityShort key={activity.id} activity={activity} />
         })}
