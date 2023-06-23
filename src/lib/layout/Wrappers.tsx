@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.header`
   justify-content: start;
   padding: 40px 0;
   justify-content: space-between;
-  width: 1000px;
+  width: 1100px;
   margin: 0 auto;
 
   .nav {
@@ -26,12 +26,22 @@ export const HeaderWrapper = styled.header`
     }
   }
   .logo {
+    position: relative;
     a {
       color: #1337ff;
       text-decoration: none;
       font-weight: 600;
       font-size: 40px;
       line-height: 1;
+    } 
+    span {
+      background: #4561ff;
+      color: #fff;
+      position: absolute;
+      right: -35px;
+      padding: 2px 5px;
+      font-size: 14px;
+      border-radius: 2px;
     }
   }
 `;

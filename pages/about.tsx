@@ -75,9 +75,15 @@ const About = () => {
         </p>
 
         <h2>Business Inquiries</h2>
-        https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE
+        <a
+          href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE"
+          target="_blank"
+          rel="noreferrer"
+        >
+          https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE
+        </a>
       </article >
-    </AboutPageWrapper >
+    </AboutPageWrapper>
   );
 };
 

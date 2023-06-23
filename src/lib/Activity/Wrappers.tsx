@@ -6,7 +6,7 @@ export const ActivityWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    width: 1000px;
+    width: 1100px;
     
     .date {
       color: #555;

@@ -30,7 +30,7 @@ export const HomePageWrapper = styled.div`
 
   main {
     margin: 0 auto;
-    width: 1000px;
+    width: 1100px;
     display: flex;
     flex-direction: column;
   }
@@ -57,6 +57,16 @@ export const LoginPageWrapper = styled.div`
     background: #eee;
     padding: 60px;
     flex: 1;
+    h1 {
+      margin-bottom: 20px;
+      font-size: 36px;
+    }
+    h2 {
+      margin-bottom: 40px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
   }
 `;
 
@@ -82,7 +92,7 @@ export const AboutPageWrapper = styled.div`
     justify-content: center;
 
     .middle {
-      width: 1000px;
+      width: 1100px;
 
       h2 {
         font-size: 42px;
@@ -100,7 +110,7 @@ export const AboutPageWrapper = styled.div`
   article {
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 1100px;
     padding: 0 60px 100px;
     margin: 0 auto;
 
@@ -116,7 +126,7 @@ export const AboutPageWrapper = styled.div`
 export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 1000px;
+  width: 1100px;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
