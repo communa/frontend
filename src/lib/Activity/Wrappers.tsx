@@ -13,7 +13,7 @@ export const ActivityWrapper = styled.div`
     }
     >a {
       margin-bottom: 10px;
-      font-size: 40px;
+      font-size: 36px;
       display: flex;
       font-weight: 600;
       color: #000;
@@ -28,8 +28,17 @@ export const ActivityWrapper = styled.div`
       background: #1337ff;
       color: #fff;
       width: fit-content;
-      padding: 15px 20px;
-      height: auto;
+      padding: 0 50px;
+      height: 80px;
+      font-size: 24px;
+      border-radius: 15px;
+      line-height: 80px; 
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+        transform: scale(105%);
+        transition: 0.125s ease;
+      }
     }
     .body {
       padding: 20px 0 20px;

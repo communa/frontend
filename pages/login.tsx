@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { LoginPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
@@ -17,12 +18,25 @@ const About = () => {
         ..
       </div>
       <div className="login">
-        <h1>Welcome to Communa</h1>
-        <h2>
-          Web3 freelancing platform that connects businesses
-          with talented professionals worldwide, making remote work more convenient than ever before.
-        </h2>
-        <ConnectButton />
+        <div className="main">
+          <h1>Welcome to Communa</h1>
+          <h2>
+            Communa is a freelancing platform that connects businesses
+            with talented professionals worldwide, making remote work more convenient than ever before.
+          </h2>
+          <ConnectButton label='Connect Wallet' />
+        </div>
+        <div className="nav">
+          <Link href="/">
+            Browse Jobs
+          </Link>
+          <Link href="/about">
+            About Us
+          </Link>
+          <Link href="https://github.com/communa">
+            GitHub
+          </Link>
+        </div>
       </div>
     </LoginPageWrapper>
   );

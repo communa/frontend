@@ -42,7 +42,9 @@ export const LoginPageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 60px;
-
+  border-radius: 10px;
+  overflow: hidden;
+  
   .banner {
     padding: 0 60px;
     background-image: url('/login.png');
@@ -54,18 +56,43 @@ export const LoginPageWrapper = styled.div`
     flex: 1;
   }
   .login {
-    background: #eee;
-    padding: 60px;
+    padding: 50px 60px 60px 70px;
     flex: 1;
-    h1 {
-      margin-bottom: 20px;
-      font-size: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .main {
+      h1 {
+        line-height: 1;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        margin-bottom: 60px;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+      button {
+        padding: 0 50px;
+        height: 80px;
+        font-size: 23px;
+        border-radius: 15px;
+      }
     }
-    h2 {
-      margin-bottom: 40px;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1.4;
+    .nav {
+      gap: 20px;
+      justify-content: left;
+      display: flex;
+      a {
+        font-size: 18px;
+        text-decoration: underline;
+        color: #000;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 `;

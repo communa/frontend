@@ -7,17 +7,17 @@ export default function Header({ }) {
       <div className="logo">
         <Link href="/">
           Communa
-        </Link><span>alpha</span>
+        </Link>
       </div>
       <div className="nav">
         <Link href="/">
           Browse Jobs
         </Link>
-        <Link href="/about">
-          About
-        </Link>
         <Link href="/login">
-          Log In
+          Login
+        </Link>
+        <Link href="/about">
+          About Us
         </Link>
         <Link href="https://github.com/communa">
           GitHub

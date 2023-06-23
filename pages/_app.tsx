@@ -70,7 +70,18 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <MainInterfaceWrapper>
       <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider appInfo={demoAppInfo} theme={darkTheme()} chains={chains}>
+        <RainbowKitProvider
+          coolMode
+          appInfo={demoAppInfo}
+          chains={chains}
+          theme={darkTheme({
+            accentColor: '#1337ff',
+            accentColorForeground: 'white',
+            // borderRadius: 'small',
+            fontStack: 'system',
+            overlayBlur: 'small',
+          })}
+        >
           <Notifications />
           <Component {...pageProps} />
 

@@ -14,11 +14,10 @@ export const HeaderWrapper = styled.header`
     gap: 20px;
     justify-content: right;
     display: flex;
-    align-items: end;
-    align-items: end;
+    align-items: center;
     a {
-      font-size: 16px;
-      text-decoration: none;
+      font-size: 18px;
+      text-decoration: underline;
       color: #000;
       &:hover {
         text-decoration: underline;
@@ -26,22 +25,12 @@ export const HeaderWrapper = styled.header`
     }
   }
   .logo {
-    position: relative;
     a {
       color: #1337ff;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 40px;
+      font-weight: 700;
+      font-size: 42px;
       line-height: 1;
-    } 
-    span {
-      background: #4561ff;
-      color: #fff;
-      position: absolute;
-      right: -35px;
-      padding: 2px 5px;
-      font-size: 14px;
-      border-radius: 2px;
     }
   }
 `;
