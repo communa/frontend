@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { AuthContextInterface } from './defaults';
+import moment from 'moment';
 
 import { AuthenticationStatus } from '@rainbow-me/rainbowkit';
 import * as defaults from './defaults';
@@ -10,8 +11,39 @@ export const AuthContext = React.createContext<AuthContextInterface>(
 
 export const useAuth = () => React.useContext(AuthContext);
 
+export const getJWT = (): { access: string; refresh: string } | null => {
+  const JWT = JSON.parse(localStorage.getItem('JWT') as string);
+
+  if (JWT) {
+    return JWT;
+  }
+
+  return null;
+};
+
+export const isJWTexpired = (): boolean => {
+  const jwt = getJWT();
+
+  if (jwt) {
+    const parts = jwt.access.split('.');
+    const exp = JSON.parse(atob(parts[1])).exp;
+    const diff = exp - moment().unix();
+
+    if (diff < 1000) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   let status: AuthenticationStatus = 'unauthenticated';
+  const authorization = getJWT();
+
+  if (authorization) {
+    status = 'authenticated';
+  }
 
   const [authStatus, setAuthStatus] = useState<AuthenticationStatus>(status);
 
