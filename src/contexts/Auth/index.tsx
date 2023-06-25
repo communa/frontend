@@ -11,7 +11,11 @@ export const AuthContext = React.createContext<AuthContextInterface>(
 
 export const useAuth = () => React.useContext(AuthContext);
 
-export const getJWT = (): { access: string; refresh: string } | null => {
+export const getJwtLocalStorage = (): { access: string; refresh: string } | null => {
+  if (typeof window !== 'undefined') {
+    return null;
+  };
+
   const JWT = JSON.parse(localStorage.getItem('JWT') as string);
 
   if (JWT) {
@@ -22,7 +26,7 @@ export const getJWT = (): { access: string; refresh: string } | null => {
 };
 
 export const isJWTexpired = (): boolean => {
-  const jwt = getJWT();
+  const jwt = getJwtLocalStorage();
 
   if (jwt) {
     const parts = jwt.access.split('.');
@@ -39,11 +43,11 @@ export const isJWTexpired = (): boolean => {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   let status: AuthenticationStatus = 'unauthenticated';
-  const authorization = getJWT();
+  // const authorization = getJwtLocalStorage();
 
-  if (authorization) {
-    status = 'authenticated';
-  }
+  // if (authorization) {
+  //   status = 'authenticated';
+  // }
 
   const [authStatus, setAuthStatus] = useState<AuthenticationStatus>(status);
 
