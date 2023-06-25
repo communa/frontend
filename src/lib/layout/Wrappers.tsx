@@ -17,7 +17,7 @@ export const HeaderWrapper = styled.header`
     align-items: center;
     a {
       font-size: 18px;
-      text-decoration: underline;
+      text-decoration: none;
       color: #000;
       &:hover {
         text-decoration: underline;

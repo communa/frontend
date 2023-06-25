@@ -34,6 +34,7 @@ export const ActivityWrapper = styled.div`
       border-radius: 15px;
       line-height: 80px; 
       text-decoration: none;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
       &:hover {
         text-decoration: none;
         transform: scale(105%);

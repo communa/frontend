@@ -87,7 +87,7 @@ export const LoginPageWrapper = styled.div`
       display: flex;
       a {
         font-size: 18px;
-        text-decoration: underline;
+        text-decoration: none;
         color: #000;
         &:hover {
           text-decoration: underline;
