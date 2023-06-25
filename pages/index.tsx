@@ -69,7 +69,6 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
           page: page + 1,
         }
       });
-
     }
   }
 

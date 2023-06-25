@@ -9,6 +9,9 @@ import {
   createAuthenticationAdapter,
 } from '@rainbow-me/rainbowkit';
 
+import { useRouter } from "next/router";
+
+
 import { useContext, useEffect } from 'react';
 import {
   argentWallet,
@@ -18,7 +21,7 @@ import {
 import { configureChains, createClient, useAccount, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
-import { AuthContext, isJWTexpired, AuthProvider, getJwtLocalStorage } from 'src/contexts/Auth';
+import { AuthContext, AuthProvider, getJwtLocalStorage, isJWTexpired } from 'src/contexts/Auth';
 import { withProviders } from 'src/lib/Hooks';
 import { NotificationsProvider, useNotifications } from 'src/contexts/Notifications';
 import { TooltipProvider } from 'src/contexts/Tooltip';
@@ -47,7 +50,7 @@ const { wallets } = getDefaultWallets({
   chains,
 });
 
-const demoAppInfo = {
+const appInfo = {
   appName: APP_NAME,
 };
 
@@ -74,6 +77,7 @@ function App({ Component, pageProps }: AppProps) {
   const { authStatus, connect } = useContext(AuthContext);
   const { addNotification } = useNotifications();
   const { address } = useAccount();
+  const router = useRouter();
 
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
@@ -108,22 +112,20 @@ function App({ Component, pageProps }: AppProps) {
       }
 
       localStorage.setItem('JWT', JSON.stringify(tokens));
-      connect('authenticated');
 
       addNotification({
         title: 'welcome to communa',
         subtitle: '',
       });
 
+      router.push('/');
+
+      connect('authenticated');
+
       return Promise.resolve(true);
     },
     signOut: async () => {
-      localStorage.removeItem('JWT');
-      localStorage.removeItem('wagmi.connected');
-      localStorage.removeItem('wagmi.store');
-      localStorage.removeItem('wagmi.wallet');
-      localStorage.removeItem('wagmi.metaMask.shimDisconnect');
-      localStorage.removeItem('wagmi.cache');
+      localStorage.clear();
       connect('unauthenticated');
     },
   });
@@ -148,7 +150,7 @@ function App({ Component, pageProps }: AppProps) {
         localStorage.setItem('JWT', JSON.stringify(res.data.authRefresh));
       });
     }
-  }, [connect]);
+  }, []);
 
   return (
     <MainInterfaceWrapper>
@@ -158,8 +160,8 @@ function App({ Component, pageProps }: AppProps) {
           status={authStatus}
         >
           <RainbowKitProvider
-            coolMode
-            appInfo={demoAppInfo}
+            // coolMode
+            appInfo={appInfo}
             chains={chains}
             theme={darkTheme({
               accentColor: '#1337ff',

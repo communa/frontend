@@ -1,10 +1,31 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { AuthContext } from 'src/contexts/Auth';
+import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderWrapper } from 'src/lib/Layout/Wrappers';
+import { useDisconnect } from 'wagmi';
+
 
 export default function Header({ }) {
   const { authStatus } = useContext(AuthContext);
+  const { addNotification } = useNotifications();
+  const router = useRouter();
+  const { disconnect } = useDisconnect()
+
+  const onLogoutClick = () => {
+    localStorage.clear();
+    router.push('/');
+    addNotification({
+      title: 'See You Around',
+      subtitle: '',
+    });
+    disconnect();
+  }
+
+  const onLoginClick = () => {
+    router.push('/login');
+  }
 
   return (
     <HeaderWrapper>
@@ -12,6 +33,7 @@ export default function Header({ }) {
         <Link href="/">
           Communa
         </Link>
+        <span>alpha</span>
       </div>
       <div className="nav">
         <Link href="/">
@@ -20,18 +42,18 @@ export default function Header({ }) {
         <Link href="/about">
           About Us
         </Link>
-        <Link href="https://github.com/communa">
+        <a href="https://github.com/communa" target="_blank" rel="noreferrer">
           GitHub
-        </Link>
+        </a>
         {authStatus === 'unauthenticated' && (
-          <Link href="/login">
+          <button onClick={() => onLoginClick()}>
             Log In
-          </Link>
+          </button>
         )}
         {authStatus === 'authenticated' && (
-          <Link href="/login">
+          <button onClick={() => onLogoutClick()}>
             Log Out
-          </Link>
+          </button>
         )}
       </div>
     </HeaderWrapper>

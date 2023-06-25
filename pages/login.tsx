@@ -23,13 +23,12 @@ const About = () => {
       </div>
       <div className="login">
         <div className="main">
-          {authStatus}
-          <h1>Welcome to Communa</h1>
+          <h1>Welcome to Communa!</h1>
           <h2>
             Communa is a freelancing platform that connects businesses
             with talented professionals worldwide, making remote work more convenient than ever before.
           </h2>
-          <ConnectButton label='Connect Wallet' />
+          {authStatus === 'unauthenticated' && <ConnectButton label='Connect Wallet' />}
         </div>
         <div className="nav">
           <Link href="/">
