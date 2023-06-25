@@ -81,15 +81,11 @@ function App({ Component, pageProps }: AppProps) {
         url: `${API_HOST}/api/auth/nonce`,
         method: 'POST',
         data: {
-          walletAddress: address,
+          address,
         }
       });
 
-      const message = nonce.data.authWalletRequest.message.trim();
-
-      return new Promise((resolve) => {
-        resolve(message);
-      });
+      return nonce.data;
     },
     createMessage: ({ nonce }) => {
       return nonce;
@@ -99,15 +95,19 @@ function App({ Component, pageProps }: AppProps) {
     },
     verify: async ({ message, signature }) => {
       const res = await request({
-        url: `${API_HOST}/api/auth/login`,
+        url: `${API_HOST}/api/auth/web3`,
         method: 'POST',
         data: {
-          walletAddress: address,
-          signedMessage: signature,
+          address,
+          signature,
         }
       });
+      const tokens = {
+        access: res.headers.authorization,
+        refresh: res.headers['refresh-token'],
+      }
 
-      localStorage.setItem('JWT', JSON.stringify(res.data.authWalletLogin));
+      localStorage.setItem('JWT', JSON.stringify(tokens));
       connect('authenticated');
 
       addNotification({
@@ -145,7 +145,6 @@ function App({ Component, pageProps }: AppProps) {
           refreshToken: jwt.refresh,
         }
       }).then((res) => {
-        console.log(res.data.authRefresh);
         localStorage.setItem('JWT', JSON.stringify(res.data.authRefresh));
       });
     }

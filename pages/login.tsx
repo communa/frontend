@@ -4,8 +4,12 @@ import Link from 'next/link';
 import { LoginPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { AuthContext } from 'src/contexts/Auth';
+import { useContext } from 'react';
 
 const About = () => {
+  const { authStatus } = useContext(AuthContext);
+
   return (
     <LoginPageWrapper>
       <Head>
@@ -19,6 +23,7 @@ const About = () => {
       </div>
       <div className="login">
         <div className="main">
+          {authStatus}
           <h1>Welcome to Communa</h1>
           <h2>
             Communa is a freelancing platform that connects businesses

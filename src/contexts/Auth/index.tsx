@@ -12,10 +12,6 @@ export const AuthContext = React.createContext<AuthContextInterface>(
 export const useAuth = () => React.useContext(AuthContext);
 
 export const getJwtLocalStorage = (): { access: string; refresh: string } | null => {
-  if (typeof window !== 'undefined') {
-    return null;
-  };
-
   const JWT = JSON.parse(localStorage.getItem('JWT') as string);
 
   if (JWT) {
