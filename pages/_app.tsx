@@ -118,7 +118,7 @@ function App({ Component, pageProps }: AppProps) {
         subtitle: '',
       });
 
-      router.push('/');
+      router.push(`/user/${address}`);
 
       connect('authenticated');
 

@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderWrapper } from 'src/lib/Layout/Wrappers';
-import { useDisconnect } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 
 export default function Header({ }) {
@@ -12,6 +12,7 @@ export default function Header({ }) {
   const { addNotification } = useNotifications();
   const router = useRouter();
   const { disconnect } = useDisconnect()
+  const { address } = useAccount();
 
   const onLogoutClick = () => {
     localStorage.clear();
@@ -51,9 +52,14 @@ export default function Header({ }) {
           </button>
         )}
         {authStatus === 'authenticated' && (
-          <button onClick={() => onLogoutClick()}>
-            Log Out
-          </button>
+          <>
+            <Link href={`/user/${address}`}>
+              My Profile
+            </Link>
+            <button onClick={() => onLogoutClick()}>
+              Log Out
+            </button>
+          </>
         )}
       </div>
     </HeaderWrapper>

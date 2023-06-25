@@ -149,7 +149,6 @@ export const AboutPageWrapper = styled.div`
   }
 `;
 
-
 export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -159,5 +158,20 @@ export const ActivityPageWrapper = styled.div`
   margin: 0 auto;
   
   article {
+  }
+`;
+
+export const UserPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 1100px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  
+  article {
+    margin-top: 60px;
+    text-align: left;
+    width: 100%;
   }
 `;
