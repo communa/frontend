@@ -23,8 +23,6 @@ export const HomePageWrapper = styled.div`
   flex-flow: column nowrap;
   flex-grow: 1;
   width: 100%;
-  /* align-items: center;
-  justify-content: center; */
   height: 100vh;
   overflow: scroll;
 
@@ -33,6 +31,15 @@ export const HomePageWrapper = styled.div`
     width: 1100px;
     display: flex;
     flex-direction: column;
+  }
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
   }
 `;
 
@@ -95,6 +102,18 @@ export const LoginPageWrapper = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    padding: 20px;
+    height: calc(100vh - 40px);
+
+    .banner {
+      display: none;
+    }
+    .login {
+      padding: 20px;
+    }
+  }  
 `;
 
 export const AboutPageWrapper = styled.div`
@@ -147,6 +166,34 @@ export const AboutPageWrapper = styled.div`
       margin-bottom: 5px;
     }
   }
+  @media only screen and (max-width: 700px) {
+    overflow: hidden;
+
+    header {
+      padding: 20px;
+    }
+    .banner {
+      margin-top: 10px;
+      padding: 20px;
+      margin-bottom: -20px;
+
+      .middle {
+        width: auto;
+        h2 {
+          font-size: 32px;
+        }
+        p {
+          line-height: 1.3;
+          font-size: 16px;
+        }
+      }
+    }
+    article {
+      margin: inherit;
+      width: auto;
+      padding: 20px;
+    }
+  }
 `;
 
 export const ActivityPageWrapper = styled.div`
@@ -154,10 +201,14 @@ export const ActivityPageWrapper = styled.div`
   flex-flow: column nowrap;
   width: 1100px;
   justify-content: center;
-  align-items: center;
   margin: 0 auto;
   
-  article {
+  @media only screen and (max-width: 700px) {
+    margin: initial;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
   }
 `;
 

@@ -38,6 +38,8 @@ export const HeaderWrapper = styled.header`
   }
   .logo {
     position: relative;
+    width: max-content;
+    margin-bottom: 10px;
     a {
       color: #1337ff;
       text-decoration: none;
@@ -57,4 +59,20 @@ export const HeaderWrapper = styled.header`
       top: 2px;
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    width: auto;
+    margin: initial;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+    .nav {
+      justify-content: left;
+      gap: 10px;
+      button,
+      a {
+        font-size: 13px;
+      }
+    }
+  }      
 `;

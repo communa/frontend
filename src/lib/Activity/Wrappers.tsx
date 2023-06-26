@@ -71,6 +71,7 @@ export const ActivityWrapper = styled.div`
   }
   @media only screen and (max-width: 700px) {
     article {
+      width: auto;
       >a {
         font-size: 35px;
       }
