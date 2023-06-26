@@ -105,7 +105,7 @@ export const LoginPageWrapper = styled.div`
 
   @media only screen and (max-width: 700px) {
     padding: 20px;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 80px);
 
     .banner {
       display: none;

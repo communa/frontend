@@ -7,6 +7,7 @@ export const ActivityWrapper = styled.div`
     flex-direction: column;
     margin-bottom: 20px;
     width: 1100px;
+    overflow: hidden;
     
     .date {
       color: #555;
@@ -73,7 +74,7 @@ export const ActivityWrapper = styled.div`
     article {
       width: auto;
       >a {
-        font-size: 35px;
+        font-size: 28px;
       }
       .body {
         padding: 10px 0 20px;

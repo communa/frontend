@@ -71,7 +71,7 @@ export const HeaderWrapper = styled.header`
       gap: 10px;
       button,
       a {
-        font-size: 13px;
+        font-size: 16px;
       }
     }
   }      
