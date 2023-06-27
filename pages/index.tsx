@@ -54,9 +54,9 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       clientHeight,
       scrollHeight,
     } = e.nativeEvent.srcElement;
-    const canFetch = scrollTop + clientHeight < scrollHeight;
+    const canFetch = scrollTop + clientHeight + 300 < scrollHeight;
 
-    console.log(canFetch);
+    // console.log(canFetch, scrollTop, clientHeight, scrollHeight);
 
     if (!canFetch) {
       query({
@@ -75,7 +75,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   console.log(activities);
 
   return (
-    <HomePageWrapper onScroll={(e) => onScroll(e)}>
+    <HomePageWrapper onScroll={(e) => onScroll(e)} onTouchMove={(e) => onScroll(e)}>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

@@ -43,13 +43,15 @@ export default function Header({ }) {
         <Link href="/about">
           About Us
         </Link>
-        <a href="https://github.com/communa" target="_blank" rel="noreferrer">
-          GitHub
-        </a>
         {authStatus === 'unauthenticated' && (
-          <button onClick={() => onLoginClick()}>
-            Log In
-          </button>
+          <>
+            <a href="https://github.com/communa" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <button onClick={() => onLoginClick()}>
+              Log In
+            </button>
+          </>
         )}
         {authStatus === 'authenticated' && (
           <>

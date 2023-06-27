@@ -66,12 +66,13 @@ export const HeaderWrapper = styled.header`
     display: flex;
     flex-direction: column;
     padding: 0 0 20px 0;
+    
     .nav {
       justify-content: left;
       gap: 10px;
       button,
       a {
-        font-size: 16px;
+        font-size: 15px;
       }
     }
   }      

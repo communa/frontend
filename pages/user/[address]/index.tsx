@@ -33,7 +33,8 @@ const Activity = ({ user }: InferGetServerSidePropsType<typeof getServerSideProp
       </Head>
       <Header />
       <article>
-        {user.address}
+        User: {user.address} <br /><br />
+        Early access / Under development
       </article>
     </UserPageWrapper>
   );

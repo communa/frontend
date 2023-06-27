@@ -219,10 +219,23 @@ export const UserPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  overflow: hidden;
   
   article {
     margin-top: 60px;
     text-align: left;
     width: 100%;
   }
+
+  @media only screen and (max-width: 700px) {
+    margin: 0 auto;
+    width: auto;
+    /* display: flex; */
+    /* flex-direction: column; */
+    padding: 20px;
+    
+    article {
+      font-size: 16px;
+    }
+  }  
 `;
