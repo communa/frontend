@@ -15,7 +15,7 @@ export const useApi = () => React.useContext(APIContext);
 export const APIProvider = ({ children }: { children: React.ReactNode }) => {
   const [error, setError] = useState<any>(null);
   const [data, setData] = useState<any>({});
-  const [state, setState] = useState<defaults.ApiState>('progress');
+  const [state, setState] = useState<defaults.ApiState>('init');
 
   const query = async (config: AxiosRequestConfig) => {
     setState('progress');
@@ -25,10 +25,10 @@ export const APIProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const response = await request(config);
       setState('ready');
-      console.log(response.data);
+      // console.log(response.data);
       setData(response.data);
     } catch (e: any) {
-      setError(e)
+      setError(e);
       setState('error');
     }
   };
@@ -39,7 +39,7 @@ export const APIProvider = ({ children }: { children: React.ReactNode }) => {
         data,
         error,
         state,
-        query,
+        query
       }}
     >
       {children}

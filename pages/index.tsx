@@ -39,7 +39,6 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
 
   useEffect(() => {
     if (state === 'ready' && data) {
-
       setActivities([
         ...activities,
         ...data[0],
@@ -53,9 +52,11 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       clientHeight,
       scrollHeight,
     } = e.nativeEvent.srcElement;
-    const canFetch = scrollTop + clientHeight + 200 < scrollHeight;
+    const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
 
-    if (!canFetch) {
+    console.log(state);
+
+    if (!canFetch && state !== 'progress') {
       query({
         url: `/api/activity/search`,
         method: 'POST',
@@ -70,7 +71,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     }
   }
 
-  console.log(activities);
+  console.log(activities, state);
 
   return (
     <HomePageWrapper onScroll={(e) => onScroll(e)}>

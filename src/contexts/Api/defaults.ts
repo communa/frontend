@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 
-export type ApiState = 'progress' | 'ready' | 'error';
+export type ApiState = 'init' | 'progress' | 'ready' | 'error';
 
 export interface APIContextInterface {
   state: ApiState;
@@ -12,6 +12,6 @@ export interface APIContextInterface {
 export const defaultApiContext: APIContextInterface = {
   data: null,
   error: null,
-  state: 'progress',
+  state: 'init',
   query: (config: AxiosRequestConfig) => { }
 };
