@@ -53,7 +53,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       clientHeight,
       scrollHeight,
     } = e.nativeEvent.srcElement;
-    const canFetch = scrollTop + clientHeight + 100 < scrollHeight;
+    const canFetch = scrollTop + clientHeight + 200 < scrollHeight;
 
     if (!canFetch) {
       query({

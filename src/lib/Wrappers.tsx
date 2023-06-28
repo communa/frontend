@@ -37,7 +37,7 @@ export const HomePageWrapper = styled.div`
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
-      width: auto;
+      width: calc(100vw - 40px);
       display: flex;
       flex-direction: column;
       padding: 20px;
@@ -56,7 +56,7 @@ export const LoginPageWrapper = styled.div`
   
   .banner {
     padding: 0 60px;
-    background-image: url('/login.png');
+    background-image: url('/login.webp');
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
@@ -125,7 +125,7 @@ export const AboutPageWrapper = styled.div`
   flex-direction: column;
 
   .banner {
-    background-image: url('/jo-wroten-_ocWTLxYhTU-unsplash.jpg');
+    background-image: url('/about.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
