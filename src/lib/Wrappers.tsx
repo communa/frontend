@@ -31,7 +31,9 @@ export const HomePageWrapper = styled.div`
     width: 1100px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 60px;
   }
+  
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;

@@ -26,7 +26,7 @@ const About = () => {
               https://github.com/communa
             </li>
             <li>
-              https://communa.network/
+              https://communa.network
             </li>
           </ul>
         </div>

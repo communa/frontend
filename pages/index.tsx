@@ -38,13 +38,12 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   const { data, state, query } = useContext(APIContext);
 
   useEffect(() => {
-    // console.log(state, data);
     if (state === 'ready' && data) {
+
       setActivities([
         ...activities,
         ...data[0],
       ]);
-      setPage(page + 1);
     }
   }, [data]);
 
@@ -54,9 +53,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       clientHeight,
       scrollHeight,
     } = e.nativeEvent.srcElement;
-    const canFetch = scrollTop + clientHeight + 300 < scrollHeight;
-
-    // console.log(canFetch, scrollTop, clientHeight, scrollHeight);
+    const canFetch = scrollTop + clientHeight + 100 < scrollHeight;
 
     if (!canFetch) {
       query({
@@ -69,13 +66,14 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
           page: page + 1,
         }
       });
+      setPage(page + 1);
     }
   }
 
   console.log(activities);
 
   return (
-    <HomePageWrapper onScroll={(e) => onScroll(e)} onTouchMove={(e) => onScroll(e)}>
+    <HomePageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
