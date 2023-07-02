@@ -198,6 +198,64 @@ export const AboutPageWrapper = styled.div`
   }
 `;
 
+export const ActivityPublishWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 1100px;
+  justify-content: center;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    nav {
+      display: flex;
+      gap: 10px;
+      a {
+        color: #000;
+        margin-top: 10px;
+        text-decoration: none;
+      }
+    }
+    label {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+    .title {
+      font-size: 22px;
+      border-bottom: 1px solid #aaa;
+      margin-bottom: 20px;
+    }
+  }
+  .publish {
+    cursor: pointer;
+    border: 0;
+    margin-top: 40px;
+    background: #1337ff;
+    color: #fff;
+    width: fit-content;
+    padding: 0 50px;
+    height: 80px;
+    font-size: 24px;
+    border-radius: 15px;
+    line-height: 80px; 
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
+    &:hover {
+      text-decoration: none;
+      transform: scale(105%);
+      transition: 0.125s ease;
+    }
+  }
+`;
+
 export const ActivityPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;

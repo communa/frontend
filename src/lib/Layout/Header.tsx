@@ -6,7 +6,6 @@ import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderWrapper } from 'src/lib/Layout/Wrappers';
 import { useAccount, useDisconnect } from 'wagmi';
 
-
 export default function Header({ }) {
   const { authStatus } = useContext(AuthContext);
   const { addNotification } = useNotifications();
@@ -37,6 +36,9 @@ export default function Header({ }) {
         <span>alpha</span>
       </div>
       <div className="nav">
+        <Link href="/activity/publish?state=published">
+          Publish a Job
+        </Link>
         <Link href="/">
           Browse Jobs
         </Link>
