@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps<{ activities: IActivity[], s
 }
 
 const Publishing = ({ activities, state }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+
   return (
     <ActivityPublishWrapper>
       <Head>

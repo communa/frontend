@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import Script from 'next/script';
 import type { AppProps } from 'next/app';
 import {
@@ -10,9 +11,6 @@ import {
 } from '@rainbow-me/rainbowkit';
 
 import { useRouter } from "next/router";
-
-
-import { useContext, useEffect } from 'react';
 import {
   argentWallet,
   trustWallet,

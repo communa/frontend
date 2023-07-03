@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = a
 }
 
 const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-
   return (
     <ActivityPageWrapper>
       <Head>

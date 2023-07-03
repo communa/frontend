@@ -1,11 +1,13 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { useRef, useState } from 'react';
 import Head from 'next/head';
+import { Editor } from '@tinymce/tinymce-react';
 
 import { ActivityPublishWrapper } from 'src/lib/Wrappers';
-import { APP_NAME } from 'src/config/consts'
-import { Editor } from '@tinymce/tinymce-react';
+import { API_HOST, APP_NAME } from 'src/config/consts'
 import Header from 'src/lib/Layout/Header';
-import { useRef } from 'react';
+import { request } from 'src/Utils';
+import { getJwtLocalStorage } from 'src/contexts/Auth';
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context: GetServerSidePropsContext) => {
   return {
@@ -14,13 +16,26 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context: GetSer
 }
 
 const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const save = () => { };
-  const editorRef = useRef(null);
+  const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
+  const [title, setTitle] = useState('');
+  const editorRef = useRef<any>(null);
 
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
+  const onPublish = async () => {
+    const text = editorRef.current.getContent();
+    const jwt = getJwtLocalStorage();
+    const res = await request({
+      url: `${API_HOST}/api/activity`,
+      method: 'POST',
+      headers: {
+        Authorization: jwt?.access
+      },
+      data: {
+        title,
+        text,
+      }
+    });
+
+    console.log(res);
   };
 
   return (
@@ -34,16 +49,20 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <main>
         <Header />
-        <h2>Post a Job</h2>
-        <label>Job Title</label>
-        <input className="title" type='text' placeholder='...' />
+        <h2>Post a new job</h2>
+        <input
+          className="title"
+          type="text"
+          placeholder="Job Title"
+          onChange={e => setTitle(e.target.value)}
+        />
         <label>Job Description</label>
         <Editor
           // apiKey='your-api-key'
-          onInit={(evt, editor) => editorRef.current = editor}
-          initialValue="<p>This is the initial content of the editor.</p>"
+          onInit={(evt, editor) => (editorRef.current = editor)}
+          initialValue={text}
           init={{
-            height: 500,
+            // height: 300,
             menubar: false,
             plugins: [
               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
@@ -57,7 +76,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
           }}
         />
-        <button className='publish' onClick={() => save()}>
+        <button className='publish' onClick={() => onPublish()}>
           Publish
         </button>
       </main>

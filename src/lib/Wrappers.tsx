@@ -229,9 +229,9 @@ export const ActivityPublishWrapper = styled.div`
       color: #666;
     }
     .title {
-      font-size: 22px;
+      font-size: 28px;
       border-bottom: 1px solid #aaa;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
   }
   .publish {
