@@ -10,6 +10,7 @@ import { API_HOST, APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import Header from 'src/lib/Layout/Header';
+import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
   const response = await request({
@@ -84,6 +85,23 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <main>
         <Header />
+        <nav>
+          <Link href="/">
+            All Jobs
+          </Link>
+          <Link href="/activity/my?state=published">
+            Published
+          </Link>
+          <Link href="/activity/my?state=drafts">
+            Drafts
+          </Link>
+          <Link href="/activity/my?state=archived">
+            Archived
+          </Link>
+          <Link href="/activity/new">
+            Publish a Job
+          </Link>
+        </nav>
         {activities.map(activity => {
           return <ActivityShort key={activity.id} activity={activity} />
         })}

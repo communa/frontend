@@ -32,6 +32,16 @@ export const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding-bottom: 60px;
+    
+    h2 {
+      margin-bottom: 5px;
+      font-size: 36px;
+    }
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
   }
   
   @media only screen and (max-width: 700px) {

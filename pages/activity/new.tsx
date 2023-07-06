@@ -30,6 +30,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
         Authorization: jwt?.access
       },
       data: {
+        state: 'draft',
         title,
         text,
       }

@@ -161,3 +161,12 @@ input[type='number'] {
 #__next {
   width: 100vw;
 }
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

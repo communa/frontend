@@ -36,7 +36,7 @@ export default function Header({ }) {
         <span>alpha</span>
       </div>
       <div className="nav">
-        <Link href="/activity/publish?state=published">
+        <Link href="/activity/new">
           Publish a Job
         </Link>
         <Link href="/">
