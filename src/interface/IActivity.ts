@@ -16,4 +16,5 @@ export interface IActivity {
   createdAt: Date,
   updatedAt: Date,
   cancelledAt: Date,
+  user: any
 }

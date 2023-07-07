@@ -8,7 +8,12 @@ export const ActivityWrapper = styled.div`
     margin-bottom: 20px;
     width: 1100px;
     overflow: hidden;
-    
+
+    nav {
+      margin-bottom: 20px;
+      gap: 10px;
+      display: flex;
+    }
     .date {
       color: #555;
     }

@@ -85,9 +85,10 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <main>
         <Header />
+        <h2>All Jobs</h2>
         <nav>
           <Link href="/">
-            All Jobs
+            All
           </Link>
           <Link href="/activity/my?state=published">
             Published

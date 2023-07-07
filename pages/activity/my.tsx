@@ -14,7 +14,7 @@ import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { useEffectOnce } from 'usehooks-ts';
 
 
-export const getServerSideProps: GetServerSideProps<{state: string}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{ state: string }> = async (context: GetServerSidePropsContext) => {
   const { state } = context.query;
 
   return {
@@ -35,12 +35,12 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
         ...api.data[0],
       ]);
     }
-  }, [api]);
+  }, [api.data]);
 
   useEffectOnce(() => {
     const jwt = getJwtLocalStorage();
     setActivities([]);
-    
+
     api.query({
       url: `/api/activity/search/publishing`,
       method: 'POST',
@@ -68,14 +68,15 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
       </Head>
       <main>
         <Header />
+        <h2>Jobs / {state}</h2>
         <nav>
           <Link href="/">
-            All Jobs
+            All
           </Link>
           <Link href="/activity/my?state=published">
             Published
           </Link>
-          <Link href="/activity/my?state=drafts">
+          <Link href="/activity/my?state=draft">
             Drafts
           </Link>
           <Link href="/activity/my?state=archived">

@@ -50,7 +50,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
       </Head>
       <main>
         <Header />
-        <h2>Post a new job</h2>
+        <h2>Add new</h2>
         <input
           className="title"
           type="text"

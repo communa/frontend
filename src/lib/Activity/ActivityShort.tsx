@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { IActivity } from 'src/interface/IActivity';
 
 import { ActivityWrapper } from './Wrappers';
+import ActivityNav from './ActivityNav';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -19,6 +20,7 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
   return (
     <ActivityWrapper>
       <article key={activity.id}>
+        <ActivityNav activity={activity} />
         <p className="date">
           {moment(activity.createdAt).format('LLL')}
         </p>

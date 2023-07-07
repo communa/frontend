@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { IActivity } from 'src/interface/IActivity';
 
 import { ActivityWrapper } from './Wrappers';
+import { useAccount } from 'wagmi';
+import ActivityNav from './ActivityNav';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -18,6 +20,7 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
 
   return (
     <ActivityWrapper>
+      <ActivityNav activity={activity} />
       <article key={activity.id}>
         <p className="date">
           {moment(activity.createdAt).format('LLL')}
@@ -25,7 +28,6 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
         <Link href={`/activity/${activity.id}`}>
           {activity.title}
         </Link>
-
         {info.length > 0 && (
           <p className="info">
             {info.map(text => <span key={text}>{text}</span>)}
