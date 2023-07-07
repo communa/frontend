@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { IActivity } from 'src/interface/IActivity';
 import { useAccount } from 'wagmi';
 
@@ -11,14 +12,12 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
   if (!activity.user) {
     return null;
   }
-  if (activity.user && activity.user.addess !== address) {
-    return null;
-  }
 
   return (
     <nav>
-      {activity.user.address}
-      <button>Edit</button>
+      <Link href={`/activity/${activity.id}/edit`}>
+        Edit
+      </Link>
       <button>Delete</button>
     </nav>
   )

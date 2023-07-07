@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const ActivityWrapper = styled.div`
+  nav {
+    margin-bottom: 20px;
+    gap: 10px;
+    display: flex;
+  }
   article {
     margin-bottom: 20px;
     display: flex;
@@ -8,12 +13,6 @@ export const ActivityWrapper = styled.div`
     margin-bottom: 20px;
     width: 1100px;
     overflow: hidden;
-
-    nav {
-      margin-bottom: 20px;
-      gap: 10px;
-      display: flex;
-    }
     .date {
       color: #555;
     }

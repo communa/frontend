@@ -12,7 +12,7 @@ import Header from 'src/lib/Layout/Header';
 import Link from 'next/link';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { useEffectOnce } from 'usehooks-ts';
-
+import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 
 export const getServerSideProps: GetServerSideProps<{ state: string }> = async (context: GetServerSidePropsContext) => {
   const { state } = context.query;
@@ -37,7 +37,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
     }
   }, [api.data]);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     const jwt = getJwtLocalStorage();
     setActivities([]);
 
@@ -55,7 +55,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
         page: 0,
       }
     });
-  });
+  }, [state]);
 
   return (
     <HomePageWrapper>
@@ -69,26 +69,15 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
       <main>
         <Header />
         <h2>Jobs / {state}</h2>
-        <nav>
-          <Link href="/">
-            All
-          </Link>
-          <Link href="/activity/my?state=published">
-            Published
-          </Link>
-          <Link href="/activity/my?state=draft">
-            Drafts
-          </Link>
-          <Link href="/activity/my?state=archived">
-            Archived
-          </Link>
-          <Link href="/activity/new">
-            Publish a Job
-          </Link>
-        </nav>
-        {activities.map(activity => {
+        <ActivityNavPublishing />
+        {activities.length > 0 && activities.map(activity => {
           return <ActivityShort key={activity.id} activity={activity} />
         })}
+        {activities.length === 0 && (
+          <p>
+            You have no <strong>{state}</strong> jobs
+          </p>
+        )}
       </main>
     </HomePageWrapper >
   );
