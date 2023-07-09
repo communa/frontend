@@ -2,6 +2,8 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import { useRef, useState } from 'react';
 import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
+import { useRouter } from "next/router";
+
 
 import { ActivityPublishWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME } from 'src/config/consts'
@@ -19,6 +21,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
   const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
   const [title, setTitle] = useState('');
   const editorRef = useRef<any>(null);
+  const router = useRouter();
 
   const onPublish = async () => {
     const text = editorRef.current.getContent();
@@ -35,6 +38,8 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
         text,
       }
     });
+    const id = res.headers.location.split('/')[3];
+    router.push(`/activity/${id}/edit`);
 
     console.log(res);
   };

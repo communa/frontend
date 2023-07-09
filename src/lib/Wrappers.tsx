@@ -41,6 +41,10 @@ export const HomePageWrapper = styled.div`
       display: flex;
       gap: 10px;
       margin-bottom: 30px;
+
+      a.active {
+        text-decoration: underline;
+      }
     }
   }
   
