@@ -40,7 +40,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   const { data, state, query } = useContext(APIContext);
 
   useEffect(() => {
-    if (state === 'ready' && data) {
+    if (state === 'ready' && data && data[0]) {
       setActivities([
         ...activities,
         ...data[0],

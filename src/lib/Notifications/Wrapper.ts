@@ -12,11 +12,11 @@ export const Wrapper = styled.ul`
   list-style: none;
   justify-content: flex-end;
   z-index: 10;
-  background: #000;
+  background: #1337ff;
   width: 500px;
 
   li {
-    background: var(--background-primary);
+    /* background: var(--background-primary); */
     margin: 0.4rem 1.2rem;
     position: relative;
     border-radius: 10px;

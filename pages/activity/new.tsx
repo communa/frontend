@@ -1,5 +1,5 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from "next/router";
@@ -9,7 +9,8 @@ import { ActivityPublishWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME } from 'src/config/consts'
 import Header from 'src/lib/Layout/Header';
 import { request } from 'src/Utils';
-import { getJwtLocalStorage } from 'src/contexts/Auth';
+import { AuthContext, getJwtLocalStorage } from 'src/contexts/Auth';
+import { useNotifications } from 'src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context: GetServerSidePropsContext) => {
   return {
@@ -20,8 +21,20 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context: GetSer
 const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
   const [title, setTitle] = useState('');
+  const { authStatus } = useContext(AuthContext);
+  const { addNotification } = useNotifications();
   const editorRef = useRef<any>(null);
   const router = useRouter();
+
+  if (authStatus !== 'authenticated') {
+    router.push(`/login`);
+    addNotification({
+      title: 'Authorisation is required',
+      subtitle: '',
+    });
+
+    return null;
+  };
 
   const onPublish = async () => {
     const text = editorRef.current.getContent();
@@ -41,7 +54,10 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
     const id = res.headers.location.split('/')[3];
     router.push(`/activity/${id}/edit`);
 
-    console.log(res);
+    addNotification({
+      title: 'You\'ve added a new job',
+      subtitle: '',
+    });
   };
 
   return (

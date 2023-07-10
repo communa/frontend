@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import { APIContext } from 'src/contexts/Api';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { IActivity } from 'src/interface/IActivity';
+import { useNotifications } from 'src/contexts/Notifications';
+import { useRouter } from 'next/router';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -13,6 +15,8 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 const ActivityNav = ({ activity }: ActivityShortProps) => {
   const api = useContext(APIContext);
   const { address } = useAccount();
+  const { addNotification } = useNotifications();
+  const router = useRouter();
 
   if (!activity.user) {
     return null;
@@ -24,10 +28,14 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
       method: 'DELETE',
       headers: {
         Authorization: jwt?.access
-      },
-      data: {
       }
     });
+
+    addNotification({
+      title: 'Your job was removed',
+      subtitle: '',
+    });
+    router.push(`/`);
   }
 
   return (

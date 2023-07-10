@@ -29,7 +29,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
   const [activities, setActivities] = useState<IActivity[]>([]);
 
   useEffect(() => {
-    if (api.state === 'ready' && api.data) {
+    if (api.state === 'ready' && api.data && api.data[0]) {
       setActivities([
         ...activities,
         ...api.data[0],
@@ -69,7 +69,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
       <main>
         <Header />
         <h2>Jobs / {state}</h2>
-        <ActivityNavPublishing />
+        <ActivityNavPublishing state='' />
         {activities.length > 0 && activities.map(activity => {
           return <ActivityShort key={activity.id} activity={activity} />
         })}
