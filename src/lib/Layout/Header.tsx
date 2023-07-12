@@ -17,7 +17,7 @@ export default function Header({ }) {
     localStorage.clear();
     router.push('/');
     addNotification({
-      title: 'See You Around',
+      title: 'See You',
       subtitle: '',
     });
     disconnect();

@@ -135,6 +135,8 @@ function App({ Component, pageProps }: AppProps) {
 
     if (jwt) {
       connect('authenticated');
+    } else {
+      connect('unauthenticated');
     }
 
     if (isExpired && jwt) {

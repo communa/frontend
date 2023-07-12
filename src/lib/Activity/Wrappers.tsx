@@ -12,7 +12,10 @@ export const ActivityWrapper = styled.div`
     flex-direction: column;
     margin-bottom: 20px;
     width: 1100px;
-    overflow: hidden;
+    
+    .body {
+      overflow: hidden;
+    }
     .date {
       color: #555;
     }

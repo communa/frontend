@@ -44,7 +44,7 @@ export const isJWTexpired = (): boolean => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  let status: AuthenticationStatus = 'unauthenticated';
+  let status: AuthenticationStatus = 'init';
 
   const [authStatus, setAuthStatus] = useState<AuthenticationStatus>(status);
 

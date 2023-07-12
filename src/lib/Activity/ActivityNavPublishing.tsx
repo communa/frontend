@@ -26,9 +26,6 @@ const ActivityNavPublishing = ({ state }: ActivityNavPublishingProps) => {
           </Link>
         </>
       )}
-      {/* <Link href="/activity/new">
-        Publish a Job
-      </Link> */}
     </nav >
   )
 }

@@ -6,8 +6,10 @@ export type IActivitySearch = [
 export interface IActivity {
   id: string;
   title: string;
+  state: string;
   text: string;
   jobUrl: string;
+  rate: string;
   salary: string;
   keywords: string[];
   position: string;

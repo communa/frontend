@@ -242,10 +242,15 @@ export const ActivityPublishWrapper = styled.div`
       font-size: 16px;
       color: #666;
     }
+    .rate,
+    .salary,
+    .keywords,
     .title {
       font-size: 28px;
       border-bottom: 1px solid #aaa;
-      margin-bottom: 30px;
+    }
+    .state {
+      display: flex;
     }
   }
   .publish {

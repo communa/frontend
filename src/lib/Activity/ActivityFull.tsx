@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { IActivity } from 'src/interface/IActivity';
 
 import { ActivityWrapper } from './Wrappers';
-import { useAccount } from 'wagmi';
 import ActivityNav from './ActivityNav';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {

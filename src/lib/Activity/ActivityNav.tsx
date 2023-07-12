@@ -35,7 +35,7 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
       title: 'Your job was removed',
       subtitle: '',
     });
-    router.push(`/`);
+    router.push(`/activity/my?state=published`);
   }
 
   return (

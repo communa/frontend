@@ -37,9 +37,9 @@ const About = () => {
           <Link href="/about">
             About Us
           </Link>
-          <Link href="https://github.com/communa">
+          <a href="https://github.com/communa" target="_blank" rel="noreferrer">
             GitHub
-          </Link>
+          </a>
         </div>
       </div>
     </LoginPageWrapper>

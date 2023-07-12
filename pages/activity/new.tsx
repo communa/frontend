@@ -1,9 +1,8 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
-import { useRouter } from "next/router";
-
+import { useRouter } from 'next/router';
 
 import { ActivityPublishWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME } from 'src/config/consts'
@@ -19,22 +18,29 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context: GetSer
 }
 
 const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
-  const [title, setTitle] = useState('');
+  const router = useRouter();
   const { authStatus } = useContext(AuthContext);
   const { addNotification } = useNotifications();
   const editorRef = useRef<any>(null);
-  const router = useRouter();
 
-  if (authStatus !== 'authenticated') {
-    router.push(`/login`);
-    addNotification({
-      title: 'Authorisation is required',
-      subtitle: '',
-    });
+  const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
+  const [title, setTitle] = useState('');
+  const [keywords, setKeywords] = useState('');
+  const [rate, setRate] = useState('');
+  const [salary, setSalary] = useState('');
+  const [state, setState] = useState('draft');
 
-    return null;
-  };
+  console.log(authStatus);
+
+  useEffect(() => {
+    if (authStatus === 'unauthenticated') {
+      router.push(`/login`);
+      addNotification({
+        title: 'Authorisation is required',
+        subtitle: '',
+      });
+    };
+  }, []);
 
   const onPublish = async () => {
     const text = editorRef.current.getContent();
@@ -46,9 +52,12 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
         Authorization: jwt?.access
       },
       data: {
-        state: 'draft',
+        state,
         title,
         text,
+        salary,
+        rate,
+        keywords,
       }
     });
     const id = res.headers.location.split('/')[3];
@@ -59,6 +68,10 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
       subtitle: '',
     });
   };
+
+  if (authStatus === 'unauthenticated') {
+    return null;
+  }
 
   return (
     <ActivityPublishWrapper>
@@ -72,13 +85,40 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
       <main>
         <Header />
         <h2>Add new</h2>
+        <label>Title</label>
         <input
           className="title"
           type="text"
           placeholder="Job Title"
           onChange={e => setTitle(e.target.value)}
         />
-        <label>Job Description</label>
+        <label>Hourly Rate</label>
+        <input
+          className="rate"
+          type="text"
+          placeholder="$20 per hour"
+          onChange={e => setRate(e.target.value)}
+        />
+        <label>Annual Salary</label>
+        <input
+          className="salary"
+          type="text"
+          placeholder="$40000 a year"
+          onChange={e => setSalary(e.target.value)}
+        />
+        <label>Keywords</label>
+        <input
+          className="keywords"
+          type="text"
+          placeholder="typescript, react, aws"
+          onChange={e => setKeywords(e.target.value)}
+        />
+        <label>State</label>
+        <select onChange={e => setState(e.target.value)} defaultValue={state}>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
+        <label>Full Details</label>
         <Editor
           // apiKey='your-api-key'
           onInit={(evt, editor) => (editorRef.current = editor)}
@@ -102,7 +142,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
           Publish
         </button>
       </main>
-    </ActivityPublishWrapper>
+    </ActivityPublishWrapper >
   );
 };
 

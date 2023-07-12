@@ -9,6 +9,7 @@ import Header from 'src/lib/Layout/Header';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef, useState } from 'react';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
+import { useNotifications } from 'src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -25,9 +26,15 @@ export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = a
 }
 
 const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [text, setText] = useState(activity.text);
-  const [title, setTitle] = useState(activity.title);
+  const { addNotification } = useNotifications();
   const editorRef = useRef<any>(null);
+
+  const [text, setText] = useState(activity.text);
+  const [state, setState] = useState(activity.state);
+  const [title, setTitle] = useState(activity.title);
+  const [rate, setRate] = useState(activity.rate);
+  const [salary, setSalary] = useState(activity.salary);
+  const [keywords, setKeywords] = useState(activity.keywords.join(', '));
 
   const onEdit = async () => {
     const text = editorRef.current.getContent();
@@ -40,13 +47,21 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         Authorization: jwt?.access
       },
       data: {
-        state: 'draft',
+        state,
         title,
         text,
+        salary,
+        rate,
+        keywords: keywords.split(','),
       }
     });
 
     setText(text);
+
+    addNotification({
+      title: 'Updates Saved',
+      subtitle: '',
+    });
   };
 
   return (
@@ -68,10 +83,39 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
           defaultValue={title}
           onChange={e => setTitle(e.target.value)}
         />
+        <label>Hourly Rate</label>
+        <input
+          className="rate"
+          type="text"
+          placeholder="$20 per hour"
+          defaultValue={rate}
+          onChange={e => setRate(e.target.value)}
+        />
+        <label>Annual Salary</label>
+        <input
+          className="salary"
+          type="text"
+          placeholder="$40000 a year"
+          defaultValue={salary}
+          onChange={e => setSalary(e.target.value)}
+        />
+        <label>Keywords</label>
+        <input
+          className="keywords"
+          type="text"
+          placeholder="typescript, react, aws"
+          defaultValue={keywords}
+          onChange={e => setKeywords(e.target.value)}
+        />
+        <label>State</label>
+        <select onChange={e => setState(e.target.value)} defaultValue={state}>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
         <label>Job Description</label>
         <Editor
           // apiKey='your-api-key'
-          // onInit={(evt, editor) => (editorRef.current = editor)}
+          onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue={text}
           init={{
             // height: 300,

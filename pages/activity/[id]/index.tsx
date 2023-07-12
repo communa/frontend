@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
