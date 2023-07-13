@@ -10,20 +10,26 @@ import Header from 'src/lib/Layout/Header';
 import { request } from 'src/Utils';
 import { AuthContext, getJwtLocalStorage } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
+import { join } from 'path';
+import fs from 'fs';
 
-export const getServerSideProps: GetServerSideProps<{}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{ template: string }> = async (context: GetServerSidePropsContext) => {
+  const template = fs.readFileSync(join(__dirname, '../../../../job-template.html')).toString();
+
   return {
-    props: {},
+    props: {
+      template,
+    },
   }
 }
 
-const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { authStatus } = useContext(AuthContext);
   const { addNotification } = useNotifications();
   const editorRef = useRef<any>(null);
 
-  const [text, setText] = useState('<p>This is the initial content of the editor.</p>');
+  const [text, setText] = useState(template);
   const [title, setTitle] = useState('');
   const [keywords, setKeywords] = useState('');
   const [rate, setRate] = useState('');
