@@ -28,7 +28,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
   const [keywords, setKeywords] = useState('');
   const [rate, setRate] = useState('');
   const [salary, setSalary] = useState('');
-  const [state, setState] = useState('draft');
+  const [state, setState] = useState('Draft');
 
   console.log(authStatus);
 
@@ -57,7 +57,7 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
         text,
         salary,
         rate,
-        keywords,
+        keywords: keywords.split(','),
       }
     });
     const id = res.headers.location.split('/')[3];
@@ -115,8 +115,8 @@ const ActivityNew = ({ }: InferGetServerSidePropsType<typeof getServerSideProps>
         />
         <label>State</label>
         <select onChange={e => setState(e.target.value)} defaultValue={state}>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
+          <option value="Published">Published</option>
+          <option value="Draft">Draft</option>
         </select>
         <label>Full Details</label>
         <Editor

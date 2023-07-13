@@ -15,13 +15,13 @@ const ActivityNavPublishing = ({ state }: ActivityNavPublishingProps) => {
       </Link>
       {authStatus === 'authenticated' && (
         <>
-          <Link href="/activity/my?state=published">
+          <Link href="/activity/my?state=Published">
             Published
           </Link>
-          <Link href="/activity/my?state=draft">
+          <Link href="/activity/my?state=Draft">
             Drafts
           </Link>
-          <Link href="/activity/my?state=archived">
+          <Link href="/activity/my?state=Archived">
             Archived
           </Link>
         </>

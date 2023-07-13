@@ -34,7 +34,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
   const [title, setTitle] = useState(activity.title);
   const [rate, setRate] = useState(activity.rate);
   const [salary, setSalary] = useState(activity.salary);
-  const [keywords, setKeywords] = useState(activity.keywords.join(', '));
+  const [keywords, setKeywords] = useState(activity.keywords.join(','));
 
   const onEdit = async () => {
     const text = editorRef.current.getContent();
@@ -109,8 +109,8 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         />
         <label>State</label>
         <select onChange={e => setState(e.target.value)} defaultValue={state}>
-          <option value="published">Published</option>
-          <option value="draft">Draft</option>
+          <option value="Published">Published</option>
+          <option value="Draft">Draft</option>
         </select>
         <label>Job Description</label>
         <Editor
