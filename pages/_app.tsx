@@ -26,7 +26,7 @@ import { TooltipProvider } from 'src/contexts/Tooltip';
 import { Notifications } from 'src/lib/Notifications';
 import { APIProvider } from 'src/contexts/Api';
 import { MainInterfaceWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME } from 'src/config/consts';
+import { API_HOST, APP_NAME, WALLET_CONNECT_PROJECT_ID } from 'src/config/consts';
 
 import 'src/assets/global.css';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -45,6 +45,7 @@ const { chains, provider, webSocketProvider } = configureChains(
 
 const { wallets } = getDefaultWallets({
   appName: APP_NAME,
+  projectId: APP_NAME,
   chains,
 });
 
@@ -57,9 +58,18 @@ const connectors = connectorsForWallets([
   {
     groupName: 'Other',
     wallets: [
-      argentWallet({ chains }),
-      trustWallet({ chains }),
-      ledgerWallet({ chains }),
+      argentWallet({
+        chains,
+        projectId: WALLET_CONNECT_PROJECT_ID,
+      }),
+      trustWallet({
+        chains,
+        projectId: WALLET_CONNECT_PROJECT_ID,
+      }),
+      ledgerWallet({
+        chains,
+        projectId: WALLET_CONNECT_PROJECT_ID,
+      }),
     ],
   },
 ]);

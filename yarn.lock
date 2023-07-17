@@ -845,10 +845,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@rainbow-me/rainbowkit@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-1.0.6.tgz#6c840eaf6019e9eb6841565880f6ea8090f1e9f5"
-  integrity sha512-b6r1wrSUTJiysp2yZg9i6+Dxobwz9jKiLyQdoOFcNvQK1UsviGK9HMeMFSbxDDATueqtmnDSR8jZaUr2/uWPUA==
+"@rainbow-me/rainbowkit@^0.12.2":
+  version "0.12.17"
+  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.12.17.tgz#42be3c151d8f4977c53133bd9077f7b5b735fd24"
+  integrity sha512-H5JT1caMTcAmjMTAYG9rDhZdNeNkfEwwYSbI/x+xfXaeQNqFeSePKHwl2jbrDiTlXWToxxT0AC2lp1b/4t0J9w==
   dependencies:
     "@vanilla-extract/css" "1.9.1"
     "@vanilla-extract/dynamic" "2.0.2"
