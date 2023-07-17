@@ -5,7 +5,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from 'next/router';
 
 import { ActivityPublishWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME } from 'src/config/consts'
+import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts'
 import Header from 'src/lib/Layout/Header';
 import { request } from 'src/Utils';
 import { AuthContext, getJwtLocalStorage } from 'src/contexts/Auth';
@@ -126,7 +126,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
         </select>
         <label>Full Details</label>
         <Editor
-          // apiKey='your-api-key'
+          apiKey={TINYMCE_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue={text}
           init={{
