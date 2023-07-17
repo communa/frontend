@@ -43,7 +43,7 @@ export default function Header({ }) {
           Browse Jobs
         </Link>
         <Link href="/about">
-          About Us
+          Lite Paper
         </Link>
         {authStatus === 'unauthenticated' && (
           <>

@@ -6,7 +6,7 @@ export interface AuthContextInterface {
 }
 
 export const defaultAuthContext: AuthContextInterface = {
-  authStatus: 'init',
+  authStatus: 'loading',
   // eslint-disable-next-line
   connect: (s: AuthenticationStatus) => { },
 };
