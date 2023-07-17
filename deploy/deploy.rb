@@ -4,7 +4,7 @@ set :stage_dir,     "deploy"
 
 require 'capistrano/ext/multistage'
 
-set :application, "communa-frontend"
+set :application, "communa"
 
 set :repository,  "git@github.com:communa/frontend.git"
 set :scm,         :git
@@ -23,9 +23,10 @@ after 'deploy:update', 'deploy:cleanup'
 
 namespace :deploy do
   task :npminstall, :roles => :app do
-    try_sudo "cd #{latest_release} && npm install"
-    try_sudo "cd #{latest_release} && npm run build"
-    # try_sudo "cd #{latest_release} && npm run pm2"
+    try_sudo "cd #{latest_release} && yarn install"
+    try_sudo "cd #{latest_release} && yarn build"
+    try_sudo "cd #{latest_release} && pm2 delete npm"
+    try_sudo "cd #{latest_release} && yarn pm2"
   end
 end
 

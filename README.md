@@ -16,6 +16,11 @@ Running on a server with PM2
 pm2 start npm --name "communa-frontend" -- start
 ```
 
+## Deployment
+```sh
+cap deploy production
+```
+
 ## Intro
 
 The document provides technical recommendations for frontend for communa platform as the key interface both for freelancers and businesses to interact with the underlying services of the **Communa network**. 
