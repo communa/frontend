@@ -18,6 +18,7 @@ pm2 start npm --name "communa-frontend" -- start
 
 ## Deployment
 ```sh
+cap deploy:setup
 cap deploy production
 ```
 
