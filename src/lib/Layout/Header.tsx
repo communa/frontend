@@ -42,7 +42,7 @@ export default function Header({ }) {
         <Link href="/">
           Browse Jobs
         </Link>
-        <Link href="/about">
+        <Link href="/litepaper">
           Lite Paper
         </Link>
         {authStatus === 'unauthenticated' && (

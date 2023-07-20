@@ -132,14 +132,14 @@ export const LoginPageWrapper = styled.div`
   }  
 `;
 
-export const AboutPageWrapper = styled.div`
+export const LitePaperPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   display: flex;
   flex-direction: column;
 
   .banner {
-    background-image: url('/about.webp');
+    background-image: url('/litepaper.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

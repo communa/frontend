@@ -34,8 +34,8 @@ const About = () => {
           <Link href="/">
             Browse Jobs
           </Link>
-          <Link href="/about">
-            About Us
+          <Link href="/litepaper">
+            Lite Paper
           </Link>
           <a href="https://github.com/communa" target="_blank" rel="noreferrer">
             GitHub

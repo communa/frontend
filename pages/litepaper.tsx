@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import { AboutPageWrapper } from 'src/lib/Wrappers';
+import { LitePaperPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import Header from 'src/lib/Layout/Header';
 
 const About = () => {
   return (
-    <AboutPageWrapper>
+    <LitePaperPageWrapper>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -83,7 +83,7 @@ const About = () => {
           https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE
         </a>
       </article >
-    </AboutPageWrapper>
+    </LitePaperPageWrapper>
   );
 };
 
