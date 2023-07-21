@@ -295,26 +295,34 @@ export const UserPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   width: 1100px;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
-  overflow: hidden;
+  margin-bottom: 60px;
   
-  article {
-    margin-top: 60px;
+  main {
     text-align: left;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+    .field {
+      font-size: 28px;
+      border-bottom: 1px solid #aaa;
+    }    
   }
 
   @media only screen and (max-width: 700px) {
     margin: 0 auto;
     width: auto;
-    /* display: flex; */
-    /* flex-direction: column; */
     padding: 20px;
     
     article {
       font-size: 16px;
     }
-  }  
+  }
 `;

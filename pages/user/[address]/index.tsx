@@ -6,6 +6,8 @@ import { UserPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME } from 'src/config/consts';
 import Header from 'src/lib/Layout/Header';
 import { IUser } from 'src/interface/IUser';
+import { useRouter } from 'next/router';
+import { useAccount } from 'wagmi';
 
 export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (context: GetServerSidePropsContext) => {
   const { address } = context.query;
@@ -21,7 +23,14 @@ export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (co
   }
 }
 
-const Activity = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter();
+  const { address } = useAccount();
+
+  const onEdit = () => {
+    router.push(`/user/${user.address}/edit`);
+  }
+
   return (
     <UserPageWrapper>
       <Head>
@@ -32,12 +41,26 @@ const Activity = ({ user }: InferGetServerSidePropsType<typeof getServerSideProp
         <link rel="icon" href="/logo.png" />
       </Head>
       <Header />
-      <article>
-        Your address is <strong>{user.address}</strong>. <br /><br />
-        Early access / Under development.
-      </article>
+      <main>
+        <strong>Address</strong>{user.address}<br />
+        <strong>Name</strong>{user.userName}<br />
+        <strong>Company</strong>{user.company}<br />
+        <strong>Twitter</strong>{user.twitter}<br />
+        <strong>LinkedIn</strong>{user.linkedIn}<br />
+        <strong>Telegram</strong>{user.telegram}<br />
+        <strong>Bio</strong>
+        <div className="body" dangerouslySetInnerHTML={{
+          __html: user.bio
+        }} />
+
+        {address === user.address && (
+          <button className='update' onClick={() => onEdit()}>
+            Edit
+          </button>
+        )}
+      </main>
     </UserPageWrapper>
   );
 };
 
-export default Activity;
+export default UserProfile;

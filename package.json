@@ -1,8 +1,10 @@
 {
   "name": "communa",
   "description": "Web3 freelancing platform that connects businesses with talented professionals worldwide, making remote work more convenient than ever before.",
+  "version": "0.0.0",
   "private": false,
-  "version": "0.0.1",
+  "author": "ivan.proskuryakov",
+  "license": "MIT",
   "scripts": {
     "pm2": "NODE_ENV=production pm2 start npm --  start",
     "dev": "next dev",
@@ -22,6 +24,7 @@
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "sass": "^1.64.0",
     "siwe": "^2.1.4",
     "styled-components": "^5.3.9",
     "wagmi": "^0.12.0"

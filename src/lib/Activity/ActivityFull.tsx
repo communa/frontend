@@ -22,6 +22,14 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
       <ActivityNav activity={activity} />
       <article key={activity.id}>
         <p className="date">
+          {activity.user && (
+            <>
+              By <Link href={`/user/${activity.user.address}`}>
+                {activity.user.address}
+              </Link>
+              <br />
+            </>
+          )}
           {moment(activity.createdAt).format('LLL')}
         </p>
         <Link href={`/activity/${activity.id}`}>
@@ -45,11 +53,11 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
         <div className="body" dangerouslySetInnerHTML={{
           __html: activity.text
         }} />
-        <a href={activity.jobUrl} className="apply">
-          Apply Now
-        </a>
       </article>
-    </ActivityWrapper>
+      <a href={activity.jobUrl} className="apply">
+        Apply Now
+      </a>
+    </ActivityWrapper >
   )
 }
 export default ActivityFull;

@@ -28,7 +28,7 @@ import { APIProvider } from 'src/contexts/Api';
 import { MainInterfaceWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, WALLET_CONNECT_PROJECT_ID } from 'src/config/consts';
 
-import 'src/assets/global.css';
+import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
 import { request } from 'src/Utils';
 

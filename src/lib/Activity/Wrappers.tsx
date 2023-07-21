@@ -31,24 +31,6 @@ export const ActivityWrapper = styled.div`
         text-decoration: underline;
       }
     }
-    .apply {
-      margin-top: 20px;
-      background: #1337ff;
-      color: #fff;
-      width: fit-content;
-      padding: 0 50px;
-      height: 80px;
-      font-size: 24px;
-      border-radius: 15px;
-      line-height: 80px; 
-      text-decoration: none;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
-      &:hover {
-        text-decoration: none;
-        transform: scale(105%);
-        transition: 0.125s ease;
-      }
-    }
     .body {
       padding: 20px 0 20px;
       h1, h2, h3 {

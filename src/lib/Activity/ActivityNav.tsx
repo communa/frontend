@@ -21,6 +21,11 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
   if (!activity.user) {
     return null;
   }
+
+  if (activity.user.address !== address) {
+    return null;
+  }
+
   const onDelete = () => {
     const jwt = getJwtLocalStorage();
     api.query({
