@@ -7,10 +7,8 @@ export const ActivityWrapper = styled.div`
     display: flex;
   }
   article {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     width: 1100px;
     
     .body {
@@ -57,6 +55,9 @@ export const ActivityWrapper = styled.div`
         padding: 3px 5px;
         flex: none;
       }
+    }
+    &.short {
+      margin-bottom: 30px;
     }
   }
   @media only screen and (max-width: 700px) {

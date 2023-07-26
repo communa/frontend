@@ -281,6 +281,7 @@ export const ActivityPageWrapper = styled.div`
   width: 1100px;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 100px;
   
   @media only screen and (max-width: 700px) {
     margin: initial;

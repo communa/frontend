@@ -10,16 +10,19 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const ActivityShort = ({ activity }: ActivityShortProps) => {
-  const info = [
-    activity.position,
-    activity.employment,
-    activity.location,
-    activity.salary,
-  ].filter(n => n);
+  const keywords = [
+    ...activity.keywords,
+    ...[
+      activity.position,
+      activity.employment,
+      activity.location,
+      activity.salary,
+    ].filter(n => n),
+  ];
 
   return (
     <ActivityWrapper>
-      <article key={activity.id}>
+      <article key={activity.id} className='short'>
         <ActivityNav activity={activity} />
         <p className="date">
           {moment(activity.createdAt).format('LLL')}
@@ -28,15 +31,9 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
           {activity.title}
         </Link>
 
-        {info.length > 0 && (
-          <p className="info">
-            {info.map(text => <span key={text}>{text}</span>)}
-          </p>
-        )}
-
-        {activity.keywords && (
+        {keywords.length > 0 && (
           <p className="keywords">
-            {activity.keywords.map(k => {
+            {keywords.map(k => {
               return (
                 <span key={k}>{k}</span>
               );
