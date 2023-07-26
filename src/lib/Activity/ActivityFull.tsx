@@ -11,7 +11,7 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 
 const ActivityFull = ({ activity }: ActivityShortProps) => {
   const keywords = [
-    ...activity.keywords,
+    ...activity.keywords ? activity.keywords : [],
     ...[
       activity.position,
       activity.employment,
