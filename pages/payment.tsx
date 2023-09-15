@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { useAccount, usePrepareContractWrite, useContractWrite, erc20ABI } from 'wagmi'
+import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 import { PaymentPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
@@ -10,7 +11,6 @@ import Header from 'src/lib/Layout/Header';
 import { ROUTER_ADDRESS, TOKEN_ADDRESS, COMMUNA_WALLET_ADDRESS } from 'src/config/consts';
 
 import communaRouterAbi from 'CommunaRouter.json';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 const Payment = () => {
   const { address } = useAccount();
@@ -25,10 +25,7 @@ const Payment = () => {
     args: [
       ROUTER_ADDRESS,
       amountEth,
-    ],
-    // overrides: {
-    //   gasLimit: 200000,
-    // }
+    ]
   });
   const transfer = usePrepareContractWrite({
     address: ROUTER_ADDRESS,
@@ -38,10 +35,7 @@ const Payment = () => {
       addressTo,
       TOKEN_ADDRESS,
       amountEth,
-    ],
-    // overrides: {
-    //   gasLimit: 200000,
-    // }
+    ]
   });
   const writeApprove = useContractWrite(approve.config)
   const writeTransfer = useContractWrite(transfer.config)

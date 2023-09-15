@@ -6,7 +6,7 @@ import { PaymentPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import Header from 'src/lib/Layout/Header';
 import { TOKEN_ADDRESS } from 'src/config/consts';
-import { Breadcrumbs, Button, Link, Typography } from '@mui/material';
+import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 import communaTokenAbi from 'CommunaToken.json';
 
@@ -17,10 +17,7 @@ const Payment = () => {
     address: TOKEN_ADDRESS,
     abi: communaTokenAbi.abi,
     functionName: 'airdrop',
-    args: [],
-    // overrides: {
-    //   gasLimit: 200000,
-    // },
+    args: []
   });
 
   const writeApprove = useContractWrite(approve.config);
@@ -32,6 +29,7 @@ const Payment = () => {
     const tokenSymbol = 'COMM';
     const tokenDecimals = 18;
 
+    // @ts-ignore
     const wasAdded = await window.ethereum.request({
       method: 'wallet_watchAsset',
       params: {
