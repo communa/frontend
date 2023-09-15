@@ -17,8 +17,9 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import { configureChains, createClient, useAccount, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains';
+import { goerli } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+
 import { AuthContext, AuthProvider, getJwtLocalStorage, isJWTexpired } from 'src/contexts/Auth';
 import { withProviders } from 'src/lib/Hooks';
 import { NotificationsProvider, useNotifications } from 'src/contexts/Notifications';
@@ -27,25 +28,22 @@ import { Notifications } from 'src/lib/Notifications';
 import { APIProvider } from 'src/contexts/Api';
 import { MainInterfaceWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, WALLET_CONNECT_PROJECT_ID } from 'src/config/consts';
+import { request } from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
-import { request } from 'src/Utils';
 
-const { chains, provider, webSocketProvider } = configureChains(
+
+const { chains, provider } = configureChains(
   [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
+    goerli,
   ],
   [publicProvider()]
 );
 
 const { wallets } = getDefaultWallets({
   appName: APP_NAME,
-  projectId: APP_NAME,
+  projectId: WALLET_CONNECT_PROJECT_ID,
   chains,
 });
 
@@ -77,8 +75,7 @@ const connectors = connectorsForWallets([
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider,
-  webSocketProvider,
+  provider
 });
 
 function App({ Component, pageProps }: AppProps) {

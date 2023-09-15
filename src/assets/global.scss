@@ -176,7 +176,6 @@ a:hover {
 .update {
   cursor: pointer;
   border: 0;
-  // margin-top: 40px;
   background: #1337ff;
   color: #fff;
   width: fit-content;
@@ -186,7 +185,7 @@ a:hover {
   border-radius: 15px;
   line-height: 80px; 
   text-decoration: none;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
+  box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
   display: flex;
   
   &:hover {
@@ -194,4 +193,29 @@ a:hover {
     transform: scale(105%);
     transition: 0.125s ease;
   } 
+  &:disabled {
+    background: #8392eb;
+    transform: scale(100%);
+  }
+}
+
+main {
+  label {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  .field {
+    font-size: 28px;
+    border-bottom: 1px solid #aaa;
+  }    
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 20px;
+    background: #eee;
+    border-radius: 10px;
+  }
 }

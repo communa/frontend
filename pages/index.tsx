@@ -10,7 +10,6 @@ import { API_HOST, APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import Header from 'src/lib/Layout/Header';
-import Link from 'next/link';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 
 export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {

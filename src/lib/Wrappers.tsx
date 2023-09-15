@@ -59,6 +59,47 @@ export const HomePageWrapper = styled.div`
   }
 `;
 
+export const PaymentPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+
+  main {
+    margin: 0 auto;
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 100px;
+    
+    h2 {
+      margin-bottom: 5px;
+      font-size: 36px;
+    }
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      a.active {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: calc(100vw - 40px);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+  }
+`;
+
 export const LoginPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -132,7 +173,7 @@ export const LoginPageWrapper = styled.div`
   }  
 `;
 
-export const LitePaperPageWrapper = styled.div`
+export const DocumentPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   display: flex;
@@ -155,11 +196,11 @@ export const LitePaperPageWrapper = styled.div`
 
     .middle {
       width: 1100px;
-
       h2 {
         font-size: 42px;
         margin-bottom: 10px;;
       }
+      
       p {
         font-size: 18px;
       }
@@ -169,6 +210,12 @@ export const LitePaperPageWrapper = styled.div`
       }
     }
   }
+
+  nav {
+    width: 1100px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
   article {
     justify-content: center;
     align-items: center;
@@ -176,12 +223,32 @@ export const LitePaperPageWrapper = styled.div`
     padding: 0 60px 100px;
     margin: 0 auto;
 
+    aside {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eee;
+      border-radius: 10px;
+    }
+    ol, ul {
+      margin-left: 30px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+    h1 {
+      font-size: 36px;
+    }
     h2 {
-      margin-top: 30px;
       font-size: 24px;
-      margin-bottom: 5px;
+      margin-bottom: 0;
+      margin-top: 40px;
+    }
+    h3 {
+      font-size: 18px;
+      margin-top: 5px;
+      margin-bottom: 2px;
     }
   }
+
   @media only screen and (max-width: 700px) {
     overflow: hidden;
 

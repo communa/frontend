@@ -15,6 +15,9 @@ export const HeaderWrapper = styled.header`
     justify-content: right;
     display: flex;
     align-items: center;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background: #f5f5f5;
     a {
       font-size: 18px;
       text-decoration: none;
@@ -24,16 +27,7 @@ export const HeaderWrapper = styled.header`
       }
     }
     button {
-      background: none;
-      font-size: 18px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      border-left: 1px solid #000;
-      padding-left: 20px;
-      &:hover {
-        text-decoration: underline;
-      }
+      font-weight: 600;
     }
   }
   .logo {
@@ -48,8 +42,9 @@ export const HeaderWrapper = styled.header`
       line-height: 1;
     }
     span {
-      background: #1337ff;
-      color: #fff;
+      background: #aaa;
+      color: #000;
+      font-weight: 500;
       position: absolute;
       padding: 2px 5px;
       border-radius: 2px;

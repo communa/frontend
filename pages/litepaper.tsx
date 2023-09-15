@@ -1,12 +1,13 @@
 import Head from 'next/head';
 
-import { LitePaperPageWrapper } from 'src/lib/Wrappers';
+import { DocumentPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import Header from 'src/lib/Layout/Header';
+import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 const About = () => {
   return (
-    <LitePaperPageWrapper>
+    <DocumentPageWrapper>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -14,12 +15,17 @@ const About = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <Header />
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" href="/">
+          Documents
+        </Link>
+        <Typography color="text.primary">Litepaper</Typography>
+      </Breadcrumbs>
       <div className="banner">
         <div className="middle">
-          <h2>We are Communa</h2>
+          <h2>Litepaper</h2>
           <p>
-            Web3 freelancing platform that connects businesses
-            with talented professionals worldwide, making remote work more convenient than ever before.
+            Communa is an open-source web3 freelancing platform to connect businesses with talented professionals worldwide through blockchain.
           </p>
           <ul>
             <li>
@@ -83,7 +89,7 @@ const About = () => {
           https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE
         </a>
       </article >
-    </LitePaperPageWrapper>
+    </DocumentPageWrapper>
   );
 };
 

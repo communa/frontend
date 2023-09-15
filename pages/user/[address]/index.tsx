@@ -42,22 +42,25 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
       </Head>
       <Header />
       <main>
-        <strong>Address</strong>{user.address}<br />
-        <strong>Name</strong>{user.userName}<br />
-        <strong>Company</strong>{user.company}<br />
-        <strong>Twitter</strong>{user.twitter}<br />
-        <strong>LinkedIn</strong>{user.linkedIn}<br />
-        <strong>Telegram</strong>{user.telegram}<br />
-        <strong>Bio</strong>
-        <div className="body" dangerouslySetInnerHTML={{
-          __html: user.bio
-        }} />
+        <form>
+          <strong>Address</strong>{user.address}<br />
+          <strong>Name</strong>{user.userName}<br />
+          <strong>Company</strong>{user.company}<br />
+          <strong>Twitter</strong>{user.twitter}<br />
+          <strong>LinkedIn</strong>{user.linkedIn}<br />
+          <strong>Telegram</strong>{user.telegram}<br />
+          <strong>Bio</strong>
+          <div className="body" dangerouslySetInnerHTML={{
+            __html: user.bio
+          }} />
 
-        {address === user.address && (
-          <button className='update' onClick={() => onEdit()}>
-            Edit
-          </button>
-        )}
+          <br />
+          {address === user.address && (
+            <button className='update' onClick={() => onEdit()}>
+              Edit
+            </button>
+          )}
+        </form>
       </main>
     </UserPageWrapper>
   );
