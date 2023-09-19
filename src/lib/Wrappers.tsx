@@ -30,20 +30,182 @@ export const HomePageWrapper = styled.div`
     margin: 0 auto;
     width: 1100px;
     display: flex;
-    flex-direction: column;
-    padding-bottom: 60px;
     
-    h2 {
-      margin-bottom: 5px;
-      font-size: 36px;
-    }
-    nav {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    section {
+      width: 800px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
 
-      a.active {
+      .helpLinks {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        font-size: 16px;
         text-decoration: underline;
+        a {
+          display: flex;
+          gap: 8px;
+          /* margin: 30px 0px 0px; */
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          text-align: center;
+          letter-spacing: -0.03em;
+          color: rgba(var(--color-primary-main),0.5);
+        }
+      }
+      h1, h2 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 72px;
+        line-height: 72px;
+        text-align: center;
+        letter-spacing: -0.02em;
+      }
+      h3 {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+        letter-spacing: -0.03em;
+        color: rgba(var(--color-primary-main),1);
+        opacity: 0.8;
+        margin-top: 20px;
+      }
+      .action {
+        margin-top: 50px;
+        gap: 50px;
+        display: flex;
+        justify-content: center;
+      }
+      .faq {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        margin: 50px 0;
+
+        li {
+          background: #f1f1f1;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 40px;
+          letter-spacing: -0.03em;
+          margin-bottom: 1px;
+          padding: 20px;
+          list-style: none;
+          text-align: left;
+
+          &:first-child {
+            border-radius: 12px 12px 0px 0px;
+          }
+          &:last-child {
+            border-radius: 0px 0px 12px 12px;
+          }
+        }
+      }
+      &#index {
+        .helpLinks {
+          margin-top: 10px;
+        }
+        .logo {
+          margin-top: 60px;
+          margin-bottom: 60px;
+          a {
+            font-size: 46px;
+          }
+        }
+        h3 {
+          margin-top: 15px;
+        }
+        .action {
+          margin-top: 100px;
+        }
+      }
+      &#faq {
+        height: auto;
+        margin-bottom: 30px;
+        width: 1000px;
+
+        .logo {
+          margin-top: 100px;
+        }
+        .action {
+          margin-top: 50px;
+        }
+        .copyright {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+          text-align: center;
+          letter-spacing: -0.03em;
+          color: rgba(var(--color-primary-main),0.5);
+        }
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: calc(100vw - 40px);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+  }
+`;
+
+export const JobsPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+
+  main {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 320px auto;
+    
+    > aside {
+      border-right: 1px solid #eee;
+      padding-right: 60px;
+      z-index: 100;
+      padding: 40px;
+      position: relative;
+    }
+    > article {
+      /* border-left: 1px solid rgba(var(--color-primary-main),0.1); */
+      padding: 80px 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        margin-bottom: 5px;
+        font-size: 36px;
+      }
+      nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+
+        a.active {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -100,152 +262,55 @@ export const PaymentPageWrapper = styled.div`
   }
 `;
 
-export const LoginPageWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  display: flex;
-  flex-direction: row;
-  padding: 60px;
-  border-radius: 10px;
-  overflow: hidden;
-  
-  .banner {
-    padding: 0 60px;
-    background-image: url('/login.webp');
-    background-size: cover;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: calc(100vh - 120px);
-    flex: 1;
-  }
-  .login {
-    padding: 50px 60px 60px 70px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .main {
-      h1 {
-        line-height: 1;
-        font-size: 36px;
-        margin-bottom: 20px;
-      }
-      h2 {
-        margin-bottom: 60px;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1.4;
-      }
-      button {
-        padding: 0 50px;
-        height: 80px;
-        font-size: 23px;
-        border-radius: 15px;
-      }
-    }
-    .nav {
-      gap: 20px;
-      justify-content: left;
-      display: flex;
-      a {
-        font-size: 18px;
-        text-decoration: none;
-        color: #000;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 700px) {
-    padding: 20px;
-    height: calc(100vh - 80px);
-
-    .banner {
-      display: none;
-    }
-    .login {
-      padding: 20px;
-    }
-  }  
-`;
-
 export const DocumentPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   display: flex;
   flex-direction: column;
 
-  .banner {
-    background-image: url('/litepaper.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 200px;
-    flex: 1;
-    color: #fff;
-    flex-direction: column;
-    padding: 60px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  main {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 320px auto;
+    
+    > aside {
+      border-right: 1px solid #eee;
+      padding-right: 60px;
+      z-index: 100;
+      padding: 40px;
+      position: relative;
+    }
+    article {
+      padding: 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
 
-    .middle {
-      width: 1100px;
-      h2 {
-        font-size: 42px;
-        margin-bottom: 10px;;
-      }
-      
-      p {
-        font-size: 18px;
-      }
-      ul {
-        margin-left: 20px;
+      > aside {
         margin-top: 20px;
+        padding: 20px;
+        background: rgb(238, 238, 238);
+        border-radius: 10px;
       }
-    }
-  }
-
-  nav {
-    width: 1100px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
-  article {
-    justify-content: center;
-    align-items: center;
-    width: 1100px;
-    padding: 0 60px 100px;
-    margin: 0 auto;
-
-    aside {
-      margin-top: 20px;
-      padding: 20px;
-      background: #eee;
-      border-radius: 10px;
-    }
-    ol, ul {
-      margin-left: 30px;
-      margin-bottom: 20px;
-      margin-top: 10px;
-    }
-    h1 {
-      font-size: 36px;
-    }
-    h2 {
-      font-size: 24px;
-      margin-bottom: 0;
-      margin-top: 40px;
-    }
-    h3 {
-      font-size: 18px;
-      margin-top: 5px;
-      margin-bottom: 2px;
+      ol, ul {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+      }
+      h1 {
+        font-size: 42px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 24px;
+        margin-bottom: 0;
+        margin-top: 40px;
+      }
+      h3 {
+        font-size: 18px;
+        margin-top: 5px;
+        margin-bottom: 2px;
+      }
     }
   }
 
@@ -254,22 +319,6 @@ export const DocumentPageWrapper = styled.div`
 
     header {
       padding: 20px;
-    }
-    .banner {
-      margin-top: 10px;
-      padding: 20px;
-      margin-bottom: -20px;
-
-      .middle {
-        width: auto;
-        h2 {
-          font-size: 32px;
-        }
-        p {
-          line-height: 1.3;
-          font-size: 16px;
-        }
-      }
     }
     article {
       margin: inherit;
@@ -339,23 +388,6 @@ export const ActivityPublishWrapper = styled.div`
       transform: scale(105%);
       transition: 0.125s ease;
     }
-  }
-`;
-
-export const ActivityPageWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: 1100px;
-  justify-content: center;
-  margin: 0 auto;
-  margin-bottom: 100px;
-  
-  @media only screen and (max-width: 700px) {
-    margin: initial;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
   }
 `;
 

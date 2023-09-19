@@ -8,7 +8,7 @@ import { IActivity } from 'src/interface/IActivity';
 import { APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import Header from 'src/lib/Layout/Header';
+import Header from 'src/lib/Layout/Logo';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 

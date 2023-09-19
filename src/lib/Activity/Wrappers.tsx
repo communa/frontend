@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const ActivityWrapper = styled.div`
+  padding-bottom: 100px;
+
   nav {
     margin-bottom: 20px;
     gap: 10px;
@@ -9,7 +11,6 @@ export const ActivityWrapper = styled.div`
   article {
     display: flex;
     flex-direction: column;
-    width: 1100px;
     
     .body {
       overflow: hidden;

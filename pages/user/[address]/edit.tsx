@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { request } from 'src/Utils';
 import { UserPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
-import Header from 'src/lib/Layout/Header';
+import Header from 'src/lib/Layout/Logo';
 import { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { getJwtLocalStorage } from 'src/contexts/Auth';

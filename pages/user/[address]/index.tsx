@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { request } from 'src/Utils';
 import { UserPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME } from 'src/config/consts';
-import Header from 'src/lib/Layout/Header';
+import Header from 'src/lib/Layout/Logo';
 import { IUser } from 'src/interface/IUser';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';

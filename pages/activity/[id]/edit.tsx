@@ -5,7 +5,7 @@ import { IActivity } from 'src/interface/IActivity';
 import { request } from 'src/Utils';
 import { ActivityPublishWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
-import Header from 'src/lib/Layout/Header';
+import Header from 'src/lib/Layout/Logo';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef, useState } from 'react';
 import { getJwtLocalStorage } from 'src/contexts/Auth';

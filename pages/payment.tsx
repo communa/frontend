@@ -7,7 +7,7 @@ import { Breadcrumbs, Link, Typography } from '@mui/material';
 
 import { PaymentPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
-import Header from 'src/lib/Layout/Header';
+import Header from 'src/lib/Layout/Logo';
 import { ROUTER_ADDRESS, TOKEN_ADDRESS, COMMUNA_WALLET_ADDRESS } from 'src/config/consts';
 
 import communaRouterAbi from 'CommunaRouter.json';

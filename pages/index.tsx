@@ -1,97 +1,115 @@
-import { InferGetServerSidePropsType } from 'next'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
 
-import { request } from 'src/Utils';
 import { HomePageWrapper } from 'src/lib/Wrappers';
-import { IActivitySearch } from 'src/interface/IActivity';
-import { API_HOST, APP_NAME } from 'src/config/consts';
-import { APIContext } from 'src/contexts/Api';
-import ActivityShort from 'src/lib/Activity/ActivityShort';
-import Header from 'src/lib/Layout/Header';
-import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
+import { APP_NAME } from 'src/config/consts';
+import Header from 'src/lib/Layout/Logo';
+import { Button, Link } from '@mui/material';
+import NextLink from 'next/link';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { AuthContext } from 'src/contexts/Auth';
+import { useContext } from 'react';
+import ContractAirdrop from 'src/lib/Contract/airdrop';
 
-export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
-  const response = await request({
-    url: `${API_HOST}/api/activity/search`,
-    method: 'POST',
-    data: {
-      filter: {
-      },
-      sort: {
-        createdAt: 'DESC'
-      },
-      page: 0,
-    }
-  });
-
-  return {
-    props: {
-      search: response.data,
-    },
-  }
-}
-
-const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [activities, setActivities] = useState(search[0]);
-  const [page, setPage] = useState(0);
-  const { data, state, query } = useContext(APIContext);
-
-  useEffect(() => {
-    if (state === 'ready' && data && data[0]) {
-      setActivities([
-        ...activities,
-        ...data[0],
-      ]);
-    }
-  }, [data]);
-
-  const onScroll = (e: any) => {
-    const {
-      scrollTop,
-      clientHeight,
-      scrollHeight,
-    } = e.nativeEvent.srcElement;
-    const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
-
-    console.log(state);
-
-    if (!canFetch && state !== 'progress') {
-      query({
-        url: `/api/activity/search`,
-        method: 'POST',
-        data: {
-          filter: {
-          },
-          sort: { createdAt: 'DESC' },
-          page: page + 1,
-        }
-      });
-      setPage(page + 1);
-    }
-  }
-
-  console.log(activities, state);
+const Home = () => {
+  const { authStatus } = useContext(AuthContext);
 
   return (
-    <HomePageWrapper onScroll={(e) => onScroll(e)}>
+    <HomePageWrapper>
       <Head>
-        <title>Software Engineering Jobs - {APP_NAME}</title>
+        <title>Web3 Freelance Marketplace - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <Header />
-        <h2>All Jobs</h2>
-        <ActivityNavPublishing state='' />
-        {activities.map(activity => {
-          return <ActivityShort key={activity.id} activity={activity} />
-        })}
+        <section id="index">
+          <p className="helpLinks">
+            <NextLink href="https://github.com/communa">
+              GitHub
+            </NextLink>
+            <NextLink href="/litepaper">
+              Docs
+            </NextLink>
+          </p>
+          <Header />
+          <h1>Web3 marketplace to connect businesses with talents</h1>
+          <h3>...through blockchain!</h3>
+          <div className="action">
+            <NextLink href="/activity" passHref>
+              <Button variant="outlined" LinkComponent={Link}>
+                Browse Jobs
+              </Button>
+            </NextLink>
+            {authStatus === 'unauthenticated' ? (
+              <ConnectButton label="Create a Profile" />
+            ) : (
+              <Button variant="contained" disabled>
+                Download TimeTracker
+              </Button>
+            )}
+          </div>
+        </section>
+        <section id="howitworks">
+          <h2>How It Works</h2>
+          <h3>
+            Communa automates the needed business processes directly on the blockchain.
+          </h3>
+        </section>
+        <section id="fees">
+          <h2>Fees</h2>
+          <h3>
+            Our smart contracts automate all required processes related to time-tracking.
+          </h3>
+        </section>
+        <section id="token">
+          <h2>Token</h2>
+          <h3>
+            Airdrop 10 tokens (Goerli Testnet)
+          </h3><br />
+          <ContractAirdrop />
+        </section>
+        <section id="faq">
+          <h2>FAQ</h2>
+          <ul className="faq">
+            <li>But how does it really work?</li>
+            <li>How is the HTTPS enabled?</li>
+            <li>Who can access .local domains published by LocalCan?</li>
+            <li>Will it work in my Wi-Fi / local network?</li>
+            <li>In which networks it wont work?</li>
+            <li>How much memory does LocalCan use?</li>
+          </ul>
+          <Header />
+          <p>Web3 freelancing marketplace</p>
+          <div className="action">
+            <NextLink href="/activity" passHref>
+              <Button variant="contained" LinkComponent={Link}>
+                Browse Jobs
+              </Button>
+            </NextLink>
+            {authStatus === 'unauthenticated' ? (
+              <ConnectButton label="Create a Profile" />
+            ) : (
+              <Button variant="contained" disabled>
+                Download TimeTracker
+              </Button>
+            )}
+          </div>
+          <p className="helpLinks">
+            <NextLink href="https://github.com/communa">
+              GitHub
+            </NextLink>
+            <NextLink href="/litepaper">
+              Read Docs
+            </NextLink>
+          </p>
+          <br />
+          <p className="copyright">
+            MIT License. Copyright (c) 2023 Ivan Proskuryakov
+          </p>
+        </section>
       </main>
-    </HomePageWrapper >
+    </HomePageWrapper>
   );
 };
 
