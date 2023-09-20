@@ -9,7 +9,7 @@ export default function Header({ }) {
       <Link href="/">
         Communa
       </Link>
-      <span>Goerli</span>
+      <span>Testnet</span>
     </LogoWrapper>
   )
 }

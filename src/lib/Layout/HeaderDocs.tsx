@@ -10,7 +10,7 @@ export default function HeaderDocs() {
         <Link href="/">
           Communa
         </Link>
-        <span>Goerli</span>
+        <span>Testnet</span>
       </div>
       <nav>
         <h4>Docs</h4>

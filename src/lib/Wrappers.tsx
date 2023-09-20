@@ -54,7 +54,6 @@ export const HomePageWrapper = styled.div`
         a {
           display: flex;
           gap: 8px;
-          /* margin: 30px 0px 0px; */
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
@@ -89,6 +88,23 @@ export const HomePageWrapper = styled.div`
         display: flex;
         justify-content: center;
       }
+      .placeholder {
+          height: 200px;
+          width: 100%;
+          background: #aaa;
+          /* background: rgb(2,0,36); */
+          background: linear-gradient(349deg, rgba(170,170,170,1) 0%, rgba(238,238,238,1) 100%);
+          margin-top: 60px;
+          margin-bottom: 60px;
+          border-radius: 15px;
+          transition: 0.3s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: none;
+            transform: scale(102%);
+          } 
+        }
       .faq {
         display: flex;
         flex-direction: column;
@@ -96,7 +112,7 @@ export const HomePageWrapper = styled.div`
         margin: 50px 0;
 
         li {
-          background: #f1f1f1;
+          background: #f1f1f1c1;
           font-weight: 700;
           font-size: 24px;
           line-height: 40px;
@@ -132,16 +148,22 @@ export const HomePageWrapper = styled.div`
           margin-top: 100px;
         }
       }
+      &#fees {
+      }
+      &#howitworks {
+      }
       &#faq {
         height: auto;
         margin-bottom: 30px;
         width: 1000px;
 
         .logo {
-          margin-top: 100px;
+          margin-top: 120px;
+          font-size: 46px;
         }
         .action {
           margin-top: 50px;
+          margin-bottom: 70px;
         }
         .copyright {
           font-style: normal;
@@ -150,7 +172,22 @@ export const HomePageWrapper = styled.div`
           line-height: 22px;
           text-align: center;
           letter-spacing: -0.03em;
-          color: rgba(var(--color-primary-main),0.5);
+          color: #f7f7f7;
+        }
+        svg {
+          font-size: 42px;
+          color: #777;
+        }
+        li {
+          justify-content: space-between;
+          display: flex;
+          align-items: center;
+          button {
+            display: flex;
+            svg {
+              font-size: 36px;
+            }
+          }
         }
       }
     }
@@ -190,7 +227,7 @@ export const JobsPageWrapper = styled.div`
     > article {
       /* border-left: 1px solid rgba(var(--color-primary-main),0.1); */
       padding: 80px 100px;
-      min-height: 100vh;
+      /* min-height: 100vh; */
       display: flex;
       flex-direction: column;
 
@@ -282,7 +319,7 @@ export const DocumentPageWrapper = styled.div`
     }
     article {
       padding: 100px;
-      min-height: 100vh;
+      /* min-height: 100vh; */
       display: flex;
       flex-direction: column;
 

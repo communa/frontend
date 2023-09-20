@@ -43,14 +43,16 @@ export default function HeaderJobs() {
         <ul>
           <li>
             <Link href="/activity">
-              All jobs
+              View All
             </Link>
           </li>
-          <li>
-            <Link href="/activity/new">
-              Publish a job
-            </Link>
-          </li>
+          {authStatus === 'authenticated' && address && (
+            <li>
+              <Link href="/activity/new">
+                Publish a job
+              </Link>
+            </li>
+          )}
         </ul>
         {authStatus === 'authenticated' && address && (
           <>
@@ -58,7 +60,7 @@ export default function HeaderJobs() {
             <ul>
               <li>
                 <Link href={`/user/${address}`}>
-                  My profile
+                  View profile
                 </Link>
               </li>
               <li>

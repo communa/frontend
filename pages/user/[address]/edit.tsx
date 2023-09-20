@@ -2,7 +2,7 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import Head from 'next/head';
 
 import { request } from 'src/Utils';
-import { UserPageWrapper } from 'src/lib/Wrappers';
+import { DocumentPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
 import Header from 'src/lib/Layout/Logo';
 import { useEffect, useRef, useState } from 'react';
@@ -12,6 +12,7 @@ import { useNotifications } from 'src/contexts/Notifications';
 import { useAccount } from 'wagmi';
 import { IUser } from 'src/interface/IUser';
 import { useRouter } from 'next/router';
+import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (context: GetServerSidePropsContext) => {
   const { address } = context.query;
@@ -74,83 +75,87 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
   };
 
   return (
-    <UserPageWrapper>
+    <DocumentPageWrapper>
       <Head>
         <title>{address} - Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <Header />
       <main>
-        <form>
-          <h2>User / {user.id}</h2>
-          <label>Name</label>
-          <input
-            className="field"
-            type="text"
-            placeholder="Name"
-            defaultValue={userName}
-            onChange={e => setUserName(e.target.value)}
-          />
-          <label>Company</label>
-          <input
-            className="field"
-            type="text"
-            placeholder="Company"
-            defaultValue={company}
-            onChange={e => setCompany(e.target.value)}
-          />
-          <label>LinkedIn</label>
-          <input
-            className="field"
-            type="text"
-            placeholder="linkedIn"
-            defaultValue={linkedIn}
-            onChange={e => setLinkedIn(e.target.value)}
-          />
-          <label>Twitter</label>
-          <input
-            className="field"
-            type="text"
-            placeholder="Twitter"
-            defaultValue={twitter}
-            onChange={e => setTwitter(e.target.value)}
-          />
-          <label>Telegram</label>
-          <input
-            className="field"
-            type="text"
-            placeholder="Telegram"
-            defaultValue={telegram}
-            onChange={e => setTelegram(e.target.value)}
-          />
-          <label>Bio</label>
-          <Editor
-            apiKey={TINYMCE_KEY}
-            onInit={(evt, editor) => (editorRef.current = editor)}
-            initialValue={bio}
-            init={{
-              // height: 300,
-              menubar: false,
-              plugins: [
-                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-              ],
-              toolbar: 'undo redo | blocks | ' +
-                'bold italic forecolor | alignleft aligncenter ' +
-                'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | help',
-              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-            }}
-          />
-          <button className='update' onClick={() => onUpdate()}>
-            Update
-          </button>
-        </form>
+        <aside>
+          <HeaderJobs />
+        </aside>
+        <article>
+          <form>
+            <h2>User / {user.id}</h2>
+            <label>Name</label>
+            <input
+              className="field"
+              type="text"
+              placeholder="Name"
+              defaultValue={userName}
+              onChange={e => setUserName(e.target.value)}
+            />
+            <label>Company</label>
+            <input
+              className="field"
+              type="text"
+              placeholder="Company"
+              defaultValue={company}
+              onChange={e => setCompany(e.target.value)}
+            />
+            <label>LinkedIn</label>
+            <input
+              className="field"
+              type="text"
+              placeholder="linkedIn"
+              defaultValue={linkedIn}
+              onChange={e => setLinkedIn(e.target.value)}
+            />
+            <label>Twitter</label>
+            <input
+              className="field"
+              type="text"
+              placeholder="Twitter"
+              defaultValue={twitter}
+              onChange={e => setTwitter(e.target.value)}
+            />
+            <label>Telegram</label>
+            <input
+              className="field"
+              type="text"
+              placeholder="Telegram"
+              defaultValue={telegram}
+              onChange={e => setTelegram(e.target.value)}
+            />
+            <label>Bio</label>
+            <Editor
+              apiKey={TINYMCE_KEY}
+              onInit={(evt, editor) => (editorRef.current = editor)}
+              initialValue={bio}
+              init={{
+                // height: 300,
+                menubar: false,
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+              }}
+            />
+            <button className='update' onClick={() => onUpdate()}>
+              Update
+            </button>
+          </form>
+        </article>
       </main>
-    </UserPageWrapper>
+    </DocumentPageWrapper>
   );
 };
 

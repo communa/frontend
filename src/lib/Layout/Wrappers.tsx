@@ -22,8 +22,8 @@ export const LogoWrapper = styled.div`
     line-height: 1;
   }
   span {
-    background: #aaa;
-    color: #000;
+    background: #3b56ec;
+    color: #fff;
     font-weight: 500;
     position: absolute;
     padding: 2px 5px;

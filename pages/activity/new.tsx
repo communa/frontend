@@ -148,7 +148,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
           Publish
         </button>
       </main>
-    </ActivityPublishWrapper >
+    </ActivityPublishWrapper>
   );
 };
 
