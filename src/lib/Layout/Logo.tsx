@@ -7,7 +7,12 @@ export default function Header({ }) {
   return (
     <LogoWrapper className="logo">
       <Link href="/">
-        Communa
+        <picture>
+          <img
+            src="/logo.png"
+            alt="Landscape picture"
+          />
+        </picture>
       </Link>
       <span>Testnet</span>
     </LogoWrapper>

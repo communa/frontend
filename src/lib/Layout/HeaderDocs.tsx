@@ -8,9 +8,14 @@ export default function HeaderDocs() {
     <HeaderSideWrapper>
       <div className="logo">
         <Link href="/">
-          Communa
+          <picture>
+            <img
+              src="/logo.png"
+              alt="Landscape picture"
+            />
+            <span>Testnet</span>
+          </picture>
         </Link>
-        <span>Testnet</span>
       </div>
       <nav>
         <h4>Docs</h4>

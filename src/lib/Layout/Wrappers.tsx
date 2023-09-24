@@ -13,17 +13,16 @@ export const LogoWrapper = styled.div`
   width: max-content;
   margin-bottom: 10px;
   margin-top: 20px;
+  cursor: pointer;
 
-  a {
-    color: #1337ff;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 42px;
-    line-height: 1;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
   }
   span {
-    background: #3b56ec;
-    color: #fff;
+    background: #aaa;
+    color: #000;
     font-weight: 500;
     position: absolute;
     padding: 2px 5px;
@@ -72,7 +71,7 @@ export const HeaderSideWrapper = styled.header`
       font-weight: 300;
       color: rgba(var(--color-primary-main),0.6);
       display: block;
-      font-size: 16px;
+      font-size: 18px;
       font-style: normal;
       line-height: 22px;
       letter-spacing: -0.48px;
@@ -90,7 +89,13 @@ export const HeaderSideWrapper = styled.header`
   .logo {
     position: relative;
     width: max-content;
-    margin-bottom: 10px;
+    cursor: pointer;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
     a {
       color: #1337ff;
       text-decoration: none;

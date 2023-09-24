@@ -9,8 +9,11 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { AuthContext } from 'src/contexts/Auth';
 import { useContext } from 'react';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';
+// import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import Image from 'next/image';
+
 
 const Home = () => {
   const { authStatus } = useContext(AuthContext);
@@ -31,13 +34,35 @@ const Home = () => {
               GitHub
             </NextLink>
             <NextLink href="/litepaper">
-              Read docs
+              Help
             </NextLink>
           </p>
           {/* <GitHubIcon /> */}
+          {/* <Image
+            priority
+            src={MetaMaskFox}
+            alt="Follow us on Twitter"
+          /> */}
+          {/* <MetaMaskFox /> */}
           <Header />
-          <h1>Web3 marketplace to connect businesses with talents</h1>
-          <h3>...through blockchain!</h3>
+          <div className="hero">
+            <div className="tag-orange-outer">
+              <div className="tag-orange-inner">
+                <div className="hHuuya">Decentralisation</div>
+              </div>
+            </div>
+            <div className="tag-green-inner">
+              <div className="hHuuya">Transparency</div>
+            </div>
+            <div className="tag-purple-inner">
+              <div className="hHuuya">Reputation</div>
+            </div>
+            <div className="tag-blue-inner">
+              <div className="hHuuya">Payments</div>
+            </div>
+            <h1>Web3 marketplace to connect businesses with talents</h1>
+            <h3>...through blockchain!</h3>
+          </div>
           <div className="action">
             <NextLink href="/activity" passHref>
               <Button variant="outlined" LinkComponent={Link}>
@@ -45,25 +70,35 @@ const Home = () => {
               </Button>
             </NextLink>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton label="Log in with MetaMask" />
+              <ConnectButton label="Connect Wallet" />
             ) : (
               <Button variant="contained" disabled>
                 Download TimeTracker
               </Button>
             )}
           </div>
+          <p className="jobsTotal">
+            <span>1000+</span> jobs available
+          </p>
         </section>
         <section id="howitworks">
-          <h2>How it works</h2>
-          <h3>
-            Communa automates the needed business processes directly on the blockchain.
-          </h3>
-          <div className="placeholder" />
+          <div className="placeholder __top" />
           <h3>
             Trusted by 250+ developers
           </h3>
           <p>
             “LocalCan has been an absolute game-changer for my app development process! As a developer, I used to dread dealing with HTTPS certificates, port numbers, and editing /etc/hosts just to test my apps locally.”
+          </p>
+
+          <h2>How it works</h2>
+          <h3>
+            Forget editing /etc/hosts or typing 192.168.0.12!
+            Your Wi-Fi
+          </h3>
+          <div className="placeholder" />
+          <p>
+            Publish e.g. www.myapp.local domain from your MacBook,
+            and it will be visible to all devices in your local network ⟶ pointing to your MacBook.
           </p>
         </section>
         <section id="fees">
@@ -101,7 +136,7 @@ const Home = () => {
             })}
           </ul>
           <Header />
-          <p>Web3 freelancing marketplace</p>
+          <p className="subtext">Web3 freelancing marketplace</p>
           <div className="action">
             <NextLink href="/activity" passHref>
               <Button variant="outlined" LinkComponent={Link}>
@@ -109,23 +144,24 @@ const Home = () => {
               </Button>
             </NextLink>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton label="Create a Profile" />
+              <ConnectButton label="Connect Wallet" />
             ) : (
               <Button variant="contained" disabled>
                 Download TimeTracker
               </Button>
             )}
           </div>
-          <GitHubIcon />
+          <NextLink href="https://github.com/communa">
+            <GitHubIcon />
+          </NextLink>
           <p className="helpLinks">
             <NextLink href="https://github.com/communa">
               GitHub
             </NextLink>
             <NextLink href="/litepaper">
-              Read docs
+              Help
             </NextLink>
           </p>
-          <br />
           <p className="copyright">
             MIT License. Copyright (c) 2023 Communa
           </p>

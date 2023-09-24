@@ -18,6 +18,19 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
+export const ContractAirdropWrapper = styled.div`
+  background: #f1f1f1c1;
+  text-align: center;
+  padding: 40px;
+  border-radius: 15px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin-top: 40px;
+  }
+`;
 export const HomePageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -35,14 +48,73 @@ export const HomePageWrapper = styled.div`
     align-items: center;
     text-align: center;
     
+    .hero {
+      position: relative;
+      .tag-green-inner,
+      .tag-purple-inner,
+      .tag-blue-inner,
+      .tag-orange-inner {
+        opacity: 1;
+        pointer-events: none;
+        position: absolute;
+        transition: opacity 400ms ease 0s;
+        transform: translateX(0px) scale(1);
+        filter: blur(0px);
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid #000;
+        border-radius: 15px;
+        padding: 3px 8px;
+      }
+      .tag-green-inner {
+        opacity: 1;
+        transform: rotate(-10deg);
+        top: -30px;
+        right: -100px;
+        color: rgb(215, 219, 40);
+        border: 1px solid rgb(215, 219, 40);
+        border-color: linear-gradient(10deg, rgb(215, 219, 40) 0%, rgb(117, 168, 10) 100%);
+      }
+      .tag-orange-inner {
+        transform: rotate(10deg);
+        top: -30px;
+        left: -120px;
+        color: rgb(255, 145, 68);
+        border: 1px solid rgb(255, 145, 68);
+        border-color: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(135deg, #E2660F 0%, #FF9144 100%) border-box;
+      }
+      .tag-blue-inner {
+        transform: rotate(-10deg);
+        bottom: -30px;
+        left: 0px;
+        color: rgb(9, 173, 225);
+        border: 1px solid rgb(9, 173, 225);
+      }
+      .tag-purple-inner {
+        transform: rotate(10deg);
+        bottom: -30px;
+        right: -30px;
+        color: rgb(148, 102, 246);
+        border: 1px solid rgb(148, 102, 246);
+      }
+    }
+    
     section {
       width: 800px;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      height: 100vh;
+      min-height: 100vh;
       padding: 20px;
-
+      
+      p {
+        opacity: 0.8;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.48px;
+      }
       .helpLinks {
         display: flex;
         gap: 20px;
@@ -50,7 +122,6 @@ export const HomePageWrapper = styled.div`
         margin-top: 50px;
         margin-bottom: 20px;
         font-size: 16px;
-        text-decoration: underline;
         a {
           display: flex;
           gap: 8px;
@@ -60,7 +131,8 @@ export const HomePageWrapper = styled.div`
           line-height: 22px;
           text-align: center;
           letter-spacing: -0.03em;
-          color: rgba(var(--color-primary-main),0.5);
+          /* color: rgba(var(--color-primary-main),0.5); */
+          color: rgba(0,0,0,0.5);
         }
       }
       h1, h2 {
@@ -84,15 +156,41 @@ export const HomePageWrapper = styled.div`
       }
       .action {
         margin-top: 50px;
-        gap: 50px;
+        gap: 30px;
         display: flex;
         justify-content: center;
+
+        button,
+          a {
+            background: #1337ff;
+            font-size: 18px;
+            border-radius: 35px;
+            padding: 10px 30px;
+            font-weight: 600;
+            color: #fff;
+            height: 54px;
+            text-transform: capitalize;
+          }
+        a { 
+          background-color: rgba(var(--color-primary-main),0.1);
+          color: rgba(var(--color-primary-main),1);
+          font-weight: 500;
+          border-width: 0;
+          transition: transform 0.125s ease;
+          font-weight: 500;
+          &:hover {
+            transform: scale(105%);
+            transition: 0.125s ease;
+          } 
+        }
+        button {
+          background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+        }
       }
       .placeholder {
           height: 200px;
           width: 100%;
           background: #aaa;
-          /* background: rgb(2,0,36); */
           background: linear-gradient(349deg, rgba(170,170,170,1) 0%, rgba(238,238,238,1) 100%);
           margin-top: 60px;
           margin-bottom: 60px;
@@ -135,8 +233,8 @@ export const HomePageWrapper = styled.div`
           margin-top: 10px;
         }
         .logo {
-          margin-top: 60px;
-          margin-bottom: 60px;
+          margin-top: 50px;
+          margin-bottom: 50px;
           a {
             font-size: 46px;
           }
@@ -145,12 +243,23 @@ export const HomePageWrapper = styled.div`
           margin-top: 15px;
         }
         .action {
-          margin-top: 100px;
+          margin-top: 80px;
+        }
+        .jobsTotal {
+          margin-top: 40px;
+          color: rgba(0, 0, 0, 0.5);
+          span {
+            font-weight: 600;
+          }
         }
       }
       &#fees {
       }
       &#howitworks {
+        .placeholder {
+          margin-top: 0;
+          height: 400px;
+        }
       }
       &#faq {
         height: auto;
@@ -158,12 +267,19 @@ export const HomePageWrapper = styled.div`
         width: 1000px;
 
         .logo {
-          margin-top: 120px;
-          font-size: 46px;
+          margin-top: 140px;
+          font-size: 38px;
         }
         .action {
           margin-top: 50px;
           margin-bottom: 70px;
+        }
+        .subtext {
+          color: rgba(var(--color-primary-main),0.5);
+        }
+        .helpLinks {
+          margin-top: 70px;
+          margin-bottom: 60px;
         }
         .copyright {
           font-style: normal;
@@ -172,9 +288,10 @@ export const HomePageWrapper = styled.div`
           line-height: 22px;
           text-align: center;
           letter-spacing: -0.03em;
-          color: #f7f7f7;
+          color: rgba(var(--color-primary-main),0.5);
         }
         svg {
+          cursor: pointer;
           font-size: 42px;
           color: #777;
         }
@@ -185,7 +302,8 @@ export const HomePageWrapper = styled.div`
           button {
             display: flex;
             svg {
-              font-size: 36px;
+              font-size: 26px;
+              color: #444;
             }
           }
         }

@@ -3,6 +3,7 @@ import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
 import { TOKEN_ADDRESS } from 'src/config/consts';
 
 import communaTokenAbi from 'CommunaToken.json';
+import { ContractAirdropWrapper } from '../Wrappers';
 
 const ContractAirdrop = () => {
   const { address } = useAccount();
@@ -41,7 +42,7 @@ const ContractAirdrop = () => {
   };
 
   return (
-    <>
+    <ContractAirdropWrapper>
       <p>
         See <strong>CommunaToken</strong> contract on&nbsp;
         <a href={`https://goerli.etherscan.io/address/${TOKEN_ADDRESS}`} target="_blank" rel="noreferrer">
@@ -60,25 +61,18 @@ const ContractAirdrop = () => {
       {writeApprove.error && (
         <div>An error occurred preparing the transaction: {writeApprove.error.message}</div>
       )}
-      <form>
-        <label>Address to (connected wallet)</label>
-        <input
-          className="field"
-          type="text"
-          disabled
-          value={address}
-        />
-        <br />
-        <button
-          type='button'
-          className='update'
-          onClick={() => writeApprove.write?.()}
-          disabled={isProcessingAirdrop}
-        >
-          Receive
-        </button>
-      </form>
-    </>
+      <br />
+      <p>Connect wallet to the website, communa tokens to be send you wallet.</p>
+      <p><strong>{address}</strong></p>
+      <button
+        type='button'
+        className='update'
+        onClick={() => writeApprove.write?.()}
+        disabled={isProcessingAirdrop}
+      >
+        Receive
+      </button>
+    </ContractAirdropWrapper >
   );
 };
 

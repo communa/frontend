@@ -185,8 +185,9 @@ a:hover {
 .update {
   cursor: pointer;
   border: 0;
-  background: #1337ff;
-  color: #fff;
+  // background: #1337ff;
+  background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+  color: rgba(255, 255, 255, 0.04);
   width: fit-content;
   padding: 0 50px;
   height: 80px;
@@ -196,6 +197,13 @@ a:hover {
   text-decoration: none;
   box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
   display: flex;
+  text-decoration: none;
+  box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
+  display: flex;
+  border-radius: 85px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
   
   &:hover {
     text-decoration: none;
