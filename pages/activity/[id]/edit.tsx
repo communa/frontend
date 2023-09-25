@@ -1,15 +1,15 @@
 import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
+import { Editor } from '@tinymce/tinymce-react';
+import { useRef, useState } from 'react';
 
 import { IActivity } from 'src/interface/IActivity';
 import { request } from 'src/Utils';
-import { ActivityPublishWrapper } from 'src/lib/Wrappers';
+import { ActivityPublishWrapper, DocumentPageWrapper, JobsPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
-import Header from 'src/lib/Layout/Logo';
-import { Editor } from '@tinymce/tinymce-react';
-import { useRef, useState } from 'react';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
+import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -65,7 +65,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
   };
 
   return (
-    <ActivityPublishWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Publish - Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -74,69 +74,73 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <Header />
-        <h2>Job / {activity.id}</h2>
-        <input
-          className="title"
-          type="text"
-          placeholder="Job Title"
-          defaultValue={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <label>Hourly Rate</label>
-        <input
-          className="rate"
-          type="text"
-          placeholder="$20 per hour"
-          defaultValue={rate}
-          onChange={e => setRate(e.target.value)}
-        />
-        <label>Annual Salary</label>
-        <input
-          className="salary"
-          type="text"
-          placeholder="$40000 a year"
-          defaultValue={salary}
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label>Keywords</label>
-        <input
-          className="keywords"
-          type="text"
-          placeholder="typescript, react, aws"
-          defaultValue={keywords}
-          onChange={e => setKeywords(e.target.value)}
-        />
-        <label>State</label>
-        <select onChange={e => setState(e.target.value)} defaultValue={state}>
-          <option value="Published">Published</option>
-          <option value="Draft">Draft</option>
-        </select>
-        <label>Job Description</label>
-        <Editor
-          apiKey={TINYMCE_KEY}
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={text}
-          init={{
-            // height: 300,
-            menubar: false,
-            plugins: [
-              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-            ],
-            toolbar: 'undo redo | blocks | ' +
-              'bold italic forecolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ' +
-              'removeformat | help',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-          }}
-        />
-        <button className='publish' onClick={() => onEdit()}>
-          Update
-        </button>
+        <aside>
+          <HeaderJobs />
+        </aside>
+        <ActivityPublishWrapper>
+          <h2>Job / {activity.id}</h2>
+          <input
+            className="title"
+            type="text"
+            placeholder="Job Title"
+            defaultValue={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+          <label>Hourly Rate</label>
+          <input
+            className="rate"
+            type="text"
+            placeholder="$20 per hour"
+            defaultValue={rate}
+            onChange={e => setRate(e.target.value)}
+          />
+          <label>Annual Salary</label>
+          <input
+            className="salary"
+            type="text"
+            placeholder="$40000 a year"
+            defaultValue={salary}
+            onChange={e => setSalary(e.target.value)}
+          />
+          <label>Keywords</label>
+          <input
+            className="keywords"
+            type="text"
+            placeholder="typescript, react, aws"
+            defaultValue={keywords}
+            onChange={e => setKeywords(e.target.value)}
+          />
+          <label>State</label>
+          <select onChange={e => setState(e.target.value)} defaultValue={state}>
+            <option value="Published">Published</option>
+            <option value="Draft">Draft</option>
+          </select>
+          <label>Job Description</label>
+          <Editor
+            apiKey={TINYMCE_KEY}
+            onInit={(evt, editor) => (editorRef.current = editor)}
+            initialValue={text}
+            init={{
+              // height: 300,
+              menubar: false,
+              plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+              ],
+              toolbar: 'undo redo | blocks | ' +
+                'bold italic forecolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+            }}
+          />
+          <button className='publish' onClick={() => onEdit()}>
+            Update
+          </button>
+        </ActivityPublishWrapper>
       </main>
-    </ActivityPublishWrapper>
+    </DocumentPageWrapper>
   );
 };
 

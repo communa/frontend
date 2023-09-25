@@ -7,6 +7,7 @@ import { AuthContext } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
 import { useAccount, useDisconnect } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 
 export default function HeaderJobs() {
@@ -59,6 +60,62 @@ export default function HeaderJobs() {
             </li>
           )}
         </ul>
+        {/* <h4>Skill</h4>
+        <ul className="inline">
+          <li>
+            <Link href="/activity">
+              Rust
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              Go
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              TypeScript
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              Python
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              Solidity
+            </Link>
+          </li>
+        </ul>
+        <h4>Location</h4>
+        <ul>
+          <li>
+            <Link href="/activity">
+              USA
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              United Kingdom
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              Germany
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              Spain
+            </Link>
+          </li>
+          <li>
+            <Link href="/activity">
+              UAE
+            </Link>
+          </li>
+        </ul> */}
         {authStatus === 'authenticated' && address && (
           <>
             <h4>My Account</h4>
@@ -81,19 +138,16 @@ export default function HeaderJobs() {
             </ul>
           </>
         )}
+        <br />
+        <br />
+        <br />
         {authStatus !== 'authenticated' && (
           <>
-            <h4>My Account</h4>
-            <ul>
-              <li>
-                <Link href="/" onClick={() => onLoginClick()}>
-                  Log In
-                </Link>
-              </li>
-            </ul>
+            <ConnectButton />
           </>
         )}
+
       </nav>
-    </HeaderSideWrapper>
+    </HeaderSideWrapper >
   )
 }

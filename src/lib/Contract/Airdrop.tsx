@@ -70,7 +70,13 @@ const ContractAirdrop = () => {
         onClick={() => writeApprove.write?.()}
         disabled={isProcessingAirdrop}
       >
-        Receive
+        <picture>
+          <img
+            src="/logo.png"
+            alt="Comm Token"
+          />
+        </picture>
+        Airdrop
       </button>
     </ContractAirdropWrapper >
   );

@@ -12,7 +12,6 @@ export const Wrapper = styled.ul`
   list-style: none;
   justify-content: flex-end;
   z-index: 10;
-  background: #1337ff;
   width: 500px;
 
   li {

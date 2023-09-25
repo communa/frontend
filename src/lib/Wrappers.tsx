@@ -21,14 +21,24 @@ export const MainInterfaceWrapper = styled.div`
 export const ContractAirdropWrapper = styled.div`
   background: #f1f1f1c1;
   text-align: center;
-  padding: 40px;
-  border-radius: 15px;
+  padding: 100px;
+  border-radius: 50px;
   align-items: center;
   display: flex;
   flex-direction: column;
 
   button {
     margin-top: 40px;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      margin-right: 10px;
+    }
   }
 `;
 export const HomePageWrapper = styled.div`
@@ -58,13 +68,15 @@ export const HomePageWrapper = styled.div`
         pointer-events: none;
         position: absolute;
         transition: opacity 400ms ease 0s;
-        transform: translateX(0px) scale(1);
-        filter: blur(0px);
         font-weight: 600;
         font-size: 14px;
         border: 1px solid #000;
         border-radius: 15px;
         padding: 3px 8px;
+
+        transform: translateX(0px) scale(1);
+        filter: blur(0px);
+        cursor: pointer;
       }
       .tag-green-inner {
         opacity: 1;
@@ -104,7 +116,6 @@ export const HomePageWrapper = styled.div`
       flex-direction: column;
       align-items: center;
       text-align: center;
-      min-height: 100vh;
       padding: 20px;
       
       p {
@@ -114,6 +125,7 @@ export const HomePageWrapper = styled.div`
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.48px;
+        line-height: 1.5;
       }
       .helpLinks {
         display: flex;
@@ -153,6 +165,7 @@ export const HomePageWrapper = styled.div`
         color: rgba(var(--color-primary-main),1);
         opacity: 0.8;
         margin-top: 20px;
+        margin-bottom: 10px;
       }
       .action {
         margin-top: 50px;
@@ -162,47 +175,45 @@ export const HomePageWrapper = styled.div`
 
         button,
           a {
-            background: #1337ff;
+            background: #1360d3;
             font-size: 18px;
             border-radius: 35px;
             padding: 10px 30px;
             font-weight: 600;
             color: #fff;
             height: 54px;
+            cursor: pointer;
             text-transform: capitalize;
+            transition: transform 0.125s ease;
+            &:hover {
+              transform: scale(105%);
+              transition: 0.125s ease;
+            } 
           }
         a { 
-          background-color: rgba(var(--color-primary-main),0.1);
-          color: rgba(var(--color-primary-main),1);
+          background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+          color: #fff;
           font-weight: 500;
           border-width: 0;
-          transition: transform 0.125s ease;
           font-weight: 500;
-          &:hover {
-            transform: scale(105%);
-            transition: 0.125s ease;
-          } 
         }
         button {
-          background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+          background-color: rgba(var(--color-primary-main),0.1);
+          color: rgba(var(--color-primary-main),1);
+          border: 0;
+          font-size: 18px;
+          border-radius: 35px;
+          padding: 10px 30px;
+          font-weight: 600;
+          height: 54px;
+          display: flex;
+          text-transform: capitalize;
+          align-items: center;
+          span {
+            margin-right: 5px !important;
+          }
         }
       }
-      .placeholder {
-          height: 200px;
-          width: 100%;
-          background: #aaa;
-          background: linear-gradient(349deg, rgba(170,170,170,1) 0%, rgba(238,238,238,1) 100%);
-          margin-top: 60px;
-          margin-bottom: 60px;
-          border-radius: 15px;
-          transition: 0.3s ease-in-out;
-          cursor: pointer;
-
-          &:hover {
-            text-decoration: none;
-            transform: scale(102%);
-          } 
-        }
       .faq {
         display: flex;
         flex-direction: column;
@@ -219,6 +230,9 @@ export const HomePageWrapper = styled.div`
           padding: 20px;
           list-style: none;
           text-align: left;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
 
           &:first-child {
             border-radius: 12px 12px 0px 0px;
@@ -226,15 +240,26 @@ export const HomePageWrapper = styled.div`
           &:last-child {
             border-radius: 0px 0px 12px 12px;
           }
+          .title {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+          }
+          .body {
+            width: 100%;
+            display: none;
+          }
         }
       }
       &#index {
+        min-height: 100vh;
+
         .helpLinks {
-          margin-top: 10px;
+          margin-top: 20px;
         }
         .logo {
           margin-top: 50px;
-          margin-bottom: 50px;
+          margin-bottom: 40px;
           a {
             font-size: 46px;
           }
@@ -243,7 +268,7 @@ export const HomePageWrapper = styled.div`
           margin-top: 15px;
         }
         .action {
-          margin-top: 80px;
+          margin-top: 70px;
         }
         .jobsTotal {
           margin-top: 40px;
@@ -253,22 +278,31 @@ export const HomePageWrapper = styled.div`
           }
         }
       }
-      &#fees {
-      }
       &#howitworks {
+        h2 {
+          margin-top: 100px;
+        }
         .placeholder {
           margin-top: 0;
           height: 400px;
         }
       }
+      &#fees {
+        margin-top: 200px;
+      }
+      &#token {
+        margin-top: 200px;
+      }
       &#faq {
         height: auto;
         margin-bottom: 30px;
         width: 1000px;
+        margin-top: 200px;
 
         .logo {
           margin-top: 140px;
           font-size: 38px;
+          margin-bottom: 0;
         }
         .action {
           margin-top: 50px;
@@ -278,8 +312,8 @@ export const HomePageWrapper = styled.div`
           color: rgba(var(--color-primary-main),0.5);
         }
         .helpLinks {
-          margin-top: 70px;
-          margin-bottom: 60px;
+          margin-top: 50px;
+          margin-bottom: 20px;
         }
         .copyright {
           font-style: normal;
@@ -343,9 +377,7 @@ export const JobsPageWrapper = styled.div`
       position: relative;
     }
     > article {
-      /* border-left: 1px solid rgba(var(--color-primary-main),0.1); */
       padding: 80px 100px;
-      /* min-height: 100vh; */
       display: flex;
       flex-direction: column;
 
@@ -486,9 +518,6 @@ export const DocumentPageWrapper = styled.div`
 export const ActivityPublishWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 1100px;
-  justify-content: center;
-  margin: 0 auto;
   padding-bottom: 100px;
   
   main {
@@ -528,7 +557,7 @@ export const ActivityPublishWrapper = styled.div`
     cursor: pointer;
     border: 0;
     margin-top: 40px;
-    background: #1337ff;
+    background: #1360d3;
     color: #fff;
     width: fit-content;
     padding: 0 50px;

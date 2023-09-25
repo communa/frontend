@@ -51,7 +51,7 @@ export const ActivityWrapper = styled.div`
       flex-wrap: wrap;
       display: flex;
       span {
-        background: #1337ff;
+        background: #777;
         color: #fff;
         padding: 3px 5px;
         flex: none;

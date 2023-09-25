@@ -1,19 +1,19 @@
 import Head from 'next/head';
+import { useContext } from 'react';
+import { Button, IconButton, Link } from '@mui/material';
+import NextLink from 'next/link';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { HomePageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME, FAQ_TOPICS } from 'src/config/consts';
 import Header from 'src/lib/Layout/Logo';
-import { Button, IconButton, Link } from '@mui/material';
-import NextLink from 'next/link';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { AuthContext } from 'src/contexts/Auth';
-import { useContext } from 'react';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';
-// import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-// import Image from 'next/image';
-
+import { ConnectButton } from 'src/lib/Layout/ConnectButton';
+import IntroImage from 'src/assets/Illustration-1.png';
+import HowItWorksImage from 'src/assets/Illustration-2.png';
+import FeesImage from 'src/assets/Illustration-3.png';
+import { Faq } from 'src/lib/Layout/Faq';
 
 const Home = () => {
   const { authStatus } = useContext(AuthContext);
@@ -30,20 +30,13 @@ const Home = () => {
       <main>
         <section id="index">
           <p className="helpLinks">
-            <NextLink href="https://github.com/communa">
+            <a href="https://github.com/communa" target='_blank' rel="noreferrer">
               GitHub
-            </NextLink>
+            </a>
             <NextLink href="/litepaper">
               Help
             </NextLink>
           </p>
-          {/* <GitHubIcon /> */}
-          {/* <Image
-            priority
-            src={MetaMaskFox}
-            alt="Follow us on Twitter"
-          /> */}
-          {/* <MetaMaskFox /> */}
           <Header />
           <div className="hero">
             <div className="tag-orange-outer">
@@ -55,10 +48,10 @@ const Home = () => {
               <div className="hHuuya">Transparency</div>
             </div>
             <div className="tag-purple-inner">
-              <div className="hHuuya">Reputation</div>
+              <div className="hHuuya">Public reputation</div>
             </div>
             <div className="tag-blue-inner">
-              <div className="hHuuya">Payments</div>
+              <div className="hHuuya">Payments in USDT</div>
             </div>
             <h1>Web3 marketplace to connect businesses with talents</h1>
             <h3>...through blockchain!</h3>
@@ -70,7 +63,7 @@ const Home = () => {
               </Button>
             </NextLink>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton label="Connect Wallet" />
+              <ConnectButton />
             ) : (
               <Button variant="contained" disabled>
                 Download TimeTracker
@@ -78,27 +71,37 @@ const Home = () => {
             )}
           </div>
           <p className="jobsTotal">
-            <span>1000+</span> jobs available
+            <span>1000+</span> active jobs for hire
           </p>
         </section>
         <section id="howitworks">
-          <div className="placeholder __top" />
+          <picture>
+            <img
+              src={IntroImage.src}
+              alt="Work Process"
+              width={800}
+            />
+          </picture>
           <h3>
-            Trusted by 250+ developers
+            Reputation
           </h3>
           <p>
-            “LocalCan has been an absolute game-changer for my app development process! As a developer, I used to dread dealing with HTTPS certificates, port numbers, and editing /etc/hosts just to test my apps locally.”
+            We all know that a strong reputation is essential in a crowded market, where profiles on social networks like LinkedIn serve as a digital resume. Reputation built on blockchain is a new idea that is gaining popularity in the crypto community.
           </p>
 
-          <h2>How it works</h2>
+          <h2>How It Works</h2>
           <h3>
-            Forget editing /etc/hosts or typing 192.168.0.12!
-            Your Wi-Fi
+            Our smart contracts automate all required processes related to time-tracking.
           </h3>
-          <div className="placeholder" />
+          <picture>
+            <img
+              src={HowItWorksImage.src}
+              alt="Work Process"
+              width={800}
+            />
+          </picture>
           <p>
-            Publish e.g. www.myapp.local domain from your MacBook,
-            and it will be visible to all devices in your local network ⟶ pointing to your MacBook.
+            Communa is made to operate borderless where unbiased smart contracts enable freelancers to work with clients directly, without the need for 3rd party services or any other intermediaries.
           </p>
         </section>
         <section id="fees">
@@ -106,37 +109,34 @@ const Home = () => {
           <h3>
             Our smart contracts automate all required processes related to time-tracking.
           </h3>
-          <div className="placeholder" />
+          <picture>
+            <img
+              src={FeesImage.src}
+              alt="Work Process"
+              width={800}
+            />
+          </picture>
           <h3>
-            Trusted by 250+ developers
+            Payments
           </h3>
           <p>
-            “LocalCan has been an absolute game-changer for my app development process! As a developer, I used to dread dealing with HTTPS certificates, port numbers, and editing /etc/hosts just to test my apps locally.”
+            Communa automates the needed business processes directly on the blockchain: time tracking, invoicing, payments, and reputation. Using blockchain we aim not only to reduce costs, and cut the needs for party systems but also to increase trust bringing a level of autonomy that has never been seen before.
           </p>
         </section>
         <section id="token">
           <h2>Token</h2>
           <h3>
-            Airdrop 10 tokens (Goerli Testnet)
+            Airdrop 10 tokens on Goerli Testnet
           </h3><br />
           <ContractAirdrop />
         </section>
         <section id="faq">
           <h2>FAQ</h2>
-          <ul className="faq">
-            {FAQ_TOPICS.map(t => {
-              return (
-                <li key={t}>
-                  {t}
-                  <IconButton aria-label="delete" size="small">
-                    <KeyboardArrowDownIcon />
-                  </IconButton>
-                </li>
-              )
-            })}
-          </ul>
+          <Faq />
           <Header />
-          <p className="subtext">Web3 freelancing marketplace</p>
+          <p className="subtext">
+            Web3 marketplace to connect<br />businesses with talents
+          </p>
           <div className="action">
             <NextLink href="/activity" passHref>
               <Button variant="outlined" LinkComponent={Link}>
@@ -144,7 +144,7 @@ const Home = () => {
               </Button>
             </NextLink>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton label="Connect Wallet" />
+              <ConnectButton />
             ) : (
               <Button variant="contained" disabled>
                 Download TimeTracker
@@ -155,9 +155,9 @@ const Home = () => {
             <GitHubIcon />
           </NextLink>
           <p className="helpLinks">
-            <NextLink href="https://github.com/communa">
+            <a href="https://github.com/communa" target='_blank' rel="noreferrer">
               GitHub
-            </NextLink>
+            </a>
             <NextLink href="/litepaper">
               Help
             </NextLink>

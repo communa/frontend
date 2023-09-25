@@ -171,7 +171,7 @@ function App({ Component, pageProps }: AppProps) {
             appInfo={appInfo}
             chains={chains}
             theme={darkTheme({
-              accentColor: '#1337ff',
+              accentColor: '#1360d3',
               accentColorForeground: 'white',
               fontStack: 'system',
               overlayBlur: 'small',

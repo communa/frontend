@@ -13,14 +13,11 @@ export const ROUTER_ADDRESS = '0x51F7e80D725309b519E5538F993C5B3a6694C647';
 export const TOKEN_ADDRESS = '0x86C948f06AAF9dF1199dF9539Ec3E56FbeE23CA9';
 export const COMMUNA_WALLET_ADDRESS = '0x86C948f06AAF9dF1199dF9539Ec3E56FbeE23CA9';
 
-
 export const FAQ_TOPICS = [
     'Tell me more what are the fees?',
     'How can I publish a job and is it free?',
-    'I want to join communa as a freelancer, how can I apply on a job?',
+    'I want to join communa as a freelancer and apply on a job?',
     'Explain me, what Communa Token is about?',
     'What is Communa TimeTracker and why do I need it?',
     'How do I get paid for my work as a freelancer?',
-    'What is decenralized reputation and ranking is about?',
-    'You say Communa Network is an open-source project, right?',
 ];

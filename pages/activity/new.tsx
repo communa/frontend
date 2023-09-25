@@ -4,14 +4,14 @@ import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from 'next/router';
 
-import { ActivityPublishWrapper } from 'src/lib/Wrappers';
+import { ActivityPublishWrapper, JobsPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts'
-import Header from 'src/lib/Layout/Logo';
 import { request } from 'src/Utils';
 import { AuthContext, getJwtLocalStorage } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
 import { join } from 'path';
 import fs from 'fs';
+import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 export const getServerSideProps: GetServerSideProps<{ template: string }> = async (context: GetServerSidePropsContext) => {
   const template = fs.readFileSync(join(__dirname, '../../../../job-template.html')).toString();
@@ -80,7 +80,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
   }
 
   return (
-    <ActivityPublishWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Publish - Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -89,66 +89,72 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <Header />
-        <h2>Add new</h2>
-        <label>Title</label>
-        <input
-          className="title"
-          type="text"
-          placeholder="Job Title"
-          onChange={e => setTitle(e.target.value)}
-        />
-        <label>Hourly Rate</label>
-        <input
-          className="rate"
-          type="text"
-          placeholder="$20 per hour"
-          onChange={e => setRate(e.target.value)}
-        />
-        <label>Annual Salary</label>
-        <input
-          className="salary"
-          type="text"
-          placeholder="$40000 a year"
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label>Keywords</label>
-        <input
-          className="keywords"
-          type="text"
-          placeholder="typescript, react, aws"
-          onChange={e => setKeywords(e.target.value)}
-        />
-        <label>State</label>
-        <select onChange={e => setState(e.target.value)} defaultValue={state}>
-          <option value="Published">Published</option>
-          <option value="Draft">Draft</option>
-        </select>
-        <label>Full Details</label>
-        <Editor
-          apiKey={TINYMCE_KEY}
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={text}
-          init={{
-            // height: 300,
-            menubar: false,
-            plugins: [
-              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-              'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-              'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-            ],
-            toolbar: 'undo redo | blocks | ' +
-              'bold italic forecolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ' +
-              'removeformat | help',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-          }}
-        />
-        <button className='publish' onClick={() => onPublish()}>
-          Publish
-        </button>
+        <aside>
+          <HeaderJobs />
+        </aside>
+        <article>
+          <ActivityPublishWrapper>
+            <h2>Add new</h2>
+            <label>Title</label>
+            <input
+              className="title"
+              type="text"
+              placeholder="Job Title"
+              onChange={e => setTitle(e.target.value)}
+            />
+            <label>Hourly Rate</label>
+            <input
+              className="rate"
+              type="text"
+              placeholder="$20 per hour"
+              onChange={e => setRate(e.target.value)}
+            />
+            <label>Annual Salary</label>
+            <input
+              className="salary"
+              type="text"
+              placeholder="$40000 a year"
+              onChange={e => setSalary(e.target.value)}
+            />
+            <label>Keywords</label>
+            <input
+              className="keywords"
+              type="text"
+              placeholder="typescript, react, aws"
+              onChange={e => setKeywords(e.target.value)}
+            />
+            <label>State</label>
+            <select onChange={e => setState(e.target.value)} defaultValue={state}>
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
+            </select>
+            <label>Full Details</label>
+            <Editor
+              apiKey={TINYMCE_KEY}
+              onInit={(evt, editor) => (editorRef.current = editor)}
+              initialValue={text}
+              init={{
+                // height: 300,
+                menubar: false,
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+              }}
+            />
+            <button className='publish' onClick={() => onPublish()}>
+              Publish
+            </button>
+          </ActivityPublishWrapper>
+        </article>
       </main>
-    </ActivityPublishWrapper>
+    </JobsPageWrapper>
   );
 };
 
