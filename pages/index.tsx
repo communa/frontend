@@ -126,7 +126,7 @@ const Home = () => {
         <section id="token">
           <h2>Token</h2>
           <h3>
-            Airdrop 10 tokens on Goerli Testnet
+            Airdrop 10 tokens on Goerli Testnet.<br /> Connect the wallet and tokens received to your wallet.
           </h3><br />
           <ContractAirdrop />
         </section>

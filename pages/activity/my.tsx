@@ -3,12 +3,11 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
 
-import { HomePageWrapper, JobsPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import { IActivity } from 'src/interface/IActivity';
 import { APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import Header from 'src/lib/Layout/Logo';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
@@ -70,8 +69,8 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
           <HeaderJobs />
         </aside>
         <article>
-          <h2>Jobs / {state}</h2>
-          <ActivityNavPublishing state='' />
+          <h2>My {state} jobs</h2>
+          <ActivityNavPublishing />
           {activities.length > 0 && activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}

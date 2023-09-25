@@ -85,6 +85,15 @@ export const HeaderSideWrapper = styled.header`
       }
       li {
         list-style-type: none;
+        color: #000;
+        cursor: pointer;
+        p {
+          color: #000;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

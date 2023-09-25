@@ -77,70 +77,72 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <aside>
           <HeaderJobs />
         </aside>
-        <ActivityPublishWrapper>
-          <h2>Job / {activity.id}</h2>
-          <input
-            className="title"
-            type="text"
-            placeholder="Job Title"
-            defaultValue={title}
-            onChange={e => setTitle(e.target.value)}
-          />
-          <label>Hourly Rate</label>
-          <input
-            className="rate"
-            type="text"
-            placeholder="$20 per hour"
-            defaultValue={rate}
-            onChange={e => setRate(e.target.value)}
-          />
-          <label>Annual Salary</label>
-          <input
-            className="salary"
-            type="text"
-            placeholder="$40000 a year"
-            defaultValue={salary}
-            onChange={e => setSalary(e.target.value)}
-          />
-          <label>Keywords</label>
-          <input
-            className="keywords"
-            type="text"
-            placeholder="typescript, react, aws"
-            defaultValue={keywords}
-            onChange={e => setKeywords(e.target.value)}
-          />
-          <label>State</label>
-          <select onChange={e => setState(e.target.value)} defaultValue={state}>
-            <option value="Published">Published</option>
-            <option value="Draft">Draft</option>
-          </select>
-          <label>Job Description</label>
-          <Editor
-            apiKey={TINYMCE_KEY}
-            onInit={(evt, editor) => (editorRef.current = editor)}
-            initialValue={text}
-            init={{
-              // height: 300,
-              menubar: false,
-              plugins: [
-                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-              ],
-              toolbar: 'undo redo | blocks | ' +
-                'bold italic forecolor | alignleft aligncenter ' +
-                'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | help',
-              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-            }}
-          />
-          <button className='publish' onClick={() => onEdit()}>
-            Update
-          </button>
-        </ActivityPublishWrapper>
+        <article>
+          <ActivityPublishWrapper>
+            <h2>Job / {activity.id}</h2>
+            <input
+              className="title"
+              type="text"
+              placeholder="Job Title"
+              defaultValue={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+            <label>Hourly Rate</label>
+            <input
+              className="rate"
+              type="text"
+              placeholder="$20 per hour"
+              defaultValue={rate}
+              onChange={e => setRate(e.target.value)}
+            />
+            <label>Annual Salary</label>
+            <input
+              className="salary"
+              type="text"
+              placeholder="$40000 a year"
+              defaultValue={salary}
+              onChange={e => setSalary(e.target.value)}
+            />
+            <label>Keywords</label>
+            <input
+              className="keywords"
+              type="text"
+              placeholder="typescript, react, aws"
+              defaultValue={keywords}
+              onChange={e => setKeywords(e.target.value)}
+            />
+            <label>State</label>
+            <select onChange={e => setState(e.target.value)} defaultValue={state}>
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
+            </select>
+            <label>Job Description</label>
+            <Editor
+              apiKey={TINYMCE_KEY}
+              onInit={(evt, editor) => (editorRef.current = editor)}
+              initialValue={text}
+              init={{
+                // height: 300,
+                menubar: false,
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+              }}
+            />
+            <button className='publish' onClick={() => onEdit()}>
+              Update
+            </button>
+          </ActivityPublishWrapper>
+        </article>
       </main>
-    </DocumentPageWrapper>
+    </JobsPageWrapper>
   );
 };
 

@@ -62,8 +62,7 @@ const ContractAirdrop = () => {
         <div>An error occurred preparing the transaction: {writeApprove.error.message}</div>
       )}
       <br />
-      <p>Connect wallet to the website, communa tokens to be send you wallet.</p>
-      <p><strong>{address}</strong></p>
+      <p>Connected Wallet: <strong>{address}</strong></p>
       <button
         type='button'
         className='update'

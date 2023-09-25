@@ -19,8 +19,6 @@ export const Faq = () => {
     setDisplay(new Set(display));
   }
 
-  console.log(display);
-
   return (
     <FaqWrapper className="faq">
       {FAQ_TOPICS.map((t, i) => {

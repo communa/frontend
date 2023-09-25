@@ -27,10 +27,6 @@ export default function HeaderJobs() {
     disconnect();
   }
 
-  const onLoginClick = () => {
-    router.push('/login');
-  }
-
   return (
     <HeaderSideWrapper>
       <div className="logo">
@@ -131,9 +127,9 @@ export default function HeaderJobs() {
                 </Link>
               </li>
               <li>
-                <Link href="/" onClick={() => onLogoutClick()}>
+                <p onClick={() => onLogoutClick()}>
                   Log out
-                </Link>
+                </p>
               </li>
             </ul>
           </>
