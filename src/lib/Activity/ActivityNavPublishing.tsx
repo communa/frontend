@@ -10,7 +10,7 @@ const ActivityNavPublishing = ({ state }: ActivityNavPublishingProps) => {
   const { authStatus } = useContext(AuthContext);
   return (
     <nav>
-      <Link href="/">
+      <Link href="/activity">
         View All
       </Link>
       {authStatus === 'authenticated' && (

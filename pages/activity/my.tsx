@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
 
-import { HomePageWrapper } from 'src/lib/Wrappers';
+import { HomePageWrapper, JobsPageWrapper } from 'src/lib/Wrappers';
 import { IActivity } from 'src/interface/IActivity';
 import { APP_NAME } from 'src/config/consts';
 import { APIContext } from 'src/contexts/Api';
@@ -11,6 +11,7 @@ import ActivityShort from 'src/lib/Activity/ActivityShort';
 import Header from 'src/lib/Layout/Logo';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
+import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 export const getServerSideProps: GetServerSideProps<{ state: string }> = async (context: GetServerSidePropsContext) => {
   const { state } = context.query;
@@ -56,7 +57,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
   }, [state]);
 
   return (
-    <HomePageWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Software Engineering Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -65,19 +66,23 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <Header />
-        <h2>Jobs / {state}</h2>
-        <ActivityNavPublishing state='' />
-        {activities.length > 0 && activities.map(activity => {
-          return <ActivityShort key={activity.id} activity={activity} />
-        })}
-        {activities.length === 0 && (
-          <p>
-            You have no <strong>{state}</strong> jobs
-          </p>
-        )}
+        <aside>
+          <HeaderJobs />
+        </aside>
+        <article>
+          <h2>Jobs / {state}</h2>
+          <ActivityNavPublishing state='' />
+          {activities.length > 0 && activities.map(activity => {
+            return <ActivityShort key={activity.id} activity={activity} />
+          })}
+          {activities.length === 0 && (
+            <p>
+              You have no <strong>{state}</strong> jobs
+            </p>
+          )}
+        </article>
       </main>
-    </HomePageWrapper >
+    </JobsPageWrapper >
   );
 };
 

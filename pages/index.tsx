@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { useContext } from 'react';
-import { Button, IconButton, Link } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import NextLink from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { HomePageWrapper } from 'src/lib/Wrappers';
-import { APP_NAME, FAQ_TOPICS } from 'src/config/consts';
+import { APP_NAME } from 'src/config/consts';
 import Header from 'src/lib/Layout/Logo';
 import { AuthContext } from 'src/contexts/Auth';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';

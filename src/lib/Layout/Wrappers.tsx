@@ -42,7 +42,6 @@ export const LogoWrapper = styled.div`
   }      
 `;
 
-
 export const HeaderSideWrapper = styled.header`
   display: flex;
   position: relative;
@@ -130,4 +129,52 @@ export const HeaderSideWrapper = styled.header`
       }
     }
   }      
+`;
+
+
+export const FaqWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 50px 0;
+
+  li {
+    background: #f1f1f1c1;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 40px;
+    letter-spacing: -0.03em;
+    margin-bottom: 1px;
+    padding: 20px;
+    list-style: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      width: 40px;
+    }
+
+    &:first-child {
+      border-radius: 12px 12px 0px 0px;
+    }
+    &:last-child {
+      border-radius: 0px 0px 12px 12px;
+    }
+    .title {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    p {
+      width: 100%;
+      display: none;
+    }
+    &.active {
+      p {
+        display: block;
+      }
+    }    
+  }
 `;

@@ -209,45 +209,9 @@ export const HomePageWrapper = styled.div`
           display: flex;
           text-transform: capitalize;
           align-items: center;
+          color: #aaa;
           span {
             margin-right: 5px !important;
-          }
-        }
-      }
-      .faq {
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        margin: 50px 0;
-
-        li {
-          background: #f1f1f1c1;
-          font-weight: 700;
-          font-size: 24px;
-          line-height: 40px;
-          letter-spacing: -0.03em;
-          margin-bottom: 1px;
-          padding: 20px;
-          list-style: none;
-          text-align: left;
-          cursor: pointer;
-          display: flex;
-          flex-direction: column;
-
-          &:first-child {
-            border-radius: 12px 12px 0px 0px;
-          }
-          &:last-child {
-            border-radius: 0px 0px 12px 12px;
-          }
-          .title {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-          }
-          .body {
-            width: 100%;
-            display: none;
           }
         }
       }
@@ -408,47 +372,6 @@ export const JobsPageWrapper = styled.div`
   }
 `;
 
-export const PaymentPageWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  width: 100%;
-  height: 100vh;
-  overflow: scroll;
-
-  main {
-    margin: 0 auto;
-    width: 1100px;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 100px;
-    
-    h2 {
-      margin-bottom: 5px;
-      font-size: 36px;
-    }
-    nav {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
-
-      a.active {
-        text-decoration: underline;
-      }
-    }
-  }
-  
-  @media only screen and (max-width: 700px) {
-    main {
-      margin: 0 auto;
-      width: calc(100vw - 40px);
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-    }
-  }
-`;
-
 export const DocumentPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -520,39 +443,39 @@ export const ActivityPublishWrapper = styled.div`
   flex-flow: column nowrap;
   padding-bottom: 100px;
   
-  main {
+  
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  nav {
     display: flex;
-    flex-direction: column;
-    h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-    nav {
-      display: flex;
-      gap: 10px;
-      a {
-        color: #000;
-        margin-top: 10px;
-        text-decoration: none;
-      }
-    }
-    label {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #666;
-    }
-    .rate,
-    .salary,
-    .keywords,
-    .title {
-      font-size: 28px;
-      border-bottom: 1px solid #aaa;
-    }
-    .state {
-      display: flex;
+    gap: 10px;
+    a {
+      color: #000;
+      margin-top: 10px;
+      text-decoration: none;
     }
   }
+  label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #666;
+  }
+  .rate,
+  .salary,
+  .keywords,
+  .title {
+    font-size: 28px;
+    border-bottom: 1px solid #aaa;
+  }
+  .state {
+    display: flex;
+  }
+
   .publish {
     cursor: pointer;
     border: 0;
