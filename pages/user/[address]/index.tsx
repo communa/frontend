@@ -46,13 +46,14 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
         </aside>
         <article>
           <form>
-            <strong>Address</strong>{user.address}<br />
-            <strong>Name</strong>{user.userName}<br />
-            <strong>Company</strong>{user.company}<br />
-            <strong>Twitter</strong>{user.twitter}<br />
-            <strong>LinkedIn</strong>{user.linkedIn}<br />
-            <strong>Telegram</strong>{user.telegram}<br />
-            <strong>Bio</strong>
+            <h3>Address</h3>{user.address}<br />
+            <h3>Name</h3>{user.userName}<br />
+            <h3>Company</h3>{user.company}<br />
+            <h3>Twitter</h3>{user.twitter}<br />
+            <h3>LinkedIn</h3>{user.linkedIn}<br />
+            <h3>Telegram</h3>{user.telegram}<br />
+
+            <h3>Bio</h3>
             <div className="body" dangerouslySetInnerHTML={{
               __html: user.bio
             }} />

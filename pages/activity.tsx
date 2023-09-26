@@ -88,8 +88,8 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
           <HeaderJobs />
         </aside>
         <article>
-          <h2>All Jobs</h2>
-          <ActivityNavPublishing state='' />
+          <h2>All jobs</h2>
+          <ActivityNavPublishing />
           {activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}

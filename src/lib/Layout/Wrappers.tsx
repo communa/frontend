@@ -62,7 +62,7 @@ export const HeaderSideWrapper = styled.header`
     flex-direction: column;  
   
     h4 {
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 30px;
     }
     ul {
@@ -70,7 +70,7 @@ export const HeaderSideWrapper = styled.header`
       font-weight: 300;
       color: rgba(var(--color-primary-main),0.6);
       display: block;
-      font-size: 16px;
+      font-size: 18px;
       font-style: normal;
       line-height: 22px;
       letter-spacing: -0.48px;
@@ -97,15 +97,24 @@ export const HeaderSideWrapper = styled.header`
       }
     }
   }
-
+  .copyright {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    letter-spacing: -0.03em;
+    color: rgba(var(--color-primary-main), 0.5);
+    margin-top: 60px;
+  }
   .logo {
     position: relative;
     width: max-content;
     cursor: pointer;
 
     img {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
     }
     span {

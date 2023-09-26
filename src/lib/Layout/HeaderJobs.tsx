@@ -138,12 +138,13 @@ export default function HeaderJobs() {
         <br />
         <br />
         {authStatus !== 'authenticated' && (
-          <>
-            <ConnectButton />
-          </>
+          <ConnectButton />
         )}
-
       </nav>
+      <p className="copyright">
+        Copyright (c) 2023 Communa.<br />
+        MIT License.
+      </p>
     </HeaderSideWrapper >
   )
 }

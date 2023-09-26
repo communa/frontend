@@ -209,7 +209,9 @@ export const HomePageWrapper = styled.div`
           display: flex;
           text-transform: capitalize;
           align-items: center;
-          color: #aaa;
+          &:disabled {
+            color: #aaa;
+          }
           span {
             margin-right: 5px !important;
           }

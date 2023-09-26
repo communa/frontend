@@ -60,6 +60,10 @@ export default function HeaderDocs() {
           </li>
         </ul>
       </nav>
+      <p className="copyright">
+        Copyright (c) 2023 Communa.<br />
+        MIT License.
+      </p>
     </HeaderSideWrapper>
   )
 }

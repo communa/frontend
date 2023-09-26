@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useContext } from 'react';
-import { Button, Link } from '@mui/material';
+import { Button, Link, Tooltip } from '@mui/material';
 import NextLink from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -57,17 +57,21 @@ const Home = () => {
             <h3>...through blockchain!</h3>
           </div>
           <div className="action">
-            <NextLink href="/activity" passHref>
-              <Button variant="outlined" LinkComponent={Link}>
-                Browse Jobs
-              </Button>
-            </NextLink>
+            <Tooltip title="TimeTacker is in development and not yet ready" arrow>
+              <NextLink href="/activity" passHref>
+                <Button variant="outlined" LinkComponent={Link}>
+                  Browse Jobs
+                </Button>
+              </NextLink>
+            </Tooltip>
             {authStatus === 'unauthenticated' ? (
               <ConnectButton />
             ) : (
-              <Button variant="contained" disabled>
-                Download TimeTracker
-              </Button>
+              <Tooltip title="TimeTacker is in development and not yet ready" arrow>
+                <Button variant="contained" disabled>
+                  Download TimeTracker
+                </Button>
+              </Tooltip>
             )}
           </div>
           <p className="jobsTotal">
@@ -88,7 +92,6 @@ const Home = () => {
           <p>
             We all know that a strong reputation is essential in a crowded market, where profiles on social networks like LinkedIn serve as a digital resume. Reputation built on blockchain is a new idea that is gaining popularity in the crypto community.
           </p>
-
           <h2>How It Works</h2>
           <h3>
             Our smart contracts automate all required processes related to time-tracking.
