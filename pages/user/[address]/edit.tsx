@@ -2,9 +2,8 @@ import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSideP
 import Head from 'next/head';
 
 import { request } from 'src/Utils';
-import { DocumentPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
-import Header from 'src/lib/Layout/Logo';
 import { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
@@ -13,6 +12,7 @@ import { useAccount } from 'wagmi';
 import { IUser } from 'src/interface/IUser';
 import { useRouter } from 'next/router';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import { TextField } from '@mui/material';
 
 export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (context: GetServerSidePropsContext) => {
   const { address } = context.query;
@@ -62,6 +62,7 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
         company,
         twitter,
         linkedIn,
+        telegram,
         bio,
       }
     });
@@ -75,56 +76,51 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
   };
 
   return (
-    <DocumentPageWrapper>
+    <JobsPageWrapper>
       <Head>
-        <title>{address} - Software Engineering Jobs - {APP_NAME}</title>
+        <title>{address} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main>
+      <main id="userEdit">
         <aside>
           <HeaderJobs />
         </aside>
         <article>
+          <h2>Edit profile</h2>
           <form>
-            <h2>User / {user.id}</h2>
-            <label>Name</label>
-            <input
-              className="field"
-              type="text"
+            <TextField
+              label="Name"
+              variant="outlined"
               placeholder="Name"
               defaultValue={userName}
               onChange={e => setUserName(e.target.value)}
             />
-            <label>Company</label>
-            <input
-              className="field"
-              type="text"
+            <TextField
+              label="Company"
+              variant="outlined"
               placeholder="Company"
               defaultValue={company}
               onChange={e => setCompany(e.target.value)}
             />
-            <label>LinkedIn</label>
-            <input
-              className="field"
-              type="text"
-              placeholder="linkedIn"
+            <TextField
+              label="LinkedIn"
+              variant="outlined"
+              placeholder="LinkedIn"
               defaultValue={linkedIn}
               onChange={e => setLinkedIn(e.target.value)}
             />
-            <label>Twitter</label>
-            <input
-              className="field"
-              type="text"
+            <TextField
+              label="Twitter"
+              variant="outlined"
               placeholder="Twitter"
               defaultValue={twitter}
               onChange={e => setTwitter(e.target.value)}
             />
-            <label>Telegram</label>
-            <input
-              className="field"
-              type="text"
+            <TextField
+              label="Telegram"
+              variant="outlined"
               placeholder="Telegram"
               defaultValue={telegram}
               onChange={e => setTelegram(e.target.value)}
@@ -149,13 +145,14 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
               }}
             />
+
             <button type="button" className='update' onClick={() => onUpdate()}>
               Update
             </button>
           </form>
         </article>
       </main>
-    </DocumentPageWrapper>
+    </JobsPageWrapper>
   );
 };
 

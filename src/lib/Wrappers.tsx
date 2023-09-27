@@ -22,7 +22,7 @@ export const ContractAirdropWrapper = styled.div`
   background: #f1f1f1c1;
   text-align: center;
   padding: 100px;
-  border-radius: 50px;
+  border-radius: 12px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -50,10 +50,7 @@ export const HomePageWrapper = styled.div`
   overflow: scroll;
 
   main {
-    margin: 0 auto;
-    width: 1100px;
     display: flex;
-    
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -126,6 +123,8 @@ export const HomePageWrapper = styled.div`
         line-height: normal;
         letter-spacing: -0.48px;
         line-height: 1.5;
+        width: 600px;
+        margin: 0 auto;
       }
       .helpLinks {
         display: flex;
@@ -147,7 +146,7 @@ export const HomePageWrapper = styled.div`
           color: rgba(0,0,0,0.5);
         }
       }
-      h1, h2 {
+      h1, h2, h3, h4, h5 {
         font-style: normal;
         font-weight: 700;
         font-size: 72px;
@@ -156,6 +155,12 @@ export const HomePageWrapper = styled.div`
         letter-spacing: -0.02em;
       }
       h3 {
+        font-size: 52px;
+        margin-bottom: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h5 {
         font-style: normal;
         font-weight: 400;
         font-size: 22px;
@@ -164,8 +169,9 @@ export const HomePageWrapper = styled.div`
         letter-spacing: -0.03em;
         color: rgba(var(--color-primary-main),1);
         opacity: 0.8;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 10px;
+        line-height: 1.5;
       }
       .action {
         margin-top: 50px;
@@ -217,6 +223,12 @@ export const HomePageWrapper = styled.div`
           }
         }
       }
+      .blueprint {
+        margin-bottom: 40px;
+        padding: 30px;
+        border: 3px dashed rgba(var(--color-primary-main),0.08);
+        border-radius: 12px;
+      }
       &#index {
         min-height: 100vh;
 
@@ -245,6 +257,7 @@ export const HomePageWrapper = styled.div`
         }
       }
       &#howitworks {
+        width: 1100px;
         h2 {
           margin-top: 100px;
         }
@@ -356,9 +369,42 @@ export const JobsPageWrapper = styled.div`
         gap: 10px;
         margin-bottom: 30px;
 
-        a.active {
-          text-decoration: underline;
+        &.links {
+          a {
+            color: #777;
+          }
         }
+      }
+    }
+    &#jobNew,
+    &#jobEdit,
+    &#userEdit {
+      article {
+        > h2 {
+          font-size: 36px;
+          margin-bottom: 30px;
+          margin-top: 0;
+        }
+        form {
+          > label {
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            margin-top: 10px;
+          }
+          .jobState {
+            > label {
+              color: #666;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    &#userProfile {
+      h3 {
+        margin-top: 20px;
       }
     }
   }
@@ -382,7 +428,6 @@ export const DocumentPageWrapper = styled.div`
 
   main {
     display: grid;
-    min-height: 100vh;
     grid-template-columns: 320px auto;
     
     > aside {
@@ -394,7 +439,6 @@ export const DocumentPageWrapper = styled.div`
     }
     article {
       padding: 100px;
-      /* min-height: 100vh; */
       display: flex;
       flex-direction: column;
 
@@ -436,66 +480,6 @@ export const DocumentPageWrapper = styled.div`
       margin: inherit;
       width: auto;
       padding: 20px;
-    }
-  }
-`;
-
-export const ActivityPublishWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  padding-bottom: 100px;
-  
-  
-  display: flex;
-  flex-direction: column;
-  h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  nav {
-    display: flex;
-    gap: 10px;
-    a {
-      color: #000;
-      margin-top: 10px;
-      text-decoration: none;
-    }
-  }
-  label {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #666;
-  }
-  .rate,
-  .salary,
-  .keywords,
-  .title {
-    font-size: 28px;
-    border-bottom: 1px solid #aaa;
-  }
-  .state {
-    display: flex;
-  }
-
-  .publish {
-    cursor: pointer;
-    border: 0;
-    margin-top: 40px;
-    background: #1360d3;
-    color: #fff;
-    width: fit-content;
-    padding: 0 50px;
-    height: 80px;
-    font-size: 24px;
-    border-radius: 15px;
-    line-height: 80px; 
-    text-decoration: none;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px;
-    &:hover {
-      text-decoration: none;
-      transform: scale(105%);
-      transition: 0.125s ease;
     }
   }
 `;

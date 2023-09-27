@@ -10,10 +10,13 @@ import Header from 'src/lib/Layout/Logo';
 import { AuthContext } from 'src/contexts/Auth';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';
 import { ConnectButton } from 'src/lib/Layout/ConnectButton';
-import IntroImage from 'src/assets/Illustration-1.png';
+import IntroImage from 'src/assets/Illustration-2.png';
 import HowItWorksImage from 'src/assets/Illustration-2.png';
-import FeesImage from 'src/assets/Illustration-3.png';
+import FeesImage from 'src/assets/Illustration-2.png';
 import { Faq } from 'src/lib/Layout/Faq';
+
+import ClientImage from 'src/assets/client.png';
+import FreelancerImage from 'src/assets/freelancer.png';
 
 const Home = () => {
   const { authStatus } = useContext(AuthContext);
@@ -21,7 +24,7 @@ const Home = () => {
   return (
     <HomePageWrapper>
       <Head>
-        <title>Web3 Freelance Marketplace - {APP_NAME}</title>
+        <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
@@ -54,7 +57,7 @@ const Home = () => {
               <div className="hHuuya">Payments in USDT</div>
             </div>
             <h1>Web3 marketplace to connect businesses with talents</h1>
-            <h3>...through blockchain!</h3>
+            <h5>...through blockchain!</h5>
           </div>
           <div className="action">
             <Tooltip title="TimeTacker is in development and not yet ready" arrow>
@@ -65,7 +68,7 @@ const Home = () => {
               </NextLink>
             </Tooltip>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton />
+              <ConnectButton size={'large'} />
             ) : (
               <Tooltip title="TimeTacker is in development and not yet ready" arrow>
                 <Button variant="contained" disabled>
@@ -79,46 +82,59 @@ const Home = () => {
           </p>
         </section>
         <section id="howitworks">
-          <picture>
-            <img
-              src={IntroImage.src}
-              alt="Work Process"
-              width={800}
-            />
-          </picture>
+          <div className="blueprint">
+            <picture>
+              <img
+                src={IntroImage.src}
+                alt="Work Process"
+                width={800}
+              />
+            </picture>
+            <p>
+              Like numerous web2 freelancing platforms, Communa automates the needed business processes directly on the blockchain: time tracking, invoicing, payments, and reputation. Using blockchain we aim not only to reduce costs, and cut the needs for party systems but also to increase trust bringing a level of autonomy that has never been seen before.
+            </p>
+          </div>
+          <h3>How It Works</h3>
+          <h5>
+            Our smart contracts automate all required processes related to time-tracking.
+          </h5>
+          <div className="blueprint">
+            <picture>
+              <img
+                src={ClientImage.src}
+                alt="Client post a job"
+                width={400}
+              />
+            </picture><span>Job</span>
+            <picture>
+              <img
+                src={FreelancerImage.src}
+                alt="Freelancer gets a job"
+                width={400}
+              />
+            </picture>
+          </div>
           <h3>
             Reputation
           </h3>
-          <p>
-            We all know that a strong reputation is essential in a crowded market, where profiles on social networks like LinkedIn serve as a digital resume. Reputation built on blockchain is a new idea that is gaining popularity in the crypto community.
-          </p>
-          <h2>How It Works</h2>
-          <h3>
-            Our smart contracts automate all required processes related to time-tracking.
-          </h3>
-          <picture>
-            <img
-              src={HowItWorksImage.src}
-              alt="Work Process"
-              width={800}
-            />
-          </picture>
           <p>
             Communa is made to operate borderless where unbiased smart contracts enable freelancers to work with clients directly, without the need for 3rd party services or any other intermediaries.
           </p>
         </section>
         <section id="fees">
           <h2>Low fees</h2>
-          <h3>
+          <h5>
             Our smart contracts automate all required processes related to time-tracking.
-          </h3>
-          <picture>
-            <img
-              src={FeesImage.src}
-              alt="Work Process"
-              width={800}
-            />
-          </picture>
+          </h5>
+          <div className="blueprint">
+            <picture>
+              <img
+                src={FeesImage.src}
+                alt="Work Process"
+                width={800}
+              />
+            </picture>
+          </div>
           <h3>
             Payments
           </h3>
@@ -128,9 +144,9 @@ const Home = () => {
         </section>
         <section id="token">
           <h2>Token</h2>
-          <h3>
-            Airdrop 10 tokens on Goerli Testnet.<br /> Connect the wallet and tokens received to your wallet.
-          </h3><br />
+          <h5>
+            Airdrop 10 tokens on Goerli Testnet.<br /> Fill in you Communa profile to recieve the FREE tokens.
+          </h5><br />
           <ContractAirdrop />
         </section>
         <section id="faq">
@@ -147,7 +163,7 @@ const Home = () => {
               </Button>
             </NextLink>
             {authStatus === 'unauthenticated' ? (
-              <ConnectButton />
+              <ConnectButton size={'large'} />
             ) : (
               <Button variant="contained" disabled>
                 Download TimeTracker
@@ -166,11 +182,11 @@ const Home = () => {
             </NextLink>
           </p>
           <p className="copyright">
-            MIT License. Copyright (c) 2023 Communa
+            Copyright (c) 2023 Communa.
           </p>
         </section>
       </main>
-    </HomePageWrapper>
+    </HomePageWrapper >
   );
 };
 

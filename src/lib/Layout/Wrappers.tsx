@@ -1,5 +1,53 @@
 import styled from 'styled-components';
 
+export const ConnectButtonWrapper = styled.div`
+  button {
+    cursor: pointer;
+    background-color: rgba(var(--color-primary-main),0.1);
+    color: rgba(var(--color-primary-main),1);
+    border: 0;
+    font-size: 17px !important;
+    border-radius: 35px;
+    padding: 10px 30px;
+    font-weight: 600;
+    height: 54px;
+    display: flex;
+    text-transform: capitalize;
+    align-items: center;
+    &:disabled {
+      color: #aaa;
+    }
+    span {
+      margin-right: 5px !important;
+    }
+              
+    &:hover {
+      transform: scale(105%);
+      transition: 0.125s ease;
+    } 
+  }
+  &.small {
+    button {
+      height: 37px;
+      font-size: 14px !important;
+      font-weight: 600;
+      padding: 10px 24px;
+      transform: none;
+      /* transition: none; */
+
+      span {
+        img {
+          width: 25px !important;
+          height: 25px !important;
+        }
+      }
+      &:hover {
+        background-color: rgba(var(--color-primary-main),0.2);
+      }
+    }
+  }
+`;
+
 export const LogoWrapper = styled.div`
   display: flex;
   position: relative;
@@ -47,11 +95,11 @@ export const HeaderSideWrapper = styled.header`
   position: relative;
   flex-grow: 1;
   justify-content: start;
-  justify-content: space-between;
   flex-direction: column;
   margin-top: 40px;
   position: fixed;
   top: 0;
+  bottom: 40px;
 
   nav {  
     margin-top: 20px;
@@ -62,15 +110,16 @@ export const HeaderSideWrapper = styled.header`
     flex-direction: column;  
   
     h4 {
-      font-size: 16px;
+      font-size: 14px;
       margin-top: 30px;
+      color: #5586d1;
     }
     ul {
       list-style-type: none;
-      font-weight: 300;
+      font-weight: 400;
       color: rgba(var(--color-primary-main),0.6);
       display: block;
-      font-size: 18px;
+      /* font-size: 18px; */
       font-style: normal;
       line-height: 22px;
       letter-spacing: -0.48px;
@@ -85,28 +134,44 @@ export const HeaderSideWrapper = styled.header`
       }
       li {
         list-style-type: none;
-        color: #000;
+
         cursor: pointer;
-        p {
-          color: #000;
-          
+
+        p,
+        a {
+          color: rgba(0, 0, 0, 0.6);
           &:hover {
-            text-decoration: underline;
+            color: #000;
+            text-decoration: none;
           }
         }
       }
     }
   }
-  .copyright {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.5;
-    text-align: left;
-    letter-spacing: -0.03em;
-    color: rgba(var(--color-primary-main), 0.5);
-    margin-top: 60px;
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+
+    .downloadTimeTracker {
+      border-radius: 20px;
+      text-transform: capitalize;
+      background: rgb(239, 239, 239);
+      margin-top: 10px;
+    }
+    .copyright {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: left;
+      letter-spacing: -0.03em;
+      margin-top: 30px;
+      color: rgba(var(--color-primary-main), 0.5);
+    }
   }
+  
   .logo {
     position: relative;
     width: max-content;
@@ -150,7 +215,7 @@ export const HeaderSideWrapper = styled.header`
 `;
 
 
-export const FaqWrapper = styled.div`
+export const FaqWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1px;

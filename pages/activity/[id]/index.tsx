@@ -26,7 +26,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
   return (
     <JobsPageWrapper>
       <Head>
-        <title>{activity.title} - Software Engineering Jobs - {APP_NAME}</title>
+        <title>{activity.title} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />

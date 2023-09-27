@@ -12,6 +12,8 @@ import { getJwtLocalStorage } from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
+import HowItWorksImage from 'src/assets/Illustration-6.png';
+
 export const getServerSideProps: GetServerSideProps<{ state: string }> = async (context: GetServerSidePropsContext) => {
   const { state } = context.query;
 
@@ -58,7 +60,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
   return (
     <JobsPageWrapper>
       <Head>
-        <title>Software Engineering Jobs - {APP_NAME}</title>
+        <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
@@ -75,9 +77,18 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
             return <ActivityShort key={activity.id} activity={activity} />
           })}
           {activities.length === 0 && (
-            <p>
-              You have no <strong>{state}</strong> jobs
-            </p>
+            <>
+              <p>
+                You have no <strong>{state}</strong> jobs
+              </p>
+              <picture>
+                <img
+                  src={HowItWorksImage.src}
+                  alt="Work Process"
+                  width={600}
+                />
+              </picture>
+            </>
           )}
         </article>
       </main>

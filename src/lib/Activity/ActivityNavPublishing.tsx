@@ -5,9 +5,9 @@ import { AuthContext } from 'src/contexts/Auth';
 const ActivityNavPublishing = () => {
   const { authStatus } = useContext(AuthContext);
   return (
-    <nav>
+    <nav className="links">
       <Link href="/activity">
-        View All
+        View all
       </Link>
       {authStatus === 'authenticated' && (
         <>

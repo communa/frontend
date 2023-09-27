@@ -13,13 +13,14 @@ export const Wrapper = styled.ul`
   justify-content: flex-end;
   z-index: 10;
   width: 500px;
+  height: 20px;
 
   li {
-    /* background: var(--background-primary); */
+    background: #5586d1;
     margin: 0.4rem 1.2rem;
     position: relative;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 50px;
+    padding: 40px;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -27,7 +28,7 @@ export const Wrapper = styled.ul`
     overflow: hidden;
 
     h3 {
-      color: #fff;
+      color: #fff !important;
       font-family: 24px;
       flex: 1;
       text-transform: uppercase;

@@ -77,7 +77,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
   return (
     <JobsPageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
-        <title>Software Engineering Jobs - {APP_NAME}</title>
+        <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />

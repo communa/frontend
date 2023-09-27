@@ -62,7 +62,12 @@ const ContractAirdrop = () => {
         <div>An error occurred preparing the transaction: {writeApprove.error.message}</div>
       )}
       <br />
-      <p>Connected Wallet: <strong>{address}</strong></p>
+      {address ? (
+        <p>Connected Wallet: <strong>{address}</strong></p>
+      ) : (
+        <p>Connected Wallet: connect your wallet to Receive AirDrop</p>
+      )}
+
       <button
         type='button'
         className='update'

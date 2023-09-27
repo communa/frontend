@@ -6,7 +6,7 @@ import { API_HOST, APP_NAME } from 'src/config/consts';
 import { IUser } from 'src/interface/IUser';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
-import { DocumentPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (context: GetServerSidePropsContext) => {
@@ -32,19 +32,20 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
   }
 
   return (
-    <DocumentPageWrapper>
+    <JobsPageWrapper>
       <Head>
-        <title>{user.address} - Software Engineering Jobs - {APP_NAME}</title>
+        <title>{user.address} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={user.address} />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main>
+      <main id="userProfile">
         <aside>
           <HeaderJobs />
         </aside>
         <article>
+          <h2>My profile</h2>
           <form>
             <h3>Address</h3>{user.address}<br />
             <h3>Name</h3>{user.userName}<br />
@@ -52,7 +53,6 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
             <h3>Twitter</h3>{user.twitter}<br />
             <h3>LinkedIn</h3>{user.linkedIn}<br />
             <h3>Telegram</h3>{user.telegram}<br />
-
             <h3>Bio</h3>
             <div className="body" dangerouslySetInnerHTML={{
               __html: user.bio
@@ -67,7 +67,7 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
           </form>
         </article>
       </main>
-    </DocumentPageWrapper>
+    </JobsPageWrapper>
   );
 };
 

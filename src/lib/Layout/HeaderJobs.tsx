@@ -7,8 +7,8 @@ import { AuthContext } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
 import { useAccount, useDisconnect } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-
+import { ConnectButton } from 'src/lib/Layout/ConnectButton';
+import { Button, Tooltip } from '@mui/material';
 
 export default function HeaderJobs() {
   const { authStatus } = useContext(AuthContext);
@@ -45,7 +45,7 @@ export default function HeaderJobs() {
         <ul>
           <li>
             <Link href="/activity">
-              View All
+              View all
             </Link>
           </li>
           {authStatus === 'authenticated' && address && (
@@ -112,9 +112,9 @@ export default function HeaderJobs() {
             </Link>
           </li>
         </ul> */}
-        {authStatus === 'authenticated' && address && (
+        {authStatus === 'authenticated' && (
           <>
-            <h4>My Account</h4>
+            <h4>My account</h4>
             <ul>
               <li>
                 <Link href={`/user/${address}`}>
@@ -137,14 +137,24 @@ export default function HeaderJobs() {
         <br />
         <br />
         <br />
-        {authStatus !== 'authenticated' && (
-          <ConnectButton />
-        )}
       </nav>
-      <p className="copyright">
-        Copyright (c) 2023 Communa.<br />
-        MIT License.
-      </p>
+      <footer>
+        {authStatus !== 'authenticated' && (
+          <ConnectButton size={'small'} />
+        )}
+        <Tooltip title="Communa TimeTracker is not yet released">
+          <Button
+            className="downloadTimeTracker"
+            variant="contained"
+            disabled
+          >
+            Download TimeTracker
+          </Button>
+        </Tooltip>
+        <p className="copyright">
+          Copyright © 2023 Communa.
+        </p>
+      </footer>
     </HeaderSideWrapper >
   )
 }

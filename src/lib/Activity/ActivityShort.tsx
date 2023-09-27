@@ -21,8 +21,8 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
   ];
 
   return (
-    <ActivityWrapper>
-      <article key={activity.id} className='short'>
+    <ActivityWrapper className='short'>
+      <article key={activity.id}>
         <ActivityNav activity={activity} />
         <p className="date">
           {moment(activity.createdAt).format('LLL')}

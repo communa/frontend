@@ -5,11 +5,12 @@ import { useRef, useState } from 'react';
 
 import { IActivity } from 'src/interface/IActivity';
 import { request } from 'src/Utils';
-import { ActivityPublishWrapper, DocumentPageWrapper, JobsPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
 import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { useNotifications } from 'src/contexts/Notifications';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import { Switch, TextField } from '@mui/material';
 
 export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
   const { id } = context.query;
@@ -67,56 +68,66 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
   return (
     <JobsPageWrapper>
       <Head>
-        <title>Publish - Software Engineering Jobs - {APP_NAME}</title>
+        <title>Publish - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main>
+      <main id="jobEdit">
         <aside>
           <HeaderJobs />
         </aside>
         <article>
-          <ActivityPublishWrapper>
-            <h2>Job / {activity.id}</h2>
-            <input
-              className="title"
-              type="text"
-              placeholder="Job Title"
+          <h2>
+            Job editing
+          </h2>
+          <form>
+            <TextField
+              label="Title"
+              variant="outlined"
+              placeholder="Title"
               defaultValue={title}
               onChange={e => setTitle(e.target.value)}
             />
-            <label>Hourly Rate</label>
-            <input
-              className="rate"
-              type="text"
-              placeholder="$20 per hour"
+            <TextField
+              label="Rate hourly"
+              variant="outlined"
+              placeholder="$20"
               defaultValue={rate}
               onChange={e => setRate(e.target.value)}
             />
-            <label>Annual Salary</label>
-            <input
-              className="salary"
-              type="text"
-              placeholder="$40000 a year"
+            <TextField
+              label="Salary annualy"
+              variant="outlined"
+              placeholder="$40000"
               defaultValue={salary}
               onChange={e => setSalary(e.target.value)}
             />
-            <label>Keywords</label>
-            <input
-              className="keywords"
-              type="text"
-              placeholder="typescript, react, aws"
+            <TextField
+              label="Keywords"
+              variant="outlined"
+              placeholder="TypeSript, React, AWS"
               defaultValue={keywords}
               onChange={e => setKeywords(e.target.value)}
             />
-            <label>State</label>
-            <select onChange={e => setState(e.target.value)} defaultValue={state}>
-              <option value="Published">Published</option>
-              <option value="Draft">Draft</option>
-            </select>
-            <label>Job Description</label>
+            <p className="jobState">
+              <Switch
+                inputProps={{ 'aria-label': 'Switch demo' }}
+                onChange={e => {
+                  if (state === 'published') {
+                    setState('draft');
+                  } else {
+                    setState('published');
+                  }
+                }}
+                value={state}
+              />
+              <label>
+                {state}
+              </label>
+            </p>
+            <label>Job description full</label>
             <Editor
               apiKey={TINYMCE_KEY}
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -136,13 +147,13 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
               }}
             />
-            <button className='publish' onClick={() => onEdit()}>
+            <button className='update' type='button' onClick={() => onEdit()}>
               Update
             </button>
-          </ActivityPublishWrapper>
+          </form>
         </article>
       </main>
-    </JobsPageWrapper>
+    </JobsPageWrapper >
   );
 };
 

@@ -21,7 +21,7 @@ const Payment = () => {
         </aside>
         <article>
           <h2>
-            Make Payment (Goerli Testnet)
+            Token
           </h2>
           <ContractAirdrop />
         </article>

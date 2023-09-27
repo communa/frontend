@@ -21,7 +21,7 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
   ];
 
   return (
-    <ActivityWrapper>
+    <ActivityWrapper className="full">
       <ActivityNav activity={activity} />
       <article key={activity.id}>
         <p className="date">
@@ -52,7 +52,7 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
           __html: activity.text
         }} />
       </article>
-      <a href={activity.jobUrl} className="apply">
+      <a href={activity.jobUrl} className="apply" target="_blank" rel="noreferrer">
         Apply Now
       </a>
     </ActivityWrapper >

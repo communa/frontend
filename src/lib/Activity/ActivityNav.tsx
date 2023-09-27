@@ -7,6 +7,7 @@ import { getJwtLocalStorage } from 'src/contexts/Auth';
 import { IActivity } from 'src/interface/IActivity';
 import { useNotifications } from 'src/contexts/Notifications';
 import { useRouter } from 'next/router';
+import { Button } from '@mui/material';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -45,10 +46,10 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
 
   return (
     <nav>
-      <Link href={`/activity/${activity.id}/edit`}>
+      <Button href={`/activity/${activity.id}/edit`} variant='outlined'>
         Edit
-      </Link>
-      <button onClick={() => onDelete()}>Delete</button>
+      </Button>
+      <Button onClick={() => onDelete()} variant='outlined'>Delete</Button>
     </nav>
   )
 }
