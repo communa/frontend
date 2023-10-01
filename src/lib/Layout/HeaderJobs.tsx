@@ -83,24 +83,6 @@ export default function HeaderJobs() {
             </li>
           </li>
         </ul>
-        <h4>Location</h4>
-        <ul>
-          <li>
-            <Link href="/activity">
-              United Kingdom
-            </Link>
-          </li>
-          <li>
-            <Link href="/activity">
-              Germany
-            </Link>
-          </li>
-          <li>
-            <Link href="/activity">
-              USA
-            </Link>
-          </li>
-        </ul>
         {authStatus === 'authenticated' && (
           <>
             <h4>My account</h4>

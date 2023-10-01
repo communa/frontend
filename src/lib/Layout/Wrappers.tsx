@@ -197,19 +197,17 @@ export const HeaderSideWrapper = styled.header`
   }
 
   @media only screen and (max-width: 700px) {
-    width: auto;
-    margin: initial;
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 20px 0;
-    
-    .nav {
-      justify-content: left;
-      gap: 10px;
-      button,
-      a {
-        font-size: 15px;
-      }
+    display: block;
+    position: fixed;
+    left: 0px;
+    top: 0;
+    height: 100vh;
+    background: #fff;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    footer {
+      position: relative;
     }
   }      
 `;

@@ -19,16 +19,15 @@ export const MainInterfaceWrapper = styled.div`
 `;
 
 export const ContractAirdropWrapper = styled.div`
-/* background: #1360d3; */
-  background: #eee;
+  background: #ddddddaa;
   text-align: center;
   border-radius: 12px;
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 550px;
   border-radius: 50%;
-  height: 500px;
+  height: 550px;
   justify-content: center;
 
   button {
@@ -44,7 +43,12 @@ export const ContractAirdropWrapper = styled.div`
       margin-right: 10px;
     }
   }
+  .wallet {
+    margin-top: 40px;
+    color: #444;
+  }
 `;
+
 export const HomePageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -87,7 +91,6 @@ export const HomePageWrapper = styled.div`
         border-color: linear-gradient(10deg, rgb(215, 219, 40) 0%, rgb(117, 168, 10) 100%);
       }
       .tag-orange-inner {
-        /* transform: rotate(10deg); */
         top: -50px;
         left: -90px;
         color: rgb(255, 145, 68);
@@ -95,14 +98,12 @@ export const HomePageWrapper = styled.div`
         border-color: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(135deg, #E2660F 0%, #FF9144 100%) border-box;
       }
       .tag-blue-inner {
-        /* transform: rotate(-10deg); */
         bottom: 10px;
         left: 35px;
         color: rgb(9, 173, 225);
         border: 1px solid rgb(9, 173, 225);
       }
       .tag-purple-inner {
-        /* transform: rotate(10deg); */
         bottom: 20px;
         right: 40px;
         color: rgb(148, 102, 246);
@@ -289,14 +290,14 @@ export const HomePageWrapper = styled.div`
               box-shadow: 0 14px 26px -12px rgba(0,178,137,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,178,137,.2)!important;
           }
           .dot-success {
-              background: #06d6a0;
-              -webkit-box-shadow: 0 14px 26px -12px rgba(6,214,160,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
-              box-shadow: 0 14px 26px -12px rgba(6,214,160,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+              background: #2775ca;
+              -webkit-box-shadow: 0 14px 26px -12px #2775ca,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+              box-shadow: 0 14px 26px -12px #2775ca,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
           }
           .dot-info {
-              background: #039be5;
-              -webkit-box-shadow: 0 14px 26px -12px rgba(3,155,229,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(3,155,229,.2)!important;
-              box-shadow: 0 14px 26px -12px rgba(3,155,229,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(3,155,229,.2)!important;
+              background: #f5ac37;
+              -webkit-box-shadow: 0 14px 26px -12px #f5ac37,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(3,155,229,.2)!important;
+              box-shadow: 0 14px 26px -12px #f5ac37,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(3,155,229,.2)!important;
           }
           .dot {
               position: absolute;
@@ -307,10 +308,11 @@ export const HomePageWrapper = styled.div`
           }
           .text {
             text-align: left;
+            
             h3 {
               padding-top: 60px;
               text-align: left;
-              font-weight: 600;
+              font-weight: 700;
               font-size: 36px;
               margin-bottom: 10px;
             }
@@ -326,6 +328,50 @@ export const HomePageWrapper = styled.div`
               position: relative;
             }
           }
+          .one {
+            ul {
+              position: absolute;
+              list-style: none;
+              color: #000;
+              z-index: 1;
+              left: 0;
+              display: flex;
+              gap: 2px;
+              flex-direction: column;
+              bottom: 40px;
+
+              li {
+                background: #108a00;
+                color: #fff;
+                padding: 7px 15px;
+                -webkit-flex: none;
+                -ms-flex: none;
+                -webkit-flex: none;
+                -ms-flex: none;
+                -webkit-flex: none;
+                -ms-flex: none;
+                flex: none;
+                border-radius: 28px;
+                font-size: 13px;
+                width: 150px;
+                -webkit-box-shadow: 0 14px 26px -12px #d1d1d1,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+                box-shadow: 0 14px 16px -6px #d1d1d1,0 4px 13px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+              }
+            }
+          }
+          .two {
+            .timetracking {
+              position: absolute;
+              z-index: 1;
+              bottom: 40px;
+              
+              img {
+                border-radius: 10px;
+                -webkit-box-shadow: 0 14px 26px -12px #d1d1d1,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+                box-shadow: 0 14px -16px -12px #d1d1d1,0 4px 13px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(6,214,160,.2)!important;
+              }
+            }
+          }
           .left {
             .bg {
               position: absolute;
@@ -338,6 +384,9 @@ export const HomePageWrapper = styled.div`
               .dot-6 {
                 top: 15%;
                 left: 2%;
+                display: flex;
+                justify-content: center;
+                align-items: end;
               }
               .dot-5 {
                 bottom: 22%;
@@ -382,6 +431,9 @@ export const HomePageWrapper = styled.div`
             padding: 0 30px;
             padding-right: 100px;
             
+            h5 {
+              font-size: 22px;
+            }
             p {
               color: #888;
               font-size: 14px;
@@ -407,7 +459,6 @@ export const HomePageWrapper = styled.div`
         .providers {
           margin-bottom: 150px;
           justify-content: center;
-          width: 500px;
           .gallery {
             display: flex;
             gap: 50px;
@@ -477,6 +528,42 @@ export const HomePageWrapper = styled.div`
       display: flex;
       flex-direction: column;
       padding: 20px;
+
+      section {
+        padding: 0;
+
+        &#index {
+          width: auto;
+          .logo {
+            margin-top: 30px;
+              margin-bottom: 10px;
+          }
+          h1 {
+            font-size: 42px;
+            line-height: 1.1;
+          }
+        }
+        &#token {
+          width: auto;
+          flex-direction: column;
+          .tokenContainer {
+            width: auto;  
+            flex-direction: column;
+          }
+        }
+        &#howitworks {
+          width: auto;
+          .blueprint {
+            .left,
+            .right {
+              flex-direction: column;
+            }
+          }
+        }
+        &#faq {
+          width: auto;
+        }
+      }
     }
   }
 `;
@@ -561,7 +648,16 @@ export const JobsPageWrapper = styled.div`
       width: calc(100vw - 40px);
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      /* padding: 20px; */
+      /* overflow: hidden; */
+      > aside {
+        display: none;
+      }
+      > article {
+        margin: inherit;
+        width: 100%;
+        padding: 20px 0;
+      }
     }
   }
 `;
@@ -622,10 +718,12 @@ export const DocumentPageWrapper = styled.div`
     header {
       padding: 20px;
     }
-    article {
-      margin: inherit;
-      width: auto;
-      padding: 20px;
+    main {
+      > article {
+        margin: inherit;
+        width: auto;
+        padding: 20px;
+      }
     }
   }
 `;

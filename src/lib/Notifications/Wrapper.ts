@@ -6,7 +6,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.ul`
   position: fixed;
   bottom: 20px;
-  right: calc(50% - 200px);
+  right: calc(50% - 250px);
   display: flex;
   flex-direction: column;
   list-style: none;

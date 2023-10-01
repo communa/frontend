@@ -18,12 +18,14 @@ import Mask3Image from 'src/assets/mask-3.svg';
 import image1 from 'src/assets/index-8.jpg';
 import image2 from 'src/assets/index-9.jpg';
 import image3 from 'src/assets/index-11.jpg';
+import timetrackerImage from 'src/assets/timetracker.jpeg';
 
 import ethereumImage from 'src/assets/providers/ethereum-eth-logo.svg';
 import gnosisImage from 'src/assets/providers/gnosis-gno-gno-logo.svg';
 import polygonImage from 'src/assets/providers/polygon-matic-logo.svg';
 import usdtImage from 'src/assets/providers/tether-usdt-logo.svg';
 import usdcImage from 'src/assets/providers/usd-coin-usdc-logo.svg';
+import daiImage from 'src/assets/providers/multi-collateral-dai-dai-logo.svg';
 
 
 const Home = () => {
@@ -128,6 +130,19 @@ const Home = () => {
           <div className="blueprint">
             <div className="left one">
               <picture className="bg">
+                <ul>
+                  <li>Development &amp; IT</li>
+                  <li style={{
+                    marginLeft: 30,
+                  }}>
+                    Design &amp; Creative
+                  </li>
+                  <li style={{
+                    marginLeft: 60,
+                  }}>
+                    Sales &amp; Marketing
+                  </li>
+                </ul>
                 <img
                   src={image1.src}
                   alt="Client post a job"
@@ -143,7 +158,7 @@ const Home = () => {
               </picture>
               <div className="text">
                 <h3>
-                  Freelance Jobs
+                  Remote Jobs
                 </h3>
                 <p>
                   We are building Communa with a commitment to transparency and fairness, bringing a suite of tools and resources to help both clients and freelancers manage and truly own their work.
@@ -154,7 +169,7 @@ const Home = () => {
             <div className="right two">
               <div className="text">
                 <h3>
-                  Time Trackering
+                  Time Tracking
                 </h3>
                 <p>
                   Our desktop app is designed to help freelancers track time spent on projects throughout the day.
@@ -162,6 +177,14 @@ const Home = () => {
                 </p>
               </div>
               <picture className="bg">
+                <picture className="timetracking">
+                  <img
+                    src={timetrackerImage.src}
+                    alt="Time Tracking"
+                    width={200}
+                    height={130}
+                  />
+                </picture>
                 <img
                   src={image2.src}
                   alt="Client post a job"
@@ -190,9 +213,31 @@ const Home = () => {
                   alt="Freelancer gets a job"
                   width={450}
                 />
-                <div className="dot dot-info dot-3 levitate delay-2" />
-                <div className="dot dot-success dot-5 levitate delay-3" />
-                <div className="dot dot-primary dot-6 levitate" />
+                <div className="dot dot-info dot-3 levitate delay-2">
+                  <picture>
+                    <img
+                      src={daiImage.src}
+                      alt="DAI logo"
+                    />
+                  </picture>
+                </div>
+                <div className="dot dot-success dot-5 levitate delay-3">
+                  <picture>
+                    <img
+                      src={usdcImage.src}
+                      alt="USDC logo"
+                    />
+                  </picture>
+                </div>
+                <div className="dot dot-primary dot-6 levitate">
+                  <picture>
+                    <img
+                      src={usdtImage.src}
+                      alt="DAI logo"
+                      width={40}
+                    />
+                  </picture>
+                </div>
               </picture>
               <div className="text">
                 <h3>
@@ -209,9 +254,9 @@ const Home = () => {
         <section id="token">
           <div className="tokenContainer">
             <div className="left">
-              <h2>Token</h2>
+              <h2>Token Airdrop</h2>
               <h5>
-                Airdrop 100 tokens on Goerli Testnet.<br /> Fill in you Communa profile to recieve the FREE utility tokens.
+                Receive 100 utility tokens by filling in in you Communa profile. FREE.
               </h5><br />
               <p>
                 Communa charges a 5% transaction fee on USDT payments, while sedning with COMM token comes with a 0% fee.
@@ -226,7 +271,7 @@ const Home = () => {
         <section id="faq">
           <div className="providers">
             <p>
-              Although some time in the future Communa is to be technology agnostic, nowadays our system functions on:
+              Although some time in the future Communa is to be technology agnostic
             </p>
             <div className="gallery">
               <a href="https://ethereum.org/" target="_blank" rel="noreferrer">
@@ -266,6 +311,14 @@ const Home = () => {
                   <img
                     src={gnosisImage.src}
                     alt="Gnosis logo"
+                  />
+                </picture>
+              </a>
+              <a href="https://makerdao.com" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={daiImage.src}
+                    alt="DAI logo"
                   />
                 </picture>
               </a>

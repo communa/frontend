@@ -79,14 +79,18 @@ const ContractAirdrop = () => {
         </picture>
         Airdrop
       </button>
-      <br />
-      <br />
-      {address ? (
-        <p>Connected Wallet: <strong>{address}</strong></p>
-      ) : (
-        <p>no wallet connected</p>
-      )}
-    </ContractAirdropWrapper>
+      <p className="wallet">
+        {address ? (
+          <>
+            Connected Wallet: <strong>{address}</strong>
+          </>
+        ) : (
+          <>
+            No wallet connected
+          </>
+        )}
+      </p>
+    </ContractAirdropWrapper >
   );
 };
 
