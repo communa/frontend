@@ -30,10 +30,10 @@ export const ConnectButtonWrapper = styled.div`
     button {
       height: 37px;
       font-size: 14px !important;
-      font-weight: 600;
+      font-weight: 500;
       padding: 10px 24px;
       transform: none;
-      /* transition: none; */
+      width: 200px;
 
       span {
         img {
@@ -64,8 +64,8 @@ export const LogoWrapper = styled.div`
   cursor: pointer;
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   span {
@@ -119,14 +119,13 @@ export const HeaderSideWrapper = styled.header`
       font-weight: 400;
       color: rgba(var(--color-primary-main),0.6);
       display: block;
-      /* font-size: 18px; */
       font-style: normal;
       line-height: 22px;
       letter-spacing: -0.48px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 2px;
       margin-top: 3px;
       max-width: 250px;
       &.inline {
@@ -155,6 +154,7 @@ export const HeaderSideWrapper = styled.header`
     width: 280px;
 
     .downloadTimeTracker {
+      width: 200px;
       border-radius: 20px;
       text-transform: capitalize;
       background: rgb(239, 239, 239);
@@ -220,6 +220,7 @@ export const FaqWrapper = styled.ul`
   flex-direction: column;
   gap: 1px;
   margin: 50px 0;
+  width: 100%;
 
   li {
     background: #f1f1f1c1;

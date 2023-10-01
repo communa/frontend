@@ -33,7 +33,6 @@ import { request } from 'src/Utils';
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
 
-
 const { chains, provider } = configureChains(
   [
     goerli,

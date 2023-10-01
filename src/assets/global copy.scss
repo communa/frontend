@@ -1,0 +1,233 @@
+@font-face {
+  font-family: 'Inter';
+  src: URL('./Inter/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  background: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  margin: 0;
+  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //   sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // white-space: pre-line;
+
+  --color-primary-main: 0, 0, 0; 
+  --color-primary-surface: 255, 255, 255;
+  //  --color-primary-surfaceMenu: 245, 245, 245; --color-primary-accent: 57, 126, 73; --color-star: 255, 201, 11; --tags-green-gradient: linear-gradient(10deg, #D7DB28 0%, #75A80A 100%); --tags-green-gradientBorder: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(10deg, #D7DB28 0%, #75A80A 100%) border-box; --tags-green-solid: #ABC41B; --tags-orange-gradient: linear-gradient(135deg, #E2660F 0%, #FF9144 100%); --tags-orange-gradientBorder: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(135deg, #E2660F 0%, #FF9144 100%) border-box; --tags-orange-solid: #E2660F; --tags-purple-gradient: linear-gradient(135deg, #9466F6 0%, #D166F6 100%); --tags-purple-gradientBorder: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(135deg, #9466F6 0%, #D166F6 100%) border-box; --tags-purple-solid: #9466F6; --tags-blue-gradient: linear-gradient(135deg, #4BE3DA 0%, #09ADE1 100%); --tags-blue-gradientBorder: linear-gradient(rgba(255, 255, 255,1), rgba(255, 255, 255,1)) padding-box, linear-gradient(135deg, #4BE3DA 0%, #09ADE1 100%) border-box; --tags-blue-solid: #00B0E8; --gradient-h1: linear-gradient(180deg, #000000 0%, #293017 100%); --gradient-h1Blue: linear-gradient(180deg, #000000 0%, #0A2C37 100%); --gradient-h1Orange: linear-gradient(180deg, #000000 0%, #3D2D16 100%); --gradient-cta: linear-gradient(236.08deg, #343C30 12.34%, #000000 86.37%); --gradient-ctaBlue: linear-gradient(236.08deg, #343C30 12.34%, #000000 86.37%); --animation-time-veryFast: 50ms; --animation-time-fast: 100ms; --animation-time-normal: 200ms; --animation-time-long: 400ms; --animation-timingFunction-dynamic: cubic-bezier(0.31, 0.3, 0.17, 0.99);
+}
+
+#root {
+  width: 100%;
+}
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #000;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+input {
+  border: none;
+  padding: 0.7rem 0rem;
+  font-size: 1.1rem;
+  background: none;
+  transition: all 0.1s;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+#__next {
+  width: 100vw;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.apply,
+.update {
+  cursor: pointer;
+  border: 0;
+  background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+  color: rgba(255, 255, 255, 0.04);
+  width: fit-content;
+  padding: 0 50px;
+  height: 80px;
+  font-size: 24px;
+  border-radius: 15px;
+  line-height: 80px; 
+  text-decoration: none;
+  box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
+  display: flex;
+  text-decoration: none;
+  box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
+  display: flex;
+  border-radius: 85px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  
+  &:hover {
+    text-decoration: none;
+    transform: scale(105%);
+    transition: 0.125s ease;
+  } 
+  &:disabled {
+    background: #8392eb;
+    transform: scale(100%);
+  }
+}
+
+main {
+  article {
+    form {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      
+      .MuiOutlinedInput-root {
+        margin-bottom: 20px !important;
+      }
+      .update {
+        margin-top: 50px;
+      }
+    }
+  }
+}

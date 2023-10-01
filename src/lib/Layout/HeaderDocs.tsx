@@ -10,6 +10,8 @@ export default function HeaderDocs() {
         <Link href="/">
           <picture>
             <img
+              width={100}
+              height={100}
               src="/logo.png"
               alt="Landscape picture"
             />

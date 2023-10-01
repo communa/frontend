@@ -10,6 +10,8 @@ export default function Header({ }) {
         <picture>
           <img
             src="/logo.png"
+            width={100}
+            height={100}
             alt="Landscape picture"
           />
         </picture>

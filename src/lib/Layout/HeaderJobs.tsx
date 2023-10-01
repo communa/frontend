@@ -33,6 +33,8 @@ export default function HeaderJobs() {
         <Link href="/">
           <picture>
             <img
+              width={100}
+              height={100}
               src="/logo.png"
               alt="Landscape picture"
             />
@@ -56,18 +58,8 @@ export default function HeaderJobs() {
             </li>
           )}
         </ul>
-        {/* <h4>Skill</h4>
-        <ul className="inline">
-          <li>
-            <Link href="/activity">
-              Rust
-            </Link>
-          </li>
-          <li>
-            <Link href="/activity">
-              Go
-            </Link>
-          </li>
+        <h4>Technology</h4>
+        <ul>
           <li>
             <Link href="/activity">
               TypeScript
@@ -79,18 +71,20 @@ export default function HeaderJobs() {
             </Link>
           </li>
           <li>
-            <Link href="/activity">
-              Solidity
-            </Link>
+            <li>
+              <Link href="/activity">
+                Rust
+              </Link>
+            </li>
+            <li>
+              <Link href="/activity">
+                Go
+              </Link>
+            </li>
           </li>
         </ul>
         <h4>Location</h4>
         <ul>
-          <li>
-            <Link href="/activity">
-              USA
-            </Link>
-          </li>
           <li>
             <Link href="/activity">
               United Kingdom
@@ -103,15 +97,10 @@ export default function HeaderJobs() {
           </li>
           <li>
             <Link href="/activity">
-              Spain
+              USA
             </Link>
           </li>
-          <li>
-            <Link href="/activity">
-              UAE
-            </Link>
-          </li>
-        </ul> */}
+        </ul>
         {authStatus === 'authenticated' && (
           <>
             <h4>My account</h4>

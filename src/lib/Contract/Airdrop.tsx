@@ -44,13 +44,16 @@ const ContractAirdrop = () => {
   return (
     <ContractAirdropWrapper>
       <p>
-        See <strong>CommunaToken</strong> contract on&nbsp;
+        <a href="#" onClick={() => addToMetaMask()}>
+          Add token to MetaMask
+        </a>
+      </p>
+      <p>
+        <strong>Smart Contract</strong> on&nbsp;
         <a href={`https://goerli.etherscan.io/address/${TOKEN_ADDRESS}`} target="_blank" rel="noreferrer">
           Etherscan
         </a> | <a href="https://github.com/communa/contracts" target="_blank" rel="noreferrer">
           GitHub
-        </a> | <a href="#" onClick={() => addToMetaMask()}>
-          Add to MetaMask
         </a>
       </p>
       {writeApprove.data && (
@@ -62,12 +65,6 @@ const ContractAirdrop = () => {
         <div>An error occurred preparing the transaction: {writeApprove.error.message}</div>
       )}
       <br />
-      {address ? (
-        <p>Connected Wallet: <strong>{address}</strong></p>
-      ) : (
-        <p>Connected Wallet: connect your wallet to Receive AirDrop</p>
-      )}
-
       <button
         type='button'
         className='update'
@@ -82,7 +79,14 @@ const ContractAirdrop = () => {
         </picture>
         Airdrop
       </button>
-    </ContractAirdropWrapper >
+      <br />
+      <br />
+      {address ? (
+        <p>Connected Wallet: <strong>{address}</strong></p>
+      ) : (
+        <p>no wallet connected</p>
+      )}
+    </ContractAirdropWrapper>
   );
 };
 

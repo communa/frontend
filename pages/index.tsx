@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Link, Tooltip } from '@mui/material';
 import NextLink from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -10,19 +10,36 @@ import Header from 'src/lib/Layout/Logo';
 import { AuthContext } from 'src/contexts/Auth';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';
 import { ConnectButton } from 'src/lib/Layout/ConnectButton';
-import IntroImage from 'src/assets/Illustration-2.png';
-import HowItWorksImage from 'src/assets/Illustration-2.png';
-import FeesImage from 'src/assets/Illustration-2.png';
 import { Faq } from 'src/lib/Layout/Faq';
 
-import ClientImage from 'src/assets/client.png';
-import FreelancerImage from 'src/assets/freelancer.png';
+import Mask1Image from 'src/assets/mask-1.svg';
+import Mask2Image from 'src/assets/mask-2.svg';
+import Mask3Image from 'src/assets/mask-3.svg';
+import image1 from 'src/assets/index-8.jpg';
+import image2 from 'src/assets/index-9.jpg';
+import image3 from 'src/assets/index-11.jpg';
+
+import ethereumImage from 'src/assets/providers/ethereum-eth-logo.svg';
+import gnosisImage from 'src/assets/providers/gnosis-gno-gno-logo.svg';
+import polygonImage from 'src/assets/providers/polygon-matic-logo.svg';
+import usdtImage from 'src/assets/providers/tether-usdt-logo.svg';
+import usdcImage from 'src/assets/providers/usd-coin-usdc-logo.svg';
+
 
 const Home = () => {
   const { authStatus } = useContext(AuthContext);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const onScroll = (e: any) => {
+    const {
+      scrollTop,
+    } = e.nativeEvent.srcElement;
+
+    setScrollTop(scrollTop);
+  }
 
   return (
-    <HomePageWrapper>
+    <HomePageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
         <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -42,21 +59,47 @@ const Home = () => {
           </p>
           <Header />
           <div className="hero">
-            <div className="tag-orange-outer">
-              <div className="tag-orange-inner">
-                <div className="hHuuya">Decentralisation</div>
+            {scrollTop < 1000 && (
+              <div className="tags">
+                <div
+                  className="tag-orange-inner"
+                  style={{
+                    filter: `blur(${scrollTop / 10}px)`,
+                    transform: `translate(${-scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                  }}
+                >
+                  <div className="hHuuya">Censorship resiliant</div>
+                </div>
+                <div
+                  className="tag-green-inner"
+                  style={{
+                    transform: `translate(${scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                    filter: `blur(${scrollTop / 10}px)`,
+                  }}
+                >
+                  <div className="hHuuya">Transparency</div>
+                </div>
+                <div
+                  className="tag-purple-inner"
+                  style={{
+                    filter: `blur(${scrollTop / 10}px)`,
+                    transform: `translate(${scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                  }}
+                >
+                  <div className="hHuuya">Reputation</div>
+                </div>
+                <div
+                  className="tag-blue-inner"
+                  style={{
+                    transform: `translate(${-scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                    filter: `blur(${scrollTop / 10}px)`,
+                  }}
+                >
+                  <div className="hHuuya">Stablecoins</div>
+                </div>
               </div>
-            </div>
-            <div className="tag-green-inner">
-              <div className="hHuuya">Transparency</div>
-            </div>
-            <div className="tag-purple-inner">
-              <div className="hHuuya">Public reputation</div>
-            </div>
-            <div className="tag-blue-inner">
-              <div className="hHuuya">Payments in USDT</div>
-            </div>
-            <h1>Web3 marketplace to connect businesses with talents</h1>
+            )}
+            <h1>Web3 marketplace to connect businesses<br />with freelancers</h1>
             <h5>...through blockchain!</h5>
           </div>
           <div className="action">
@@ -83,78 +126,156 @@ const Home = () => {
         </section>
         <section id="howitworks">
           <div className="blueprint">
-            <picture>
-              <img
-                src={IntroImage.src}
-                alt="Work Process"
-                width={800}
-              />
-            </picture>
-            <p>
-              Like numerous web2 freelancing platforms, Communa automates the needed business processes directly on the blockchain: time tracking, invoicing, payments, and reputation. Using blockchain we aim not only to reduce costs, and cut the needs for party systems but also to increase trust bringing a level of autonomy that has never been seen before.
-            </p>
+            <div className="left one">
+              <picture className="bg">
+                <img
+                  src={image1.src}
+                  alt="Client post a job"
+                  width={450}
+                />
+              </picture>
+              <picture>
+                <img
+                  src={Mask1Image.src}
+                  alt="Client post a job"
+                  width={450}
+                />
+              </picture>
+              <div className="text">
+                <h3>
+                  Freelance Jobs
+                </h3>
+                <p>
+                  We are building Communa with a commitment to transparency and fairness, bringing a suite of tools and resources to help both clients and freelancers manage and truly own their work.
+                  Advances in technology have made it possible to work remotely and connect workers and clients worldwide.
+                </p>
+              </div>
+            </div>
+            <div className="right two">
+              <div className="text">
+                <h3>
+                  Time Trackering
+                </h3>
+                <p>
+                  Our desktop app is designed to help freelancers track time spent on projects throughout the day.
+                  The application operates in the background, automatically recording the time spent with the total number of hours worked always displayed in the system tray.
+                </p>
+              </div>
+              <picture className="bg">
+                <img
+                  src={image2.src}
+                  alt="Client post a job"
+                  width={450}
+                />
+              </picture>
+              <picture>
+                <img
+                  src={Mask2Image.src}
+                  alt="Freelancer gets a job"
+                  width={450}
+                />
+              </picture>
+            </div>
+            <div className="left three">
+              <picture className="bg">
+                <img
+                  src={image3.src}
+                  alt="Client post a job"
+                  width={448}
+                />
+              </picture>
+              <picture>
+                <img
+                  src={Mask3Image.src}
+                  alt="Freelancer gets a job"
+                  width={450}
+                />
+                <div className="dot dot-info dot-3 levitate delay-2" />
+                <div className="dot dot-success dot-5 levitate delay-3" />
+                <div className="dot dot-primary dot-6 levitate" />
+              </picture>
+              <div className="text">
+                <h3>
+                  Payments in USDT
+                </h3>
+                <p>
+                  Fast and reliable payments are crucial for contractors located across the globe with 100+ different currencies circulating.
+                  Blockchain networks and stablecoins like USDT and USDC offer the needed global accessibility both for businesses and freelancers, which is also faster, cheaper, and more independent than usual payments.
+                </p>
+              </div>
+            </div>
           </div>
-          <h3>How It Works</h3>
-          <h5>
-            Our smart contracts automate all required processes related to time-tracking.
-          </h5>
-          <div className="blueprint">
-            <picture>
-              <img
-                src={ClientImage.src}
-                alt="Client post a job"
-                width={400}
-              />
-            </picture><span>Job</span>
-            <picture>
-              <img
-                src={FreelancerImage.src}
-                alt="Freelancer gets a job"
-                width={400}
-              />
-            </picture>
-          </div>
-          <h3>
-            Reputation
-          </h3>
-          <p>
-            Communa is made to operate borderless where unbiased smart contracts enable freelancers to work with clients directly, without the need for 3rd party services or any other intermediaries.
-          </p>
-        </section>
-        <section id="fees">
-          <h2>Low fees</h2>
-          <h5>
-            Our smart contracts automate all required processes related to time-tracking.
-          </h5>
-          <div className="blueprint">
-            <picture>
-              <img
-                src={FeesImage.src}
-                alt="Work Process"
-                width={800}
-              />
-            </picture>
-          </div>
-          <h3>
-            Payments
-          </h3>
-          <p>
-            Communa automates the needed business processes directly on the blockchain: time tracking, invoicing, payments, and reputation. Using blockchain we aim not only to reduce costs, and cut the needs for party systems but also to increase trust bringing a level of autonomy that has never been seen before.
-          </p>
         </section>
         <section id="token">
-          <h2>Token</h2>
-          <h5>
-            Airdrop 10 tokens on Goerli Testnet.<br /> Fill in you Communa profile to recieve the FREE tokens.
-          </h5><br />
-          <ContractAirdrop />
+          <div className="tokenContainer">
+            <div className="left">
+              <h2>Token</h2>
+              <h5>
+                Airdrop 100 tokens on Goerli Testnet.<br /> Fill in you Communa profile to recieve the FREE utility tokens.
+              </h5><br />
+              <p>
+                Communa charges a 5% transaction fee on USDT payments, while sedning with COMM token comes with a 0% fee.
+                Plus, gas fees to process your transactions which vary.
+              </p>
+            </div>
+            <div className="right">
+              <ContractAirdrop />
+            </div>
+          </div>
         </section>
         <section id="faq">
+          <div className="providers">
+            <p>
+              Although some time in the future Communa is to be technology agnostic, nowadays our system functions on:
+            </p>
+            <div className="gallery">
+              <a href="https://ethereum.org/" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={ethereumImage.src}
+                    alt="Ethereum logo"
+                  />
+                </picture>
+              </a>
+              <a href="https://tether.to" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={usdtImage.src}
+                    alt="USDT logo"
+                  />
+                </picture>
+              </a>
+              <a href="https://polygon.technology" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={polygonImage.src}
+                    alt="Polygon logo"
+                  />
+                </picture>
+              </a>
+              <a href="https://www.circle.com/en/usdc" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={usdcImage.src}
+                    alt="USDC logo"
+                  />
+                </picture>
+              </a>
+              <a href="https://www.gnosis.io" target="_blank" rel="noreferrer">
+                <picture>
+                  <img
+                    src={gnosisImage.src}
+                    alt="Gnosis logo"
+                  />
+                </picture>
+              </a>
+            </div>
+          </div>
           <h2>FAQ</h2>
           <Faq />
           <Header />
           <p className="subtext">
-            Web3 marketplace to connect<br />businesses with talents
+            Web3 freelance marketplace
           </p>
           <div className="action">
             <NextLink href="/activity" passHref>
@@ -170,9 +291,9 @@ const Home = () => {
               </Button>
             )}
           </div>
-          <NextLink href="https://github.com/communa">
+          <a href="https://github.com/communa" target="_blank" rel="noreferrer">
             <GitHubIcon />
-          </NextLink>
+          </a>
           <p className="helpLinks">
             <a href="https://github.com/communa" target='_blank' rel="noreferrer">
               GitHub
