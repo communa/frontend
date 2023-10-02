@@ -8,6 +8,7 @@ body {
   display: flex;
   place-items: center;
   background: #fff;
+  overflow-x: hidden; 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -168,9 +169,9 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-#__next {
-  width: 100vw;
-}
+// #__next {
+//   width: 100vw;
+// }
 
 a {
   color: #000;
@@ -203,11 +204,11 @@ a:hover {
   font-weight: 600;
   color: #fff;
   text-transform: capitalize;
-  
+  transition: 0.125s ease;
+
   &:hover {
     text-decoration: none;
     transform: scale(105%);
-    transition: 0.125s ease;
   } 
   &:disabled {
     background: #8392eb;

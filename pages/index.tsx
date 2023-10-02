@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Link, Tooltip } from '@mui/material';
 import NextLink from 'next/link';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -32,16 +32,17 @@ const Home = () => {
   const { authStatus } = useContext(AuthContext);
   const [scrollTop, setScrollTop] = useState(0);
 
-  const onScroll = (e: any) => {
-    const {
-      scrollTop,
-    } = e.nativeEvent.srcElement;
+  useEffect(() => {
+    const updatePosition = () => setScrollTop(window.pageYOffset);
+    
+    window.addEventListener("scroll", updatePosition);
+    updatePosition();
 
-    setScrollTop(scrollTop);
-  }
+    return () => window.removeEventListener("scroll", updatePosition);
+  }, []);
 
   return (
-    <HomePageWrapper onScroll={(e) => onScroll(e)}>
+    <HomePageWrapper>
       <Head>
         <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -61,7 +62,7 @@ const Home = () => {
           </p>
           <Header />
           <div className="hero">
-            {scrollTop < 1000 && (
+            {scrollTop < 800 && (
               <div className="tags">
                 <div
                   className="tag-orange-inner"

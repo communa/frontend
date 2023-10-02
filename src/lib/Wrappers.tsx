@@ -54,15 +54,13 @@ export const HomePageWrapper = styled.div`
   flex-flow: column nowrap;
   flex-grow: 1;
   width: 100%;
-  height: 100vh;
-  overflow: scroll;
 
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
+
     .hero {
       position: relative;
       .tag-green-inner,
@@ -194,9 +192,10 @@ export const HomePageWrapper = styled.div`
             cursor: pointer;
             text-transform: capitalize;
             transition: transform 0.125s ease;
+            
             &:hover {
               transform: scale(105%);
-              transition: 0.125s ease;
+              /* transition: 0.125s ease; */
             } 
           }
         a { 
@@ -229,7 +228,12 @@ export const HomePageWrapper = styled.div`
       }
       &#index {
         min-height: 100vh;
+        position: relative;
+        width: auto;
 
+        .hero {
+          width: 800px;
+        }
         .helpLinks {
           margin-top: 20px;
         }
@@ -521,6 +525,23 @@ export const HomePageWrapper = styled.div`
     }
   }
   
+  @media only screen and (min-width: 1500px) {
+    main {
+      section {
+        &#index {
+          .hero {
+            margin-top: 100px;  
+            h1 {
+              font-size: 72px;
+              line-height: 1.2;
+            }
+          }
+          .action {
+          }
+        }
+      }
+    }
+  }
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
@@ -574,7 +595,7 @@ export const JobsPageWrapper = styled.div`
   flex-grow: 1;
   width: 100%;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
 
   main {
     display: grid;

@@ -14,16 +14,17 @@ export const ConnectButtonWrapper = styled.div`
     display: flex;
     text-transform: capitalize;
     align-items: center;
+    /* transition: 0.125s ease; */
+    transition: 0.125s ease;
     &:disabled {
       color: #aaa;
     }
     span {
       margin-right: 5px !important;
-    }
-              
+    }              
     &:hover {
       transform: scale(105%);
-      transition: 0.125s ease;
+      /* transition: 0.125s ease; */
     } 
   }
   &.small {
