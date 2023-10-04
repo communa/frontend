@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     const updatePosition = () => setScrollTop(window.pageYOffset);
-    
+
     window.addEventListener("scroll", updatePosition);
     updatePosition();
 
@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <HomePageWrapper>
       <Head>
-        <title>Web3 Jobs - {APP_NAME}</title>
+        <title>Web3 Freelance Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
@@ -62,48 +62,46 @@ const Home = () => {
           </p>
           <Header />
           <div className="hero">
-            {scrollTop < 800 && (
-              <div className="tags">
-                <div
-                  className="tag-orange-inner"
-                  style={{
-                    filter: `blur(${scrollTop / 10}px)`,
-                    transform: `translate(${-scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
-                  }}
-                >
-                  <div className="hHuuya">Censorship resiliant</div>
-                </div>
-                <div
-                  className="tag-green-inner"
-                  style={{
-                    transform: `translate(${scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
-                    filter: `blur(${scrollTop / 10}px)`,
-                  }}
-                >
-                  <div className="hHuuya">Transparency</div>
-                </div>
-                <div
-                  className="tag-purple-inner"
-                  style={{
-                    filter: `blur(${scrollTop / 10}px)`,
-                    transform: `translate(${scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
-                  }}
-                >
-                  <div className="hHuuya">Reputation</div>
-                </div>
-                <div
-                  className="tag-blue-inner"
-                  style={{
-                    transform: `translate(${-scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
-                    filter: `blur(${scrollTop / 10}px)`,
-                  }}
-                >
-                  <div className="hHuuya">Stablecoins</div>
-                </div>
+            <div className={`tags ${scrollTop > 1000 ? 'hide' : ''}`}>
+              <div
+                className="tag-orange-inner"
+                style={{
+                  filter: `blur(${scrollTop / 10}px)`,
+                  transform: `translate(${-scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                }}
+              >
+                <div className="hHuuya">Censorship resiliant</div>
               </div>
-            )}
+              <div
+                className="tag-green-inner"
+                style={{
+                  transform: `translate(${scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                  filter: `blur(${scrollTop / 10}px)`,
+                }}
+              >
+                <div className="hHuuya">Transparency</div>
+              </div>
+              <div
+                className="tag-purple-inner"
+                style={{
+                  filter: `blur(${scrollTop / 10}px)`,
+                  transform: `translate(${scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                }}
+              >
+                <div className="hHuuya">Reputation</div>
+              </div>
+              <div
+                className="tag-blue-inner"
+                style={{
+                  transform: `translate(${-scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                  filter: `blur(${scrollTop / 10}px)`,
+                }}
+              >
+                <div className="hHuuya">Stablecoins</div>
+              </div>
+            </div>
             <h1>Web3 marketplace to connect businesses<br />with freelancers</h1>
-            <h5>...through blockchain!</h5>
+            <h5>...on blockchain!</h5>
           </div>
           <div className="action">
             <Tooltip title="TimeTacker is in development and not yet ready" arrow>
@@ -130,33 +128,35 @@ const Home = () => {
         <section id="howitworks">
           <div className="blueprint">
             <div className="left one">
-              <picture className="bg">
-                <ul>
-                  <li>Development &amp; IT</li>
-                  <li style={{
-                    marginLeft: 30,
-                  }}>
-                    Design &amp; Creative
-                  </li>
-                  <li style={{
-                    marginLeft: 60,
-                  }}>
-                    Sales &amp; Marketing
-                  </li>
-                </ul>
-                <img
-                  src={image1.src}
-                  alt="Client post a job"
-                  width={450}
-                />
-              </picture>
-              <picture>
-                <img
-                  src={Mask1Image.src}
-                  alt="Client post a job"
-                  width={450}
-                />
-              </picture>
+              <div className="bgContainer">
+                <picture className="bg">
+                  <ul>
+                    <li>Development &amp; IT</li>
+                    <li style={{
+                      marginLeft: 30,
+                    }}>
+                      Design &amp; Creative
+                    </li>
+                    <li style={{
+                      marginLeft: 60,
+                    }}>
+                      Sales &amp; Marketing
+                    </li>
+                  </ul>
+                  <img
+                    src={image1.src}
+                    alt="Client post a job"
+                    width={450}
+                  />
+                </picture>
+                <picture>
+                  <img
+                    src={Mask1Image.src}
+                    alt="Client post a job"
+                    width={450}
+                  />
+                </picture>
+              </div>
               <div className="text">
                 <h3>
                   Remote Jobs
@@ -177,69 +177,73 @@ const Home = () => {
                   The application operates in the background, automatically recording the time spent with the total number of hours worked always displayed in the system tray.
                 </p>
               </div>
-              <picture className="bg">
-                <picture className="timetracking">
+              <div className="bgContainer">
+                <picture className="bg">
+                  <picture className="timetracking">
+                    <img
+                      src={timetrackerImage.src}
+                      alt="Time Tracking"
+                      width={200}
+                      height={130}
+                    />
+                  </picture>
                   <img
-                    src={timetrackerImage.src}
-                    alt="Time Tracking"
-                    width={200}
-                    height={130}
+                    src={image2.src}
+                    alt="Client post a job"
+                    width={450}
                   />
                 </picture>
-                <img
-                  src={image2.src}
-                  alt="Client post a job"
-                  width={450}
-                />
-              </picture>
-              <picture>
-                <img
-                  src={Mask2Image.src}
-                  alt="Freelancer gets a job"
-                  width={450}
-                />
-              </picture>
+                <picture>
+                  <img
+                    src={Mask2Image.src}
+                    alt="Freelancer gets a job"
+                    width={450}
+                  />
+                </picture>
+              </div>
             </div>
             <div className="left three">
-              <picture className="bg">
-                <img
-                  src={image3.src}
-                  alt="Client post a job"
-                  width={448}
-                />
-              </picture>
-              <picture>
-                <img
-                  src={Mask3Image.src}
-                  alt="Freelancer gets a job"
-                  width={450}
-                />
-                <div className="dot dot-info dot-3 levitate delay-2">
-                  <picture>
-                    <img
-                      src={daiImage.src}
-                      alt="DAI logo"
-                    />
-                  </picture>
-                </div>
-                <div className="dot dot-success dot-5 levitate delay-3">
-                  <picture>
-                    <img
-                      src={usdcImage.src}
-                      alt="USDC logo"
-                    />
-                  </picture>
-                </div>
-                <div className="dot dot-primary dot-6 levitate">
-                  <picture>
-                    <img
-                      src={usdtImage.src}
-                      alt="DAI logo"
-                      width={40}
-                    />
-                  </picture>
-                </div>
-              </picture>
+              <div className="bgContainer">
+                <picture className="bg">
+                  <img
+                    src={image3.src}
+                    alt="Client post a job"
+                    width={448}
+                  />
+                </picture>
+                <picture>
+                  <img
+                    src={Mask3Image.src}
+                    alt="Freelancer gets a job"
+                    width={450}
+                  />
+                  <div className="dot dot-info dot-3 levitate delay-2">
+                    <picture>
+                      <img
+                        src={daiImage.src}
+                        alt="DAI logo"
+                      />
+                    </picture>
+                  </div>
+                  <div className="dot dot-success dot-5 levitate delay-3">
+                    <picture>
+                      <img
+                        src={usdcImage.src}
+                        alt="USDC logo"
+                      />
+                    </picture>
+                  </div>
+                  <div className="dot dot-primary dot-6 levitate">
+                    <picture>
+                      <img
+                        src={usdtImage.src}
+                        alt="DAI logo"
+                        width={40}
+                      />
+                    </picture>
+                  </div>
+                </picture>
+              </div>
               <div className="text">
                 <h3>
                   Payments in USDT
@@ -258,7 +262,7 @@ const Home = () => {
               <h2>Token Airdrop</h2>
               <h5>
                 Receive 100 utility tokens by filling in in you Communa profile. FREE.
-              </h5><br />
+              </h5>
               <p>
                 Communa charges a 5% transaction fee on USDT payments, while sedning with COMM token comes with a 0% fee.
                 Plus, gas fees to process your transactions which vary.

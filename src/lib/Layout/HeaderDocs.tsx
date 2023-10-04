@@ -6,67 +6,69 @@ import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
 export default function HeaderDocs() {
   return (
     <HeaderSideWrapper>
-      <div className="logo">
-        <Link href="/">
-          <picture>
-            <img
-              width={100}
-              height={100}
-              src="/logo.png"
-              alt="Landscape picture"
-            />
-            <span>Testnet</span>
-          </picture>
-        </Link>
-      </div>
-      <nav>
-        <h4>Docs</h4>
-        <ul>
-          <li>
-            <Link href="/litepaper">
-              Litepaper
-            </Link>
-          </li>
-          <li>
-            <Link href="/roadmap">
-              Roadmap
-            </Link>
-          </li>
-        </ul>
+      <header>
+        <div className="logo">
+          <Link href="/">
+            <picture>
+              <img
+                width={100}
+                height={100}
+                src="/logo.png"
+                alt="Landscape picture"
+              />
+              <span>Testnet</span>
+            </picture>
+          </Link>
+        </div>
+        <nav>
+          <h4>Docs</h4>
+          <ul>
+            <li>
+              <Link href="/litepaper">
+                Litepaper
+              </Link>
+            </li>
+            <li>
+              <Link href="/roadmap">
+                Roadmap
+              </Link>
+            </li>
+          </ul>
 
-        <h4>Smart Contracts</h4>
-        <ul>
-          <li>
-            <Link href="/airdrop">
-              Airdrop
-            </Link>
-          </li>
-          <li>
-            <Link href="/payment">
-              Release Payment
-            </Link>
-          </li>
-        </ul>
+          <h4>Smart Contracts</h4>
+          <ul>
+            <li>
+              <Link href="/airdrop">
+                Airdrop
+              </Link>
+            </li>
+            <li>
+              <Link href="/payment">
+                Release Payment
+              </Link>
+            </li>
+          </ul>
 
-        <h4>Other</h4>
-        <ul>
-          <li>
-            <Link href="https://github.com/communa">
-              GitHub
-            </Link>
-          </li>
-          <li>
-            <Link href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
-              Business Inquiries
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <footer>
-        <p className="copyright">
-          Copyright © 2023 Communa.
-        </p>
-      </footer>
+          <h4>Other</h4>
+          <ul>
+            <li>
+              <Link href="https://github.com/communa">
+                GitHub
+              </Link>
+            </li>
+            <li>
+              <Link href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
+                Business Inquiries
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <footer>
+          <p className="copyright">
+            Copyright © 2023 Communa.
+          </p>
+        </footer>
+      </header>
     </HeaderSideWrapper>
   )
 }

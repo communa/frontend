@@ -84,9 +84,7 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="userEdit">
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <h2>Edit profile</h2>
           <form>

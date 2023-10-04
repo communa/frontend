@@ -16,9 +16,7 @@ const Payment = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <aside>
-          <HeaderDocs />
-        </aside>
+        <HeaderDocs />
         <article>
           <h2>
             Token

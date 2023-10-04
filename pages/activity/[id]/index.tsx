@@ -33,9 +33,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <ActivityFull activity={activity} />
         </article>

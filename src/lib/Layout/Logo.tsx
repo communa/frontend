@@ -14,9 +14,9 @@ export default function Header({ }) {
             height={100}
             alt="Landscape picture"
           />
+          <span>Testnet</span>
         </picture>
       </Link>
-      <span>Testnet</span>
     </LogoWrapper>
   )
 }

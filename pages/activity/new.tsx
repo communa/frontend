@@ -91,9 +91,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobNew">
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <h2>
             Add new job

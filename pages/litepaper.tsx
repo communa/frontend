@@ -20,7 +20,7 @@ const Litepaper = () => {
         <article>
           <h1>Litepaper</h1>
           <p>
-            Communa is an open-source web3 freelancing platform to connect businesses with talented professionals worldwide through blockchain.
+            Communa is an open-source web3 freelancing platform to connect businesses with talented professionals worldwide on blockchain.
           </p>
           <ul>
             <li>

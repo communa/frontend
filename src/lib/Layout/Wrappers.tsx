@@ -52,7 +52,7 @@ export const ConnectButtonWrapper = styled.div`
 export const LogoWrapper = styled.div`
   display: flex;
   position: relative;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   padding: 0;
   margin: 0 auto;
   display: flex;
@@ -64,10 +64,13 @@ export const LogoWrapper = styled.div`
   margin-top: 20px;
   cursor: pointer;
 
-  img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  picture {
+    position: relative;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
   }
   span {
     background: #313131;
@@ -91,128 +94,154 @@ export const LogoWrapper = styled.div`
   }      
 `;
 
-export const HeaderSideWrapper = styled.header`
-  display: flex;
+export const HeaderSideWrapper = styled.aside`
+  border-right: 1px solid #eee;
+  padding-right: 60px;
+  z-index: 100;
+  padding: 40px;
   position: relative;
-  flex-grow: 1;
-  justify-content: start;
-  flex-direction: column;
-  margin-top: 40px;
-  position: fixed;
-  top: 0;
-  bottom: 40px;
-
-  nav {  
-    margin-top: 20px;
-    justify-content: right;
-    display: flex;
-    align-items: start;
-    border-radius: 6px;
-    flex-direction: column;  
   
-    h4 {
-      font-size: 14px;
-      margin-top: 30px;
-      color: #5586d1;
-    }
-    ul {
-      list-style-type: none;
-      font-weight: 400;
-      color: rgba(var(--color-primary-main),0.6);
-      display: block;
-      font-style: normal;
-      line-height: 22px;
-      letter-spacing: -0.48px;
-      text-decoration: none;
+  header {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    justify-content: start;
+    flex-direction: column;
+    margin-top: 40px;
+    position: fixed;
+    top: 0;
+    bottom: 40px;
+
+    nav {  
+      margin-top: 20px;
+      justify-content: right;
       display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-top: 3px;
-      max-width: 250px;
-      &.inline {
-        flex-direction: row;
+      align-items: start;
+      border-radius: 6px;
+      flex-direction: column;  
+    
+      h4 {
+        font-size: 14px;
+        margin-top: 30px;
+        color: #5586d1;
       }
-      li {
+      ul {
         list-style-type: none;
+        font-weight: 400;
+        color: rgba(var(--color-primary-main),0.6);
+        display: block;
+        font-style: normal;
+        line-height: 22px;
+        letter-spacing: -0.48px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 3px;
+        max-width: 250px;
+        &.inline {
+          flex-direction: row;
+        }
+        li {
+          list-style-type: none;
 
-        cursor: pointer;
+          cursor: pointer;
 
-        p,
-        a {
-          color: rgba(0, 0, 0, 0.6);
-          &:hover {
-            color: #000;
-            text-decoration: none;
+          p,
+          a {
+            color: rgba(0, 0, 0, 0.6);
+            &:hover {
+              color: #000;
+              text-decoration: none;
+            }
           }
         }
       }
     }
-  }
-  footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 280px;
-
-    .downloadTimeTracker {
-      width: 200px;
-      border-radius: 20px;
-      text-transform: capitalize;
-      background: rgb(239, 239, 239);
-      margin-top: 10px;
-    }
-    .copyright {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1.5;
-      text-align: left;
-      letter-spacing: -0.03em;
-      margin-top: 30px;
-      color: rgba(var(--color-primary-main), 0.5);
-    }
-  }
-  
-  .logo {
-    position: relative;
-    width: max-content;
-    cursor: pointer;
-
-    img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-    }
-    span {
-      background: #313131;
-      color: #aaa;
-      font-weight: 500;
+    footer {
       position: absolute;
-      padding: 2px 5px;
-      border-radius: 22px;
-      font-size: 10px;
-      right: -20px;
-      opacity: 0.9;
-      top: 2px;
+      bottom: 0;
+      left: 0;
+      width: 280px;
+
+      .downloadTimeTracker {
+        width: 200px;
+        border-radius: 20px;
+        text-transform: capitalize;
+        background: rgb(239, 239, 239);
+        margin-top: 10px;
+      }
+      .copyright {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: left;
+        letter-spacing: -0.03em;
+        margin-top: 30px;
+        color: rgba(var(--color-primary-main), 0.5);
+      }
     }
+    
+    .logo {
+      position: relative;
+      width: max-content;
+      cursor: pointer;
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+      span {
+        background: #313131;
+        color: #aaa;
+        font-weight: 500;
+        position: absolute;
+        padding: 2px 5px;
+        border-radius: 22px;
+        font-size: 10px;
+        right: -20px;
+        opacity: 0.9;
+        top: 2px;
+      }
+    }  
   }
 
   @media only screen and (max-width: 700px) {
-    display: block;
-    position: fixed;
-    left: 0px;
-    top: 0;
-    height: 100vh;
-    background: #fff;
-    width: 100%;
-    margin: 0;
-    padding: 20px;
-    footer {
-      position: relative;
-    }
-  }      
-`;
+    border-right: 0;
+    padding: 0;
 
+    header {
+      display: block;
+      position: fixed;
+      left: 0px;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      bottom: 0;
+      background: #f5f5f5;
+      padding: 10px 20px;
+      height: 50px;
+      overflow: hidden;
+      border-bottom: 1px solid #e7e7e7;
+      
+      .logo {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      footer {
+        position: relative;
+      }
+      &.__active {
+        height: 100vh;
+      }
+    }
+  }    
+`;
 
 export const FaqWrapper = styled.ul`
   display: flex;

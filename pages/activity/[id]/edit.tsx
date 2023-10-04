@@ -75,9 +75,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobEdit">
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <h2>
             Job editing

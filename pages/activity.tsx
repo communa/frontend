@@ -84,9 +84,7 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <h2>All jobs</h2>
           <ActivityNavPublishing />

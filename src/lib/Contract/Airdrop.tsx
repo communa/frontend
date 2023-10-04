@@ -64,7 +64,6 @@ const ContractAirdrop = () => {
       {writeApprove.error && (
         <div>An error occurred preparing the transaction: {writeApprove.error.message}</div>
       )}
-      <br />
       <button
         type='button'
         className='update'
@@ -90,7 +89,7 @@ const ContractAirdrop = () => {
           </>
         )}
       </p>
-    </ContractAirdropWrapper >
+    </ContractAirdropWrapper>
   );
 };
 

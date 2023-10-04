@@ -41,9 +41,7 @@ const UserProfile = ({ user }: InferGetServerSidePropsType<typeof getServerSideP
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="userProfile">
-        <aside>
-          <HeaderJobs />
-        </aside>
+        <HeaderJobs />
         <article>
           <h2>My profile</h2>
           <form>

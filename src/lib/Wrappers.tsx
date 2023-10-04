@@ -47,6 +47,19 @@ export const ContractAirdropWrapper = styled.div`
     margin-top: 40px;
     color: #444;
   }
+
+  @media only screen and (max-width: 700px) {
+    width: auto;  
+    height: auto;
+    background: none;
+
+    button {
+      margin-top: 20px;
+    }
+    .wallet {
+      margin-top: 20px;
+    }
+  }  
 `;
 
 export const HomePageWrapper = styled.div`
@@ -63,6 +76,10 @@ export const HomePageWrapper = styled.div`
 
     .hero {
       position: relative;
+
+      .hide {
+        display: none;
+      }
       .tag-green-inner,
       .tag-purple-inner,
       .tag-blue-inner,
@@ -230,6 +247,7 @@ export const HomePageWrapper = styled.div`
         min-height: 100vh;
         position: relative;
         width: auto;
+        display: flex;
 
         .hero {
           width: 800px;
@@ -249,9 +267,6 @@ export const HomePageWrapper = styled.div`
         }
         h5 {
           color: rgba(0,0,0,0.5);
-        }
-        .action {
-          margin-top: 70px;
         }
         .jobsTotal {
           margin-top: 40px;
@@ -377,13 +392,17 @@ export const HomePageWrapper = styled.div`
             }
           }
           .left {
-            .bg {
-              position: absolute;
-              left: 0;
+            .bgContainer {
+              .bg {
+                position: absolute;
+                left: 0;
+              }
             }
             &.three {
-              .bg {
-                left: 1px;
+              .bgContainer {
+                .bg {
+                  left: 1px;
+                }
               }
               .dot-6 {
                 top: 15%;
@@ -407,10 +426,12 @@ export const HomePageWrapper = styled.div`
             }
           }
           .right {
-            .bg {
-              position: absolute;
-              right: 0;
-            } 
+            .bgContainer {
+              .bg {
+                position: absolute;
+                right: 0;
+              } 
+            }
           }
         }
       }
@@ -545,44 +566,171 @@ export const HomePageWrapper = styled.div`
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
-      width: calc(100vw - 40px);
+      width: auto;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 0;
 
+      .action {
+        margin-top: 70px;
+        display: flex;
+        flex-direction: column;   
+      }
       section {
         padding: 0;
+        width: auto !important;
 
         &#index {
-          width: auto;
+          .hero {
+            width: auto;
+            h1 {
+              font-size: 32px;
+              line-height: 1.1;
+            }
+            h5 {
+              margin-top: 0;
+            }
+            .tags {
+              display: none;
+            }
+          }
           .logo {
+            margin: 0;
+            padding: 30px 0;
+          }
+          .action {
             margin-top: 30px;
-              margin-bottom: 10px;
           }
-          h1 {
-            font-size: 42px;
-            line-height: 1.1;
+          .helpLinks {
+            margin-top: 30px;
           }
-        }
-        &#token {
-          width: auto;
-          flex-direction: column;
-          .tokenContainer {
-            width: auto;  
-            flex-direction: column;
+          .jobsTotal {
+            margin-bottom: 40px;
           }
         }
         &#howitworks {
-          width: auto;
+          padding: 20px;
+
           .blueprint {
+            gap: 40px;
+
+            .text {
+              h3 {
+                padding-top: 0;
+                text-align: center;
+              }
+            }
             .left,
             .right {
               flex-direction: column;
+              gap: 10px;
+              align-items: center;
+
+              .bgContainer {
+                height: 250px;
+                width: 260px;
+                display: flex;
+                position: relative;
+
+                > picture {
+                  position: absolute;
+                  left: 0;
+                  right: auto !important;
+
+                  > img {
+                    width: 250px;
+                  }
+                }
+              }
+            }
+            .one {
+              ul {
+                li {
+                  font-size: 10px;
+                  width: 100px;
+                  padding: 5px 15px;
+                }
+              }
+              .text {
+                order: 1;
+              }
+              .bgContainer {
+                order: 2;
+              }
+            }
+            .three {
+              .text {
+                order: 1;
+              }
+              .bgContainer {
+                order: 2;
+                .bg {
+                  left: 0 !important;
+                }
+              }
+            }
+          }
+        }
+        &#token {        
+          flex-direction: column;
+          padding: 0;
+          margin-top: 100px;
+          h2 {
+            font-size: 46px;
+          }
+          .tokenContainer {
+            width: auto;  
+            flex-direction: column;
+            padding: 20px;
+            margin-bottom: 100px;
+
+            .left {
+              padding: 0;
+            }
+            .right {
+              margin-top: 50px;
             }
           }
         }
         &#faq {
-          width: auto;
+          padding: 20px;
+          margin-top: 20px;
+
+          .logo {
+            margin-top: 20px;
+          }
+          .providers {
+            padding: 0;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            > p {
+              width: 80%;
+              line-height: 1.4;
+            }  
+            .gallery {
+              flex-direction: column;
+              display: inline-table;
+              gap: 0;
+              margin-top: 30px;
+              a {
+                float: left;
+                width: 33%;
+                padding: 20px 0px;
+                display: flex;
+                text-align: center;
+                justify-content: center;
+              }
+            }
+          }
+          ul {
+            li {
+              font-size: 17px;
+              line-height: 1.3;
+            }
+          }
         }
       }
     }
@@ -602,13 +750,6 @@ export const JobsPageWrapper = styled.div`
     min-height: 100vh;
     grid-template-columns: 320px auto;
     
-    > aside {
-      border-right: 1px solid #eee;
-      padding-right: 60px;
-      z-index: 100;
-      padding: 40px;
-      position: relative;
-    }
     > article {
       padding: 80px 100px;
       display: flex;
@@ -669,11 +810,8 @@ export const JobsPageWrapper = styled.div`
       width: calc(100vw - 40px);
       display: flex;
       flex-direction: column;
-      /* padding: 20px; */
-      /* overflow: hidden; */
-      > aside {
-        display: none;
-      }
+      padding: 20px;
+      padding-top: 70px;
       > article {
         margin: inherit;
         width: 100%;
@@ -693,13 +831,6 @@ export const DocumentPageWrapper = styled.div`
     display: grid;
     grid-template-columns: 320px auto;
     
-    > aside {
-      border-right: 1px solid #eee;
-      padding-right: 60px;
-      z-index: 100;
-      padding: 40px;
-      position: relative;
-    }
     article {
       padding: 100px;
       display: flex;

@@ -14,9 +14,7 @@ const Litepaper = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <aside>
-          <HeaderDocs />
-        </aside>
+        <HeaderDocs />
         <article>
           <h1>Roadmap</h1>
           <p>
