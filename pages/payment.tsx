@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { useAccount, usePrepareContractWrite, useContractWrite, erc20ABI } from 'wagmi'
 
-import { DocumentPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import { ROUTER_ADDRESS, TOKEN_ADDRESS, COMMUNA_WALLET_ADDRESS } from 'src/config/consts';
 
@@ -53,7 +53,7 @@ const Payment = () => {
   console.log(writeTransfer);
 
   return (
-    <DocumentPageWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Payment - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -131,7 +131,7 @@ const Payment = () => {
           </form>
         </article>
       </main>
-    </DocumentPageWrapper >
+    </JobsPageWrapper >
   );
 };
 

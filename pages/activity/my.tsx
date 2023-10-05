@@ -69,7 +69,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
       <main>
         <HeaderJobs />
         <article>
-          <h2>My {state} jobs</h2>
+          <h1>My {state} jobs</h1>
           <ActivityNavPublishing />
           {activities.length > 0 && activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />

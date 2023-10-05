@@ -57,7 +57,7 @@ const Home = () => {
               GitHub
             </a>
             <NextLink href="/litepaper">
-              Help
+              Litepaper
             </NextLink>
           </p>
           <Header />

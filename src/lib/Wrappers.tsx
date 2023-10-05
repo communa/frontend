@@ -292,6 +292,7 @@ export const HomePageWrapper = styled.div`
 
           picture {
             position: relative;
+            display: block;
           }
           .levitate {
               -webkit-animation-name: levitate;
@@ -755,9 +756,32 @@ export const JobsPageWrapper = styled.div`
       display: flex;
       flex-direction: column;
 
+      > aside {
+        margin-top: 20px;
+        padding: 20px;
+        background: rgb(238, 238, 238);
+        border-radius: 10px;
+      }
+      ol, ul {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+      }
+      h1 {
+        font-size: 42px;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
       h2 {
         margin-bottom: 5px;
         font-size: 36px;
+        margin-bottom: 0;
+        margin-top: 40px;
+      }
+      h3 {
+        font-size: 18px;
+        margin-top: 5px;
+        margin-bottom: 2px;
       }
       nav {
         display: flex;
@@ -812,69 +836,12 @@ export const JobsPageWrapper = styled.div`
       flex-direction: column;
       padding: 20px;
       padding-top: 70px;
+      /* overflow-x: hidden; */
+
       > article {
         margin: inherit;
         width: 100%;
         padding: 20px 0;
-      }
-    }
-  }
-`;
-
-export const DocumentPageWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  display: flex;
-  flex-direction: column;
-
-  main {
-    display: grid;
-    grid-template-columns: 320px auto;
-    
-    article {
-      padding: 100px;
-      display: flex;
-      flex-direction: column;
-
-      > aside {
-        margin-top: 20px;
-        padding: 20px;
-        background: rgb(238, 238, 238);
-        border-radius: 10px;
-      }
-      ol, ul {
-        margin-left: 30px;
-        margin-bottom: 20px;
-        margin-top: 10px;
-      }
-      h1 {
-        font-size: 42px;
-        margin-bottom: 30px;
-      }
-      h2 {
-        font-size: 24px;
-        margin-bottom: 0;
-        margin-top: 40px;
-      }
-      h3 {
-        font-size: 18px;
-        margin-top: 5px;
-        margin-bottom: 2px;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 700px) {
-    overflow: hidden;
-
-    header {
-      padding: 20px;
-    }
-    main {
-      > article {
-        margin: inherit;
-        width: auto;
-        padding: 20px;
       }
     }
   }

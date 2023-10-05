@@ -1,13 +1,13 @@
 
 import Head from 'next/head';
 import { APP_NAME } from 'src/config/consts';
-import { DocumentPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import HeaderDocs from 'src/lib/Layout/HeaderDocs';
 import ContractAirdrop from 'src/lib/Contract/Airdrop';
 
 const Payment = () => {
   return (
-    <DocumentPageWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Token airdrop - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -18,13 +18,13 @@ const Payment = () => {
       <main>
         <HeaderDocs />
         <article>
-          <h2>
-            Token
-          </h2>
+          <h1>
+            Token Airdrop
+          </h1>
           <ContractAirdrop />
         </article>
       </main>
-    </DocumentPageWrapper >
+    </JobsPageWrapper >
   );
 };
 

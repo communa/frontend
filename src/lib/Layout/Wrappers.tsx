@@ -111,7 +111,18 @@ export const HeaderSideWrapper = styled.aside`
     position: fixed;
     top: 0;
     bottom: 40px;
-
+    
+    .menu {
+      position: absolute;
+      right: 16px;
+      top: 11px;
+      font-size: 28px;
+      color: #000;
+      height: 50px;
+      width: 50px;
+      line-height: 50px;
+      display:  none;
+    }
     nav {  
       margin-top: 20px;
       justify-content: right;
@@ -221,12 +232,15 @@ export const HeaderSideWrapper = styled.aside`
       margin: 0;
       padding: 0;
       bottom: 0;
-      background: #f5f5f5;
+      background: #fafafa;
       padding: 10px 20px;
       height: 50px;
       overflow: hidden;
       border-bottom: 1px solid #e7e7e7;
       
+      .menu {
+        display: block;
+      }
       .logo {
         img {
           width: 50px;
@@ -238,6 +252,11 @@ export const HeaderSideWrapper = styled.aside`
       }
       &.__active {
         height: 100vh;
+      }
+    }
+    &.__open {
+      header {
+        height: 100vh
       }
     }
   }    

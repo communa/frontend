@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import { DocumentPageWrapper } from 'src/lib/Wrappers';
+import { JobsPageWrapper } from 'src/lib/Wrappers';
 import { APP_NAME } from 'src/config/consts';
 import HeaderDocs from 'src/lib/Layout/HeaderDocs';
 
 const Litepaper = () => {
   return (
-    <DocumentPageWrapper>
+    <JobsPageWrapper>
       <Head>
         <title>Litepaper - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -14,9 +14,7 @@ const Litepaper = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <aside>
-          <HeaderDocs />
-        </aside>
+        <HeaderDocs />
         <article>
           <h1>Litepaper</h1>
           <p>
@@ -82,7 +80,7 @@ const Litepaper = () => {
           </a>
         </article>
       </main>
-    </DocumentPageWrapper>
+    </JobsPageWrapper>
   );
 };
 

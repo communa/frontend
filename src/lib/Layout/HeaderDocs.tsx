@@ -1,11 +1,17 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
 import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function HeaderDocs() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <HeaderSideWrapper>
+    <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
           <Link href="/">
@@ -20,7 +26,19 @@ export default function HeaderDocs() {
             </picture>
           </Link>
         </div>
-        <nav>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          className="menu"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <CloseIcon fontSize="inherit" />
+          ) : (
+            <MenuIcon fontSize="inherit" />
+          )}
+        </IconButton>
+        <nav onClick={() => setIsOpen(false)}>
           <h4>Docs</h4>
           <ul>
             <li>
@@ -34,7 +52,7 @@ export default function HeaderDocs() {
               </Link>
             </li>
           </ul>
-
+          {/* 
           <h4>Smart Contracts</h4>
           <ul>
             <li>
@@ -47,19 +65,19 @@ export default function HeaderDocs() {
                 Release Payment
               </Link>
             </li>
-          </ul>
+          </ul> */}
 
           <h4>Other</h4>
           <ul>
             <li>
-              <Link href="https://github.com/communa">
+              <a href="https://github.com/communa" target="_blank" rel="noreferrer">
                 GitHub
-              </Link>
+              </a>
             </li>
             <li>
-              <Link href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
+              <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE" target="_blank" rel="noreferrer">
                 Business Inquiries
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>

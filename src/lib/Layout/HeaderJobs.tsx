@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,9 +9,12 @@ import { useNotifications } from 'src/contexts/Notifications';
 import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
 import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from 'src/lib/Layout/ConnectButton';
-import { Button, Tooltip } from '@mui/material';
+import { Button, IconButton, Tooltip } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function HeaderJobs() {
+  const [isOpen, setIsOpen] = useState(false);
   const { authStatus } = useContext(AuthContext);
   const { addNotification } = useNotifications();
   const { disconnect } = useDisconnect()
@@ -28,7 +32,7 @@ export default function HeaderJobs() {
   }
 
   return (
-    <HeaderSideWrapper>
+    <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
           <Link href="/">
@@ -43,7 +47,19 @@ export default function HeaderJobs() {
             </picture>
           </Link>
         </div>
-        <nav>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          className="menu"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <CloseIcon fontSize="inherit" />
+          ) : (
+            <MenuIcon fontSize="inherit" />
+          )}
+        </IconButton>
+        <nav onClick={() => setIsOpen(false)}>
           <h4>Jobs</h4>
           <ul>
             <li>
