@@ -15,9 +15,9 @@ import { Faq } from 'src/lib/Layout/Faq';
 import Mask1Image from 'src/assets/mask-1.svg';
 import Mask2Image from 'src/assets/mask-2.svg';
 import Mask3Image from 'src/assets/mask-3.svg';
-import image1 from 'src/assets/index-8.jpg';
-import image2 from 'src/assets/index-9.jpg';
-import image3 from 'src/assets/index-11.jpg';
+import image1 from 'src/assets/office-place.jpg';
+import image2 from 'src/assets/time-tracking.jpg';
+import image3 from 'src/assets/invoice-payment.jpg';
 import timetrackerImage from 'src/assets/timetracker.jpeg';
 
 import ethereumImage from 'src/assets/providers/ethereum-eth-logo.svg';
