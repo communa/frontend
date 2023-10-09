@@ -52,78 +52,82 @@ const Home = () => {
       </Head>
       <main>
         <section id="index">
-          <p className="helpLinks">
-            <a href="https://github.com/communa" target='_blank' rel="noreferrer">
-              GitHub
-            </a>
-            <NextLink href="/litepaper">
-              Litepaper
-            </NextLink>
-          </p>
-          <Header />
-          <div className="hero">
-            <div className={`tags ${scrollTop > 1000 ? 'hide' : ''}`}>
-              <div
-                className="tag-orange-inner"
-                style={{
-                  filter: `blur(${scrollTop / 10}px)`,
-                  transform: `translate(${-scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
-                }}
-              >
-                <div className="hHuuya">Censorship resiliant</div>
-              </div>
-              <div
-                className="tag-green-inner"
-                style={{
-                  transform: `translate(${scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
-                  filter: `blur(${scrollTop / 10}px)`,
-                }}
-              >
-                <div className="hHuuya">Transparency</div>
-              </div>
-              <div
-                className="tag-purple-inner"
-                style={{
-                  filter: `blur(${scrollTop / 10}px)`,
-                  transform: `translate(${scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
-                }}
-              >
-                <div className="hHuuya">Reputation</div>
-              </div>
-              <div
-                className="tag-blue-inner"
-                style={{
-                  transform: `translate(${-scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
-                  filter: `blur(${scrollTop / 10}px)`,
-                }}
-              >
-                <div className="hHuuya">Stablecoins</div>
-              </div>
-            </div>
-            <h1>Web3 marketplace to connect businesses<br />with freelancers</h1>
-            <h5>...on blockchain!</h5>
-          </div>
-          <div className="action">
-            <Tooltip title="TimeTacker is in development and not yet ready" arrow>
-              <NextLink href="/activity" passHref>
-                <Button variant="outlined" LinkComponent={Link}>
-                  Browse Jobs
-                </Button>
+          <nav>
+            <p className="helpLinks">
+              <a href="https://github.com/communa" target='_blank' rel="noreferrer">
+                GitHub
+              </a>
+              <NextLink href="/litepaper">
+                Litepaper
               </NextLink>
-            </Tooltip>
-            {authStatus === 'unauthenticated' ? (
-              <ConnectButton size={'large'} />
-            ) : (
+            </p>
+            <Header />
+          </nav>
+          <article>
+            <div className="hero">
+              <div className={`tags ${scrollTop > 1000 ? 'hide' : ''}`}>
+                <div
+                  className="tag-orange-inner"
+                  style={{
+                    filter: `blur(${scrollTop / 10}px)`,
+                    transform: `translate(${-scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                  }}
+                >
+                  <div className="hHuuya">Censorship resiliant</div>
+                </div>
+                <div
+                  className="tag-green-inner"
+                  style={{
+                    transform: `translate(${scrollTop * 5 / 2}px, ${-scrollTop * 3 / 2}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                    filter: `blur(${scrollTop / 10}px)`,
+                  }}
+                >
+                  <div className="hHuuya">Transparency</div>
+                </div>
+                <div
+                  className="tag-purple-inner"
+                  style={{
+                    filter: `blur(${scrollTop / 10}px)`,
+                    transform: `translate(${scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${20 + (scrollTop / 3)}deg)`,
+                  }}
+                >
+                  <div className="hHuuya">Reputation</div>
+                </div>
+                <div
+                  className="tag-blue-inner"
+                  style={{
+                    transform: `translate(${-scrollTop / 3 * 5}px, ${scrollTop / 2 * 3}px) scale(${1 + scrollTop / 50}, ${1 + scrollTop / 50}) rotate(${-20 - (scrollTop / 5)}deg)`,
+                    filter: `blur(${scrollTop / 10}px)`,
+                  }}
+                >
+                  <div className="hHuuya">Stablecoins</div>
+                </div>
+              </div>
+              <h1>Web3 marketplace to connect businesses<br />with freelancers</h1>
+              <h5>...on blockchain!</h5>
+            </div>
+            <div className="action">
               <Tooltip title="TimeTacker is in development and not yet ready" arrow>
-                <Button variant="contained" disabled>
-                  Download TimeTracker
-                </Button>
+                <NextLink href="/activity" passHref>
+                  <Button variant="outlined" LinkComponent={Link}>
+                    Browse Jobs
+                  </Button>
+                </NextLink>
               </Tooltip>
-            )}
-          </div>
-          <p className="jobsTotal">
+              {authStatus === 'unauthenticated' ? (
+                <ConnectButton size={'large'} />
+              ) : (
+                <Tooltip title="TimeTacker is in development and not yet ready" arrow>
+                  <Button variant="contained" disabled>
+                    Download TimeTracker
+                  </Button>
+                </Tooltip>
+              )}
+            </div>
+          </article>
+          <footer>
             <span>1000+</span> active jobs for hire
-          </p>
+          </footer>
         </section>
         <section id="howitworks">
           <div className="blueprint">
@@ -261,7 +265,7 @@ const Home = () => {
             <div className="left">
               <h2>Token Airdrop</h2>
               <h5>
-                Receive 100 utility tokens by filling in in you Communa profile. FREE.
+                Receive 100 utility tokens by filling in a profile. FREE.
               </h5>
               <p>
                 Communa charges a 5% transaction fee on USDT payments, while sedning with COMM token comes with a 0% fee.

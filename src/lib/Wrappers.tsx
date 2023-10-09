@@ -131,7 +131,7 @@ export const HomePageWrapper = styled.div`
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 20px;
+      padding: 0 20px;
       
       p {
         opacity: 0.8;
@@ -146,8 +146,6 @@ export const HomePageWrapper = styled.div`
         display: flex;
         gap: 20px;
         justify-content: center;
-        margin-top: 50px;
-        margin-bottom: 20px;
         font-size: 16px;
         a {
           display: flex;
@@ -234,6 +232,7 @@ export const HomePageWrapper = styled.div`
           display: flex;
           text-transform: capitalize;
           align-items: center;
+          /* width: 100%; */
 
           &:disabled {
             color: #aaa;
@@ -248,29 +247,36 @@ export const HomePageWrapper = styled.div`
         position: relative;
         width: auto;
         display: flex;
+        justify-content: space-between;
 
-        .hero {
-          width: 800px;
-        }
-        .helpLinks {
-          margin-top: 20px;
-        }
-        .logo {
-          margin-top: 50px;
-          margin-bottom: 40px;
-          a {
-            font-size: 46px;
+        nav {
+          margin-top: 30px;
+
+          .helpLinks {
+          }
+          .logo {
+            margin-top: 30px;
+            a {
+              font-size: 46px;
+            }
           }
         }
-        h3 {
-          margin-top: 15px;
+        article {
+          .hero {
+            width: 800px;
+          }
+          h3 {
+            margin-top: 15px;
+          }
+          h5 {
+            color: rgba(0,0,0,0.5);
+          }
         }
-        h5 {
-          color: rgba(0,0,0,0.5);
-        }
-        .jobsTotal {
+        footer {
           margin-top: 40px;
           color: rgba(0, 0, 0, 0.5);
+          margin-bottom: 30px;
+
           span {
             font-weight: 600;
           }
@@ -514,8 +520,6 @@ export const HomePageWrapper = styled.div`
           color: rgba(var(--color-primary-main),0.5);
         }
         .helpLinks {
-          margin-top: 50px;
-          margin-bottom: 20px;
         }
         .copyright {
           font-style: normal;
@@ -582,30 +586,36 @@ export const HomePageWrapper = styled.div`
         width: auto !important;
 
         &#index {
-          .hero {
-            width: auto;
-            h1 {
-              font-size: 32px;
-              line-height: 1.1;
+          nav {
+            .helpLinks {
             }
-            h5 {
-              margin-top: 0;
-            }
-            .tags {
-              display: none;
+            .logo {
+              margin: 0;
+              padding: 30px 0;
             }
           }
-          .logo {
-            margin: 0;
-            padding: 30px 0;
+          article {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            .hero {
+              width: auto;
+              h1 {
+                font-size: 32px;
+                line-height: 1.1;
+              }
+              h5 {
+                margin-top: 0;
+              }
+              .tags {
+                display: none;
+              }
+            }
+            .action {
+              margin-top: 30px;
+            }
           }
-          .action {
-            margin-top: 30px;
-          }
-          .helpLinks {
-            margin-top: 30px;
-          }
-          .jobsTotal {
+          footer {
             margin-bottom: 40px;
           }
         }
@@ -616,8 +626,12 @@ export const HomePageWrapper = styled.div`
             gap: 40px;
 
             .text {
+              padding: 0 20px;
               h3 {
                 padding-top: 0;
+                text-align: center;
+              }
+              p {
                 text-align: center;
               }
             }
@@ -676,17 +690,22 @@ export const HomePageWrapper = styled.div`
           flex-direction: column;
           padding: 0;
           margin-top: 100px;
-          h2 {
-            font-size: 46px;
-          }
           .tokenContainer {
             width: auto;  
             flex-direction: column;
             padding: 20px;
             margin-bottom: 100px;
-
+            text-align: center !important;
+                      
+            h2 {
+              font-size: 36px;
+            }
             .left {
               padding: 0;
+
+              * {
+              text-align: center;
+              }
             }
             .right {
               margin-top: 50px;
