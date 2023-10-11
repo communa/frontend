@@ -61,9 +61,9 @@ const Home = () => {
                 Litepaper
               </NextLink>
             </p>
-            <Header />
           </nav>
           <article>
+            <Header />
             <div className="hero">
               <div className={`tags ${scrollTop > 1000 ? 'hide' : ''}`}>
                 <div

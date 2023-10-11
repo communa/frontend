@@ -78,23 +78,23 @@ export default function HeaderJobs() {
           <h4>Technology</h4>
           <ul>
             <li>
-              <Link href="/activity">
+              <Link href="/activity?keyword=typescript">
                 TypeScript
               </Link>
             </li>
             <li>
-              <Link href="/activity">
+              <Link href="/activity?keyword=python">
                 Python
               </Link>
             </li>
             <li>
               <li>
-                <Link href="/activity">
+                <Link href="/activity?keyword=rust">
                   Rust
                 </Link>
               </li>
               <li>
-                <Link href="/activity">
+                <Link href="/activity?keyword=go">
                   Go
                 </Link>
               </li>

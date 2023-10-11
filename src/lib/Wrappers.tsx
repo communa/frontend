@@ -251,17 +251,14 @@ export const HomePageWrapper = styled.div`
 
         nav {
           margin-top: 30px;
-
-          .helpLinks {
-          }
+        }
+        article {
           .logo {
-            margin-top: 30px;
+            margin-bottom: 30px;
             a {
               font-size: 46px;
             }
           }
-        }
-        article {
           .hero {
             width: 800px;
           }
@@ -482,7 +479,7 @@ export const HomePageWrapper = styled.div`
       }
       &#faq {
         height: auto;
-        margin-bottom: 20px;
+        margin-bottom: 60px;
         width: 1000px;
         margin-top: 150px;
         justify-content: center;
@@ -506,7 +503,6 @@ export const HomePageWrapper = styled.div`
             }
           }
         }
-
         .logo {
           margin-top: 140px;
           font-size: 38px;
@@ -519,8 +515,6 @@ export const HomePageWrapper = styled.div`
         .subtext {
           color: rgba(var(--color-primary-main),0.5);
         }
-        .helpLinks {
-        }
         .copyright {
           font-style: normal;
           font-weight: 400;
@@ -529,6 +523,10 @@ export const HomePageWrapper = styled.div`
           text-align: center;
           letter-spacing: -0.03em;
           color: rgba(var(--color-primary-main),0.5);
+          margin-top: 30px;
+        }
+        .helpLinks {
+          margin-top: 60px;
         }
         svg {
           cursor: pointer;
@@ -556,7 +554,7 @@ export const HomePageWrapper = styled.div`
       section {
         &#index {
           .hero {
-            margin-top: 100px;  
+            margin-top: 50px;  
             h1 {
               font-size: 72px;
               line-height: 1.2;
@@ -598,6 +596,7 @@ export const HomePageWrapper = styled.div`
             padding: 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             .hero {
               width: auto;
               h1 {
