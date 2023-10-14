@@ -15,9 +15,9 @@ import { Faq } from 'src/lib/Layout/Faq';
 import Mask1Image from 'src/assets/mask-1.svg';
 import Mask2Image from 'src/assets/mask-2.svg';
 import Mask3Image from 'src/assets/mask-3.svg';
-import image1 from 'src/assets/office-place.jpg';
-import image2 from 'src/assets/time-tracking.jpg';
-import image3 from 'src/assets/invoice-payment.jpg';
+import image1 from 'src/assets/office-place.jpeg';
+import image2 from 'src/assets/time-tracking.jpeg';
+import image3 from 'src/assets/invoice-payment.jpeg';
 import timetrackerImage from 'src/assets/timetracker.jpeg';
 
 import ethereumImage from 'src/assets/providers/ethereum-eth-logo.svg';
@@ -150,14 +150,14 @@ const Home = () => {
                   <img
                     src={image1.src}
                     alt="Client post a job"
-                    width={450}
+                    width={500}
                   />
                 </picture>
                 <picture>
                   <img
                     src={Mask1Image.src}
                     alt="Client post a job"
-                    width={450}
+                    width={500}
                   />
                 </picture>
               </div>
@@ -194,14 +194,14 @@ const Home = () => {
                   <img
                     src={image2.src}
                     alt="Client post a job"
-                    width={450}
+                    width={500}
                   />
                 </picture>
                 <picture>
                   <img
                     src={Mask2Image.src}
                     alt="Freelancer gets a job"
-                    width={450}
+                    width={500}
                   />
                 </picture>
               </div>
@@ -212,20 +212,21 @@ const Home = () => {
                   <img
                     src={image3.src}
                     alt="Client post a job"
-                    width={448}
+                    width={498}
                   />
                 </picture>
                 <picture>
                   <img
                     src={Mask3Image.src}
                     alt="Freelancer gets a job"
-                    width={450}
+                    width={500}
                   />
                   <div className="dot dot-info dot-3 levitate delay-2">
                     <picture>
                       <img
                         src={daiImage.src}
                         alt="DAI logo"
+                        width={50}
                       />
                     </picture>
                   </div>
@@ -234,6 +235,7 @@ const Home = () => {
                       <img
                         src={usdcImage.src}
                         alt="USDC logo"
+                        width={50}
                       />
                     </picture>
                   </div>
@@ -241,8 +243,8 @@ const Home = () => {
                     <picture>
                       <img
                         src={usdtImage.src}
-                        alt="DAI logo"
-                        width={40}
+                        alt="USDT logo"
+                        width={70}
                       />
                     </picture>
                   </div>

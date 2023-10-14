@@ -324,8 +324,8 @@ export const HomePageWrapper = styled.div`
           }
           .dot {
               position: absolute;
-              height: 48px;
-              width: 48px;
+              height: 80px;
+              width: 76px;
               border-radius: 50%;
               z-index: 1;
           }
@@ -357,11 +357,11 @@ export const HomePageWrapper = styled.div`
               list-style: none;
               color: #000;
               z-index: 1;
-              left: 0;
+              left: 50px;
               display: flex;
               gap: 2px;
               flex-direction: column;
-              bottom: 40px;
+              bottom: 50px;
 
               li {
                 background: #108a00;
@@ -409,22 +409,22 @@ export const HomePageWrapper = styled.div`
                 }
               }
               .dot-6 {
-                top: 15%;
-                left: 2%;
+                top: 10%;
+                left: -2%;
                 display: flex;
                 justify-content: center;
                 align-items: end;
               }
               .dot-5 {
-                bottom: 22%;
-                right: 5%;
-                height: 54px;
-                width: 54px;
+                bottom: 25%;
+                right: 7%;
+                height: 45px;
+                width: 45px;
               }
               .dot-3 {
                 bottom: 10%;
-                height: 32px;
-                width: 32px;
+                height: 52px;
+                width: 52px;
                 left: 15%;
               }
             }
