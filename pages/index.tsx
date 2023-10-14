@@ -212,7 +212,7 @@ const Home = () => {
                   <img
                     src={image3.src}
                     alt="Client post a job"
-                    width={498}
+                    width={500}
                   />
                 </picture>
                 <picture>
@@ -226,7 +226,7 @@ const Home = () => {
                       <img
                         src={daiImage.src}
                         alt="DAI logo"
-                        width={50}
+                        width={30}
                       />
                     </picture>
                   </div>
@@ -235,7 +235,7 @@ const Home = () => {
                       <img
                         src={usdcImage.src}
                         alt="USDC logo"
-                        width={50}
+                        width={30}
                       />
                     </picture>
                   </div>
@@ -244,7 +244,7 @@ const Home = () => {
                       <img
                         src={usdtImage.src}
                         alt="USDT logo"
-                        width={70}
+                        width={50}
                       />
                     </picture>
                   </div>
@@ -270,7 +270,7 @@ const Home = () => {
                 Receive 100 utility tokens by filling in a profile. FREE.
               </h5>
               <p>
-                Communa charges a 5% transaction fee on USDT payments, while sedning with COMM token comes with a 0% fee.
+                Communa charges a 5% transaction fee on USDT payments, while sending with COMM token comes with a 0% fee.
                 Plus, gas fees to process your transactions which vary.
               </p>
             </div>

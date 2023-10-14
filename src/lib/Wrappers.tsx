@@ -295,7 +295,7 @@ export const HomePageWrapper = styled.div`
 
           picture {
             position: relative;
-            display: block;
+            display: flex;
           }
           .levitate {
               -webkit-animation-name: levitate;
@@ -323,11 +323,12 @@ export const HomePageWrapper = styled.div`
               box-shadow: 0 14px 26px -12px #f5ac37,0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(3,155,229,.2)!important;
           }
           .dot {
-              position: absolute;
-              height: 80px;
-              width: 76px;
-              border-radius: 50%;
-              z-index: 1;
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            align-items: center;
+            justify-content: center;
+            display: flex;
           }
           .text {
             text-align: left;
@@ -409,11 +410,13 @@ export const HomePageWrapper = styled.div`
                 }
               }
               .dot-6 {
-                top: 10%;
-                left: -2%;
+                top: 15%;
+                left: 2%;
                 display: flex;
                 justify-content: center;
-                align-items: end;
+                /* align-items: end; */
+                height: 56px;
+                width: 56px;
               }
               .dot-5 {
                 bottom: 25%;
@@ -423,8 +426,8 @@ export const HomePageWrapper = styled.div`
               }
               .dot-3 {
                 bottom: 10%;
-                height: 52px;
-                width: 52px;
+                height: 45px;
+                width: 45px;
                 left: 15%;
               }
             }
