@@ -65,7 +65,7 @@ const Home = () => {
           <article>
             <Header />
             <div className="hero">
-              <div className={`tags ${scrollTop > 1000 ? 'hide' : ''}`}>
+              <div className={`tags ${scrollTop > 800 ? 'hide' : ''}`}>
                 <div
                   className="tag-orange-inner"
                   style={{
@@ -103,7 +103,7 @@ const Home = () => {
                   <div className="hHuuya">Stablecoins</div>
                 </div>
               </div>
-              <h1>Web3 marketplace to connect businesses<br />with freelancers</h1>
+              <h1>Web3 marketplace to connect business<br />and freelance</h1>
               <h5>...on blockchain!</h5>
             </div>
             <div className="action">

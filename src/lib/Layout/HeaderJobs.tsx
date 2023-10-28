@@ -12,6 +12,7 @@ import { ConnectButton } from 'src/lib/Layout/ConnectButton';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import { JOB_KEYWORDS } from 'src/config/consts';
 
 export default function HeaderJobs() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ export default function HeaderJobs() {
       subtitle: '',
     });
     disconnect();
-  }
+  };
 
   return (
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
@@ -75,30 +76,17 @@ export default function HeaderJobs() {
               </li>
             )}
           </ul>
-          <h4>Technology</h4>
+          <h4>Filter By</h4>
           <ul>
-            <li>
-              <Link href="/activity?keyword=typescript">
-                TypeScript
-              </Link>
-            </li>
-            <li>
-              <Link href="/activity?keyword=python">
-                Python
-              </Link>
-            </li>
-            <li>
-              <li>
-                <Link href="/activity?keyword=rust">
-                  Rust
-                </Link>
-              </li>
-              <li>
-                <Link href="/activity?keyword=go">
-                  Go
-                </Link>
-              </li>
-            </li>
+            {JOB_KEYWORDS.map(k => {
+              return (
+                <li key={k}>
+                  <Link href={`/activity?filter=${k}`}>
+                    {k}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           {authStatus === 'authenticated' && (
             <>

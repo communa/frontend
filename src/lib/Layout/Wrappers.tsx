@@ -132,7 +132,7 @@ export const HeaderSideWrapper = styled.aside`
       flex-direction: column;  
     
       h4 {
-        font-size: 14px;
+        font-size: 16px;
         margin-top: 30px;
         color: #5586d1;
       }
@@ -142,7 +142,7 @@ export const HeaderSideWrapper = styled.aside`
         color: rgba(var(--color-primary-main),0.6);
         display: block;
         font-style: normal;
-        line-height: 22px;
+        line-height: 1.3;
         letter-spacing: -0.48px;
         text-decoration: none;
         display: flex;
@@ -150,14 +150,13 @@ export const HeaderSideWrapper = styled.aside`
         gap: 2px;
         margin-top: 3px;
         max-width: 250px;
+        font-size: 18px;
         &.inline {
           flex-direction: row;
         }
         li {
           list-style-type: none;
-
           cursor: pointer;
-
           p,
           a {
             color: rgba(0, 0, 0, 0.6);
@@ -200,8 +199,8 @@ export const HeaderSideWrapper = styled.aside`
       cursor: pointer;
 
       img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
       }
       span {

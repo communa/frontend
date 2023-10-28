@@ -11,19 +11,28 @@ import { APIContext } from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import { useRouter } from 'next/router';
 
-export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async () => {
+export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async (context) => {
+  const data = {
+    filter: {
+    },
+    sort: {
+      createdAt: 'DESC'
+    },
+    page: 0,
+  };
+
+  if (context.query.filter) {
+    data.filter = {
+      keywords: [context.query.filter]
+    }
+  }
+
   const response = await request({
     url: `${API_HOST}/api/activity/search`,
     method: 'POST',
-    data: {
-      filter: {
-      },
-      sort: {
-        createdAt: 'DESC'
-      },
-      page: 0,
-    }
+    data,
   });
 
   return {
@@ -33,9 +42,10 @@ export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }>
   }
 }
 
-const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [activities, setActivities] = useState(search[0]);
   const [page, setPage] = useState(0);
+  const router = useRouter();
   const { data, state, query } = useContext(APIContext);
 
   useEffect(() => {
@@ -47,6 +57,13 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     }
   }, [data]);
 
+  useEffect(() => {
+    console.log(router.query.filter);
+    setPage(0);
+    setActivities([]);
+    doQuery();
+  }, [router.query.filter]);
+
   const onScroll = (e: any) => {
     const {
       scrollTop,
@@ -55,24 +72,33 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
     } = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
 
-    console.log(state);
-
     if (!canFetch && state !== 'progress') {
-      query({
-        url: `/api/activity/search`,
-        method: 'POST',
-        data: {
-          filter: {
-          },
-          sort: { createdAt: 'DESC' },
-          page: page + 1,
-        }
-      });
-      setPage(page + 1);
+      doQuery();
     }
   }
+  const doQuery = () => {
+    const data = {
+      filter: {
+      },
+      sort: {
+        createdAt: 'DESC'
+      },
+      page: 0,
+    };
 
-  console.log(activities, state);
+    if (router.query.filter) {
+      data.filter = {
+        keywords: [router.query.filter]
+      }
+    }
+
+    query({
+      url: `/api/activity/search`,
+      method: 'POST',
+      data,
+    });
+    setPage(page + 1);
+  }
 
   return (
     <JobsPageWrapper onScroll={(e) => onScroll(e)}>
@@ -86,15 +112,23 @@ const Home = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>
       <main>
         <HeaderJobs />
         <article>
-          <h1>All jobs</h1>
+          <h1>
+            {router.query.filter ? router.query.filter : "All Jobs"}
+          </h1>
           <ActivityNavPublishing />
           {activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}
+
+          {activities.length === 0 && (
+            <div className="noResults">
+              We have no results matching your criteria :(
+            </div>
+          )}
         </article>
       </main>
     </JobsPageWrapper >
   );
 };
 
-export default Home;
+export default Activity;

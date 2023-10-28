@@ -46,8 +46,17 @@ export const FAQ_TEXTS = [
 
     'Communa Token is the utility token of Communa platform that operates on the blockchain network, specifically on the Ethereum a-like blockchain. The token serves as a medium of exchange within the platform and facilitates various transactions and interactions between freelancers, clients, and the ecosystem.',
     'The Communa Token has multiple purposes and use cases within the platform: 1. Payment: Freelancers can receive payments for their services in Communa Tokens from clients. This allows for seamless and secure transactions between parties without relying on traditional banking systems. 2. Rewards and Incentives: Communa Tokens can be used as rewards and incentives to encourage freelancers to deliver high-quality work, meet project milestones, or achieve certain performance metrics. Clients can offer these tokens as bonuses or additional compensation to motivate freelancers. 3. Platform Governance: Holders of Communa Tokens may have the ability to participate in the decision-making processes related to platform governance. This can include voting on proposed changes, protocol upgrades, or other community-related matters. 4. Access to Premium Features: Communa Tokens may grant access to exclusive features or premium services within the platform. This can provide additional benefits and privileges to token holders.',
-    'Communa Tokens can be obtained through various means, including: 1. Purchasing them on supported cryptocurrency exchanges where the token is listed. 2. Earning them as payment for freelance services rendered on the Communa platform. 3. Participating in token sales or initial coin offerings(ICOs) conducted by Communa, if applicable. It\'s important to note that the availability and specific methods of obtaining Communa Tokens may vary, so it\'s recommended to refer to official announcements and guidelines provided by the Communa team for accurate information.',
+    'Communa Tokens can be obtained through various means, including: 1. Purchasing them on supported cryptocurrency exchanges where the token is listed. 2. Earning them as payment for freelance services rendered on the Communa platform. 3. Participating in token airdrop conducted by Communa, if applicable. It\'s important to note that the availability and specific methods of obtaining Communa Tokens may vary, so it\'s recommended to refer to official announcements and guidelines provided by the Communa team for accurate information.',
 
     'Communa utilizes blockchain-based reputation systems to verify the authenticity of freelancers profiles and work history. By publishing job contracts as non-fungible tokens (NFTs) on the blockchain, users can reference time tracking, invoices, and payments. This decentralized reputation system allows freelancers to have full control over their reputation and achievements, independent of any centralized authority.',
     'Yes, Communa is an open-source platform, and the development process is open to the community. Interested individuals can join the project on GitHub and contribute to the creation of this new freelancing platform.',
+];
+
+export const JOB_KEYWORDS = [
+    'Rust',
+    'React',
+    'Solidity',
+    'TypeScript',
+    'Ethereum',
+    'Web3',
 ];

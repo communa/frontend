@@ -125,7 +125,6 @@ export const HomePageWrapper = styled.div`
         border: 1px solid rgb(148, 102, 246);
       }
     }
-    
     section {
       width: 800px;
       flex-direction: column;
@@ -179,7 +178,7 @@ export const HomePageWrapper = styled.div`
       h5 {
         font-style: normal;
         font-weight: 400;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 27px;
         text-align: center;
         letter-spacing: -0.03em;
@@ -243,7 +242,7 @@ export const HomePageWrapper = styled.div`
         }
       }
       &#index {
-        min-height: 100vh;
+        height: 100vh;
         position: relative;
         width: auto;
         display: flex;
@@ -814,6 +813,10 @@ export const JobsPageWrapper = styled.div`
             color: #777;
           }
         }
+      }
+      .noResults {
+        color: #777;
+        font-size: 18px;
       }
     }
     &#jobNew,

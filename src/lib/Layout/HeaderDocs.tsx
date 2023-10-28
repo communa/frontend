@@ -52,21 +52,6 @@ export default function HeaderDocs() {
               </Link>
             </li>
           </ul>
-          {/* 
-          <h4>Smart Contracts</h4>
-          <ul>
-            <li>
-              <Link href="/airdrop">
-                Airdrop
-              </Link>
-            </li>
-            <li>
-              <Link href="/payment">
-                Release Payment
-              </Link>
-            </li>
-          </ul> */}
-
           <h4>Other</h4>
           <ul>
             <li>
