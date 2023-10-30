@@ -1,4 +1,4 @@
-set :domain,      "communa.network"
+set :domain,      "app.communa.network"
 set :deploy_to,   "/var/www/html/communa-frontend"
 set :user, 'root'
 

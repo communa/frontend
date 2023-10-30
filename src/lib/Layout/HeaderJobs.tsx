@@ -64,7 +64,7 @@ export default function HeaderJobs() {
           <h4>Jobs</h4>
           <ul>
             <li>
-              <Link href="/activity">
+              <Link href="/">
                 View all
               </Link>
             </li>
@@ -81,7 +81,7 @@ export default function HeaderJobs() {
             {JOB_KEYWORDS.map(k => {
               return (
                 <li key={k}>
-                  <Link href={`/activity?filter=${k}`}>
+                  <Link href={`/?filter=${k}`}>
                     {k}
                   </Link>
                 </li>

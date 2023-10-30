@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App: any) => (props:any) =>
+          enhanceApp: (App: any) => (props: any) =>
             sheet.collectStyles(<App {...props} />),
         })
 
@@ -22,16 +22,4 @@ export default class MyDocument extends Document {
       sheet.seal()
     }
   }
-
-  // render () {
-  //   return (
-  //     <Html>
-  //       <Head />
-  //       <BodyInterfaceWrapper>
-  //         <Main />
-  //         <NextScript />
-  //       </BodyInterfaceWrapper>
-  //     </Html>
-  //   )
-  // }
 }
