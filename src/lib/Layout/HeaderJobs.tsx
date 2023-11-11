@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { useState } from 'react';
+import {useState} from 'react';
 
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useContext } from 'react';
-import { AuthContext } from 'src/contexts/Auth';
-import { useNotifications } from 'src/contexts/Notifications';
-import { HeaderSideWrapper } from 'src/lib/Layout/Wrappers';
-import { useAccount, useDisconnect } from 'wagmi';
-import { ConnectButton } from 'src/lib/Layout/ConnectButton';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import {useRouter} from 'next/router';
+import {useContext} from 'react';
+import {AuthContext} from 'src/contexts/Auth';
+import {useNotifications} from 'src/contexts/Notifications';
+import {HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
+import {useAccount, useDisconnect} from 'wagmi';
+import {ConnectButton} from 'src/lib/Layout/ConnectButton';
+import {Button, IconButton, Tooltip} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { JOB_KEYWORDS } from 'src/config/consts';
+import {JOB_KEYWORDS} from 'src/config/consts';
 
 export default function HeaderJobs() {
   const [isOpen, setIsOpen] = useState(false);
-  const { authStatus } = useContext(AuthContext);
-  const { addNotification } = useNotifications();
-  const { disconnect } = useDisconnect()
-  const { address } = useAccount();
+  const {authStatus} = useContext(AuthContext);
+  const {addNotification} = useNotifications();
+  const {disconnect} = useDisconnect()
+  const {address} = useAccount();
   const router = useRouter();
 
   const onLogoutClick = () => {
@@ -41,10 +41,9 @@ export default function HeaderJobs() {
               <img
                 width={100}
                 height={100}
-                src="/logo.png"
+                src="/logo-testnet.png"
                 alt="Landscape picture"
               />
-              <span>Testnet</span>
             </picture>
           </Link>
         </div>

@@ -1,15 +1,15 @@
 {
   "name": "communa",
-  "description": "Web3 freelancing platform that connects businesses with talented professionals worldwide, making remote work more convenient than ever before.",
+  "description": "Web3 marketplace to connect business and freelance",
   "version": "0.0.0",
   "private": false,
   "author": "ivan.proskuryakov",
   "license": "MIT",
   "scripts": {
-    "pm2": "NODE_ENV=production pm2 start npm --  start",
-    "dev": "next dev",
+    "pm2": "NODE_ENV=production pm2 start yarn --name frontend -- start",
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3000",
     "lint": "next lint"
   },
   "dependencies": {

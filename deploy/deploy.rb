@@ -25,7 +25,7 @@ namespace :deploy do
   task :npminstall, :roles => :app do
     try_sudo "cd #{latest_release} && yarn install"
     try_sudo "cd #{latest_release} && yarn build"
-    try_sudo "cd #{latest_release} && pm2 delete npm"
+    try_sudo "cd #{latest_release} && pm2 delete frontend"
     try_sudo "cd #{latest_release} && yarn pm2"
   end
 end

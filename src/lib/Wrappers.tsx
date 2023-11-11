@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-/* BodyInterfaceWrapper
- *
- * An element that houses SideInterface and MainInterface.
- * Used once in Router.
- */
 export const BodyInterfaceWrapper = styled.body`
   display: flex;
   position: relative;

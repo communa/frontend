@@ -1,19 +1,19 @@
-import { InferGetServerSidePropsType } from 'next'
-import { GetServerSideProps } from 'next'
+import {InferGetServerSidePropsType} from 'next'
+import {GetServerSideProps} from 'next'
 import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 
-import { request } from 'src/Utils';
-import { JobsPageWrapper } from 'src/lib/Wrappers';
-import { IActivitySearch } from 'src/interface/IActivity';
-import { API_HOST, APP_NAME } from 'src/config/consts';
-import { APIContext } from 'src/contexts/Api';
+import {request} from 'src/Utils';
+import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {IActivitySearch} from 'src/interface/IActivity';
+import {API_HOST, APP_NAME} from 'src/config/consts';
+import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 
-export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{search: IActivitySearch}> = async (context) => {
   const data = {
     filter: {
     },
@@ -42,11 +42,11 @@ export const getServerSideProps: GetServerSideProps<{ search: IActivitySearch }>
   }
 }
 
-const Activity = ({ search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [activities, setActivities] = useState(search[0]);
   const [page, setPage] = useState(0);
   const router = useRouter();
-  const { data, state, query } = useContext(APIContext);
+  const {data, state, query} = useContext(APIContext);
 
   useEffect(() => {
     if (state === 'ready' && data && data[0]) {
@@ -107,7 +107,7 @@ const Activity = ({ search }: InferGetServerSidePropsType<typeof getServerSidePr
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
         <HeaderJobs />

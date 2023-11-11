@@ -52,7 +52,6 @@ export const ConnectButtonWrapper = styled.div`
 export const LogoWrapper = styled.div`
   display: flex;
   position: relative;
-  /* flex-grow: 1; */
   padding: 0;
   margin: 0 auto;
   display: flex;
@@ -71,18 +70,6 @@ export const LogoWrapper = styled.div`
       height: 100px;
       border-radius: 50%;
     }
-  }
-  span {
-    background: #313131;
-    color: #aaa;
-    font-weight: 500;
-    position: absolute;
-    padding: 2px 5px;
-    border-radius: 22px;
-    font-size: 11px;
-    right: -20px;
-    opacity: 0.9;
-    top: 10px;
   }
 
   @media only screen and (max-width: 700px) {

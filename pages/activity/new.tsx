@@ -1,21 +1,21 @@
-import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
-import { useContext, useEffect, useRef, useState } from 'react';
+import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
+import {useContext, useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
-import { Editor } from '@tinymce/tinymce-react';
-import { useRouter } from 'next/router';
+import {Editor} from '@tinymce/tinymce-react';
+import {useRouter} from 'next/router';
 import fs from 'fs';
-import { TextField } from '@mui/material';
+import {TextField} from '@mui/material';
 import Switch from '@mui/material/Switch';
 
-import { JobsPageWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts'
-import { request } from 'src/Utils';
-import { AuthContext, getJwtLocalStorage } from 'src/contexts/Auth';
-import { useNotifications } from 'src/contexts/Notifications';
-import { join } from 'path';
+import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
+import {request} from 'src/Utils';
+import {AuthContext, getJwtLocalStorage} from 'src/contexts/Auth';
+import {useNotifications} from 'src/contexts/Notifications';
+import {join} from 'path';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
-export const getServerSideProps: GetServerSideProps<{ template: string }> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
   const template = fs.readFileSync(join(__dirname, '../../../../job-template.html')).toString();
 
   return {
@@ -25,10 +25,10 @@ export const getServerSideProps: GetServerSideProps<{ template: string }> = asyn
   }
 }
 
-const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { authStatus } = useContext(AuthContext);
-  const { addNotification } = useNotifications();
+  const {authStatus} = useContext(AuthContext);
+  const {addNotification} = useNotifications();
   const editorRef = useRef<any>(null);
 
   const [text, setText] = useState(template);
@@ -88,7 +88,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="jobNew">
         <HeaderJobs />
@@ -123,7 +123,7 @@ const ActivityNew = ({ template }: InferGetServerSidePropsType<typeof getServerS
             />
             <p className="jobState">
               <Switch
-                inputProps={{ 'aria-label': 'Switch demo' }}
+                inputProps={{'aria-label': 'Switch demo'}}
                 onChange={e => {
                   if (state === 'published') {
                     setState('draft');

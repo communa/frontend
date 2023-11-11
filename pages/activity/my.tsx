@@ -1,21 +1,21 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { GetServerSideProps } from 'next'
+import {GetServerSidePropsContext, InferGetServerSidePropsType} from 'next'
+import {GetServerSideProps} from 'next'
 import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 
-import { JobsPageWrapper } from 'src/lib/Wrappers';
-import { IActivity } from 'src/interface/IActivity';
-import { APP_NAME } from 'src/config/consts';
-import { APIContext } from 'src/contexts/Api';
+import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {IActivity} from 'src/interface/IActivity';
+import {APP_NAME} from 'src/config/consts';
+import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import { getJwtLocalStorage } from 'src/contexts/Auth';
+import {getJwtLocalStorage} from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 import HowItWorksImage from 'src/assets/Illustration-6.png';
 
-export const getServerSideProps: GetServerSideProps<{ state: string }> = async (context: GetServerSidePropsContext) => {
-  const { state } = context.query;
+export const getServerSideProps: GetServerSideProps<{state: string}> = async (context: GetServerSidePropsContext) => {
+  const {state} = context.query;
 
   return {
     props: {
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<{ state: string }> = async (
   }
 }
 
-const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const My = ({state}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const api = useContext(APIContext);
   const [activities, setActivities] = useState<IActivity[]>([]);
 
@@ -51,7 +51,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
         filter: {
           state
         },
-        sort: { createdAt: 'DESC' },
+        sort: {createdAt: 'DESC'},
         page: 0,
       }
     });
@@ -64,7 +64,7 @@ const My = ({ state }: InferGetServerSidePropsType<typeof getServerSideProps>) =
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
         <HeaderJobs />

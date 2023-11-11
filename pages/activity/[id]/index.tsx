@@ -1,15 +1,15 @@
-import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import Head from 'next/head';
 
-import { IActivity } from 'src/interface/IActivity';
-import { request } from 'src/Utils';
-import { JobsPageWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME } from 'src/config/consts';
+import {IActivity} from 'src/interface/IActivity';
+import {request} from 'src/Utils';
+import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {API_HOST, APP_NAME} from 'src/config/consts';
 import ActivityFull from 'src/lib/Activity/ActivityFull';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
-export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = async (context: GetServerSidePropsContext) => {
-  const { id } = context.query;
+export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
+  const {id} = context.query;
   const response = await request({
     url: `${API_HOST}/api/activity/${id}`,
     method: 'GET'
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps<{ activity: IActivity }> = a
   }
 }
 
-const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <JobsPageWrapper>
       <Head>
@@ -30,7 +30,7 @@ const Activity = ({ activity }: InferGetServerSidePropsType<typeof getServerSide
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
         <HeaderJobs />

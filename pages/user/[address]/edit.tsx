@@ -1,21 +1,21 @@
-import type { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import Head from 'next/head';
 
-import { request } from 'src/Utils';
-import { JobsPageWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME, TINYMCE_KEY } from 'src/config/consts';
-import { useEffect, useRef, useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
-import { getJwtLocalStorage } from 'src/contexts/Auth';
-import { useNotifications } from 'src/contexts/Notifications';
-import { useAccount } from 'wagmi';
-import { IUser } from 'src/interface/IUser';
-import { useRouter } from 'next/router';
+import {request} from 'src/Utils';
+import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
+import {useEffect, useRef, useState} from 'react';
+import {Editor} from '@tinymce/tinymce-react';
+import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {useNotifications} from 'src/contexts/Notifications';
+import {useAccount} from 'wagmi';
+import {IUser} from 'src/interface/IUser';
+import {useRouter} from 'next/router';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
-import { TextField } from '@mui/material';
+import {TextField} from '@mui/material';
 
-export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (context: GetServerSidePropsContext) => {
-  const { address } = context.query;
+export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
+  const {address} = context.query;
   const response = await request({
     url: `${API_HOST}/api/user/${address}/address`,
     method: 'GET'
@@ -28,11 +28,11 @@ export const getServerSideProps: GetServerSideProps<{ user: IUser }> = async (co
   }
 }
 
-const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const editorRef = useRef<any>(null);
   const router = useRouter();
-  const { addNotification } = useNotifications();
-  const { address } = useAccount();
+  const {addNotification} = useNotifications();
+  const {address} = useAccount();
 
   const [bio, setBio] = useState(user.bio);
   const [userName, setUserName] = useState(user.userName);
@@ -81,7 +81,7 @@ const UserProfileEdit = ({ user }: InferGetServerSidePropsType<typeof getServerS
         <title>{address} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="userEdit">
         <HeaderJobs />

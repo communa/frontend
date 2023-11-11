@@ -15,10 +15,8 @@ export const TOKEN_ADDRESS = '0x86C948f06AAF9dF1199dF9539Ec3E56FbeE23CA9';
 export const COMMUNA_WALLET_ADDRESS = '0x86C948f06AAF9dF1199dF9539Ec3E56FbeE23CA9';
 
 export const JOB_KEYWORDS = [
-    'Rust',
-    'React',
-    'Solidity',
-    'TypeScript',
-    'Ethereum',
     'Web3',
+    'Ethereum',
+    'Solidity',
+    'Rust',
 ];
