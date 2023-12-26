@@ -13,6 +13,16 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
+export const AuthTimeTrackerWrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 100px;
+`;
+
 export const JobsPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -30,6 +40,7 @@ export const JobsPageWrapper = styled.div`
       padding: 80px 100px;
       display: flex;
       flex-direction: column;
+      flex: 1;
 
       > aside {
         margin-top: 20px;

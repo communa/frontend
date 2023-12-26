@@ -137,7 +137,7 @@ export const HeaderSideWrapper = styled.aside`
         gap: 2px;
         margin-top: 3px;
         max-width: 250px;
-        font-size: 18px;
+        font-size: 16px;
         &.inline {
           flex-direction: row;
         }

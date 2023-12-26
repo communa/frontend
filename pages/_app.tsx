@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
+import {useContext, useEffect} from 'react';
 import Script from 'next/script';
-import type { AppProps } from 'next/app';
+import type {AppProps} from 'next/app';
 import {
   RainbowKitProvider,
   darkTheme,
@@ -10,37 +10,36 @@ import {
   createAuthenticationAdapter,
 } from '@rainbow-me/rainbowkit';
 
-import { useRouter } from "next/router";
 import {
   argentWallet,
   trustWallet,
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { configureChains, createClient, useAccount, WagmiConfig } from 'wagmi';
-import { goerli } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+import {configureChains, createClient, useAccount, WagmiConfig} from 'wagmi';
+import {polygon} from 'wagmi/chains';
+import {publicProvider} from 'wagmi/providers/public';
 
-import { AuthContext, AuthProvider, getJwtLocalStorage, isJWTexpired } from 'src/contexts/Auth';
-import { withProviders } from 'src/lib/Hooks';
-import { NotificationsProvider, useNotifications } from 'src/contexts/Notifications';
-import { TooltipProvider } from 'src/contexts/Tooltip';
-import { Notifications } from 'src/lib/Notifications';
-import { APIProvider } from 'src/contexts/Api';
-import { MainInterfaceWrapper } from 'src/lib/Wrappers';
-import { API_HOST, APP_NAME, WALLET_CONNECT_PROJECT_ID } from 'src/config/consts';
-import { request } from 'src/Utils';
+import {AuthContext, AuthProvider, getJwtLocalStorage, isJWTexpired} from 'src/contexts/Auth';
+import {withProviders} from 'src/lib/Hooks';
+import {NotificationsProvider, useNotifications} from 'src/contexts/Notifications';
+import {TooltipProvider} from 'src/contexts/Tooltip';
+import {Notifications} from 'src/lib/Notifications';
+import {APIProvider} from 'src/contexts/Api';
+import {MainInterfaceWrapper} from 'src/lib/Wrappers';
+import {API_HOST, APP_NAME, WALLET_CONNECT_PROJECT_ID} from 'src/config/consts';
+import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
 
-const { chains, provider } = configureChains(
+const {chains, provider} = configureChains(
   [
-    goerli,
+    polygon,
   ],
   [publicProvider()]
 );
 
-const { wallets } = getDefaultWallets({
+const {wallets} = getDefaultWallets({
   appName: APP_NAME,
   projectId: WALLET_CONNECT_PROJECT_ID,
   chains,
@@ -77,11 +76,10 @@ const wagmiClient = createClient({
   provider
 });
 
-function App({ Component, pageProps }: AppProps) {
-  const { authStatus, connect } = useContext(AuthContext);
-  const { addNotification } = useNotifications();
-  const { address } = useAccount();
-  const router = useRouter();
+function App({Component, pageProps}: AppProps) {
+  const {authStatus, connect} = useContext(AuthContext);
+  const {addNotification} = useNotifications();
+  const {address} = useAccount();
 
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
@@ -95,13 +93,13 @@ function App({ Component, pageProps }: AppProps) {
 
       return nonce.data;
     },
-    createMessage: ({ nonce }) => {
+    createMessage: ({nonce}) => {
       return nonce;
     },
-    getMessageBody: ({ message }) => {
+    getMessageBody: ({message}) => {
       return message;
     },
-    verify: async ({ message, signature }) => {
+    verify: async ({message, signature}) => {
       const res = await request({
         url: `${API_HOST}/api/auth/web3`,
         method: 'POST',
@@ -118,11 +116,9 @@ function App({ Component, pageProps }: AppProps) {
       localStorage.setItem('JWT', JSON.stringify(tokens));
 
       addNotification({
-        title: 'welcome to communa',
+        title: 'Welcome to Communa',
         subtitle: '',
       });
-
-      router.push(`/user/${address}`);
 
       connect('authenticated');
 

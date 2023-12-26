@@ -1,11 +1,11 @@
-import { AxiosRequestConfig } from "axios";
+import {AxiosRequestConfig} from "axios";
 
 export type ApiState = 'init' | 'progress' | 'ready' | 'error';
 
 export interface APIContextInterface {
   state: ApiState;
-  data: null,
-  error: null,
+  data: any,
+  error: any,
   query: (config: AxiosRequestConfig) => void;
 }
 

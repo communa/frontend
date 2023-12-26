@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import type { AuthContextInterface } from './defaults';
+import React, {useState} from 'react';
+import type {AuthContextInterface} from './defaults';
 import moment from 'moment';
 
-import { AuthenticationStatus } from '@rainbow-me/rainbowkit';
+import {AuthenticationStatus} from '@rainbow-me/rainbowkit';
 import * as defaults from './defaults';
 
 export const AuthContext = React.createContext<AuthContextInterface>(
@@ -11,7 +11,7 @@ export const AuthContext = React.createContext<AuthContextInterface>(
 
 export const useAuth = () => React.useContext(AuthContext);
 
-export const getJwtLocalStorage = (): { access: string; refresh: string } | null => {
+export const getJwtLocalStorage = (): {access: string; refresh: string} | null => {
   const tokens = localStorage.getItem('JWT') as string;
 
   if (!tokens || tokens === "undefined") {
@@ -43,7 +43,7 @@ export const isJWTexpired = (): boolean => {
   return false;
 };
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({children}: {children: React.ReactNode}) => {
   let status: AuthenticationStatus = 'loading';
 
   const [authStatus, setAuthStatus] = useState<AuthenticationStatus>(status);

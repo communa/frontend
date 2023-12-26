@@ -26,7 +26,7 @@ namespace :deploy do
     try_sudo "cd #{latest_release} && yarn install"
     try_sudo "cd #{latest_release} && yarn build"
     try_sudo "cd #{latest_release} && pm2 delete frontend"
-    try_sudo "cd #{latest_release} && yarn pm2"
+    try_sudo "cd #{latest_release} && NODE_ENV=production pm2 start yarn --name frontend -- start"
   end
 end
 
