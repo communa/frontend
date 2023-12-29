@@ -14,17 +14,23 @@ import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 
 import HowItWorksImage from 'src/assets/Illustration-6.png';
 
-export const getServerSideProps: GetServerSideProps<{state: string}> = async (context: GetServerSidePropsContext) => {
-  const {state} = context.query;
+export const getServerSideProps: GetServerSideProps<{
+  state: string, 
+  type: string
+}> = async (context: GetServerSidePropsContext) => {
+  const {state, type} = context.query;
+
+  console.log(state, type);
 
   return {
     props: {
       state: state as string,
+      type: type as string,
     },
   }
 }
 
-const My = ({state}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const api = useContext(APIContext);
   const [activities, setActivities] = useState<IActivity[]>([]);
 
@@ -34,7 +40,7 @@ const My = ({state}: InferGetServerSidePropsType<typeof getServerSideProps>) => 
         ...activities,
         ...api.data[0],
       ]);
-    }
+    }state
   }, [api.data]);
 
   useEffect(() => {
@@ -42,20 +48,21 @@ const My = ({state}: InferGetServerSidePropsType<typeof getServerSideProps>) => 
     setActivities([]);
 
     api.query({
-      url: `/api/activity/search/publishing`,
+      url: `/api/activity/search/business`,
       method: 'POST',
       headers: {
         Authorization: jwt?.access
       },
       data: {
         filter: {
-          state
+          state,
+          type,
         },
         sort: {createdAt: 'DESC'},
         page: 0,
       }
     });
-  }, [state]);
+  }, [state, type]);
 
   return (
     <JobsPageWrapper>
@@ -69,16 +76,26 @@ const My = ({state}: InferGetServerSidePropsType<typeof getServerSideProps>) => 
       <main>
         <HeaderJobs />
         <article>
-          <h1>My {state} jobs</h1>
+          {type === 'Contract' ? (
+            <h1>{state} contracts</h1>
+          ): (
+            <h1>Personal projects</h1>
+          )}
           <ActivityNavPublishing />
           {activities.length > 0 && activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}
           {activities.length === 0 && (
             <>
-              <p>
-                You have no <strong>{state}</strong> jobs
-              </p>
+              {type === 'Contract' ? (
+                <p>
+                  You have no <strong>{state}</strong> contracts
+                </p>
+              ): (
+                <p>
+                  You have no <strong>personal</strong> projects
+                </p>
+              )}              
               <picture>
                 <img
                   src={HowItWorksImage.src}

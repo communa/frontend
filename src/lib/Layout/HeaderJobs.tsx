@@ -60,7 +60,7 @@ export default function HeaderJobs() {
           )}
         </IconButton>
         <nav onClick={() => setIsOpen(false)}>
-          <h4>Jobs</h4>
+          <h4>Projects</h4>
           <ul>
             <li>
               <Link href="/">
@@ -70,7 +70,7 @@ export default function HeaderJobs() {
             {authStatus === 'authenticated' && address && (
               <li>
                 <Link href="/activity/new">
-                  Publish a job
+                  Add new
                 </Link>
               </li>
             )}

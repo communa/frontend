@@ -20,6 +20,9 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
     ].filter(n => n).flat(),
   ];
 
+  const isImported = activity.jobUrl && activity.type === 'Import';
+  const isPersonal = activity.type === 'Personal';
+
   return (
     <ActivityWrapper className="full">
       <ActivityNav activity={activity} />
@@ -38,8 +41,7 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
         <Link href={`/activity/${activity.id}`}>
           {activity.title}
         </Link>
-
-        {keywords && (
+        {!isPersonal && keywords && (
           <p className="keywords">
             {keywords.map(k => {
               return (
@@ -52,9 +54,11 @@ const ActivityFull = ({ activity }: ActivityShortProps) => {
           __html: activity.text
         }} />
       </article>
-      <a href={activity.jobUrl} className="apply" target="_blank" rel="noreferrer">
-        Apply Now
-      </a>
+      {isImported && (
+        <a href={activity.jobUrl} className="apply" target="_blank" rel="noreferrer">
+          Apply Now
+        </a>
+      )}
     </ActivityWrapper >
   )
 }

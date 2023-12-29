@@ -85,7 +85,22 @@ export const JobsPageWrapper = styled.div`
         font-size: 18px;
       }
     }
-    &#jobNew,
+    &#jobNew {
+      .projectType {
+        > div {
+          padding: 50px;
+          border-radius: 20px;
+          margin-top: 20px;
+          background: #999;
+          a {
+            color: #fff;
+            font-size: 26px;
+          }
+        }
+      }
+    }
+    &#jobPeronal,
+    &#jobContract,
     &#jobEdit,
     &#userEdit {
       article {
@@ -97,10 +112,7 @@ export const JobsPageWrapper = styled.div`
         form {
           > label {
             width: 100%;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            margin-bottom: 10px;
           }
           .jobState {
             > label {

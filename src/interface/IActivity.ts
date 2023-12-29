@@ -7,6 +7,7 @@ export interface IActivity {
   id: string;
   title: string;
   state: string;
+  type: string;
   text: string;
   jobUrl: string;
   rate: string;

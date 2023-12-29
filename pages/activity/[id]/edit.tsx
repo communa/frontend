@@ -29,13 +29,14 @@ export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = asy
 const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {addNotification} = useNotifications();
   const editorRef = useRef<any>(null);
+  const kw = activity.keywords ? activity.keywords.join(',') : '';
 
   const [text, setText] = useState(activity.text);
   const [state, setState] = useState(activity.state);
   const [title, setTitle] = useState(activity.title);
   const [rate, setRate] = useState(activity.rate);
   const [salary, setSalary] = useState(activity.salary);
-  const [keywords, setKeywords] = useState(activity.keywords.join(','));
+  const [keywords, setKeywords] = useState(kw);
 
   const onEdit = async () => {
     const text = editorRef.current.getContent();
@@ -68,7 +69,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   return (
     <JobsPageWrapper>
       <Head>
-        <title>Publish - Web3 Jobs - {APP_NAME}</title>
+        <title>Edit - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
@@ -78,7 +79,10 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <HeaderJobs />
         <article>
           <h2>
-            Job editing
+            {activity.type === 'Contract'
+            ? 'Contract editing'
+            : 'Project editing'
+            }            
           </h2>
           <form>
             <TextField
@@ -88,44 +92,47 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
               defaultValue={title}
               onChange={e => setTitle(e.target.value)}
             />
-            <TextField
-              label="Rate hourly"
-              variant="outlined"
-              placeholder="$20"
-              defaultValue={rate}
-              onChange={e => setRate(e.target.value)}
-            />
-            <TextField
-              label="Salary annualy"
-              variant="outlined"
-              placeholder="$40000"
-              defaultValue={salary}
-              onChange={e => setSalary(e.target.value)}
-            />
-            <TextField
-              label="Keywords"
-              variant="outlined"
-              placeholder="TypeSript, React, AWS"
-              defaultValue={keywords}
-              onChange={e => setKeywords(e.target.value)}
-            />
-            <p className="jobState">
-              <Switch
-                inputProps={{'aria-label': 'Switch demo'}}
-                onChange={e => {
-                  if (state === 'published') {
-                    setState('draft');
-                  } else {
-                    setState('published');
-                  }
-                }}
-                value={state}
-              />
-              <label>
-                {state}
-              </label>
-            </p>
-            <label>Job description full</label>
+            {activity.type === 'Contractdd +dd +' && (
+              <>
+                <TextField
+                  label="Rate hourly"
+                  variant="outlined"
+                  placeholder="$20"
+                  defaultValue={rate}
+                  onChange={e => setRate(e.target.value)}
+                />
+                <TextField
+                  label="Salary annualy"
+                  variant="outlined"
+                  placeholder="$40000"
+                  defaultValue={salary}
+                  onChange={e => setSalary(e.target.value)}
+                />
+                <TextField
+                  label="Keywords"
+                  variant="outlined"
+                  placeholder="TypeSript, React, AWS"
+                  defaultValue={keywords}
+                  onChange={e => setKeywords(e.target.value)}
+                />
+                <p className="jobState">
+                  <Switch
+                    inputProps={{'aria-label': 'Switch demo'}}
+                    onChange={e => {
+                      if (state === 'published') {
+                        setState('draft');
+                      } else {
+                        setState('published');
+                      }
+                    }}
+                    value={state}
+                  />
+                  <label>
+                    {state}
+                  </label>
+                </p>              
+              </>
+            )}
             <Editor
               apiKey={TINYMCE_KEY}
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -146,7 +153,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
               }}
             />
             <button className='update' type='button' onClick={() => onEdit()}>
-              Update
+              Save
             </button>
           </form>
         </article>

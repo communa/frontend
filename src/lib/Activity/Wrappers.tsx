@@ -63,7 +63,7 @@ export const ActivityWrapper = styled.div`
       display: flex;
 
       span {
-        background: #777;
+        background: #999;
         color: #fff;
         padding: 3px 10px;
         flex: none;

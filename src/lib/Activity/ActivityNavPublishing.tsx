@@ -11,18 +11,21 @@ const ActivityNavPublishing = () => {
       </Link>
       {authStatus === 'authenticated' && (
         <>
-          <Link href="/activity/my?state=published">
+          <Link href="/activity/my?type=Personal&state=Published">
+            Personal
+          </Link>
+          <Link href="/activity/my?type=Contract&state=Published">
             Published
           </Link>
-          <Link href="/activity/my?state=draft">
+          <Link href="/activity/my?type=Contract&state=Draft">
             Drafts
           </Link>
-          <Link href="/activity/my?state=archived">
+          <Link href="/activity/my?type=Contract&state=Archived">
             Archived
           </Link>
         </>
       )}
-    </nav >
+    </nav>
   )
 }
 export default ActivityNavPublishing;

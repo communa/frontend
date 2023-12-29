@@ -19,6 +19,8 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
       activity.salary,
     ].filter(n => n),
   ];
+  
+  const isPersonal = activity.type === 'Personal';  
 
   return (
     <ActivityWrapper className='short'>
@@ -31,7 +33,7 @@ const ActivityShort = ({ activity }: ActivityShortProps) => {
           {activity.title}
         </Link>
 
-        {keywords.length > 0 && (
+        {!isPersonal && keywords && (
           <p className="keywords">
             {keywords.map(k => {
               return (
