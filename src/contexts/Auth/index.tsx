@@ -27,6 +27,14 @@ export const getJwtLocalStorage = (): {access: string; refresh: string} | null =
   return null;
 };
 
+export const getTimeTrackerNonceLocalStorage = (nonce: string): Boolean => {
+  const data = typeof window !== "undefined"
+    ? window.localStorage.getItem(`none-${nonce}`)
+    : false;
+
+  return Boolean(data);
+};
+
 export const isJWTexpired = (): boolean => {
   const jwt = getJwtLocalStorage();
 

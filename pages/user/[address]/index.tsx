@@ -8,6 +8,7 @@ import {useRouter} from 'next/router';
 import {useAccount} from 'wagmi';
 import {JobsPageWrapper} from 'src/lib/Wrappers';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
   const {address} = context.query;
@@ -55,13 +56,6 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
             <div className="body" dangerouslySetInnerHTML={{
               __html: user.bio
             }} />
-
-            <br />
-            {address === user.address && (
-              <button className='update' onClick={() => onEdit()}>
-                Edit
-              </button>
-            )}
           </form>
         </article>
       </main>

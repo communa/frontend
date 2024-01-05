@@ -15,7 +15,7 @@ import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 import HowItWorksImage from 'src/assets/Illustration-6.png';
 
 export const getServerSideProps: GetServerSideProps<{
-  state: string, 
+  state: string,
   type: string
 }> = async (context: GetServerSidePropsContext) => {
   const {state, type} = context.query;
@@ -40,7 +40,7 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
         ...activities,
         ...api.data[0],
       ]);
-    }state
+    } state
   }, [api.data]);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
         <article>
           {type === 'Contract' ? (
             <h1>{state} contracts</h1>
-          ): (
+          ) : (
             <h1>Personal projects</h1>
           )}
           <ActivityNavPublishing />
@@ -91,11 +91,11 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
                 <p>
                   You have no <strong>{state}</strong> contracts
                 </p>
-              ): (
+              ) : (
                 <p>
                   You have no <strong>personal</strong> projects
                 </p>
-              )}              
+              )}
               <picture>
                 <img
                   src={HowItWorksImage.src}

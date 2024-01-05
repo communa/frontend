@@ -58,7 +58,6 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
   }, [data]);
 
   useEffect(() => {
-    console.log(router.query.filter);
     setPage(0);
     setActivities([]);
     doQuery();

@@ -13,16 +13,6 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
-export const AuthTimeTrackerWrapper = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  flex-grow: 1;
-  width: 100%;
-  height: 100vh;
-  overflow-y: scroll;
-  padding: 100px;
-`;
-
 export const JobsPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -91,10 +81,11 @@ export const JobsPageWrapper = styled.div`
           padding: 50px;
           border-radius: 20px;
           margin-top: 20px;
-          background: #999;
+          background: #eee;
           a {
-            color: #fff;
+            color: #000;
             font-size: 26px;
+            font-weight: 600;
           }
         }
       }

@@ -145,7 +145,7 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
             />
 
             <button type="button" className='update' onClick={() => onUpdate()}>
-              Update
+              Save
             </button>
           </form>
         </article>

@@ -32,6 +32,12 @@ export default function HeaderJobs() {
     disconnect();
   };
 
+  let addressShort = '';
+
+  if (address) {
+    addressShort = `${address.slice(0, 6)}..${address.slice(36, 44)}`;
+  }
+
   return (
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
@@ -89,11 +95,11 @@ export default function HeaderJobs() {
           </ul>
           {authStatus === 'authenticated' && (
             <>
-              <h4>My account</h4>
+              <h4>Wallet {addressShort}</h4>
               <ul>
                 <li>
                   <Link href={`/user/${address}`}>
-                    View profile
+                    My profile
                   </Link>
                 </li>
                 <li>

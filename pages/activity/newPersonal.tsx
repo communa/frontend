@@ -33,7 +33,6 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
 
   const [text, setText] = useState(template);
   const [title, setTitle] = useState('');
-  console.log(authStatus);
 
   useEffect(() => {
     if (authStatus === 'unauthenticated') {
@@ -90,15 +89,14 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
             New personal project
           </h2>
           <p>
-            You're creating a new a project for your personal needs. <br/>
-            Personal projects are not visible for freelancers, meaning they can not apply on your job, 
-            additionaly you can not assign a freelancer yourselves.<br/>
-            Or, if you need to publish a contract, click by the link -&nbsp;
+            You're initiating a new project for your personal requirements.<br />
+            Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job. Additionally, you cannot directly assign a freelancer.<br />
+            Or, if you wish to publish a contract, please click on the link for creating a new hourly contract &nbsp;
             <Link href="/activity/newContract">
               New hourly contract
-            </Link> 
+            </Link>
           </p>
-          <br/>
+          <br />
           <form>
             <TextField
               label="Title"
@@ -131,7 +129,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
           </form>
         </article>
       </main>
-    </JobsPageWrapper>
+    </JobsPageWrapper >
   );
 };
 

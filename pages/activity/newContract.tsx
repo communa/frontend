@@ -38,8 +38,6 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
   const [rate, setRate] = useState('');
   const [state, setState] = useState('draft');
 
-  console.log(authStatus);
-
   useEffect(() => {
     if (authStatus === 'unauthenticated') {
       router.push(`/login`);
@@ -97,15 +95,15 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
             New hourly contract
           </h2>
           <p>
-            You're creating a new new job with hourly basis rate.<br/>
-            You may pick up a freelancer or assign the one you need once your contract is publsihed.
-            Once a freelancer is assigned the contract can not no longer editer, but only to be closed.<br/>
-            Or, if you need to publish a contract, click by the link -&nbsp;
+            You are initiating a new job with an hourly rate. <br />
+            After publishing your contract, you have the option to choose a freelancer or assign a specific one. <br />
+            Once a freelancer is assigned, the contract becomes non-editable and can only be closed. <br />
+            Or, if you wish to publish a contract, please click on the link &nbsp;
             <Link href="/activity/newPersonal">
               New personal project
-            </Link>   
-          </p>          
-          <br/>
+            </Link>
+          </p>
+          <br />
           <form>
             <p className="jobState">
               <Switch
@@ -123,7 +121,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
                 {state}
               </label>
             </p>
-            <br/>
+            <br />
             <TextField
               label="Title"
               variant="outlined"
@@ -168,7 +166,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
           </form>
         </article>
       </main>
-    </JobsPageWrapper>
+    </JobsPageWrapper >
   );
 };
 

@@ -26,15 +26,19 @@ const ActivityNew = () => {
         <HeaderJobs />
         <article>
           <h2>
-            Let's start a project
+            Adding new
           </h2>
           <div className="projectType">
             <div>
-              <Link href="/activity/newPersonal">New personal project</Link><br/>
-            </div>          
+              <Link href="/activity/newPersonal">Pesonal project</Link>
+              <br />
+              Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job. Additionally, you cannot directly assign a freelancer.<br />
+            </div>
             <div>
-              <Link href="/activity/newContract">New hourly contact</Link>  
-            </div>                      
+              <Link href="/activity/newContract">Hourly contact</Link>
+              <br />
+              After publishing your contract, you have the option to select a freelancer or assign a specific one.
+            </div>
           </div>
         </article>
       </main>
