@@ -4,11 +4,8 @@ import Head from 'next/head';
 import {request} from 'src/Utils';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {IUser} from 'src/interface/IUser';
-import {useRouter} from 'next/router';
-import {useAccount} from 'wagmi';
 import {JobsPageWrapper} from 'src/lib/Wrappers';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
-import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
   const {address} = context.query;
@@ -25,13 +22,6 @@ export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (cont
 }
 
 const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter();
-  const {address} = useAccount();
-
-  const onEdit = () => {
-    router.push(`/user/${user.address}/edit`);
-  }
-
   return (
     <JobsPageWrapper>
       <Head>

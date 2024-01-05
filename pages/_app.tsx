@@ -141,17 +141,36 @@ function App({Component, pageProps}: AppProps) {
       connect('unauthenticated');
     }
 
-    if (isExpired && jwt) {
-      request({
-        url: `${API_HOST}/api/auth/refresh`,
-        method: 'POST',
-        data: {
-          refreshToken: jwt.refresh,
+    (async () => {
+      if (jwt) {
+        const res = await request({
+          url: `${API_HOST}/api/auth/status`,
+          method: 'GET',
+          headers: {
+            Authorization: jwt.access
+          },
+        });
+
+        console.log('auth.user', res.data)
+
+        if (!res.data) {
+          localStorage.clear();
+          connect('unauthenticated');
         }
-      }).then((res) => {
+      }
+
+      if (isExpired && jwt) {
+        const res = await request({
+          url: `${API_HOST}/api/auth/refresh`,
+          method: 'POST',
+          data: {
+            refreshToken: jwt.refresh,
+          }
+        });
+
         localStorage.setItem('JWT', JSON.stringify(res.data.authRefresh));
-      });
-    }
+      }
+    })();
   }, []);
 
   return (
@@ -162,7 +181,7 @@ function App({Component, pageProps}: AppProps) {
           status={authStatus}
         >
           <RainbowKitProvider
-            // coolMode
+            coolMode
             appInfo={appInfo}
             chains={chains}
             theme={darkTheme({

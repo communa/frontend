@@ -23,7 +23,6 @@ const AuthTimeTracker = () => {
 
   const nonce = router.query.nonce;
   const nonceStore = getTimeTrackerNonceLocalStorage(nonce as string);
-  const isAuthenticated = authStatus === 'authenticated' && address;
 
   useEffect(() => {
     if (api.error) {
@@ -79,6 +78,7 @@ const AuthTimeTracker = () => {
 
   const isErrorAuthentication = error?.name === 'AuthenticationException';
   const isErrorTimeTracker = error?.name === 'TimeTrackerException';
+  const isAuthenticated = authStatus === 'authenticated' && address;
 
   if (isErrorAuthentication) {
     return (
@@ -110,7 +110,7 @@ const AuthTimeTracker = () => {
     );
   }
 
-  if (isAuthenticated && !isConnected) {
+  if (!isConnected) {
     return (
       <JobsPageWrapper>
         <Head>
@@ -124,14 +124,29 @@ const AuthTimeTracker = () => {
           <article>
             <h1>TimeTracker</h1>
             Nonce: {nonce}<br />
-            Status: awaiting connection<br />
-            {isErrorTimeTracker && (
-              <p>Error: {error.message}</p>
-            )}
+            {isErrorTimeTracker
+              ? (
+                <p>Error: {error.message}</p>
+              ) : (
+                <p>
+                  Status: awaiting connection<br />
+                  <button className='apply' onClick={() => onConnect()}>
+                    Connect
+                  </button>
+                </p>
+              )
+            }
             <br />
-            <button className='apply' onClick={() => onConnect()}>
-              Connect
-            </button>
+            <p>
+              <br />
+              <picture>
+                <img
+                  src={HowItWorksImage.src}
+                  alt="Authentication Error"
+                  width={600}
+                />
+              </picture>
+            </p>
           </article>
         </main>
       </JobsPageWrapper>
@@ -153,6 +168,8 @@ const AuthTimeTracker = () => {
             <h1>TimeTracker</h1>
             Nonce: {nonce}<br />
             Status: connected<br />
+
+            Authentication complete. You may now close this window<br />
             <p>
               <br />
               <picture>
