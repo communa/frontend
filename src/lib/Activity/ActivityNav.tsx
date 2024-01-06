@@ -1,22 +1,22 @@
-import { useAccount } from 'wagmi';
+import {useAccount} from 'wagmi';
 import Link from 'next/link';
-import { useContext } from 'react';
+import {useContext} from 'react';
 
-import { APIContext } from 'src/contexts/Api';
-import { getJwtLocalStorage } from 'src/contexts/Auth';
-import { IActivity } from 'src/interface/IActivity';
-import { useNotifications } from 'src/contexts/Notifications';
-import { useRouter } from 'next/router';
-import { Button } from '@mui/material';
+import {APIContext} from 'src/contexts/Api';
+import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {IActivity} from 'src/interface/IActivity';
+import {useNotifications} from 'src/contexts/Notifications';
+import {useRouter} from 'next/router';
+import {Button} from '@mui/material';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
 }
 
-const ActivityNav = ({ activity }: ActivityShortProps) => {
+const ActivityNav = ({activity}: ActivityShortProps) => {
   const api = useContext(APIContext);
-  const { address } = useAccount();
-  const { addNotification } = useNotifications();
+  const {address} = useAccount();
+  const {addNotification} = useNotifications();
   const router = useRouter();
 
   if (!activity.user) {
@@ -41,7 +41,7 @@ const ActivityNav = ({ activity }: ActivityShortProps) => {
       title: 'Your job was removed',
       subtitle: '',
     });
-    router.push(`/activity/my?type=personal&state=published`);
+    router.push(`/activity?type=personal&state=published`);
   }
 
   return (

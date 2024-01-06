@@ -9,9 +9,9 @@ import {IActivitySearch} from 'src/interface/IActivity';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import HeaderJobs from 'src/lib/Layout/HeaderJobs';
 import {useRouter} from 'next/router';
+import ActivityNavJobs from 'src/lib/Activity/ActivityNavJobs';
 
 export const getServerSideProps: GetServerSideProps<{search: IActivitySearch}> = async (context) => {
   const data = {
@@ -114,11 +114,10 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
           <h1>
             {router.query.filter ? router.query.filter : "All Jobs"}
           </h1>
-          <ActivityNavPublishing />
+          <ActivityNavJobs />
           {activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}
-
           {activities.length === 0 && (
             <div className="noResults">
               We have no results matching your criteria :(

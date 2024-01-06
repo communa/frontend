@@ -66,27 +66,16 @@ export default function HeaderJobs() {
           )}
         </IconButton>
         <nav onClick={() => setIsOpen(false)}>
-          <h4>Projects</h4>
-          <ul>
-            <li>
-              <Link href="/">
-                View all
-              </Link>
-            </li>
-            {authStatus === 'authenticated' && address && (
-              <li>
-                <Link href="/activity/new">
-                  Add new
-                </Link>
-              </li>
-            )}
-          </ul>
-          <h4>Filter By</h4>
+          <h4>
+            <Link href='/'>
+              Filter By
+            </Link>
+          </h4>
           <ul>
             {JOB_KEYWORDS.map(k => {
               return (
-                <li key={k}>
-                  <Link href={`/?filter=${k}`}>
+                <li>
+                  <Link href={`/?filter=${k}`} key={k}>
                     {k}
                   </Link>
                 </li>
@@ -95,7 +84,29 @@ export default function HeaderJobs() {
           </ul>
           {authStatus === 'authenticated' && (
             <>
-              <h4>Wallet {addressShort}</h4>
+              <h4>
+                My projects
+              </h4>
+              <ul>
+                <li>
+                  <Link href="/activity?type=Personal&state=Published">
+                    View all
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/activity/new">
+                    Add new
+                  </Link>
+                </li>
+              </ul>
+              <h4>
+                <a
+                  href={`https://polygonscan.com/address/${address}`}
+                  target='_blank'
+                >
+                  Wallet {addressShort}
+                </a>
+              </h4>
               <ul>
                 <li>
                   <Link href={`/user/${address}`}>

@@ -122,6 +122,9 @@ export const HeaderSideWrapper = styled.aside`
         font-size: 16px;
         margin-top: 30px;
         color: #5586d1;
+        a {
+          color: #5586d1;
+        }
       }
       ul {
         list-style-type: none;

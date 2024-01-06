@@ -61,7 +61,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       }
     });
     const id = res.headers.location.split('/')[3];
-    router.push(`/activity/${id}/edit`);
+    router.push(`/activity?type=Personal&state=Published`);
 
     addNotification({
       title: 'You\'ve added a new project',

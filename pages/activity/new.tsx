@@ -25,9 +25,6 @@ const ActivityNew = () => {
       <main id="jobNew">
         <HeaderJobs />
         <article>
-          <h2>
-            Adding new
-          </h2>
           <div className="projectType">
             <div>
               <Link href="/activity/newPersonal">Pesonal project</Link>

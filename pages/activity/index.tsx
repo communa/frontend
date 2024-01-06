@@ -93,7 +93,7 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
                 </p>
               ) : (
                 <p>
-                  You have no <strong>personal</strong> projects
+                  You have no <strong>Personal</strong> projects
                 </p>
               )}
               <picture>
