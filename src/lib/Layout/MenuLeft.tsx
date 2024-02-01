@@ -9,12 +9,12 @@ import {useNotifications} from 'src/contexts/Notifications';
 import {HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
 import {useAccount, useDisconnect} from 'wagmi';
 import {ConnectButton} from 'src/lib/Layout/ConnectButton';
-import {Button, IconButton, Tooltip} from '@mui/material';
+import {IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import {JOB_KEYWORDS} from 'src/config/consts';
 
-export default function HeaderJobs() {
+export default function MenuLeft() {
   const [isOpen, setIsOpen] = useState(false);
   const {authStatus} = useContext(AuthContext);
   const {addNotification} = useNotifications();
@@ -35,7 +35,7 @@ export default function HeaderJobs() {
   let addressShort = '';
 
   if (address) {
-    addressShort = `${address.slice(0, 6)}..${address.slice(36, 44)}`;
+    addressShort = `${address.slice(0, 6)}..${address.slice(38, 44)}`;
   }
 
   return (
@@ -66,36 +66,59 @@ export default function HeaderJobs() {
           )}
         </IconButton>
         <nav onClick={() => setIsOpen(false)}>
-          <h4>
-            <Link href='/'>
-              Filter By
-            </Link>
-          </h4>
-          <ul>
-            {JOB_KEYWORDS.map(k => {
-              return (
+          {authStatus !== 'authenticated' && (
+            <>
+              <h4>
+                <Link href='/'>
+                  Jobs
+                </Link>
+              </h4>
+              <ul>
                 <li>
-                  <Link href={`/?filter=${k}`} key={k}>
-                    {k}
+                  <Link href='/'>
+                    View all
                   </Link>
                 </li>
-              );
-            })}
-          </ul>
+                {JOB_KEYWORDS.map(k => {
+                  return (
+                    <li>
+                      <Link href={`/?filter=${k}`} key={k}>
+                        {k}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )}
           {authStatus === 'authenticated' && (
             <>
               <h4>
-                My projects
+                <Link href='/'>
+                  Jobs
+                </Link>
+              </h4>
+              <ul>
+                <li>
+                  <Link href='/'>
+                    View all
+                  </Link>
+                </li>
+              </ul>
+              <h4>
+                <Link href="/activity?type=Personal&state=Published">
+                  Dashboard
+                </Link>
               </h4>
               <ul>
                 <li>
                   <Link href="/activity?type=Personal&state=Published">
-                    View all
+                    My work
                   </Link>
                 </li>
                 <li>
-                  <Link href="/activity/new">
-                    Add new
+                  <Link href="/time">
+                    Timesheets
                   </Link>
                 </li>
               </ul>
@@ -114,11 +137,6 @@ export default function HeaderJobs() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={`/user/${address}/edit`}>
-                    Edit profile
-                  </Link>
-                </li>
-                <li>
                   <p onClick={() => onLogoutClick()}>
                     Log out
                   </p>
@@ -134,17 +152,8 @@ export default function HeaderJobs() {
           {authStatus !== 'authenticated' && (
             <ConnectButton size={'small'} />
           )}
-          <Tooltip title="Communa TimeTracker is not yet released">
-            <Button
-              className="downloadTimeTracker"
-              variant="contained"
-              disabled
-            >
-              Download TimeTracker
-            </Button>
-          </Tooltip>
           <p className="copyright">
-            Copyright © 2023 Communa.
+            Copyright © 2023 Communa
           </p>
         </footer>
       </header>

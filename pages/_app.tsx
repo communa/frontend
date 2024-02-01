@@ -31,6 +31,7 @@ import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
+import {useRouter} from 'next/router';
 
 const {chains, provider} = configureChains(
   [
@@ -80,6 +81,7 @@ function App({Component, pageProps}: AppProps) {
   const {authStatus, connect} = useContext(AuthContext);
   const {addNotification} = useNotifications();
   const {address} = useAccount();
+  const router = useRouter();
 
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
@@ -156,6 +158,7 @@ function App({Component, pageProps}: AppProps) {
         if (!res.data) {
           localStorage.clear();
           connect('unauthenticated');
+          router.push('/');
         }
       }
 

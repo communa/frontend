@@ -1,15 +1,15 @@
 import moment from 'moment';
 import Link from 'next/link';
-import { IActivity } from 'src/interface/IActivity';
+import {IActivity} from 'src/interface/IActivity';
 
-import { ActivityWrapper } from './Wrappers';
+import {ActivityWrapper} from './Wrappers';
 import ActivityNav from './ActivityNav';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
 }
 
-const ActivityFull = ({ activity }: ActivityShortProps) => {
+const ActivityFull = ({activity}: ActivityShortProps) => {
   const keywords = [
     ...activity.keywords ? activity.keywords : [],
     ...[

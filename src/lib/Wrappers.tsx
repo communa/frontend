@@ -13,7 +13,44 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
-export const JobsPageWrapper = styled.div`
+export const TimePageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  main {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 320px auto;
+    
+    > article {
+      padding: 80px 100px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      nav {
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+        
+        h1 {
+          font-size: 42px;
+          margin-bottom: 0;
+          margin-top: 0;
+        }
+        #activities {
+          width: auto;
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+`
+
+export const PageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
@@ -63,7 +100,14 @@ export const JobsPageWrapper = styled.div`
         display: flex;
         gap: 10px;
         margin-bottom: 30px;
+        align-items: center;
+        h2 {
+          margin-top: 0;
+        }
 
+        &.actions {
+          justify-content: space-between;
+        }
         &.links {
           a {
             color: #777;
@@ -82,10 +126,26 @@ export const JobsPageWrapper = styled.div`
           border-radius: 20px;
           margin-top: 20px;
           background: #eee;
-          a {
+          
+          &.personal {
+            cursor: pointer;
+            &:hover {
+              background: #ddd;
+            }
+          }
+          &.contract {
+            opacity: 0.6;z
+            p {
+              color: #777;
+            }
+          }
+          p {
             color: #000;
             font-size: 26px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;            
           }
         }
       }
@@ -114,11 +174,11 @@ export const JobsPageWrapper = styled.div`
         }
       }
     }
-    &#userProfile {
+    &#timesheets {
       h3 {
         margin-top: 20px;
       }
-    }
+    }    
   }
   
   @media only screen and (max-width: 700px) {
@@ -143,35 +203,36 @@ export const JobsPageWrapper = styled.div`
 export const UserPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 1100px;
-  margin: 0 auto;
-  margin-bottom: 60px;
-  
-  main {
-    text-align: left;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    
-    label {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #666;
-    }
-    .field {
-      font-size: 28px;
-      border-bottom: 1px solid #aaa;
-    }    
-  }
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
 
-  @media only screen and (max-width: 700px) {
-    margin: 0 auto;
-    width: auto;
-    padding: 20px;
+  main {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 320px auto;
     
-    article {
-      font-size: 16px;
+    > article {
+      padding: 80px 100px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      
+      h3 {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        
+        h2 {
+          font-size: 22px;
+        }
+      }      
     }
   }
 `;

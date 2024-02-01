@@ -4,15 +4,15 @@ import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
 import {useRouter} from 'next/router';
 import fs from 'fs';
-import {TextField} from '@mui/material';
+import {Button, TextField} from '@mui/material';
 
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
 import {AuthContext, getJwtLocalStorage} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {join} from 'path';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
@@ -44,7 +44,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
     };
   }, []);
 
-  const onPublish = async () => {
+  const onSaveAndEdit = async () => {
     const text = editorRef.current.getContent();
     const jwt = getJwtLocalStorage();
     const res = await request({
@@ -61,7 +61,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       }
     });
     const id = res.headers.location.split('/')[3];
-    router.push(`/activity?type=Personal&state=Published`);
+    router.push(`/activity/${id}/edit`);
 
     addNotification({
       title: 'You\'ve added a new project',
@@ -74,7 +74,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
   }
 
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
         <title>New personal project - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -83,11 +83,16 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="jobNew">
-        <HeaderJobs />
+        <MenuLeft />
         <article>
-          <h2>
-            New personal project
-          </h2>
+          <nav className="actions">
+            <h2>
+              New personal project
+            </h2>
+            <Button variant='contained' size='large' onClick={() => onSaveAndEdit()}>
+              Save & Continue Editing
+            </Button>
+          </nav>
           <p>
             You're initiating a new project for your personal requirements.<br />
             Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job. Additionally, you cannot directly assign a freelancer.<br />
@@ -123,13 +128,10 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
               }}
             />
-            <button className='update' type='button' onClick={() => onPublish()}>
-              Save
-            </button>
           </form>
         </article>
       </main>
-    </JobsPageWrapper >
+    </PageWrapper >
   );
 };
 

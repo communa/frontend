@@ -3,10 +3,10 @@ import Head from 'next/head';
 
 import {IActivity} from 'src/interface/IActivity';
 import {request} from 'src/Utils';
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import ActivityFull from 'src/lib/Activity/ActivityFull';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = asy
 
 const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
         <title>{activity.title} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -33,12 +33,12 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
-        <HeaderJobs />
+        <MenuLeft />
         <article>
           <ActivityFull activity={activity} />
         </article>
       </main>
-    </JobsPageWrapper>
+    </PageWrapper>
   );
 };
 

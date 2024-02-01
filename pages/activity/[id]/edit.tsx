@@ -1,16 +1,18 @@
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import {IActivity} from 'src/interface/IActivity';
 import {request} from 'src/Utils';
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {getJwtLocalStorage} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
-import {Switch, TextField} from '@mui/material';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
+import {Button, Switch, TextField} from '@mui/material';
+import {useAccount} from 'wagmi';
+import {useRouter} from 'next/router';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
@@ -28,6 +30,8 @@ export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = asy
 
 const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {addNotification} = useNotifications();
+  const router = useRouter();
+
   const editorRef = useRef<any>(null);
   const kw = activity.keywords ? activity.keywords.join(',') : '';
 
@@ -37,6 +41,14 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   const [rate, setRate] = useState(activity.rate);
   const [salary, setSalary] = useState(activity.salary);
   const [keywords, setKeywords] = useState(kw);
+
+  const {address} = useAccount();
+
+  useEffect(() => {
+    if (address !== activity.user.address) {
+      router.push(`/activity}`);
+    }
+  });
 
   const onEdit = async () => {
     const text = editorRef.current.getContent();
@@ -67,23 +79,25 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   };
 
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
-        <title>Edit - {APP_NAME}</title>
+        <title>{activity.id} - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="jobEdit">
-        <HeaderJobs />
+        <MenuLeft />
         <article>
-          <h2>
-            {activity.type === 'Contract'
-            ? 'Contract editing'
-            : 'Project editing'
-            }            
-          </h2>
+          <nav className="actions">
+            <h2>
+              Editing
+            </h2>
+            <Button variant='contained' onClick={() => onEdit()}>
+              Save Updates
+            </Button>
+          </nav>
           <form>
             <TextField
               label="Title"
@@ -130,7 +144,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
                   <label>
                     {state}
                   </label>
-                </p>              
+                </p>
               </>
             )}
             <Editor
@@ -152,13 +166,10 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
               }}
             />
-            <button className='update' type='button' onClick={() => onEdit()}>
-              Save
-            </button>
           </form>
         </article>
       </main>
-    </JobsPageWrapper >
+    </PageWrapper>
   );
 };
 

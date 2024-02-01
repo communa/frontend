@@ -4,12 +4,12 @@ import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
 
 import {request} from 'src/Utils';
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {IActivitySearch} from 'src/interface/IActivity';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 import {useRouter} from 'next/router';
 import ActivityNavJobs from 'src/lib/Activity/ActivityNavJobs';
 
@@ -100,7 +100,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
   }
 
   return (
-    <JobsPageWrapper onScroll={(e) => onScroll(e)}>
+    <PageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
         <title>Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -109,7 +109,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
-        <HeaderJobs />
+        <MenuLeft />
         <article>
           <h1>
             {router.query.filter ? router.query.filter : "All Jobs"}
@@ -125,7 +125,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
           )}
         </article>
       </main>
-    </JobsPageWrapper>
+    </PageWrapper>
   );
 };
 

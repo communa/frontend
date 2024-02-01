@@ -3,16 +3,20 @@ import {GetServerSideProps} from 'next'
 import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
 
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import AddIcon from '@mui/icons-material/Add';
+
+import {PageWrapper} from 'src/lib/Wrappers';
 import {IActivity} from 'src/interface/IActivity';
 import {APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import {getJwtLocalStorage} from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 
 import HowItWorksImage from 'src/assets/Illustration-6.png';
+import Link from 'next/link';
+import {Button} from '@mui/material';
 
 export const getServerSideProps: GetServerSideProps<{
   state: string,
@@ -30,7 +34,7 @@ export const getServerSideProps: GetServerSideProps<{
   }
 }
 
-const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const api = useContext(APIContext);
   const [activities, setActivities] = useState<IActivity[]>([]);
 
@@ -40,7 +44,7 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
         ...activities,
         ...api.data[0],
       ]);
-    } state
+    }
   }, [api.data]);
 
   useEffect(() => {
@@ -65,22 +69,25 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
   }, [state, type]);
 
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
-        <title>Web3 Jobs - {APP_NAME}</title>
+        <title>Full-time Web3 remote jobs  - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
-        <HeaderJobs />
+        <MenuLeft />
         <article>
-          {type === 'Contract' ? (
-            <h1>{state} contracts</h1>
-          ) : (
-            <h1>Personal projects</h1>
-          )}
+          <nav className="actions">
+            <h1>My work</h1>
+            <Link href={`/activity/new`}>
+              <Button variant='contained' startIcon={<AddIcon />}>
+                Add New
+              </Button>
+            </Link>
+          </nav>
           <ActivityNavPublishing />
           {activities.length > 0 && activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
@@ -107,8 +114,8 @@ const My = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps
           )}
         </article>
       </main>
-    </JobsPageWrapper >
+    </PageWrapper >
   );
 };
 
-export default My;
+export default Activity;

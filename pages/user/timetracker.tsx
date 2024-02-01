@@ -3,13 +3,13 @@ import {useAccount} from 'wagmi';
 import {useContext, useEffect, useState} from 'react';
 
 import {API_HOST, APP_NAME} from 'src/config/consts';
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {AuthContext, getJwtLocalStorage, getTimeTrackerNonceLocalStorage} from 'src/contexts/Auth';
 import {useRouter} from 'next/router';
 import {APIContext} from 'src/contexts/Api';
 import {request} from 'src/Utils';
 import {useNotifications} from 'src/contexts/Notifications';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 import HowItWorksImage from 'src/assets/Illustration-6.png';
 
 const AuthTimeTracker = () => {
@@ -82,7 +82,7 @@ const AuthTimeTracker = () => {
 
   if (isErrorAuthentication) {
     return (
-      <JobsPageWrapper>
+      <PageWrapper>
         <Head>
           <title>TimeTracker - {APP_NAME}</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -90,7 +90,7 @@ const AuthTimeTracker = () => {
           <link rel="icon" href="/logo-testnet.png" />
         </Head>
         <main id="userProfile">
-          <HeaderJobs />
+          <MenuLeft />
           <article>
             <h1>TimeTracker</h1>
             <p>{error.message}</p>
@@ -106,13 +106,13 @@ const AuthTimeTracker = () => {
             </p>
           </article>
         </main>
-      </JobsPageWrapper>
+      </PageWrapper>
     );
   }
 
   if (!isConnected) {
     return (
-      <JobsPageWrapper>
+      <PageWrapper>
         <Head>
           <title>TimeTracker - {APP_NAME}</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -120,7 +120,7 @@ const AuthTimeTracker = () => {
           <link rel=" icon" href="/logo-testnet.png" />
         </Head>
         <main id="userProfile">
-          <HeaderJobs />
+          <MenuLeft />
           <article>
             <h1>TimeTracker</h1>
             Nonce: {nonce}<br />
@@ -149,13 +149,13 @@ const AuthTimeTracker = () => {
             </p>
           </article>
         </main>
-      </JobsPageWrapper>
+      </PageWrapper>
     );
   }
 
   if (isConnected) {
     return (
-      <JobsPageWrapper>
+      <PageWrapper>
         <Head>
           <title>TimeTracker - {APP_NAME}</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -163,7 +163,7 @@ const AuthTimeTracker = () => {
           <link rel="icon" href="/logo-testnet.png" />
         </Head>
         <main id="userProfile">
-          <HeaderJobs />
+          <MenuLeft />
           <article>
             <h1>TimeTracker</h1>
             Nonce: {nonce}<br />
@@ -182,7 +182,7 @@ const AuthTimeTracker = () => {
             </p>
           </article>
         </main>
-      </JobsPageWrapper>
+      </PageWrapper>
     );
   }
 };

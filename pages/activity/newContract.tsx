@@ -7,13 +7,13 @@ import fs from 'fs';
 import {TextField} from '@mui/material';
 import Switch from '@mui/material/Switch';
 
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
 import {AuthContext, getJwtLocalStorage} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {join} from 'path';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
 import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
@@ -48,7 +48,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
     };
   }, []);
 
-  const onPublish = async () => {
+  const onSaveAndEdit = async () => {
     const text = editorRef.current.getContent();
     const jwt = getJwtLocalStorage();
     const res = await request({
@@ -80,7 +80,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
   }
 
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
         <title>New hourly contract - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -89,7 +89,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="jobNew">
-        <HeaderJobs />
+        <MenuLeft />
         <article>
           <h2>
             New hourly contract
@@ -160,13 +160,13 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
               }}
             />
 
-            <button className='update' type='button' onClick={() => onPublish()}>
+            <button className='update' type='button' onClick={() => onSaveAndEdit()}>
               Save
             </button>
           </form>
         </article>
       </main>
-    </JobsPageWrapper >
+    </PageWrapper >
   );
 };
 

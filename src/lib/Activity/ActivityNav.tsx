@@ -8,6 +8,7 @@ import {IActivity} from 'src/interface/IActivity';
 import {useNotifications} from 'src/contexts/Notifications';
 import {useRouter} from 'next/router';
 import {Button} from '@mui/material';
+import TimerIcon from '@mui/icons-material/Timer';
 
 interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -46,11 +47,18 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
 
   return (
     <nav>
-      <Button href={`/activity/${activity.id}/edit`} variant='outlined'>
-        Edit
-      </Button>
+      <Link href={`/time?acitivityId=${activity.id}`}>
+        <Button variant='contained' startIcon={<TimerIcon />}>
+          Timesheets
+        </Button>
+      </Link >
+      <Link href={`/activity/${activity.id}/edit`}>
+        <Button variant='outlined'>
+          Edit
+        </Button>
+      </Link>
       <Button onClick={() => onDelete()} variant='outlined'>Delete</Button>
-    </nav>
+    </nav >
   )
 }
 export default ActivityNav;

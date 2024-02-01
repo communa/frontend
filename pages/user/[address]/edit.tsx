@@ -2,7 +2,7 @@ import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePr
 import Head from 'next/head';
 
 import {request} from 'src/Utils';
-import {JobsPageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useEffect, useRef, useState} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
@@ -11,8 +11,9 @@ import {useNotifications} from 'src/contexts/Notifications';
 import {useAccount} from 'wagmi';
 import {IUser} from 'src/interface/IUser';
 import {useRouter} from 'next/router';
-import HeaderJobs from 'src/lib/Layout/HeaderJobs';
-import {TextField} from '@mui/material';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
+import {Button, TextField} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
 export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
   const {address} = context.query;
@@ -47,7 +48,7 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
     }
   })
 
-  const onUpdate = async () => {
+  const onEdit = async () => {
     const bio = editorRef.current.getContent();
     const jwt = getJwtLocalStorage();
 
@@ -73,10 +74,12 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
       title: 'Profile updated',
       subtitle: '',
     });
+
+    router.push(`/user/${user.address}`);
   };
 
   return (
-    <JobsPageWrapper>
+    <PageWrapper>
       <Head>
         <title>{address} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -84,9 +87,14 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main id="userEdit">
-        <HeaderJobs />
+        <MenuLeft />
         <article>
-          <h2>Edit profile</h2>
+          <nav className="actions">
+            <h2>Edit profile</h2>
+            <Button variant='contained' onClick={() => onEdit()} startIcon={<SaveIcon />}>
+              Save and Continue
+            </Button>
+          </nav>
           <form>
             <TextField
               label="Name"
@@ -143,14 +151,10 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
               }}
             />
-
-            <button type="button" className='update' onClick={() => onUpdate()}>
-              Save
-            </button>
           </form>
         </article>
       </main>
-    </JobsPageWrapper>
+    </PageWrapper>
   );
 };
 
