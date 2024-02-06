@@ -34,7 +34,7 @@ export const ConnectButtonWrapper = styled.div`
       font-weight: 500;
       padding: 10px 24px;
       transform: none;
-      width: 200px;
+      width: 190px;
 
       span {
         img {
@@ -165,11 +165,35 @@ export const HeaderSideWrapper = styled.aside`
       width: 280px;
 
       .downloadTimeTracker {
-        width: 200px;
-        border-radius: 20px;
-        text-transform: capitalize;
-        background: rgb(239, 239, 239);
         margin-top: 10px;
+        font-size: 12px;
+        border-radius: 20px;
+        padding: 5px 15px;
+        font-weight: 600;
+
+        cursor: pointer;
+        text-transform: inherit;
+        transition: transform 0.125s ease;        
+        font-weight: 500;
+        border-width: 0;
+        background-color: rgba(var(--color-primary-main),0.1);
+        color: rgba(var(--color-primary-main),1);
+        
+        height: 37px;
+        font-size: 14px !important;
+        padding: 10px 24px;
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none;
+        width: 190px;
+        justify-content: left;
+        
+        &:hover{
+          background-color: rgba(var(--color-primary-main),0.2);
+        }
+        svg {
+          margin-right: 5px;
+        }
       }
       .copyright {
         font-style: normal;
@@ -178,7 +202,7 @@ export const HeaderSideWrapper = styled.aside`
         line-height: 1.5;
         text-align: left;
         letter-spacing: -0.03em;
-        margin-top: 30px;
+        margin-top: 20px;
         color: rgba(var(--color-primary-main), 0.5);
       }
     }

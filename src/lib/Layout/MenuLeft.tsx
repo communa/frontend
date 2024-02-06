@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {useState} from 'react';
-
+import NextLink from 'next/link';
 import Link from 'next/link';
+
 import {useRouter} from 'next/router';
 import {useContext} from 'react';
 import {AuthContext} from 'src/contexts/Auth';
@@ -9,14 +10,15 @@ import {useNotifications} from 'src/contexts/Notifications';
 import {HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
 import {useAccount, useDisconnect} from 'wagmi';
 import {ConnectButton} from 'src/lib/Layout/ConnectButton';
-import {IconButton} from '@mui/material';
+import {Button, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import {JOB_KEYWORDS} from 'src/config/consts';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function MenuLeft() {
   const [isOpen, setIsOpen] = useState(false);
-  const {authStatus} = useContext(AuthContext);
+  const {authStatus, connect} = useContext(AuthContext);
   const {addNotification} = useNotifications();
   const {disconnect} = useDisconnect()
   const {address} = useAccount();
@@ -29,6 +31,7 @@ export default function MenuLeft() {
       title: 'See You',
       subtitle: '',
     });
+    connect('unauthenticated');
     disconnect();
   };
 
@@ -42,7 +45,7 @@ export default function MenuLeft() {
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
-          <Link href="/">
+          <Link href="https://communa.network">
             <picture>
               <img
                 width={100}
@@ -152,11 +155,16 @@ export default function MenuLeft() {
           {authStatus !== 'authenticated' && (
             <ConnectButton size={'small'} />
           )}
+          <NextLink href="https://communa.network/download" passHref>
+            <Button variant="outlined" className="downloadTimeTracker">
+              <DownloadIcon /> Download Timer
+            </Button>
+          </NextLink>
           <p className="copyright">
             Copyright © 2023 Communa
           </p>
         </footer>
       </header>
-    </HeaderSideWrapper >
+    </HeaderSideWrapper>
   )
 }

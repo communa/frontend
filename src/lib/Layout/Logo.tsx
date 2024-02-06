@@ -6,7 +6,7 @@ import {LogoWrapper} from 'src/lib/Layout/Wrappers';
 export default function Header({ }) {
   return (
     <LogoWrapper className="logo">
-      <Link href="/">
+      <Link href="https://communa.network">
         <picture>
           <img
             src="/logo-testnet.png"
