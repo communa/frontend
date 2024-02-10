@@ -155,6 +155,8 @@ function App({Component, pageProps}: AppProps) {
 
         console.log('auth.user', res.data)
 
+        localStorage.setItem('user', JSON.stringify(res.data));
+
         if (!res.data) {
           localStorage.clear();
           connect('unauthenticated');

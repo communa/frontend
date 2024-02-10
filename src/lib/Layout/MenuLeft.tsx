@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import NextLink from 'next/link';
 import Link from 'next/link';
 
 import {useRouter} from 'next/router';
 import {useContext} from 'react';
-import {AuthContext} from 'src/contexts/Auth';
+import {AuthContext, getAddressWagmiOrJWT} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
 import {useAccount, useDisconnect} from 'wagmi';
@@ -18,11 +18,19 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 export default function MenuLeft() {
   const [isOpen, setIsOpen] = useState(false);
+  const [userAddress, setUserAddress] = useState('');
+  const {address} = useAccount();
   const {authStatus, connect} = useContext(AuthContext);
   const {addNotification} = useNotifications();
   const {disconnect} = useDisconnect()
-  const {address} = useAccount();
   const router = useRouter();
+
+
+  useEffect(() => {
+    const addr = getAddressWagmiOrJWT(address);
+
+    setUserAddress(addr);
+  }, []);
 
   const onLogoutClick = () => {
     localStorage.clear();
@@ -37,8 +45,8 @@ export default function MenuLeft() {
 
   let addressShort = '';
 
-  if (address) {
-    addressShort = `${address.slice(0, 6)}..${address.slice(38, 44)}`;
+  if (userAddress) {
+    addressShort = `${userAddress.slice(0, 6)}..${userAddress.slice(38, 44)}`;
   }
 
   return (
@@ -127,7 +135,7 @@ export default function MenuLeft() {
               </ul>
               <h4>
                 <a
-                  href={`https://polygonscan.com/address/${address}`}
+                  href={`https://polygonscan.com/address/${userAddress}`}
                   target='_blank'
                 >
                   Wallet {addressShort}
@@ -135,13 +143,13 @@ export default function MenuLeft() {
               </h4>
               <ul>
                 <li>
-                  <Link href={`/user/${address}`}>
+                  <Link href={`/user/${userAddress}`}>
                     My profile
                   </Link>
                 </li>
                 <li>
                   <p onClick={() => onLogoutClick()}>
-                    Log out
+                    Disconnect
                   </p>
                 </li>
               </ul>

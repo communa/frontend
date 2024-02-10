@@ -27,6 +27,21 @@ export const getJwtLocalStorage = (): {access: string; refresh: string} | null =
   return null;
 };
 
+export const getAddressWagmiOrJWT = (address: string | undefined): string => {
+  if (address !== undefined) {
+    return address;
+  }
+
+  const user = JSON.parse(localStorage.getItem('user') as string);
+
+  if (user && user.address) {
+    return user.address;
+  }
+
+  return '';
+};
+
+
 export const getTimeTrackerNonceLocalStorage = (nonce: string): Boolean => {
   const data = typeof window !== "undefined"
     ? window.localStorage.getItem(`none-${nonce}`)

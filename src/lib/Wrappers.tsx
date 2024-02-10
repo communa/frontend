@@ -20,6 +20,7 @@ export const TimePageWrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  
   main {
     display: grid;
     min-height: 100vh;
@@ -48,6 +49,29 @@ export const TimePageWrapper = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: calc(100vw - 40px);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-top: 70px;
+      /* overflow-x: hidden; */
+
+      > article {
+        margin: inherit;
+        width: 100%;
+        padding: 20px 0;
+        nav {
+          h1 {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }  
 `
 
 export const PageWrapper = styled.div`
