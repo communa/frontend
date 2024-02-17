@@ -14,8 +14,8 @@ export const ConnectButtonWrapper = styled.div`
     display: flex;
     text-transform: capitalize;
     align-items: center;
-    /* transition: 0.125s ease; */
     transition: 0.125s ease;
+
     &:disabled {
       color: #aaa;
     }
@@ -24,8 +24,12 @@ export const ConnectButtonWrapper = styled.div`
     }              
     &:hover {
       transform: scale(105%);
-      /* transition: 0.125s ease; */
     } 
+  }
+  &.largeWhite {
+    button {
+      background: #fff;
+    }
   }
   &.small {
     button {
