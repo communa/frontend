@@ -225,11 +225,11 @@ export const TimePageWrapper = styled.div`
 
       nav {
         display: flex;
-        /* justify-content: space-between; */
+        justify-content: space-between;
         align-items: center;
         
         h1 {
-          font-size: 42px;
+          font-size: 36px;
           margin-bottom: 0;
           margin-top: 0;
         }

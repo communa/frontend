@@ -9,7 +9,7 @@ export default function Header({ }) {
       <Link href="https://communa.network">
         <picture>
           <img
-            src="/logo-testnet.png"
+            src="/logo.png"
             width={100}
             height={100}
             alt="Landscape picture"

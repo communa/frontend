@@ -10,7 +10,7 @@ export interface IActivity {
   type: string;
   text: string;
   jobUrl: string;
-  rate: string;
+  rateHour: number;
   salary: string;
   keywords: string[];
   position: string;

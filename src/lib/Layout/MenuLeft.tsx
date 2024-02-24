@@ -58,8 +58,8 @@ export default function MenuLeft() {
               <img
                 width={100}
                 height={100}
-                src="/logo-testnet.png"
-                alt="Landscape picture"
+                src="/logo.png"
+                alt="Communa Network"
               />
             </picture>
           </Link>
@@ -155,6 +155,19 @@ export default function MenuLeft() {
               </ul>
             </>
           )}
+          <h4>Social</h4>
+          <ul>
+            <li>
+              <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
+                Telegram
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+                Twitter / X
+              </a>
+            </li>
+          </ul>
           <br />
           <br />
           <br />
@@ -169,7 +182,7 @@ export default function MenuLeft() {
             </Button>
           </NextLink>
           <p className="copyright">
-            Copyright © 2023 Communa
+            Copyright © 2024 Communa
           </p>
         </footer>
       </header>

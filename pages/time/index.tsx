@@ -11,7 +11,8 @@ import {request} from 'src/Utils';
 import {IActivity} from 'src/interface/IActivity';
 import {useRouter} from 'next/router';
 import {TimePageWrapper} from 'src/lib/Wrappers';
-import {FormControl, NativeSelect} from '@mui/material';
+import {Chip, FormControl, NativeSelect} from '@mui/material';
+import Paper from '@mui/material/Paper';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,12 +21,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Link from 'next/link';
+import {ITimeTotals} from 'src/interface/ITimeTotals';
 
 const Time = () => {
   const router = useRouter();
   const {data, state, query, url} = useContext(APIContext);
 
   const [time, setTime] = useState<ITime[]>([]);
+  const [totals, setTotals] = useState([]);
   const [activities, setActivities] = useState<IActivity[]>([]);
   const [activitySelected, setActivitySelected] = useState<IActivity | null>();
   const [page, setPage] = useState(0);
@@ -48,6 +51,7 @@ const Time = () => {
     setPage(0);
     doQuery();
     loadActivities();
+    loadTotals();
   }, [activitySelected]);
 
   useEffect(() => {
@@ -60,8 +64,6 @@ const Time = () => {
   }, [data]);
 
   const doQuery = () => {
-    const jwt = getJwtLocalStorage();
-
     if (router.query.filter) {
       data.filter = {
         keywords: [router.query.filter]
@@ -78,7 +80,7 @@ const Time = () => {
       url: `/api/time/search`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
+        Authorization: getJwtLocalStorage()?.access
       },
       data: {
         filter,
@@ -91,13 +93,11 @@ const Time = () => {
   }
 
   const loadActivities = async () => {
-    const jwt = getJwtLocalStorage();
-
     const response = await request({
       url: `${API_HOST}/api/activity/search/business`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
+        Authorization: getJwtLocalStorage()?.access
       },
       data: {
         filter: {
@@ -111,6 +111,19 @@ const Time = () => {
 
     setActivities(response.data[0]);
   }
+
+  const loadTotals = async () => {
+    const response = await request({
+      url: `${API_HOST}/api/time/totals`,
+      method: 'GET',
+      headers: {
+        Authorization: getJwtLocalStorage()?.access
+      }
+    });
+
+    setTotals(response.data);
+  }
+
 
   const onActivityChange = (event: any) => {
     const activity = activities.find(a => a.id === event.target.value);
@@ -144,7 +157,7 @@ const Time = () => {
                 onChange={onActivityChange}
               >
                 <option value="0">
-                  View all
+                  View All
                 </option>
                 {activities.map(a => {
                   return (
@@ -155,6 +168,55 @@ const Time = () => {
             </FormControl>
           </nav>
 
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Project</TableCell>
+                  <TableCell align="left"></TableCell>
+                  <TableCell align="left">Minutes</TableCell>
+                  <TableCell align="left">Minutes active</TableCell>
+                  <TableCell align="left">Keys keyboard</TableCell>
+                  <TableCell align="left">Keys mouse</TableCell>
+                  <TableCell align="left">Distance mouse</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {totals.map((t: ITimeTotals) => {
+                  const activity = activities.find(a => a.id === t.activityId);
+                  if (activity) {
+                    return (
+                      <TableRow
+                        key={t.activityId}
+                      >
+                        <TableCell align="left">
+                          <Link href={`/activity/${activity?.id}`}>
+                            {activity?.title}
+                          </Link>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Chip
+                            label={`${Number(activity?.rateHour) * t.minutes / 10} USD`}
+                            color="primary"
+                            variant="filled"
+                          />
+                        </TableCell>
+                        <TableCell align="left">{t.minutes}</TableCell>
+                        <TableCell align="left">{t.minutesActive}</TableCell>
+                        <TableCell align="left">{t.keyboardKeys}</TableCell>
+                        <TableCell align="left">{t.mouseKeys}</TableCell>
+                        <TableCell align="left">{t.mouseDistance}</TableCell>
+                      </TableRow>
+                    )
+                  }
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <br />
+
+          <h1>Your data</h1>
           <TableContainer>
             <Table>
               <TableHead>
@@ -172,7 +234,7 @@ const Time = () => {
                   <TableRow
                     key={t.id}
                   >
-                    <TableCell align="left">{moment(t.fromAt).format('llll')}</TableCell>
+                    <TableCell align="left">{moment(t.fromAt).format('DD-MM-YY hh:mm')}</TableCell>
                     <TableCell align="left">
                       <Link href={`/activity/${t.activity.id}`}>
                         {t.activity.title}
@@ -189,7 +251,7 @@ const Time = () => {
           </TableContainer>
         </article>
       </main>
-    </TimePageWrapper>
+    </TimePageWrapper >
   );
 };
 

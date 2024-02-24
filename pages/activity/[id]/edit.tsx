@@ -38,7 +38,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   const [text, setText] = useState(activity.text);
   const [state, setState] = useState(activity.state);
   const [title, setTitle] = useState(activity.title);
-  const [rate, setRate] = useState(activity.rate);
+  const [rateHour, setRateHour] = useState(activity.rateHour);
   const [salary, setSalary] = useState(activity.salary);
   const [keywords, setKeywords] = useState(kw);
 
@@ -65,7 +65,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         title,
         text,
         salary,
-        rate,
+        rateHour,
         keywords: keywords.split(','),
       }
     });
@@ -106,15 +106,16 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
               defaultValue={title}
               onChange={e => setTitle(e.target.value)}
             />
-            {activity.type === 'Contractdd +dd +' && (
+            <TextField
+              label="Rate hourly in USD"
+              variant="outlined"
+              type='number'
+              placeholder="$20"
+              defaultValue={rateHour}
+              onChange={e => setRateHour(Number(e.target.value))}
+            />
+            {activity.type === 'Contract' && (
               <>
-                <TextField
-                  label="Rate hourly"
-                  variant="outlined"
-                  placeholder="$20"
-                  defaultValue={rate}
-                  onChange={e => setRate(e.target.value)}
-                />
                 <TextField
                   label="Salary annualy"
                   variant="outlined"
