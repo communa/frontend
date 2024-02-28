@@ -53,29 +53,32 @@ export default function MenuLeft() {
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
-          <Link href="https://communa.network">
+          <Link href="/">
             <picture>
               <img
                 width={100}
                 height={100}
                 src="/logo.png"
-                alt="Communa Network"
+                alt="Landscape picture"
               />
             </picture>
           </Link>
+          <span>
+            <ConnectButton size={'small'} />
+          </span>
+          <IconButton
+            aria-label="delete"
+            size="small"
+            className="menu"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <CloseIcon fontSize="inherit" />
+            ) : (
+              <MenuIcon fontSize="inherit" />
+            )}
+          </IconButton>          
         </div>
-        <IconButton
-          aria-label="delete"
-          size="small"
-          className="menu"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? (
-            <CloseIcon fontSize="inherit" />
-          ) : (
-            <MenuIcon fontSize="inherit" />
-          )}
-        </IconButton>
         <nav onClick={() => setIsOpen(false)}>
           {authStatus !== 'authenticated' && (
             <>
