@@ -11,17 +11,24 @@ export const AuthContext = React.createContext<AuthContextInterface>(
 
 export const useAuth = () => React.useContext(AuthContext);
 
-export const getJwtLocalStorage = (): {access: string; refresh: string} | null => {
-  const tokens = localStorage.getItem('JWT') as string;
+export const getJwtLocalStorage = (): { access: string; refresh: string } | null => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const access = searchParams.get('Authentication');
+  const jwt = JSON.parse(localStorage.getItem('JWT') as string);
 
-  if (!tokens || tokens === "undefined") {
-    return null;
+  if (access) {
+    const tokens = {
+      access,
+      refresh: '', // Refresh token missing
+    };
+
+    localStorage.setItem('JWT', JSON.stringify(tokens));
+
+    return tokens;
   }
 
-  const JWT = JSON.parse(tokens);
-
-  if (JWT) {
-    return JWT;
+  if (jwt?.access) {
+    return jwt;
   }
 
   return null;

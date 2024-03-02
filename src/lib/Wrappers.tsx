@@ -395,6 +395,8 @@ export const PageWrapper = styled.div`
       }
     }    
   }
+
+  
   
   @media only screen and (max-width: 700px) {
     main {
@@ -404,8 +406,19 @@ export const PageWrapper = styled.div`
       flex-direction: column;
       padding: 20px;
       padding-top: 70px;
-      /* overflow-x: hidden; */
+      margin-bottom: 100px;
 
+      nav.actions {
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: 24px;
+          margin-bottom: 2px;
+        }
+      }
+    
       > article {
         margin: inherit;
         width: 100%;
@@ -450,4 +463,33 @@ export const UserPageWrapper = styled.div`
       }      
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: calc(100vw - 40px);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-top: 70px;
+
+      > article {
+        margin: inherit;
+        width: 100%;
+        padding: 20px 0;
+        margin-top: 10px;
+        
+        nav {
+          flex-direction: column;
+          align-items: start;
+          margin-bottom: 0;
+
+          h2 {
+            font-size: 14px;
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }    
 `;

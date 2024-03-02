@@ -29,8 +29,10 @@ export default function MenuLeft() {
   useEffect(() => {
     const addr = getAddressWagmiOrJWT(address);
 
+    console.log('user.address', addr, address);
+
     setUserAddress(addr);
-  }, []);
+  }, [authStatus]);
 
   const onLogoutClick = () => {
     localStorage.clear();
@@ -53,7 +55,7 @@ export default function MenuLeft() {
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
-          <Link href="/">
+          <a href="https://communa.network">
             <picture>
               <img
                 width={100}
@@ -62,7 +64,7 @@ export default function MenuLeft() {
                 alt="Landscape picture"
               />
             </picture>
-          </Link>
+          </a>
           <span>
             <ConnectButton size={'small'} />
           </span>
@@ -185,8 +187,10 @@ export default function MenuLeft() {
             </Button>
           </NextLink>
           <p className="copyright">
-            Copyright © 2024 Communa
+            Copyright © 2024 Communa <br />
+            {authStatus}
           </p>
+          
         </footer>
       </header>
     </HeaderSideWrapper>

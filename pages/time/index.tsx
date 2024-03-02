@@ -12,7 +12,6 @@ import {IActivity} from 'src/interface/IActivity';
 import {useRouter} from 'next/router';
 import {TimePageWrapper} from 'src/lib/Wrappers';
 import {Chip, FormControl, NativeSelect} from '@mui/material';
-import Paper from '@mui/material/Paper';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

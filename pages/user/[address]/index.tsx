@@ -63,7 +63,7 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
           </form>
         </article>
       </main >
-    </UserPageWrapper >
+    </UserPageWrapper>
   );
 };
 

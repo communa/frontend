@@ -133,15 +133,11 @@ function App({Component, pageProps}: AppProps) {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const jwt = getJwtLocalStorage();
     const isExpired = isJWTexpired();
-
-    if (jwt) {
-      connect('authenticated');
-    } else {
-      connect('unauthenticated');
-    }
+    
+    window.scrollTo(0, 0);
+    connect('unauthenticated');
 
     (async () => {
       if (jwt) {
@@ -155,12 +151,13 @@ function App({Component, pageProps}: AppProps) {
 
         console.log('auth.user', res.data)
 
-        localStorage.setItem('user', JSON.stringify(res.data));
-
         if (!res.data) {
           localStorage.clear();
           connect('unauthenticated');
           router.push('/');
+        } else {
+          localStorage.setItem('user', JSON.stringify(res.data)); 
+          connect('authenticated');         
         }
       }
 
@@ -173,7 +170,7 @@ function App({Component, pageProps}: AppProps) {
           }
         });
 
-        localStorage.setItem('JWT', JSON.stringify(res.data.authRefresh));
+        localStorage.setItem('JWT', JSON.stringify(res.data));
       }
     })();
   }, []);
