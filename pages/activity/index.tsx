@@ -81,7 +81,7 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
         <MenuLeft />
         <article>
           <nav className="actions">
-            <h1>My work</h1>
+            <h1>My projects</h1>
             <Link href={`/activity/new`}>
               <Button variant='contained' startIcon={<AddIcon />}>
                 Add New

@@ -128,13 +128,13 @@ export default function MenuLeft() {
               </h4>
               <ul>
                 <li>
-                  <Link href="/activity?type=Personal&state=Published">
-                    My work
-                  </Link>
-                </li>
-                <li>
                   <Link href="/time">
                     Timesheets
+                  </Link>
+                </li>                
+                <li>
+                  <Link href="/activity?type=Personal&state=Published">
+                    My projects
                   </Link>
                 </li>
               </ul>

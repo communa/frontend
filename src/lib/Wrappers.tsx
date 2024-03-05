@@ -204,6 +204,65 @@ export const AuthTimeTrackerWrapper = styled.div`
   }    
 `
 
+
+export const TimeReportWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+
+  #logo {
+    margin-bottom: 20px;
+    picture {
+      position: relative;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  main {
+    padding: 40px;
+
+    .activeMinutes {
+      &.__1 {
+        background: rgba(255, 98, 98, 0.5);
+      }
+      &.__2 {
+        background: rgba(255, 155, 155, 0.5);
+      }
+      &.__3 {
+        background: rgb(255, 196, 196, 0.5);
+      }
+      &.__4 {
+        background: rgb(245, 255, 193, 0.5);
+      }
+      &.__5 {
+        background: rgb(240, 255, 134, 0.5);
+      }      
+      &.__6 {
+        background: rgb(239, 255, 65, 0.5);
+      }
+      &.__7 {
+        background: rgb(246, 255, 13, 0.5);
+      }
+      &.__8 {
+        background: rgb(216, 255, 200, 0.5);
+      }
+      &.__9 {
+        background: rgb(179, 255, 151, 0.5);
+      }
+      &.__9 {
+        background: rgb(130, 251, 91, 0.5);
+      }    
+      &.__10 {
+        background: rgb(89, 241, 42, 0.5);
+      }        
+    }    
+  }
+`
+
 export const TimePageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -239,6 +298,42 @@ export const TimePageWrapper = styled.div`
         }
       }
     }
+  }
+
+  .activeMinutes {
+    &.__1 {
+      background: rgba(255, 98, 98, 0.5);
+    }
+    &.__2 {
+      background: rgba(255, 155, 155, 0.5);
+    }
+    &.__3 {
+      background: rgb(255, 196, 196, 0.5);
+    }
+    &.__4 {
+      background: rgb(245, 255, 193, 0.5);
+    }
+    &.__5 {
+      background: rgb(240, 255, 134, 0.5);
+    }      
+    &.__6 {
+      background: rgb(239, 255, 65, 0.5);
+    }
+    &.__7 {
+      background: rgb(246, 255, 13, 0.5);
+    }
+    &.__8 {
+      background: rgb(216, 255, 200, 0.5);
+    }
+    &.__9 {
+      background: rgb(179, 255, 151, 0.5);
+    }
+    &.__9 {
+      background: rgb(130, 251, 91, 0.5);
+    }    
+    &.__10 {
+      background: rgb(89, 241, 42, 0.5);
+    }        
   }
 
   @media only screen and (max-width: 700px) {

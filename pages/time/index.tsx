@@ -11,7 +11,7 @@ import {request} from 'src/Utils';
 import {IActivity} from 'src/interface/IActivity';
 import {useRouter} from 'next/router';
 import {TimePageWrapper} from 'src/lib/Wrappers';
-import {Chip, FormControl, NativeSelect} from '@mui/material';
+import {Button, Chip, FormControl, NativeSelect} from '@mui/material';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,6 +21,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Link from 'next/link';
 import {ITimeTotals} from 'src/interface/ITimeTotals';
+
+import PrintIcon from '@mui/icons-material/Print';
 
 const Time = () => {
   const router = useRouter();
@@ -148,7 +150,7 @@ const Time = () => {
         <MenuLeft />
         <article>
           <nav>
-            <h1>Timesheets</h1>
+            <h1>Dashboard</h1>
             <FormControl id="activities">
               <NativeSelect
                 id="activitySelected-small"
@@ -175,9 +177,10 @@ const Time = () => {
                   <TableCell align="left"></TableCell>
                   <TableCell align="left">Minutes</TableCell>
                   <TableCell align="left">Minutes active</TableCell>
-                  <TableCell align="left">Keys keyboard</TableCell>
-                  <TableCell align="left">Keys mouse</TableCell>
-                  <TableCell align="left">Distance mouse</TableCell>
+                  <TableCell align="left">Keyboard</TableCell>
+                  <TableCell align="left">Mouse</TableCell>
+                  <TableCell align="left">Mouse distance</TableCell>
+                  <TableCell align="left"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -200,11 +203,26 @@ const Time = () => {
                             variant="filled"
                           />
                         </TableCell>
-                        <TableCell align="left">{t.minutes}</TableCell>
+                        <TableCell align="left">{t.minutes * 10}</TableCell>
                         <TableCell align="left">{t.minutesActive}</TableCell>
                         <TableCell align="left">{t.keyboardKeys}</TableCell>
                         <TableCell align="left">{t.mouseKeys}</TableCell>
                         <TableCell align="left">{t.mouseDistance}</TableCell>
+                        <TableCell align="left">
+                          <a 
+                            href={`/time/report?activityId=${activity?.id}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Button 
+                              variant='contained'
+                              color='inherit'
+                              size="small"
+                              startIcon={<PrintIcon />}>
+                              Print Report
+                            </Button>
+                          </a>
+                        </TableCell>                        
                       </TableRow>
                     )
                   }
@@ -215,16 +233,17 @@ const Time = () => {
 
           <br />
 
-          <h1>Your data</h1>
+          <h1>Timesheets (active sessions)</h1>
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">Date</TableCell>
+                  <TableCell align="left">Date (from - to)</TableCell>
                   <TableCell align="left">Project</TableCell>
-                  <TableCell align="left">Keys keyboard</TableCell>
-                  <TableCell align="left">Keys mouse</TableCell>
-                  <TableCell align="left">Distance mouse</TableCell>
+                  <TableCell align="left">Minutes active</TableCell>                  
+                  <TableCell align="left">Keyboard</TableCell>                  
+                  <TableCell align="left">Mouse</TableCell>
+                  <TableCell align="left">Mouse distance</TableCell>
                   <TableCell align="left">Note</TableCell>
                 </TableRow>
               </TableHead>
@@ -232,13 +251,18 @@ const Time = () => {
                 {time.map(t => (
                   <TableRow
                     key={t.id}
+                    className={`activeMinutes __${t.minutesActive}`}                    
                   >
-                    <TableCell align="left">{moment(t.fromAt).format('DD-MM-YY hh:mm')}</TableCell>
+                    <TableCell align="left">
+                      {moment(t.fromAt).format('DD-MM-YY HH:mm')} -&nbsp;
+                      {moment(t.toAt).format('HH:mm')}
+                    </TableCell>
                     <TableCell align="left">
                       <Link href={`/activity/${t.activity.id}`}>
                         {t.activity.title}
                       </Link>
                     </TableCell>
+                    <TableCell align="left">{t.minutesActive}</TableCell>                    
                     <TableCell align="left">{t.keyboardKeys}</TableCell>
                     <TableCell align="left">{t.mouseKeys}</TableCell>
                     <TableCell align="left">{t.mouseDistance}</TableCell>

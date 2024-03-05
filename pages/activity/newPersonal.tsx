@@ -33,6 +33,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
 
   const [text, setText] = useState(template);
   const [title, setTitle] = useState('');
+  const [rateHour, setRateHour] = useState(0);
 
   useEffect(() => {
     if (authStatus === 'unauthenticated') {
@@ -56,10 +57,12 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       data: {
         title,
         text,
+        rateHour,
         state: 'Published',
         type: 'Personal'
       }
     });
+    console.log(res.headers.location);
     const id = res.headers.location.split('/')[3];
     router.push(`/activity/${id}/edit`);
 
@@ -109,6 +112,14 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
               placeholder="Title"
               onChange={e => setTitle(e.target.value)}
             />
+            <TextField
+              label="Rate per hour in USD"
+              variant="outlined"
+              type='number'
+              placeholder="$20"
+              defaultValue={rateHour}
+              onChange={e => setRateHour(Number(e.target.value))}
+            />            
             <Editor
               apiKey={TINYMCE_KEY}
               onInit={(evt, editor) => (editorRef.current = editor)}

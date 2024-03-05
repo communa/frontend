@@ -3,7 +3,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import {LogoWrapper} from 'src/lib/Layout/Wrappers';
 
-export default function Header({ }) {
+export default function Logo() {
   return (
     <LogoWrapper className="logo">
       <Link href="https://communa.network">
