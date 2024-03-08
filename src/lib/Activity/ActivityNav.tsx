@@ -1,9 +1,8 @@
-import {useAccount} from 'wagmi';
 import Link from 'next/link';
 import {useContext} from 'react';
 
 import {APIContext} from 'src/contexts/Api';
-import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {IActivity} from 'src/interface/IActivity';
 import {useNotifications} from 'src/contexts/Notifications';
 import {useRouter} from 'next/router';
@@ -16,7 +15,7 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 
 const ActivityNav = ({activity}: ActivityShortProps) => {
   const api = useContext(APIContext);
-  const {address} = useAccount();
+  const {userAddress, jwt} = useAuth();
   const {addNotification} = useNotifications();
   const router = useRouter();
 
@@ -24,12 +23,11 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
     return null;
   }
 
-  if (activity.user.address !== address) {
+  if (activity.user.address !== userAddress) {
     return null;
   }
 
   const onDelete = () => {
-    const jwt = getJwtLocalStorage();
     api.query({
       url: `/api/activity/${activity.id}`,
       method: 'DELETE',
@@ -42,12 +40,12 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
       title: 'Your job was removed',
       subtitle: '',
     });
-    router.push(`/activity?type=personal&state=published`);
+    router.push(`/activity?type=Personal&state=Published`);
   }
 
   return (
     <nav>
-      <Link href={`/time?acitivityId=${activity.id}`}>
+      <Link href={`/time?activityId=${activity.id}`}>
         <Button variant='contained' startIcon={<TimerIcon />}>
           Timesheets
         </Button>

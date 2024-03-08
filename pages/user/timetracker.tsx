@@ -4,36 +4,35 @@ import {IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import NextLink from 'next/link';
 import {useRouter} from 'next/router';
-import {useAccount} from 'wagmi';
 
 import {ConnectButton} from 'src/lib/Layout/ConnectButton';
 import Logo from 'src/lib/Layout/Logo';
 import {API_HOST, APP_NAME} from 'src/config/consts';
-import {getJwtLocalStorage, getAddressWagmiOrJWT, getTimeTrackerNonceLocalStorage, AuthContext} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {APIContext} from 'src/contexts/Api';
 import {request} from 'src/Utils';
 import {useNotifications} from 'src/contexts/Notifications';
 import {AuthTimeTrackerWrapper} from 'src/lib/Wrappers';
 
+const getTimeTrackerNonceLocalStorage = (nonce: string): Boolean => {
+  const data = typeof window !== "undefined"
+    ? window.localStorage.getItem(`none-${nonce}`)
+    : false;
+
+  return Boolean(data);
+};
+
 const AuthTimeTracker = () => {
   const router = useRouter();
   const api = useContext(APIContext);
-  const {address} = useAccount();
   const {addNotification} = useNotifications();
-  const {authStatus} = useContext(AuthContext);
+  const {jwt, userAddress, authStatus} = useAuth();
 
   const [error, setErrror] = useState<any>();
   const [state, setState] = useState<string>('disconnected');
-  const [userAddress, setUserAddress] = useState('');
 
   const nonce = router.query.nonce;
   const nonceStore = getTimeTrackerNonceLocalStorage(nonce as string);
-
-  useEffect(() => {
-    const addr = getAddressWagmiOrJWT(address);
-
-    setUserAddress(addr);
-  }, [address]);
 
   useEffect(() => {
     if (api.error) {
@@ -52,8 +51,6 @@ const AuthTimeTracker = () => {
       return;
     }
 
-    const jwt = getJwtLocalStorage();
-
     api.query({
       url: `/api/auth/timetracker/${nonce}`,
       method: 'GET',
@@ -64,7 +61,6 @@ const AuthTimeTracker = () => {
   }, [nonce]);
 
   const connectTimeTracker = async () => {
-    const jwt = getJwtLocalStorage();
     localStorage.setItem(`none-${nonce}`, JSON.stringify(true));
 
     await request({
@@ -139,7 +135,7 @@ const AuthTimeTracker = () => {
         <link rel="icon" href="/logo-testnet.png" />
       </Head>
       <main>
-        <NextLink href="/" passHref>
+        <NextLink href={userAddress ? '/time' : '/'} passHref>
           <IconButton className="close" size='large'>
             <CloseIcon />
           </IconButton>
@@ -147,7 +143,7 @@ const AuthTimeTracker = () => {
         <Logo />
         <section>
           {body}
-          {!userAddress && authStatus !== 'authenticated' && (
+          {!userAddress && (
             <ConnectButton size="largeWhite" />
           )}
         </section>

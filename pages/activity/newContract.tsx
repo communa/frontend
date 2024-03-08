@@ -6,18 +6,19 @@ import {useRouter} from 'next/router';
 import fs from 'fs';
 import {TextField} from '@mui/material';
 import Switch from '@mui/material/Switch';
+import Link from 'next/link';
+import {join} from 'path';
 
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
-import {AuthContext, getJwtLocalStorage} from 'src/contexts/Auth';
+import {AuthContext, useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import {join} from 'path';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import Link from 'next/link';
+
 
 export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
-  const template = fs.readFileSync(join(__dirname, '../../../../contract-template.html')).toString();
+  const template = fs.readFileSync(join(__dirname, '../../../../template-contract.html')).toString();
 
   return {
     props: {
@@ -28,7 +29,6 @@ export const getServerSideProps: GetServerSideProps<{template: string}> = async 
 
 const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const {authStatus} = useContext(AuthContext);
   const {addNotification} = useNotifications();
   const editorRef = useRef<any>(null);
 
@@ -37,10 +37,11 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
   const [keywords, setKeywords] = useState('');
   const [rate, setRate] = useState('');
   const [state, setState] = useState('draft');
+  const {jwt, userAddress} = useAuth();
 
   useEffect(() => {
-    if (authStatus === 'unauthenticated') {
-      router.push(`/login`);
+    if (!userAddress) {
+      router.push(`/`);
       addNotification({
         title: 'Authorisation is required',
         subtitle: '',
@@ -50,7 +51,6 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
 
   const onSaveAndEdit = async () => {
     const text = editorRef.current.getContent();
-    const jwt = getJwtLocalStorage();
     const res = await request({
       url: `${API_HOST}/api/activity`,
       method: 'POST',
@@ -75,7 +75,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
     });
   };
 
-  if (authStatus === 'unauthenticated') {
+  if (!userAddress) {
     return null;
   }
 
@@ -100,7 +100,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
             Once a freelancer is assigned, the contract becomes non-editable and can only be closed. <br />
             Or, if you wish to publish a contract, please click on the link &nbsp;
             <Link href="/activity/newPersonal">
-              New personal project
+              Add new project
             </Link>
           </p>
           <br />

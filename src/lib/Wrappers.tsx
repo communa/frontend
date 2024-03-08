@@ -210,18 +210,26 @@ export const TimeReportWrapper = styled.div`
   flex-flow: column nowrap;
   flex-grow: 1;
 
-  #logo {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-    picture {
-      position: relative;
-      img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
+
+    #logo {
+      cursor: pointer;
+      margin-bottom: 20px;
+
+      picture {
+        position: relative;
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+        }
       }
     }
   }
-
   main {
     padding: 40px;
 
@@ -259,8 +267,20 @@ export const TimeReportWrapper = styled.div`
       &.__10 {
         background: rgb(89, 241, 42, 0.5);
       }        
-    }    
+    }
+    .note {
+      margin-top: 30px;
+    }
   }
+
+  @media print {
+    padding: 0;
+    margin: 0;
+
+    button {
+      display: none;
+    }
+  }    
 `
 
 export const TimePageWrapper = styled.div`
@@ -284,17 +304,38 @@ export const TimePageWrapper = styled.div`
 
       nav {
         display: flex;
-        justify-content: space-between;
+        justify-content: left;
         align-items: center;
+        margin-bottom: 40px;
+        justify-content: space-between;
         
         h1 {
           font-size: 36px;
           margin-bottom: 0;
           margin-top: 0;
         }
-        #activities {
-          width: auto;
-          margin-left: 50px;
+        p {
+          display: flex;
+          align-items: center;
+          color: #444;
+          gap: 20px;
+
+          #activities {
+            width: auto;
+          }
+        }
+      }
+    }
+    table {
+      .tooltip {
+        cursor: pointer;
+      }
+      .title {
+        a {
+          font-weight: 600;
+          font-size: 16px;
+          /* text-decoration: underline; */
+          color: #5586d1;
         }
       }
     }
@@ -344,7 +385,6 @@ export const TimePageWrapper = styled.div`
       flex-direction: column;
       padding: 20px;
       padding-top: 70px;
-      /* overflow-x: hidden; */
 
       > article {
         margin: inherit;
@@ -411,6 +451,7 @@ export const PageWrapper = styled.div`
         gap: 10px;
         margin-bottom: 30px;
         align-items: center;
+
         h2 {
           margin-top: 0;
         }
@@ -419,6 +460,7 @@ export const PageWrapper = styled.div`
           justify-content: space-between;
         }
         &.links {
+          margin-bottom: 0;
           a {
             color: #777;
           }

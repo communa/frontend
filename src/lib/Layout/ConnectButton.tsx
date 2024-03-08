@@ -2,6 +2,7 @@ import { ConnectButton as CB } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
 import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
 import { ConnectButtonWrapper } from './Wrappers';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface ConnectButtonProps extends React.HTMLAttributes<HTMLElement> {
   size: string;
@@ -67,11 +68,8 @@ export const ConnectButton = ({ size }: ConnectButtonProps) => {
 
                 return (
                   <div style={{ display: 'flex', gap: 12 }}>
-                    <button onClick={openAccountModal} type="button">
-                      {account.displayName}
-                      {account.displayBalance
-                        ? ` (${account.displayBalance})`
-                        : ''}
+                    <button onClick={openAccountModal} type="button" className="small">
+                      <LogoutIcon /> Exit {account.displayName}
                     </button>
                   </div>
                 );

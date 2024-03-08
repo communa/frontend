@@ -1,22 +1,24 @@
+import fs from 'fs';
+import {join} from 'path';
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
-import {useContext, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+
 import {Editor} from '@tinymce/tinymce-react';
 import {useRouter} from 'next/router';
-import fs from 'fs';
 import {Button, TextField} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
-import {AuthContext, getJwtLocalStorage} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import {join} from 'path';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import Link from 'next/link';
 
 export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
-  const template = fs.readFileSync(join(__dirname, '../../../../project-template.html')).toString();
+  const template = fs.readFileSync(join(__dirname, '../../../../template-project.html')).toString();
 
   return {
     props: {
@@ -27,16 +29,16 @@ export const getServerSideProps: GetServerSideProps<{template: string}> = async 
 
 const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const {authStatus} = useContext(AuthContext);
   const {addNotification} = useNotifications();
   const editorRef = useRef<any>(null);
 
   const [text, setText] = useState(template);
   const [title, setTitle] = useState('');
   const [rateHour, setRateHour] = useState(0);
+  const {jwt, userAddress} = useAuth();
 
   useEffect(() => {
-    if (authStatus === 'unauthenticated') {
+    if (!userAddress) {
       router.push(`/login`);
       addNotification({
         title: 'Authorisation is required',
@@ -47,7 +49,6 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
 
   const onSaveAndEdit = async () => {
     const text = editorRef.current.getContent();
-    const jwt = getJwtLocalStorage();
     const res = await request({
       url: `${API_HOST}/api/activity`,
       method: 'POST',
@@ -63,8 +64,8 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       }
     });
     console.log(res.headers.location);
-    const id = res.headers.location.split('/')[3];
-    router.push(`/activity/${id}/edit`);
+    // const id = res.headers.location.split('/')[3];
+    router.push(`/activity?type=Personal&state=Published`);
 
     addNotification({
       title: 'You\'ve added a new project',
@@ -72,14 +73,14 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
     });
   };
 
-  if (authStatus === 'unauthenticated') {
+  if (!userAddress) {
     return null;
   }
 
   return (
     <PageWrapper>
       <Head>
-        <title>New personal project - {APP_NAME}</title>
+        <title>New project - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
@@ -90,10 +91,14 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <article>
           <nav className="actions">
             <h2>
-              New personal project
+              New project
             </h2>
-            <Button variant='contained' size='large' onClick={() => onSaveAndEdit()}>
-              Save & Continue Editing
+            <Button
+              variant='contained'
+              size='medium'
+              onClick={() => onSaveAndEdit()}
+              startIcon={<SaveIcon />}>
+              Save & Continue
             </Button>
           </nav>
           <p>
@@ -119,7 +124,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
               placeholder="$20"
               defaultValue={rateHour}
               onChange={e => setRateHour(Number(e.target.value))}
-            />            
+            />
             <Editor
               apiKey={TINYMCE_KEY}
               onInit={(evt, editor) => (editorRef.current = editor)}

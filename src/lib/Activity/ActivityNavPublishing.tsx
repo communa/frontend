@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import {useContext} from 'react';
-import {AuthContext} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 
 const ActivityNavPublishing = () => {
-  const {authStatus} = useContext(AuthContext);
+  const {userAddress} = useAuth();
+
   return (
     <nav className="links">
       {/* <Link href="/activity">
         View all
       </Link> */}
-      {authStatus === 'authenticated' && (
+      {userAddress && (
         <>
           <Link href="/activity?type=Personal&state=Published">
             Personal

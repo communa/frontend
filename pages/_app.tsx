@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Script from 'next/script';
 import type {AppProps} from 'next/app';
 import {
@@ -19,9 +19,9 @@ import {configureChains, createClient, useAccount, WagmiConfig} from 'wagmi';
 import {polygon} from 'wagmi/chains';
 import {publicProvider} from 'wagmi/providers/public';
 
-import {AuthContext, AuthProvider, getJwtLocalStorage, isJWTexpired} from 'src/contexts/Auth';
+import {AuthContext, AuthProvider, useAuth} from 'src/contexts/Auth';
 import {withProviders} from 'src/lib/Hooks';
-import {NotificationsProvider, useNotifications} from 'src/contexts/Notifications';
+import {NotificationsProvider} from 'src/contexts/Notifications';
 import {TooltipProvider} from 'src/contexts/Tooltip';
 import {Notifications} from 'src/lib/Notifications';
 import {APIProvider} from 'src/contexts/Api';
@@ -31,7 +31,6 @@ import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
-import {useRouter} from 'next/router';
 
 const {chains, provider} = configureChains(
   [
@@ -78,10 +77,9 @@ const wagmiClient = createClient({
 });
 
 function App({Component, pageProps}: AppProps) {
-  const {authStatus, connect} = useContext(AuthContext);
-  const {addNotification} = useNotifications();
+  const {authStatus, connect, userLogOut, userLogIn} = useContext(AuthContext);
   const {address} = useAccount();
-  const router = useRouter();
+  const {jwt, isJwtExpired} = useAuth();
 
   const authenticationAdapter = createAuthenticationAdapter({
     getNonce: async () => {
@@ -115,27 +113,14 @@ function App({Component, pageProps}: AppProps) {
         refresh: res.headers['refresh-token'],
       }
 
-      localStorage.setItem('JWT', JSON.stringify(tokens));
-
-      addNotification({
-        title: 'Welcome to Communa',
-        subtitle: '',
-      });
-
-      connect('authenticated');
+      userLogIn(address as string, tokens);
 
       return Promise.resolve(true);
     },
-    signOut: async () => {
-      localStorage.clear();
-      connect('unauthenticated');
-    },
+    signOut: async () => userLogOut(),
   });
 
   useEffect(() => {
-    const jwt = getJwtLocalStorage();
-    const isExpired = isJWTexpired();
-    
     window.scrollTo(0, 0);
     connect('unauthenticated');
 
@@ -152,16 +137,14 @@ function App({Component, pageProps}: AppProps) {
         console.log('auth.user', res.data)
 
         if (!res.data) {
-          localStorage.clear();
-          connect('unauthenticated');
-          router.push('/');
+          userLogOut();
         } else {
-          localStorage.setItem('user', JSON.stringify(res.data)); 
-          connect('authenticated');         
+          localStorage.setItem('user', JSON.stringify(res.data));
+          connect('authenticated');
         }
       }
 
-      if (isExpired && jwt) {
+      if (isJwtExpired && jwt) {
         const res = await request({
           url: `${API_HOST}/api/auth/refresh`,
           method: 'POST',

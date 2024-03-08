@@ -1,21 +1,24 @@
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import Head from 'next/head';
+import fs from 'fs';
+import {join} from 'path';
 
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useEffect, useRef, useState} from 'react';
 import {Editor} from '@tinymce/tinymce-react';
-import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import {useAccount} from 'wagmi';
 import {IUser} from 'src/interface/IUser';
 import {useRouter} from 'next/router';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 import {Button, TextField} from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 
-export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{user: IUser, template: string}> = async (context: GetServerSidePropsContext) => {
+  const template = fs.readFileSync(join(__dirname, '../../../../../template-profile.html')).toString();
+
   const {address} = context.query;
   const response = await request({
     url: `${API_HOST}/api/user/${address}/address`,
@@ -25,17 +28,18 @@ export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (cont
   return {
     props: {
       user: response.data,
+      template,
     },
   }
 }
 
-const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const editorRef = useRef<any>(null);
   const router = useRouter();
   const {addNotification} = useNotifications();
-  const {address} = useAccount();
+  const {userAddress, jwt} = useAuth();
 
-  const [bio, setBio] = useState(user.bio);
+  const [bio, setBio] = useState(user.bio || template);
   const [userName, setUserName] = useState(user.userName);
   const [company, setCompany] = useState(user.company);
   const [linkedIn, setLinkedIn] = useState(user.linkedIn);
@@ -43,14 +47,13 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
   const [telegram, setTelegram] = useState(user.telegram);
 
   useEffect(() => {
-    if (address !== user.address) {
+    if (userAddress !== user.address) {
       router.push(`/user/${user.address}`);
     }
   })
 
   const onEdit = async () => {
     const bio = editorRef.current.getContent();
-    const jwt = getJwtLocalStorage();
 
     await request({
       url: `${API_HOST}/api/user`,
@@ -81,7 +84,7 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
   return (
     <PageWrapper>
       <Head>
-        <title>{address} - Web3 Jobs - {APP_NAME}</title>
+        <title>{userAddress} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/logo-testnet.png" />
@@ -96,6 +99,13 @@ const UserProfileEdit = ({user}: InferGetServerSidePropsType<typeof getServerSid
             </Button>
           </nav>
           <form>
+            <TextField
+              label="Address"
+              variant="outlined"
+              placeholder="Name"
+              disabled
+              value={userAddress}
+            />
             <TextField
               label="Name"
               variant="outlined"

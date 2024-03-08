@@ -1,16 +1,16 @@
-import {useContext} from 'react';
+
 import Head from 'next/head';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {APP_NAME} from 'src/config/consts'
-import {AuthContext} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 import Link from 'next/link';
 import {Chip} from '@mui/material';
 
 const ActivityNew = () => {
-  const {authStatus} = useContext(AuthContext);
+  const {userAddress} = useAuth();
 
-  if (authStatus === 'unauthenticated') {
+  if (!userAddress) {
     return null;
   }
 

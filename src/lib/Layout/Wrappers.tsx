@@ -24,7 +24,10 @@ export const ConnectButtonWrapper = styled.div`
     }              
     &:hover {
       transform: scale(105%);
-    } 
+    }
+    svg {
+      margin-right: 5px;
+    }    
   }
   &.largeWhite {
     button {
@@ -38,7 +41,7 @@ export const ConnectButtonWrapper = styled.div`
       font-weight: 500;
       padding: 10px 24px;
       transform: none;
-      width: 190px;
+      width: 235px;
 
       span {
         img {
@@ -141,7 +144,7 @@ export const HeaderSideWrapper = styled.aside`
         gap: 2px;
         margin-top: 3px;
         max-width: 250px;
-        font-size: 16px;
+        font-size: 18px;
         
         &.inline {
           flex-direction: row;
@@ -188,7 +191,7 @@ export const HeaderSideWrapper = styled.aside`
         -webkit-transform: none;
         -ms-transform: none;
         transform: none;
-        width: 190px;
+        width: 235px;
         justify-content: left;
         
         &:hover{
@@ -207,6 +210,21 @@ export const HeaderSideWrapper = styled.aside`
         letter-spacing: -0.03em;
         margin-top: 20px;
         color: rgba(var(--color-primary-main), 0.5);
+        display: flex;
+
+        span {
+          margin-left: 10px;
+          display: flex;
+          a {
+            display: flex;
+
+            svg {
+              font-size: 18px;
+              margin-left: 5px;
+              color: #666;
+            }
+          }
+        }
       }
     }
     
@@ -306,7 +324,7 @@ export const HeaderSideWrapper = styled.aside`
           -webkit-transform: none;
           -ms-transform: none;
           transform: none;
-          width: 190px;
+          width: 235px;
           justify-content: left;
           
           &:hover{

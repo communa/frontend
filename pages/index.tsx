@@ -2,6 +2,9 @@ import {InferGetServerSidePropsType} from 'next'
 import {GetServerSideProps} from 'next'
 import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
+import Link from 'next/link';
+import {Button} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
@@ -111,10 +114,23 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
       <main>
         <MenuLeft />
         <article>
-          <h1>
-            {router.query.filter ? router.query.filter : "All Jobs"}
-          </h1>
-          <ActivityNavJobs />
+          <nav className="actions">
+            <div>
+              <h2>
+                {router.query.filter ? router.query.filter : "All Jobs"}
+              </h2>
+              <ActivityNavJobs />
+            </div>
+            {/* <Link href={`/activity/newContract`}>
+              <Button 
+              variant='contained'
+              size='large' 
+              color="primary" 
+              startIcon={<AddIcon />}>
+                Publish job
+              </Button>
+            </Link>             */}
+          </nav>
           {activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />
           })}

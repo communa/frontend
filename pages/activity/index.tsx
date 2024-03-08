@@ -1,30 +1,37 @@
+import {useContext, useEffect, useState} from 'react';
+import moment from 'moment';
 import {GetServerSidePropsContext, InferGetServerSidePropsType} from 'next'
+import {useRouter} from 'next/router';
 import {GetServerSideProps} from 'next'
 import Head from 'next/head';
-import {useContext, useEffect, useState} from 'react';
-
+import Link from 'next/link';
+import {Button, Chip, Paper} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import TimerIcon from '@mui/icons-material/Timer';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 import {PageWrapper} from 'src/lib/Wrappers';
 import {IActivity} from 'src/interface/IActivity';
 import {APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
-import ActivityShort from 'src/lib/Activity/ActivityShort';
-import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import ActivityNavPublishing from 'src/lib/Activity/ActivityNavPublishing';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 
 import HowItWorksImage from 'src/assets/Illustration-6.png';
-import Link from 'next/link';
-import {Button} from '@mui/material';
+import {useNotifications} from 'src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{
   state: string,
   type: string
 }> = async (context: GetServerSidePropsContext) => {
   const {state, type} = context.query;
-
-  console.log(state, type);
 
   return {
     props: {
@@ -37,6 +44,9 @@ export const getServerSideProps: GetServerSideProps<{
 const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const api = useContext(APIContext);
   const [activities, setActivities] = useState<IActivity[]>([]);
+  const {jwt} = useAuth();
+  const {addNotification} = useNotifications();
+  const router = useRouter();
 
   useEffect(() => {
     if (api.state === 'ready' && api.data && api.data[0]) {
@@ -48,7 +58,6 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
   }, [api.data]);
 
   useEffect(() => {
-    const jwt = getJwtLocalStorage();
     setActivities([]);
 
     api.query({
@@ -68,10 +77,26 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
     });
   }, [state, type]);
 
+  const onDelete = (activity: IActivity) => {
+    api.query({
+      url: `/api/activity/${activity.id}`,
+      method: 'DELETE',
+      headers: {
+        Authorization: jwt?.access
+      }
+    });
+
+    addNotification({
+      title: 'Your project was removed',
+      subtitle: '',
+    });
+    router.push(`/activity?type=Personal&state=Published`);
+  }
+
   return (
     <PageWrapper>
       <Head>
-        <title>Full-time Web3 remote jobs  - {APP_NAME}</title>
+        <title>Remote jobs in web3 - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
@@ -81,17 +106,68 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
         <MenuLeft />
         <article>
           <nav className="actions">
-            <h1>My projects</h1>
-            <Link href={`/activity/new`}>
+            <p>
+              <h2>All projects</h2>
+              <ActivityNavPublishing />
+            </p>
+            <Link href={`/activity/newPersonal`}>
               <Button variant='contained' startIcon={<AddIcon />}>
-                Add New
+                New project
               </Button>
             </Link>
           </nav>
-          <ActivityNavPublishing />
-          {activities.length > 0 && activities.map(activity => {
-            return <ActivityShort key={activity.id} activity={activity} />
-          })}
+          {activities.length !== 0 && (
+            <TableContainer>
+              <Table component={Paper}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell width="20%" align="left">Created</TableCell>
+                    <TableCell width="20%" align="left">Title</TableCell>
+                    <TableCell width="20%" align="left">Rate</TableCell>
+                    <TableCell width="30%" align="right"></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {activities.map(a => {
+                    return (
+                      <TableRow
+                        key={a.id}
+                      >
+                        <TableCell align="left">
+                          {moment(a.createdAt).format('LLL')}
+                        </TableCell>
+                        <TableCell align="left">
+                          <Link href={`/activity/${a.id}`}>
+                            {a.title}
+                          </Link>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Chip
+                            label={`${a.rateHour} USD`}
+                            color="primary"
+                            variant="filled"
+                          />
+                        </TableCell>
+                        <TableCell align="left">
+                          <Link href={`/time?activityId=${a.id}`}>
+                            <Button variant='text' startIcon={<TimerIcon />}>
+                              Timesheets
+                            </Button>
+                          </Link >
+                          <Link href={`/activity/${a.id}/edit`}>
+                            <Button variant='text' color='info'>
+                              Edit
+                            </Button>
+                          </Link>
+                          <Button onClick={() => onDelete(a)} variant='text'>Delete</Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
           {activities.length === 0 && (
             <>
               {type === 'Contract' ? (

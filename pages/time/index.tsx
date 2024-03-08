@@ -1,17 +1,9 @@
 import Head from 'next/head';
 import moment from 'moment';
 import {useContext, useEffect, useState} from 'react';
-
-import {API_HOST, APP_NAME} from 'src/config/consts';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
-import {APIContext} from 'src/contexts/Api';
-import {ITime} from 'src/interface/ITime';
-import {getJwtLocalStorage} from 'src/contexts/Auth';
-import {request} from 'src/Utils';
-import {IActivity} from 'src/interface/IActivity';
 import {useRouter} from 'next/router';
-import {TimePageWrapper} from 'src/lib/Wrappers';
-import {Button, Chip, FormControl, NativeSelect} from '@mui/material';
+import {Button, Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,10 +11,18 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Link from 'next/link';
-import {ITimeTotals} from 'src/interface/ITimeTotals';
-
 import PrintIcon from '@mui/icons-material/Print';
+import Link from 'next/link';
+
+import {API_HOST, APP_NAME} from 'src/config/consts';
+import MenuLeft from 'src/lib/Layout/MenuLeft';
+import {APIContext} from 'src/contexts/Api';
+import {ITime} from 'src/interface/ITime';
+import {useAuth} from 'src/contexts/Auth';
+import {request} from 'src/Utils';
+import {IActivity} from 'src/interface/IActivity';
+import {TimePageWrapper} from 'src/lib/Wrappers';
+import {ITimeTotals} from 'src/interface/ITimeTotals';
 
 const Time = () => {
   const router = useRouter();
@@ -31,8 +31,9 @@ const Time = () => {
   const [time, setTime] = useState<ITime[]>([]);
   const [totals, setTotals] = useState([]);
   const [activities, setActivities] = useState<IActivity[]>([]);
-  const [activitySelected, setActivitySelected] = useState<IActivity | null>();
   const [page, setPage] = useState(0);
+  const {jwt} = useAuth();
+  const {activityId} = router.query;
 
   const onScroll = (e: any) => {
     const {
@@ -43,17 +44,20 @@ const Time = () => {
     const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
 
     if (!canFetch && state !== 'progress') {
-      doQuery();
+      loadTime();
     }
   }
 
   useEffect(() => {
-    setTime([]);
     setPage(0);
-    doQuery();
+    setTime([]);
+
+    console.log('activityId >>>', activityId, page);
+
     loadActivities();
     loadTotals();
-  }, [activitySelected]);
+    loadTime();
+  }, [activityId]);
 
   useEffect(() => {
     if (state === 'ready' && data && data[0] && url === '/api/time/search') {
@@ -64,7 +68,7 @@ const Time = () => {
     }
   }, [data]);
 
-  const doQuery = () => {
+  const loadTime = () => {
     if (router.query.filter) {
       data.filter = {
         keywords: [router.query.filter]
@@ -73,15 +77,15 @@ const Time = () => {
 
     const filter: any = {};
 
-    if (activitySelected) {
-      filter.activityId = activitySelected.id;
+    if (activityId && activityId !== '0') {
+      filter.activityId = activityId;
     }
 
     query({
       url: `/api/time/search`,
       method: 'POST',
       headers: {
-        Authorization: getJwtLocalStorage()?.access
+        Authorization: jwt?.access
       },
       data: {
         filter,
@@ -98,7 +102,7 @@ const Time = () => {
       url: `${API_HOST}/api/activity/search/business`,
       method: 'POST',
       headers: {
-        Authorization: getJwtLocalStorage()?.access
+        Authorization: jwt?.access
       },
       data: {
         filter: {
@@ -118,25 +122,26 @@ const Time = () => {
       url: `${API_HOST}/api/time/totals`,
       method: 'GET',
       headers: {
-        Authorization: getJwtLocalStorage()?.access
+        Authorization: jwt?.access
       }
     });
 
     setTotals(response.data);
   }
 
-
   const onActivityChange = (event: any) => {
-    const activity = activities.find(a => a.id === event.target.value);
+    const activityId = event.target.value;
 
-    setActivitySelected(activity);
+    setPage(0);
 
-    if (activity) {
-      router.push(`/time?activityId=${activity.id}`);
+    if (activityId) {
+      router.push(`/time?activityId=${activityId}`);
     } else {
       router.push(`/time`);
     }
   };
+
+  const activity = activities.find(a => a.id === activityId);
 
   return (
     <TimePageWrapper onScroll={(e) => onScroll(e)}>
@@ -150,79 +155,151 @@ const Time = () => {
         <MenuLeft />
         <article>
           <nav>
-            <h1>Dashboard</h1>
-            <FormControl id="activities">
-              <NativeSelect
-                id="activitySelected-small"
-                value={activitySelected ? activitySelected.id : null}
-                onChange={onActivityChange}
-              >
-                <option value="0">
-                  View All
-                </option>
-                {activities.map(a => {
-                  return (
-                    <option value={a.id}>{a.title}</option>
-                  )
-                })}
-              </NativeSelect>
-            </FormControl>
+            <p>
+              <h1>Dashboard</h1>
+              <FormControl id="activities">
+                <NativeSelect
+                  id="activitySelected-small"
+                  value={activityId ? activityId : 0}
+                  onChange={onActivityChange}
+                >
+                  <option value="0">
+                    View All
+                  </option>
+                  {activities.map(a => {
+                    return (
+                      <option value={a.id}>{a.title}</option>
+                    )
+                  })}
+                </NativeSelect>
+              </FormControl>
+            </p>
+            <p>
+              <Link href="/activity?type=Personal&state=Published">
+                <Button
+                  variant="contained"
+                  color="primary"
+                >
+                  Projects
+                </Button>
+              </Link>
+              <Link href={`/activity/newPersonal`}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<AddIcon />}
+                >
+                  Add project
+                </Button>
+              </Link>
+            </p>
           </nav>
-
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell align="left">Project</TableCell>
                   <TableCell align="left"></TableCell>
-                  <TableCell align="left">Minutes</TableCell>
-                  <TableCell align="left">Minutes active</TableCell>
-                  <TableCell align="left">Keyboard</TableCell>
-                  <TableCell align="left">Mouse</TableCell>
-                  <TableCell align="left">Mouse distance</TableCell>
-                  <TableCell align="left"></TableCell>
+                  <TableCell align="left" className="tooltip">
+                    <Tooltip
+                      title="Refers to all the time since the start of the time tracking application"
+                      placement="top"
+                    >
+                      <span>Time total</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell align="left" className="tooltip">
+                    <Tooltip
+                      title="Represents the recorded time using keyboard and mouse activity data"
+                      placement="top"
+                    >
+                      <span>Time active</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell width="10%" align="left" className="tooltip">
+                    <Tooltip
+                      title="Counts keystrokes                      "
+                      placement="top"
+                    >
+                      <span>Keyboard</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell width="10%" align="left" className="tooltip">
+                    <Tooltip
+                      title="Track mouse clicks"
+                      placement="top"
+                    >
+                      <span>Mouse</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell width="10%" align="left" className="tooltip">
+                    <Tooltip
+                      title="Tracks mouse movements"
+                      placement="top"
+                    >
+                      <span>Mouse distance</span>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell width="1%" align="left"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {totals.map((t: ITimeTotals) => {
                   const activity = activities.find(a => a.id === t.activityId);
+
                   if (activity) {
+                    const minutes = t.minutes * 10;
+                    const hoursTotal = (minutes - (minutes % 60)) / 60;
+                    const minutesTotal = minutes - (hoursTotal * 60);
+
+                    const minutesActive = t.minutesActive;
+                    const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
+                    const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
+
+                    const total = Number((activity?.rateHour) * (t.minutes * 10 / 60)).toFixed(1);
                     return (
                       <TableRow
-                        key={t.activityId}
+                        key={activity.id}
                       >
-                        <TableCell align="left">
+                        <TableCell align="left" className="title">
                           <Link href={`/activity/${activity?.id}`}>
                             {activity?.title}
                           </Link>
+                          {/* &nbsp; {activity?.rateHour} */}
+                          {/* ={t.minutes * 10 / 60} */}
                         </TableCell>
                         <TableCell align="left">
                           <Chip
-                            label={`${Number(activity?.rateHour) * t.minutes / 10} USD`}
+                            label={`${total} USD`}
                             color="primary"
                             variant="filled"
                           />
                         </TableCell>
-                        <TableCell align="left">{t.minutes * 10}</TableCell>
-                        <TableCell align="left">{t.minutesActive}</TableCell>
+                        <TableCell align="left">
+                          {hoursTotal} hr<br />
+                          {minutesTotal} min <br />
+                          {/* ({t.minutes * 10}) */}
+                        </TableCell>
+                        <TableCell align="left">
+                          {hoursActiveTotal} hr<br />
+                          {minutesActiveTotal} min<br />
+                          {/* ({t.minutesActive}) */}
+                        </TableCell>
                         <TableCell align="left">{t.keyboardKeys}</TableCell>
                         <TableCell align="left">{t.mouseKeys}</TableCell>
                         <TableCell align="left">{t.mouseDistance}</TableCell>
-                        <TableCell align="left">
-                          <a 
+                        <TableCell width="1%" align="right">
+                          <Link
                             href={`/time/report?activityId=${activity?.id}`}
-                            target="_blank"
-                            rel="noreferrer"
                           >
-                            <Button 
-                              variant='contained'
-                              color='inherit'
+                            <Button
                               size="small"
+                              variant='outlined'
                               startIcon={<PrintIcon />}>
-                              Print Report
+                              Invoice
                             </Button>
-                          </a>
-                        </TableCell>                        
+                          </Link>
+                        </TableCell>
                       </TableRow>
                     )
                   }
@@ -230,31 +307,36 @@ const Time = () => {
               </TableBody>
             </Table>
           </TableContainer>
-
           <br />
-
-          <h1>Timesheets (active sessions)</h1>
+          <br />
+          <h2>
+            {
+              activity
+                ? `Worklogs - ${activity.title}`
+                : `Worklogs`
+            }
+          </h2>
           <TableContainer>
-            <Table>
+            <Table size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
                   <TableCell align="left">Date (from - to)</TableCell>
                   <TableCell align="left">Project</TableCell>
-                  <TableCell align="left">Minutes active</TableCell>                  
-                  <TableCell align="left">Keyboard</TableCell>                  
-                  <TableCell align="left">Mouse</TableCell>
-                  <TableCell align="left">Mouse distance</TableCell>
                   <TableCell align="left">Note</TableCell>
+                  <TableCell width="10%" align="left">Time active</TableCell>
+                  <TableCell width="10%" align="left">Keyboard</TableCell>
+                  <TableCell width="10%" align="left">Mouse</TableCell>
+                  <TableCell width="10%" align="left">Mouse distance</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {time.map(t => (
                   <TableRow
                     key={t.id}
-                    className={`activeMinutes __${t.minutesActive}`}                    
+                    className={`activeMinutes __${t.minutesActive}`}
                   >
                     <TableCell align="left">
-                      {moment(t.fromAt).format('DD-MM-YY HH:mm')} -&nbsp;
+                      {moment(t.fromAt).format('MMM Do Y HH:mm')}-
                       {moment(t.toAt).format('HH:mm')}
                     </TableCell>
                     <TableCell align="left">
@@ -262,11 +344,11 @@ const Time = () => {
                         {t.activity.title}
                       </Link>
                     </TableCell>
-                    <TableCell align="left">{t.minutesActive}</TableCell>                    
+                    <TableCell align="left">{t.note}</TableCell>
+                    <TableCell align="left">{t.minutesActive} min</TableCell>
                     <TableCell align="left">{t.keyboardKeys}</TableCell>
                     <TableCell align="left">{t.mouseKeys}</TableCell>
                     <TableCell align="left">{t.mouseDistance}</TableCell>
-                    <TableCell align="left">{t.note}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -274,7 +356,7 @@ const Time = () => {
           </TableContainer>
         </article>
       </main>
-    </TimePageWrapper >
+    </TimePageWrapper>
   );
 };
 

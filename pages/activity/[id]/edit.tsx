@@ -2,17 +2,16 @@ import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePr
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
 import {useEffect, useRef, useState} from 'react';
+import {Button, Switch, TextField} from '@mui/material';
+import {useRouter} from 'next/router';
 
 import {IActivity} from 'src/interface/IActivity';
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
-import {getJwtLocalStorage} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import {Button, Switch, TextField} from '@mui/material';
-import {useAccount} from 'wagmi';
-import {useRouter} from 'next/router';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
@@ -31,6 +30,7 @@ export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = asy
 const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {addNotification} = useNotifications();
   const router = useRouter();
+  const {jwt, userAddress} = useAuth();
 
   const editorRef = useRef<any>(null);
   const kw = activity.keywords ? activity.keywords.join(',') : '';
@@ -42,17 +42,14 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   const [salary, setSalary] = useState(activity.salary);
   const [keywords, setKeywords] = useState(kw);
 
-  const {address} = useAccount();
-
   useEffect(() => {
-    if (address !== activity.user.address) {
+    if (userAddress !== activity.user.address) {
       router.push(`/activity}`);
     }
   });
 
   const onEdit = async () => {
     const text = editorRef.current.getContent();
-    const jwt = getJwtLocalStorage();
 
     await request({
       url: `${API_HOST}/api/activity/${activity.id}`,
@@ -76,6 +73,8 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
       title: 'Updates Saved',
       subtitle: '',
     });
+
+    router.push(`/activity/${activity.id}`);
   };
 
   return (
@@ -100,6 +99,13 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
           </nav>
           <form>
             <TextField
+              label="ID"
+              variant="outlined"
+              placeholder="Id"
+              defaultValue={activity.id}
+              disabled
+            />
+            <TextField
               label="Title"
               variant="outlined"
               placeholder="Title"
@@ -107,7 +113,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
               onChange={e => setTitle(e.target.value)}
             />
             <TextField
-              label="Rate hourly in USD"
+              label="Hourly rate / USD"
               variant="outlined"
               type='number'
               placeholder="$20"

@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import {useContext} from 'react';
-import {AuthContext} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {JOB_KEYWORDS} from 'src/config/consts';
 
 const ActivityNavJobs = () => {
-  const {authStatus} = useContext(AuthContext);
+  const {userAddress} = useAuth();
+
   return (
     <nav className="links">
       <Link href="/">
         View All
       </Link>
-      {authStatus === 'authenticated' && (
+      {userAddress && (
         <>
           {JOB_KEYWORDS.map(k => {
             return (

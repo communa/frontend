@@ -1,61 +1,36 @@
 import * as React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import NextLink from 'next/link';
 import Link from 'next/link';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
-import {useRouter} from 'next/router';
-import {useContext} from 'react';
-import {AuthContext, getAddressWagmiOrJWT} from 'src/contexts/Auth';
-import {useNotifications} from 'src/contexts/Notifications';
-import {HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
-import {useAccount, useDisconnect} from 'wagmi';
+import {useAuth} from 'src/contexts/Auth';
+
+import {ConnectButtonWrapper, HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
 import {ConnectButton} from 'src/lib/Layout/ConnectButton';
 import {Button, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import {JOB_KEYWORDS} from 'src/config/consts';
 import DownloadIcon from '@mui/icons-material/Download';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function MenuLeft() {
   const [isOpen, setIsOpen] = useState(false);
-  const [userAddress, setUserAddress] = useState('');
-  const {address} = useAccount();
-  const {authStatus, connect} = useContext(AuthContext);
-  const {addNotification} = useNotifications();
-  const {disconnect} = useDisconnect()
-  const router = useRouter();
-
-
-  useEffect(() => {
-    const addr = getAddressWagmiOrJWT(address);
-
-    console.log('user.address', addr, address);
-
-    setUserAddress(addr);
-  }, [authStatus]);
-
-  const onLogoutClick = () => {
-    localStorage.clear();
-    router.push('/');
-    addNotification({
-      title: 'See You',
-      subtitle: '',
-    });
-    connect('unauthenticated');
-    disconnect();
-  };
+  const {userAddress, userLogOut} = useAuth();
 
   let addressShort = '';
 
   if (userAddress) {
-    addressShort = `${userAddress.slice(0, 6)}..${userAddress.slice(38, 44)}`;
+    addressShort = `${userAddress.slice(0, 4)}...${userAddress.slice(38, 44)}`;
   }
 
   return (
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
       <header>
         <div className="logo">
-          <a href="https://communa.network">
+          <Link href={userAddress ? '/time' : '/'}>
             <picture>
               <img
                 width={100}
@@ -64,7 +39,7 @@ export default function MenuLeft() {
                 alt="Landscape picture"
               />
             </picture>
-          </a>
+          </Link>
           <span>
             <ConnectButton size={'small'} />
           </span>
@@ -79,118 +54,79 @@ export default function MenuLeft() {
             ) : (
               <MenuIcon fontSize="inherit" />
             )}
-          </IconButton>          
+          </IconButton>
         </div>
         <nav onClick={() => setIsOpen(false)}>
-          {authStatus !== 'authenticated' && (
+
+          {userAddress && (
             <>
               <h4>
-                <Link href='/'>
-                  Jobs
-                </Link>
-              </h4>
-              <ul>
-                <li>
-                  <Link href='/'>
-                    View all
-                  </Link>
-                </li>
-                {JOB_KEYWORDS.map(k => {
-                  return (
-                    <li>
-                      <Link href={`/?filter=${k}`} key={k}>
-                        {k}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          )}
-          {authStatus === 'authenticated' && (
-            <>
-              <h4>
-                <Link href='/'>
-                  Jobs
-                </Link>
-              </h4>
-              <ul>
-                <li>
-                  <Link href='/'>
-                    View all
-                  </Link>
-                </li>
-              </ul>
-              <h4>
-                <Link href="/activity?type=Personal&state=Published">
+                <Link href="/time">
                   Dashboard
-                </Link>
+                </Link> {addressShort}
               </h4>
               <ul>
                 <li>
                   <Link href="/time">
-                    Timesheets
-                  </Link>
-                </li>                
-                <li>
-                  <Link href="/activity?type=Personal&state=Published">
-                    My projects
+                    My work
                   </Link>
                 </li>
-              </ul>
-              <h4>
-                <a
-                  href={`https://polygonscan.com/address/${userAddress}`}
-                  target='_blank'
-                >
-                  Wallet {addressShort}
-                </a>
-              </h4>
-              <ul>
                 <li>
                   <Link href={`/user/${userAddress}`}>
-                    My profile
+                    Profile
                   </Link>
-                </li>
-                <li>
-                  <p onClick={() => onLogoutClick()}>
-                    Disconnect
-                  </p>
                 </li>
               </ul>
             </>
           )}
-          <h4>Social</h4>
+
+          <h4>
+            <Link href='/'>
+              Find work
+            </Link>
+          </h4>
           <ul>
-            <li>
-              <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
-                Telegram
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
-                Twitter / X
-              </a>
-            </li>
+            {JOB_KEYWORDS.map((k, i) => {
+              return (
+                <li key={i}>
+                  <Link href={`/?filter=${k}`}>
+                    {k}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <br />
           <br />
           <br />
         </nav>
         <footer>
-          {authStatus !== 'authenticated' && (
+          {addressShort ? (
+            <ConnectButtonWrapper className='small'>
+              <button type="button" className="small" onClick={() => userLogOut()}>
+                <LogoutIcon /> Exit {addressShort}
+              </button>
+            </ConnectButtonWrapper>
+          ) : (
             <ConnectButton size={'small'} />
           )}
           <NextLink href="https://communa.network/download" passHref>
             <Button variant="outlined" className="downloadTimeTracker">
-              <DownloadIcon /> Download Timer
+              <DownloadIcon /> Download TimeTracker
             </Button>
           </NextLink>
           <p className="copyright">
-            Copyright © 2024 Communa <br />
-            {authStatus}
+            Copyright © 2024 Communa
+
+            <span>
+              <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
+                <TwitterIcon />
+              </a>
+              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+                <TelegramIcon />
+              </a>
+            </span>
           </p>
-          
         </footer>
       </header>
     </HeaderSideWrapper>

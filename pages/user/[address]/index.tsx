@@ -1,15 +1,15 @@
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import {Button} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 import {request} from 'src/Utils';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {IUser} from 'src/interface/IUser';
 import {UserPageWrapper} from 'src/lib/Wrappers';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import Link from 'next/link';
-import {Button} from '@mui/material';
-import {useAccount} from 'wagmi';
-import EditIcon from '@mui/icons-material/Edit';
+import {useAuth} from 'src/contexts/Auth';
 
 export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
   const {address} = context.query;
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (cont
 }
 
 const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const {address} = useAccount();
+  const {userAddress} = useAuth();
 
   return (
     <UserPageWrapper>
@@ -42,7 +42,7 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
         <article>
           <nav className="action">
             <h2>{user.address}</h2>
-            {address && (
+            {userAddress && (
               <Link href={`/user/${user.address}/edit`}>
                 <Button variant='contained' startIcon={<EditIcon />}>
                   Edit profile
