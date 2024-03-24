@@ -2,9 +2,6 @@ import {InferGetServerSidePropsType} from 'next'
 import {GetServerSideProps} from 'next'
 import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
-import Link from 'next/link';
-import {Button} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';

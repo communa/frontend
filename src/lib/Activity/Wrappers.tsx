@@ -25,7 +25,7 @@ export const ActivityWrapper = styled.div`
     }
     .date {
       color: #777;
-     font-size: 16px;
+      font-size: 16px;
     }
     > a {
       margin-bottom: 10px;
@@ -62,12 +62,15 @@ export const ActivityWrapper = styled.div`
       flex-wrap: wrap;
       display: flex;
 
-      span {
+      > span {
         background: #999;
         color: #fff;
-        padding: 3px 10px;
         flex: none;
-        border-radius: 10px;
+        height: 32px;
+        border-radius: 16px;
+        display: flex;
+        padding: 0px 13px;
+        align-items: center;
       }
     }
   }

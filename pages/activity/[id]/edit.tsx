@@ -12,6 +12,7 @@ import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
+import {EActivityType} from 'src/interface/EActivityType';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
@@ -120,7 +121,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
               defaultValue={rateHour}
               onChange={e => setRateHour(Number(e.target.value))}
             />
-            {activity.type === 'Contract' && (
+            {activity.type === EActivityType.HOURLY && (
               <>
                 <TextField
                   label="Salary annualy"

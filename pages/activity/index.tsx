@@ -1,7 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import moment from 'moment';
 import {GetServerSidePropsContext, InferGetServerSidePropsType} from 'next'
-import {useRouter} from 'next/router';
 import {GetServerSideProps} from 'next'
 import Head from 'next/head';
 import Link from 'next/link';
@@ -46,7 +45,6 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
   const [activities, setActivities] = useState<IActivity[]>([]);
   const {jwt} = useAuth();
   const {addNotification} = useNotifications();
-  const router = useRouter();
 
   useEffect(() => {
     if (api.state === 'ready' && api.data && api.data[0]) {
@@ -58,6 +56,10 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
   }, [api.data]);
 
   useEffect(() => {
+    loadActivities();
+  }, [state, type]);
+
+  const loadActivities = () => {
     setActivities([]);
 
     api.query({
@@ -75,7 +77,7 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
         page: 0,
       }
     });
-  }, [state, type]);
+  }
 
   const onDelete = (activity: IActivity) => {
     api.query({
@@ -85,12 +87,12 @@ const Activity = ({state, type}: InferGetServerSidePropsType<typeof getServerSid
         Authorization: jwt?.access
       }
     });
-
     addNotification({
       title: 'Your project was removed',
       subtitle: '',
     });
-    router.push(`/activity?type=Personal&state=Published`);
+
+    setTimeout(loadActivities, 1000);
   }
 
   return (

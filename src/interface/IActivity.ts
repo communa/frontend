@@ -1,3 +1,5 @@
+import {EActivityType} from "./EActivityType";
+
 export type IActivitySearch = [
   IActivity[],
   number,
@@ -7,7 +9,7 @@ export interface IActivity {
   id: string;
   title: string;
   state: string;
-  type: string;
+  type: EActivityType;
   text: string;
   jobUrl: string;
   rateHour: number;

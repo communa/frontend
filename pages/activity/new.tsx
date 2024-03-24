@@ -1,11 +1,12 @@
 
 import Head from 'next/head';
+import Link from 'next/link';
+import {Chip} from '@mui/material';
+
 import {PageWrapper} from 'src/lib/Wrappers';
 import {APP_NAME} from 'src/config/consts'
 import {useAuth} from 'src/contexts/Auth';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import Link from 'next/link';
-import {Chip} from '@mui/material';
 
 const ActivityNew = () => {
   const {userAddress} = useAuth();

@@ -5,6 +5,7 @@ import {IActivity} from 'src/interface/IActivity';
 import {ActivityWrapper} from './Wrappers';
 import ActivityNav from './ActivityNav';
 import {Chip} from '@mui/material';
+import {EActivityType} from 'src/interface/EActivityType';
 
 interface ActivitySmallProps extends React.HTMLAttributes<HTMLElement> {
   activity: IActivity;
@@ -20,7 +21,7 @@ const ActivitySmall = ({activity}: ActivitySmallProps) => {
       activity.salary,
     ].filter(n => n),
   ];
-  const isPersonal = activity.type === 'Personal';
+  const isPersonal = activity.type === EActivityType.PERSONAL;
 
   return (
     <ActivityWrapper className='short'>

@@ -11,7 +11,9 @@ import {UserPageWrapper} from 'src/lib/Wrappers';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 import {useAuth} from 'src/contexts/Auth';
 
-export const getServerSideProps: GetServerSideProps<{user: IUser}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  user: IUser
+}> = async (context: GetServerSidePropsContext) => {
   const {address} = context.query;
   const response = await request({
     url: `${API_HOST}/api/user/${address}/address`,

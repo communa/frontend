@@ -4,10 +4,10 @@ import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePr
 import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-
-import {Editor} from '@tinymce/tinymce-react';
 import {useRouter} from 'next/router';
+
 import {Button, TextField} from '@mui/material';
+import {Editor} from '@tinymce/tinymce-react';
 import SaveIcon from '@mui/icons-material/Save';
 
 import {PageWrapper} from 'src/lib/Wrappers';
@@ -17,7 +17,9 @@ import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 
-export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  template: string
+}> = async (context: GetServerSidePropsContext) => {
   const template = fs.readFileSync(join(__dirname, '../../../../template-project.html')).toString();
 
   return {

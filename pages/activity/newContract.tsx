@@ -1,23 +1,25 @@
+import {useEffect, useRef, useState} from 'react';
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
-import {useContext, useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
-import {Editor} from '@tinymce/tinymce-react';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 import fs from 'fs';
+import {join} from 'path';
+
+import {Editor} from '@tinymce/tinymce-react';
 import {TextField} from '@mui/material';
 import Switch from '@mui/material/Switch';
-import Link from 'next/link';
-import {join} from 'path';
 
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
-import {AuthContext, useAuth} from 'src/contexts/Auth';
+import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
 
-
-export const getServerSideProps: GetServerSideProps<{template: string}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  template: string
+}> = async (context: GetServerSidePropsContext) => {
   const template = fs.readFileSync(join(__dirname, '../../../../template-contract.html')).toString();
 
   return {

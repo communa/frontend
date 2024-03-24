@@ -1,22 +1,25 @@
-import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
-import Head from 'next/head';
 import fs from 'fs';
 import {join} from 'path';
+import {useEffect, useRef, useState} from 'react';
+import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
+import {useRouter} from 'next/router';
+import Head from 'next/head';
+import {Editor} from '@tinymce/tinymce-react';
+import {Button, TextField} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
-import {useEffect, useRef, useState} from 'react';
-import {Editor} from '@tinymce/tinymce-react';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {IUser} from 'src/interface/IUser';
-import {useRouter} from 'next/router';
 import MenuLeft from 'src/lib/Layout/MenuLeft';
-import {Button, TextField} from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
 
-export const getServerSideProps: GetServerSideProps<{user: IUser, template: string}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  user: IUser,
+  template: string
+}> = async (context: GetServerSidePropsContext) => {
   const template = fs.readFileSync(join(__dirname, '../../../../../template-profile.html')).toString();
 
   const {address} = context.query;
