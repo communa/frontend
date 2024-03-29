@@ -248,15 +248,13 @@ const Time = () => {
                   const activity = activities.find(a => a.id === t.activityId);
 
                   if (activity) {
-                    const minutes = t.minutes * 10;
-                    const hoursTotal = (minutes - (minutes % 60)) / 60;
-                    const minutesTotal = minutes - (hoursTotal * 60);
+                    const hoursTotal = (t.minutes - (t.minutes % 60)) / 60;
+                    const minutesTotal = t.minutes - (hoursTotal * 60);
 
                     const minutesActive = t.minutesActive;
                     const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
                     const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
 
-                    const total = Number((activity?.rateHour) * (t.minutes * 10 / 60)).toFixed(1);
                     return (
                       <TableRow
                         key={activity.id}
@@ -265,12 +263,10 @@ const Time = () => {
                           <Link href={`/activity/${activity?.id}`}>
                             {activity?.title}
                           </Link>
-                          {/* &nbsp; {activity?.rateHour} */}
-                          {/* ={t.minutes * 10 / 60} */}
                         </TableCell>
                         <TableCell align="left">
                           <Chip
-                            label={`${total} USD`}
+                            label={`${t.rateTotal.toFixed(1)} USD`}
                             color="primary"
                             variant="filled"
                           />
@@ -278,7 +274,6 @@ const Time = () => {
                         <TableCell align="left">
                           {hoursTotal} hr<br />
                           {minutesTotal} min <br />
-                          {/* ({t.minutes * 10}) */}
                         </TableCell>
                         <TableCell align="left">
                           {hoursActiveTotal} hr<br />

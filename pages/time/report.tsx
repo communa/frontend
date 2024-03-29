@@ -4,8 +4,7 @@ import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-import {Button, Chip} from '@mui/material';
-import PrintIcon from '@mui/icons-material/Print';
+import {Chip} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,7 +15,6 @@ import TableRow from '@mui/material/TableRow';
 import {ITimeTotals} from 'src/interface/ITimeTotals';
 import {ITime} from 'src/interface/ITime';
 import {IActivity} from 'src/interface/IActivity';
-import {useNotifications} from 'src/contexts/Notifications';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {request} from 'src/Utils';
@@ -24,8 +22,7 @@ import {TimeReportWrapper} from 'src/lib/Wrappers';
 
 const TimeReport = () => {
   const router = useRouter();
-  const {addNotification} = useNotifications();
-  const {jwt} = useAuth();
+  const {jwt, userAddress} = useAuth();
 
   const {activityId} = router.query;
   const [report, setReport] = useState<{
@@ -60,14 +57,6 @@ const TimeReport = () => {
     setActivity(responseActivity.data);
   }
 
-  const printReport = () => {
-    print();
-    addNotification({
-      title: 'Printing report',
-      subtitle: '',
-    });
-  }
-
   return (
     <TimeReportWrapper>
       <Head>
@@ -90,23 +79,18 @@ const TimeReport = () => {
               </picture>
             </Link>
           </div>
-          <h1>{activity?.title}</h1>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="medium"
-            startIcon={<PrintIcon />}
-            onClick={() => printReport()}
-          >
-            Print
-          </Button>
+          <p>
+            <h1>{activity?.title}</h1>
+            <p>
+              Total: {report?.totals[0].rateTotal} USDT<br />
+              Wallet: {userAddress} / POLYGON
+            </p>
+          </p>
         </nav>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell align="left">Project</TableCell>
-                <TableCell align="left"></TableCell>
                 <TableCell align="left">Time total</TableCell>
                 <TableCell align="left">Time active</TableCell>
                 <TableCell align="left">Keyboard</TableCell>
@@ -116,10 +100,8 @@ const TimeReport = () => {
             </TableHead>
             <TableBody>
               {report && activity && report.totals.map((t: ITimeTotals) => {
-
-                const minutes = t.minutes * 10;
-                const hoursTotal = (minutes - (minutes % 60)) / 60;
-                const minutesTotal = minutes - (hoursTotal * 60);
+                const hoursTotal = (t.minutes - (t.minutes % 60)) / 60;
+                const minutesTotal = t.minutes - (hoursTotal * 60);
 
                 const minutesActive = t.minutesActive;
                 const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
@@ -130,26 +112,10 @@ const TimeReport = () => {
                     key={t.activityId}
                   >
                     <TableCell align="left">
-                      <Link href={`/activity/${activity?.id}`}>
-                        {activity.title}
-                      </Link>
+                      {hoursTotal} hr {minutesTotal} min
                     </TableCell>
                     <TableCell align="left">
-                      <Chip
-                        label={`${Number(activity?.rateHour) * t.minutes / 10} USD`}
-                        color="primary"
-                        variant="filled"
-                      />
-                    </TableCell>
-                    <TableCell align="left">
-                      {hoursTotal} hr<br />
-                      {minutesTotal} min <br />
-                      {/* ({t.minutes * 10}) */}
-                    </TableCell>
-                    <TableCell align="left">
-                      {hoursActiveTotal} hr<br />
-                      {minutesActiveTotal} min<br />
-                      {/* ({t.minutesActive}) */}
+                      {hoursActiveTotal} hr {minutesActiveTotal} min
                     </TableCell>
                     <TableCell align="left">{t.keyboardKeys}</TableCell>
                     <TableCell align="left">{t.mouseKeys}</TableCell>
@@ -196,14 +162,14 @@ const TimeReport = () => {
         </TableContainer>
         <p className="note">
           This report has been prepared by Communa Network using the Communa time tracking application.<br />
-          We utilize keyboard and mouse activity data to measure active time accurately.<br />
-          Only active time multiplied by the hourly rate is eligible for payment.<br />
+          We utilize keyboard and mouse activity data to measure active time accurately.
+          <br />
           http://communa.network
           <br />
           <br />
         </p>
       </main>
-    </TimeReportWrapper>
+    </TimeReportWrapper >
   );
 };
 

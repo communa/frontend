@@ -212,8 +212,6 @@ export const TimeReportWrapper = styled.div`
 
   nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
 
     #logo {
@@ -222,6 +220,7 @@ export const TimeReportWrapper = styled.div`
 
       picture {
         position: relative;
+        margin-right: 50px;
         img {
           width: 100px;
           height: 100px;
@@ -230,6 +229,7 @@ export const TimeReportWrapper = styled.div`
       }
     }
   }
+
   main {
     padding: 40px;
 
