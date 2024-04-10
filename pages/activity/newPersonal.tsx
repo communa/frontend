@@ -3,7 +3,6 @@ import {join} from 'path';
 import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
 import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import {useRouter} from 'next/router';
 
 import {Button, TextField} from '@mui/material';
@@ -41,7 +40,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
 
   useEffect(() => {
     if (!userAddress) {
-      router.push(`/login`);
+      router.push(`/`);
       addNotification({
         title: 'Authorisation is required',
         subtitle: '',
@@ -49,7 +48,9 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
     };
   }, []);
 
-  const onSaveAndEdit = async () => {
+  const onSaveAndEdit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     const text = editorRef.current.getContent();
     const res = await request({
       url: `${API_HOST}/api/activity`,
@@ -66,8 +67,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       }
     });
     console.log(res.headers.location);
-    // const id = res.headers.location.split('/')[3];
-    router.push(`/activity?type=Personal&state=Published`);
+    router.push(`/time`);
 
     addNotification({
       title: 'You\'ve added a new project',
@@ -91,35 +91,32 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       <main id="jobNew">
         <MenuLeft />
         <article>
-          <nav className="actions">
-            <h2>
-              New project
-            </h2>
-            <Button
-              variant='contained'
-              size='medium'
-              onClick={() => onSaveAndEdit()}
-              startIcon={<SaveIcon />}>
-              Save & Continue
-            </Button>
-          </nav>
-          <p>
-            You're initiating a new project for your personal requirements.<br />
-            Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job. Additionally, you cannot directly assign a freelancer.<br />
-            Or, if you wish to publish a contract, please click on the link for creating a new hourly contract &nbsp;
-            <Link href="/activity/newContract">
-              New hourly contract
-            </Link>
-          </p>
-          <br />
-          <form>
+          <form onSubmit={onSaveAndEdit}>
+            <nav className="actions">
+              <h2>
+                New project
+              </h2>
+              <Button
+                type='submit'
+                variant='contained'
+                size='medium'
+                startIcon={<SaveIcon />}>
+                Save & Continue
+              </Button>
+            </nav>
+            <p>
+              You're initiating a new project for your personal requirements.<br />
+              Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job. Additionally, you cannot directly assign a freelancer.<br />          </p>
+            <br />
             <TextField
+              required
               label="Title"
               variant="outlined"
               placeholder="Title"
               onChange={e => setTitle(e.target.value)}
             />
             <TextField
+              required
               label="Rate per hour in USD"
               variant="outlined"
               type='number'
@@ -131,6 +128,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
               apiKey={TINYMCE_KEY}
               onInit={(evt, editor) => (editorRef.current = editor)}
               initialValue={text}
+              onChange={e => setText(e.target.value)}
               init={{
                 height: 200,
                 menubar: false,
@@ -149,7 +147,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
           </form>
         </article>
       </main>
-    </PageWrapper >
+    </PageWrapper>
   );
 };
 

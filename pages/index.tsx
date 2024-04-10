@@ -114,7 +114,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
           <nav className="actions">
             <div>
               <h2>
-                {router.query.filter ? router.query.filter : "All Jobs"}
+                {router.query.filter ? router.query.filter : "Find work"}
               </h2>
               <ActivityNavJobs />
             </div>

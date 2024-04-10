@@ -68,8 +68,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         type: 'Contract',
       }
     });
-    const id = res.headers.location.split('/')[3];
-    router.push(`/activity/${id}/edit`);
+    router.push(`/time`);
 
     addNotification({
       title: 'You\'ve added a new job',

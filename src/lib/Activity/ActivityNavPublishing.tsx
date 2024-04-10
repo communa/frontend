@@ -6,9 +6,6 @@ const ActivityNavPublishing = () => {
 
   return (
     <nav className="links">
-      {/* <Link href="/activity">
-        View all
-      </Link> */}
       {userAddress && (
         <>
           <Link href="/activity?type=Personal&state=Published">

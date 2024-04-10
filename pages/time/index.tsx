@@ -4,14 +4,21 @@ import {useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import InfoIcon from '@mui/icons-material/Info';
+import PrintIcon from '@mui/icons-material/Print';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import PrintIcon from '@mui/icons-material/Print';
+import Collapse from '@mui/material/Collapse';
 import {Button, Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
 
 import {API_HOST, APP_NAME} from 'src/config/consts';
@@ -23,14 +30,17 @@ import {request} from 'src/Utils';
 import {IActivity} from 'src/interface/IActivity';
 import {TimePageWrapper} from 'src/lib/Wrappers';
 import {ITimeTotals} from 'src/interface/ITimeTotals';
+import {useNotifications} from 'src/contexts/Notifications';
 
 const Time = () => {
   const router = useRouter();
   const {data, state, query, url} = useContext(APIContext);
+  const [open, setOpen] = useState('');
 
   const [time, setTime] = useState<ITime[]>([]);
-  const [totals, setTotals] = useState([]);
+  const [totals, setTotals] = useState<ITimeTotals[]>([]);
   const [activities, setActivities] = useState<IActivity[]>([]);
+  const {addNotification} = useNotifications();
   const [page, setPage] = useState(0);
   const {jwt} = useAuth();
   const {activityId} = router.query;
@@ -129,6 +139,27 @@ const Time = () => {
     setTotals(response.data);
   }
 
+
+  const onDelete = async (activity: IActivity) => {
+    await request({
+      url: `${API_HOST}/api/activity/${activity.id}`,
+      method: 'DELETE',
+      headers: {
+        Authorization: jwt?.access
+      }
+    });
+    addNotification({
+      title: 'Your project was removed',
+      subtitle: '',
+    });
+
+    setTimeout(loadActivities, 1000);
+  }
+
+  const onMoreClick = (id: string) => {
+    id === open ? setOpen('') : setOpen(id);
+  }
+
   const onActivityChange = (event: any) => {
     const activityId = event.target.value;
 
@@ -175,21 +206,12 @@ const Time = () => {
               </FormControl>
             </p>
             <p>
-              <Link href="/activity?type=Personal&state=Published">
-                <Button
-                  variant="contained"
-                  color="primary"
-                >
-                  Projects
-                </Button>
-              </Link>
               <Link href={`/activity/newPersonal`}>
                 <Button
                   variant="contained"
                   color="primary"
-                  startIcon={<AddIcon />}
                 >
-                  Add project
+                  Start a project
                 </Button>
               </Link>
             </p>
@@ -198,6 +220,7 @@ const Time = () => {
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableCell sx={{borderBottom: "none"}} width="1%" />
                   <TableCell align="left">Project</TableCell>
                   <TableCell align="left"></TableCell>
                   <TableCell align="left" className="tooltip">
@@ -205,68 +228,91 @@ const Time = () => {
                       title="Refers to all the time since the start of the time tracking application"
                       placement="top"
                     >
-                      <span>Time total</span>
+                      <span>Time total<InfoIcon /></span>
                     </Tooltip>
                   </TableCell>
                   <TableCell align="left" className="tooltip">
                     <Tooltip
-                      title="Represents the recorded time using keyboard and mouse activity data"
+                      title="Represents active time within a ten-minute block of collected data"
                       placement="top"
                     >
-                      <span>Time active</span>
+                      <span>Time active<InfoIcon /></span>
                     </Tooltip>
                   </TableCell>
                   <TableCell width="10%" align="left" className="tooltip">
                     <Tooltip
-                      title="Counts keystrokes                      "
+                      title="Accurate measurement of keystrokes to assess typing productivity and time allocation"
                       placement="top"
                     >
-                      <span>Keyboard</span>
+                      <span>Keyboard <InfoIcon /></span>
                     </Tooltip>
                   </TableCell>
                   <TableCell width="10%" align="left" className="tooltip">
                     <Tooltip
-                      title="Track mouse clicks"
+                      title="Monitoring and recording of mouse clicks to evaluate task engagement and time spent on different activities"
                       placement="top"
                     >
-                      <span>Mouse</span>
+                      <span>Mouse<InfoIcon /></span>
                     </Tooltip>
                   </TableCell>
-                  <TableCell width="10%" align="left" className="tooltip">
+                  <TableCell width="15%" align="left" className="tooltip">
                     <Tooltip
-                      title="Tracks mouse movements"
+                      title="Tracking and analysis of mouse movements to understand workflow patterns and optimize productivity levels"
                       placement="top"
                     >
-                      <span>Mouse distance</span>
+                      <span>Mouse distance<InfoIcon /></span>
                     </Tooltip>
                   </TableCell>
-                  <TableCell width="1%" align="left"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {totals.map((t: ITimeTotals) => {
-                  const activity = activities.find(a => a.id === t.activityId);
+                {activities.map((activity: IActivity) => {
+                  let total = totals.find((t: ITimeTotals) => t.activityId === activity.id);
 
-                  if (activity) {
-                    const hoursTotal = (t.minutes - (t.minutes % 60)) / 60;
-                    const minutesTotal = t.minutes - (hoursTotal * 60);
+                  if (!total) {
+                    total = {
+                      activityId: activity.id,
+                      minutes: 0,
+                      minutesActive: 0,
+                      keyboardKeys: 0,
+                      mouseKeys: 0,
+                      mouseDistance: 0,
+                      rateHour: activity.rateHour,
+                      rateTotal: 0,
+                    }
+                  }
 
-                    const minutesActive = t.minutesActive;
-                    const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
-                    const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
+                  const hoursTotal = (total.minutes - (total.minutes % 60)) / 60;
+                  const minutesTotal = total.minutes - (hoursTotal * 60);
+                  const minutesActive = total.minutesActive;
+                  const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
+                  const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
 
-                    return (
+                  return (
+                    <>
                       <TableRow
                         key={activity.id}
+                        sx={{'& > *': {borderBottom: 'unset'}}}
                       >
+                        <TableCell sx={{borderBottom: "none"}} width="1%">
+                          <IconButton
+                            aria-label="expand row"
+                            size="small"
+                            onClick={() => onMoreClick(activity.id)}
+                          >
+                            {
+                              open === activity.id
+                                ? <KeyboardArrowUpIcon />
+                                : <KeyboardArrowDownIcon />
+                            }
+                          </IconButton>
+                        </TableCell>
                         <TableCell align="left" className="title">
-                          <Link href={`/activity/${activity?.id}`}>
-                            {activity?.title}
-                          </Link>
+                          {activity?.title}
                         </TableCell>
                         <TableCell align="left">
                           <Chip
-                            label={`${t.rateTotal.toFixed(1)} USD`}
+                            label={`${total.rateTotal.toFixed(1)} USD`}
                             color="primary"
                             variant="filled"
                           />
@@ -278,26 +324,67 @@ const Time = () => {
                         <TableCell align="left">
                           {hoursActiveTotal} hr<br />
                           {minutesActiveTotal} min<br />
-                          {/* ({t.minutesActive}) */}
                         </TableCell>
-                        <TableCell align="left">{t.keyboardKeys}</TableCell>
-                        <TableCell align="left">{t.mouseKeys}</TableCell>
-                        <TableCell align="left">{t.mouseDistance}</TableCell>
-                        <TableCell width="1%" align="right">
-                          <Link
-                            href={`/time/report?activityId=${activity?.id}`}
-                          >
-                            <Button
-                              size="small"
-                              variant='outlined'
-                              startIcon={<PrintIcon />}>
-                              Invoice
-                            </Button>
-                          </Link>
+                        <TableCell align="left">{total.keyboardKeys}</TableCell>
+                        <TableCell align="left">{total.mouseKeys}</TableCell>
+                        <TableCell align="left">{total.mouseDistance}</TableCell>
+                      </TableRow >
+                      <TableRow>
+                        <TableCell
+                          sx={{borderBottom: "none"}}
+                          style={{paddingBottom: 0, paddingTop: 0}}
+                          colSpan={12}
+                        >
+                          <Collapse in={open === activity.id} timeout="auto" unmountOnExit>
+                            <Box sx={{margin: 1}}>
+                              <div className="full">
+                                <div className="top">
+                                  <div>
+                                    <p>
+                                      Started at {moment(activity.createdAt).format('LLL')}
+                                    </p>
+                                    <p>
+                                      {activity.state} | {activity.type}
+                                    </p>
+                                    <p>
+                                      {activity.rateHour} USD/hr.
+                                    </p>
+                                    <br />
+                                    <div className="body" dangerouslySetInnerHTML={{
+                                      __html: activity.text
+                                    }} />
+                                  </div>
+                                  <div className="actions">
+                                    <a
+                                      target='_blank'
+                                      href={`/time/report?activityId=${activity?.id}`}
+                                    >
+                                      <Button
+                                        size="small"
+                                        variant='text'
+                                        startIcon={<PrintIcon />}>
+                                        Invoice
+                                      </Button>
+                                    </a>
+                                    <Link href={`/activity/${activity.id}/edit`}>
+                                      <Button variant='text' color='info' startIcon={<EditIcon />}>
+                                        Edit
+                                      </Button>
+                                    </Link>
+                                    <Button
+                                      onClick={() => onDelete(activity)}
+                                      variant='text'
+                                      startIcon={<DeleteIcon />}
+                                    >Delete</Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </Box>
+                          </Collapse>
                         </TableCell>
                       </TableRow>
-                    )
-                  }
+                    </>
+                  )
                 })}
               </TableBody>
             </Table>
@@ -351,7 +438,7 @@ const Time = () => {
           </TableContainer>
         </article>
       </main>
-    </TimePageWrapper>
+    </TimePageWrapper >
   );
 };
 

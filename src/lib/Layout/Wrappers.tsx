@@ -123,9 +123,10 @@ export const HeaderSideWrapper = styled.aside`
       flex-direction: column;  
     
       h4 {
-        font-size: 18px;
+        font-size: 16px;
         margin-top: 30px;
-        color: #5586d1;
+        color: rgb(85, 134, 209);
+
         a {
           color: #5586d1;
         }
@@ -144,7 +145,7 @@ export const HeaderSideWrapper = styled.aside`
         gap: 2px;
         margin-top: 3px;
         max-width: 250px;
-        font-size: 18px;
+        font-size: 16px;
         
         &.inline {
           flex-direction: row;

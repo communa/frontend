@@ -52,20 +52,18 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
               </Link>
             )}
           </nav>
-          <form>
-            <h3>Name</h3>{user.userName}<br />
-            <h3>Company</h3>{user.company}<br />
-            <h3>Twitter</h3>{user.twitter}<br />
-            <h3>LinkedIn</h3>{user.linkedIn}<br />
-            <h3>Telegram</h3>{user.telegram}<br />
-            <h3>Bio</h3>
-            <div className="body" dangerouslySetInnerHTML={{
-              __html: user.bio
-            }} />
-          </form>
+          <h3>Name</h3>{user.userName}<br />
+          <h3>Company</h3>{user.company}<br />
+          <h3>Twitter</h3>{user.twitter}<br />
+          <h3>LinkedIn</h3>{user.linkedIn}<br />
+          <h3>Telegram</h3>{user.telegram}<br />
+          <h3>Bio</h3>
+          <div className="body" dangerouslySetInnerHTML={{
+            __html: user.bio
+          }} />
         </article>
       </main >
-    </UserPageWrapper>
+    </UserPageWrapper >
   );
 };
 

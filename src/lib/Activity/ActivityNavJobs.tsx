@@ -10,17 +10,13 @@ const ActivityNavJobs = () => {
       <Link href="/">
         View All
       </Link>
-      {userAddress && (
-        <>
-          {JOB_KEYWORDS.map(k => {
-            return (
-              <Link href={`/?filter=${k}`} key={k}>
-                {k}
-              </Link>
-            );
-          })}
-        </>
-      )}
+      {JOB_KEYWORDS.map(k => {
+        return (
+          <Link href={`/?filter=${k}`} key={k}>
+            {k}
+          </Link>
+        );
+      })}
     </nav>
   )
 }

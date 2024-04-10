@@ -213,10 +213,10 @@ export const TimeReportWrapper = styled.div`
   nav {
     display: flex;
     margin-bottom: 20px;
+    align-items: center;
 
     #logo {
       cursor: pointer;
-      margin-bottom: 20px;
 
       picture {
         position: relative;
@@ -227,6 +227,16 @@ export const TimeReportWrapper = styled.div`
           border-radius: 50%;
         }
       }
+    }
+    .heading {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
@@ -329,18 +339,36 @@ export const TimePageWrapper = styled.div`
     table {
       .tooltip {
         cursor: pointer;
+        span {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          svg {
+            font-size: 14px;
+          }
+        }
       }
       .title {
-        a {
-          font-weight: 600;
-          font-size: 16px;
-          /* text-decoration: underline; */
-          color: #5586d1;
+        font-weight: 600;
+        font-size: 16px;
+        color: #5586d1;
+      }
+      .full {
+        padding: 20px 0 50px 60px;
+        margin-right: -12px;
+
+        .top {
+          display: flex;
+          justify-content: space-between;
+        }
+        .actions {
+          display: flex;
+          gap: 30px;
+          align-items: center;
         }
       }
     }
   }
-
   .activeMinutes {
     &.__1 {
       background: rgba(255, 98, 98, 0.5);

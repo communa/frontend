@@ -1,14 +1,14 @@
-import { ConnectButton as CB } from '@rainbow-me/rainbowkit';
+import {ConnectButton as CB} from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
 import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
-import { ConnectButtonWrapper } from './Wrappers';
+import {ConnectButtonWrapper} from './Wrappers';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 interface ConnectButtonProps extends React.HTMLAttributes<HTMLElement> {
   size: string;
 }
 
-export const ConnectButton = ({ size }: ConnectButtonProps) => {
+export const ConnectButton = ({size}: ConnectButtonProps) => {
   return (
     <ConnectButtonWrapper className={size}>
       <CB.Custom>
@@ -45,7 +45,11 @@ export const ConnectButton = ({ size }: ConnectButtonProps) => {
               {(() => {
                 if (!connected) {
                   return (
-                    <button onClick={openConnectModal} type="button">
+                    <button
+                      id="authLogin"
+                      onClick={openConnectModal}
+                      type="button"
+                    >
                       <Image
                         priority
                         src={MetaMaskFox}
@@ -53,7 +57,7 @@ export const ConnectButton = ({ size }: ConnectButtonProps) => {
                         width={35}
                         height={35}
                       />
-                      Connect Wallet
+                      Sign in with Web3
                     </button>
                   );
                 }
@@ -67,7 +71,7 @@ export const ConnectButton = ({ size }: ConnectButtonProps) => {
                 }
 
                 return (
-                  <div style={{ display: 'flex', gap: 12 }}>
+                  <div style={{display: 'flex', gap: 12}}>
                     <button onClick={openAccountModal} type="button" className="small">
                       <LogoutIcon /> Exit {account.displayName}
                     </button>

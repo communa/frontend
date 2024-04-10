@@ -75,7 +75,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
       subtitle: '',
     });
 
-    router.push(`/activity/${activity.id}`);
+    router.push(`/time`);
   };
 
   return (

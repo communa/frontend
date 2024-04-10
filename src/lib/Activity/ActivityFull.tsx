@@ -29,7 +29,6 @@ const ActivityFull = ({activity}: ActivityShortProps) => {
     <ActivityWrapper className="full">
       <ActivityNav activity={activity} />
       <article key={activity.id}>
-
         <p className="date">
           {activity.user && (
             <>

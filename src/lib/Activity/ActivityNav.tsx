@@ -45,11 +45,6 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
 
   return (
     <nav>
-      <Link href={`/time?activityId=${activity.id}`}>
-        <Button variant='contained' startIcon={<TimerIcon />}>
-          Timesheets
-        </Button>
-      </Link >
       <Link href={`/activity/${activity.id}/edit`}>
         <Button variant='outlined'>
           Edit

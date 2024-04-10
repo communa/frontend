@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-import {Chip} from '@mui/material';
+import {Button} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -57,6 +57,12 @@ const TimeReport = () => {
     setActivity(responseActivity.data);
   }
 
+  const printReport = () => {
+    typeof window !== "undefined"
+      ? window.print()
+      : false;
+  }
+
   return (
     <TimeReportWrapper>
       <Head>
@@ -68,7 +74,7 @@ const TimeReport = () => {
       <main>
         <nav>
           <div id="logo">
-            <Link href='/time' id="logo">
+            <Link href="https://communa.network" id="logo">
               <picture>
                 <img
                   src="/logo.png"
@@ -79,13 +85,22 @@ const TimeReport = () => {
               </picture>
             </Link>
           </div>
-          <p>
+          <div className="heading">
             <h1>{activity?.title}</h1>
             <p>
               Total: {report?.totals[0].rateTotal} USDT<br />
               Wallet: {userAddress} / POLYGON
             </p>
-          </p>
+          </div>
+          <div className="action">
+            <Button
+              size="small"
+              variant='outlined'
+              onClick={() => printReport()}
+            >
+              Print | Save as PDF
+            </Button>
+          </div>
         </nav>
         <TableContainer>
           <Table>
