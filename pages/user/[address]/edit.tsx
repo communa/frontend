@@ -5,11 +5,10 @@ import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePr
 import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
-import {Button, TextField} from '@mui/material';
-import SaveIcon from '@mui/icons-material/Save';
+import {TextField} from '@mui/material';
 
 import {request} from 'src/Utils';
-import {PageWrapper} from 'src/lib/Wrappers';
+import {PageWrapper, UserPageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
@@ -90,81 +89,89 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
         <title>{userAddress} - Web3 Jobs - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main id="userEdit">
         <MenuLeft />
         <article>
-          <nav className="actions">
-            <h2>Edit profile</h2>
-            <Button variant='contained' onClick={() => onEdit()} startIcon={<SaveIcon />}>
-              Save and Continue
-            </Button>
-          </nav>
-          <form>
-            <TextField
-              label="Address"
-              variant="outlined"
-              placeholder="Name"
-              disabled
-              value={userAddress}
-            />
-            <TextField
-              label="Name"
-              variant="outlined"
-              placeholder="Name"
-              defaultValue={userName}
-              onChange={e => setUserName(e.target.value)}
-            />
-            <TextField
-              label="Company"
-              variant="outlined"
-              placeholder="Company"
-              defaultValue={company}
-              onChange={e => setCompany(e.target.value)}
-            />
-            <TextField
-              label="LinkedIn"
-              variant="outlined"
-              placeholder="LinkedIn"
-              defaultValue={linkedIn}
-              onChange={e => setLinkedIn(e.target.value)}
-            />
-            <TextField
-              label="Twitter"
-              variant="outlined"
-              placeholder="Twitter"
-              defaultValue={twitter}
-              onChange={e => setTwitter(e.target.value)}
-            />
-            <TextField
-              label="Telegram"
-              variant="outlined"
-              placeholder="Telegram"
-              defaultValue={telegram}
-              onChange={e => setTelegram(e.target.value)}
-            />
-            <label>Bio</label>
-            <Editor
-              apiKey={TINYMCE_KEY}
-              onInit={(evt, editor) => (editorRef.current = editor)}
-              initialValue={bio}
-              init={{
-                // height: 300,
-                menubar: false,
-                plugins: [
-                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-                ],
-                toolbar: 'undo redo | blocks | ' +
-                  'bold italic forecolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | help',
-                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-              }}
-            />
-          </form>
+          <UserPageWrapper>
+            <nav className="actions">
+              <h2>Edit profile</h2>
+              <button className="apply small" onClick={() => onEdit()} >
+                Save and Continue
+              </button>
+            </nav>
+            <form>
+              <div className="userProfile __edit">
+                <div className="fields">
+                  <TextField
+                    label="Address"
+                    variant="outlined"
+                    placeholder="Name"
+                    disabled
+                    value={userAddress}
+                  />
+                  <TextField
+                    label="Username"
+                    variant="outlined"
+                    placeholder="Username"
+                    defaultValue={userName}
+                    onChange={e => setUserName(e.target.value)}
+                  />
+                  <TextField
+                    label="Company"
+                    variant="outlined"
+                    placeholder="Company"
+                    defaultValue={company}
+                    onChange={e => setCompany(e.target.value)}
+                  />
+                  <TextField
+                    label="LinkedIn"
+                    variant="outlined"
+                    placeholder="LinkedIn"
+                    defaultValue={linkedIn}
+                    onChange={e => setLinkedIn(e.target.value)}
+                  />
+                  <TextField
+                    label="Twitter"
+                    variant="outlined"
+                    placeholder="Twitter"
+                    defaultValue={twitter}
+                    onChange={e => setTwitter(e.target.value)}
+                  />
+                  <TextField
+                    label="Telegram"
+                    variant="outlined"
+                    placeholder="Telegram"
+                    defaultValue={telegram}
+                    onChange={e => setTelegram(e.target.value)}
+                  />
+                </div>
+                <div className="bio">
+                  <h3>Bio</h3>
+                  <Editor
+                    apiKey={TINYMCE_KEY}
+                    onInit={(evt, editor) => (editorRef.current = editor)}
+                    initialValue={bio}
+                    init={{
+                      // height: 300,
+                      menubar: false,
+                      plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                      ],
+                      toolbar: 'undo redo | blocks | ' +
+                        'bold italic forecolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
+          </UserPageWrapper>
         </article>
       </main>
     </PageWrapper>

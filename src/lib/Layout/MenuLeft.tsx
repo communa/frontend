@@ -1,29 +1,29 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import NextLink from 'next/link';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
-
-import {useAuth} from 'src/contexts/Auth';
-
-import {ConnectButtonWrapper, HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
-import {ConnectButton} from 'src/lib/Layout/ConnectButton';
-import {Button, IconButton} from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import {IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import {JOB_KEYWORDS} from 'src/config/consts';
-import DownloadIcon from '@mui/icons-material/Download';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useRouter} from 'next/router';
+
+import {useAuth} from 'src/contexts/Auth';
+import {ConnectButtonWrapper, HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
+import {ConnectButton} from 'src/lib/Layout/ConnectButton';
+import {JOB_KEYWORDS} from 'src/config/consts';
 
 export default function MenuLeft() {
   const [isOpen, setIsOpen] = useState(false);
+  const [menu, setMenu] = useState('');
   const {userAddress, userLogOut} = useAuth();
   const router = useRouter();
   const {redirect} = router.query;
 
   let addressShort = '';
+  let isHide = false;
 
   if (userAddress) {
     addressShort = `${userAddress.slice(0, 4)}...${userAddress.slice(38, 44)}`;
@@ -36,9 +36,24 @@ export default function MenuLeft() {
     }
   }, [redirect]);
 
+  const showMenu = (id: string) => {
+    isHide = false;
+    setMenu(id);
+    console.log(id);
+  }
+
+  const hideMenu = () => {
+    isHide = true;
+    setTimeout(() => {
+      if (isHide) {
+        setMenu('');
+      }
+    }, 1000);
+  }
+
   return (
     <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
-      <header>
+      <nav>
         <div className="logo">
           <Link href="https://communa.network">
             <picture>
@@ -51,111 +66,308 @@ export default function MenuLeft() {
             </picture>
           </Link>
           <span>
-            <ConnectButton size={'small'} />
+            <ConnectButton />
           </span>
-          <IconButton
-            aria-label="delete"
-            size="small"
-            className="menu"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? (
-              <CloseIcon fontSize="inherit" />
-            ) : (
-              <MenuIcon fontSize="inherit" />
-            )}
-          </IconButton>
         </div>
-        <nav onClick={() => setIsOpen(false)}>
-
+        <ul className="desktop">
           {userAddress && (
-            <>
-              <h4>
-                <Link href="/time">
-                  Dashboard
-                </Link>
-              </h4>
-              <ul>
-                <li>
-                  <Link href={`/time`}>
-                    Timesheets
-                  </Link>
-                </li>
-                <li>
-                  <Link href={`/user/${userAddress}`}>
-                    Profile
-                  </Link>
-                </li>
-              </ul>
-            </>
-          )}
-
-          <ul>
-            <h4>
-              <Link href="/">
-                Find Work
+            <li
+              onMouseEnter={() => showMenu('dashboard')}
+              onMouseLeave={() => hideMenu()}
+              className={menu === 'dashboard' ? 'active' : ''}
+            >
+              <Link href="/time">
+                Dashboard
               </Link>
-            </h4>
+            </li>
+          )}
+          <li
+            onMouseEnter={() => showMenu('help')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'help' ? 'active' : ''}
+          >
+            <Link href="https://communa.network/help">
+              Help
+            </Link>
+          </li>
+          <li
+            onMouseEnter={() => showMenu('investor')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'investor' ? 'active' : ''}
+          >
+            <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
+              Investors
+            </a>
+          </li>
+          <li
+            onMouseEnter={() => showMenu('developer')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'developer' ? 'active' : ''}
+          >
+            <Link href="https://github.com/communa">
+              Developers
+            </Link>
+          </li>
+          <li
+            onMouseEnter={() => showMenu('marketplace')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'marketplace' ? 'active' : ''}
+          >
+            <Link href="/">
+              Marketplace
+            </Link>
+          </li>
+          <li>
+            <a href="https://communa.network/download">
+              Download v0.6.1
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/communa" target="_blank" rel="noreferrer">
+              <GitHubIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+              <TwitterIcon />
+            </a>
+          </li>
+          <li>
+            <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
+              <TelegramIcon />
+            </a>
+          </li>
+        </ul>
+        <div className="auth">
+          {
+            addressShort ? (
+              <ConnectButtonWrapper>
+                <button type="button" onClick={() => userLogOut()}>
+                  <LogoutIcon /> Disconnect {addressShort}
+                </button>
+              </ConnectButtonWrapper>
+            ) : (
+              <ConnectButton />
+            )
+          }
+        </div>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          className="menu"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <CloseIcon fontSize="inherit" />
+          ) : (
+            <MenuIcon fontSize="inherit" />
+          )}
+        </IconButton>
+      </nav>
+
+      {isOpen && (
+        <div id="mobileMenu">
+          <h4>Dashboard</h4>
+          <ul>
+            <li>
+              <Link href={`/time`}>
+                Your projects
+              </Link>
+            </li>
+            <li>
+              <Link href={`/user/${userAddress}`}>
+                Profile
+              </Link>
+            </li>
+          </ul>
+          <h4>Marketplace</h4>
+          <ul>
             {JOB_KEYWORDS.map((k, i) => {
               return (
                 <li key={i}>
-                  <Link href={`/?filter=${k}`}>
+                  <Link href={`https://app.communa.network/?filter=${k}`}>
                     {k}
                   </Link>
                 </li>
               );
             })}
           </ul>
-          <h4>
-            <Link href="https://communa.network/help">
-              Help
-            </Link>
-          </h4>
+          <h4>Help</h4>
           <ul>
             <li>
               <Link href="https://communa.network/help">
-                How it works
+                FAQ
               </Link>
             </li>
             <li>
               <Link href="https://communa.network/help">
-                What is wallet
+                How it works?
+              </Link>
+            </li>
+            <li>
+              <Link href="https://communa.network/help">
+                What is wallet?
               </Link>
             </li>
           </ul>
-          <br />
-          <br />
-          <br />
-        </nav>
-        <footer>
-          {addressShort ? (
-            <ConnectButtonWrapper className='small'>
-              <button type="button" className="small" onClick={() => userLogOut()}>
-                <LogoutIcon /> Exit {addressShort}
-              </button>
-            </ConnectButtonWrapper>
-          ) : (
-            <ConnectButton size={'small'} />
-          )}
-          <NextLink href="https://communa.network/download" passHref>
-            <Button variant="outlined" className="downloadTimeTracker">
-              <DownloadIcon /> Download TimeTracker
-            </Button>
-          </NextLink>
-          <p className="copyright">
-            Copyright © 2024 Communa
-
-            <span>
-              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
-                <TwitterIcon />
+          <h4>Investor</h4>
+          <ul>
+            <li>
+              <a href="https://communa.network/roadmap">
+                Roadmap
               </a>
+            </li>
+            <li>
+              <a href="https://communa.network/litepaper">
+                Litepaper
+              </a>
+            </li>
+            <li>
+              <a href="https://assets.communa.network/PitchDeck.html">
+                Pitch Deck
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
+                Business Inquiry
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.google.com/forms/d/1-NVkDj1AU3p6hcUbDprqFAbZ0uj9rkJciwd0eRwZpgA">
+                Utility Token
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hello@communa.network" target="_blank" rel="noreferrer">
+                Email Us
+              </a>
+            </li>
+          </ul>
+          <h4>Social</h4>
+          <ul>
+            <li>
               <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
-                <TelegramIcon />
+                Telegram
               </a>
-            </span>
-          </p>
-        </footer>
-      </header>
-    </HeaderSideWrapper>
+            </li>
+            <li>
+              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+                Twitter / X
+              </a>
+            </li>
+          </ul>
+          <h4>Developer</h4>
+          <ul>
+            <li>
+              <a href="https://app.communa.network/swagger/" target="_blank" rel="noreferrer">
+                API
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/communa" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+
+      <div id="downMenu" className={menu} onMouseEnter={() => showMenu(menu)} onMouseLeave={() => hideMenu()}>
+        {menu === 'marketplace' && (
+          <ul>
+            {JOB_KEYWORDS.map((k, i) => {
+              return (
+                <li key={i}>
+                  <Link href={`https://app.communa.network/?filter=${k}`}>
+                    {k}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        {menu === 'dashboard' && (
+          <ul>
+            <li>
+              <Link href={`/time`}>
+                Your projects
+              </Link>
+            </li>
+            <li>
+              <Link href={`/user/${userAddress}`}>
+                Profile
+              </Link>
+            </li>
+          </ul>
+        )}
+        {menu === 'developer' && (
+          <ul>
+            <li>
+              <a href="https://github.com/communa">
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://app.communa.network/swagger/">
+                API
+              </a>
+            </li>
+          </ul>
+        )}
+        {menu === 'investor' && (
+          <ul>
+            <li>
+              <a href="https://communa.network/roadmap">
+                Roadmap
+              </a>
+            </li>
+            <li>
+              <a href="https://communa.network/litepaper">
+                Litepaper
+              </a>
+            </li>
+            <li>
+              <a href="https://assets.communa.network/PitchDeck.html">
+                Pitch Deck
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
+                Business Inquiry
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.google.com/forms/d/1-NVkDj1AU3p6hcUbDprqFAbZ0uj9rkJciwd0eRwZpgA">
+                Utility Token
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hello@communa.network" target="_blank" rel="noreferrer">
+                Email Us
+              </a>
+            </li>
+          </ul>
+        )}
+        {menu === 'help' && (
+          <ul>
+            <li>
+              <Link href="https://communa.network/help">
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link href="https://communa.network/help">
+                How it works?
+              </Link>
+            </li>
+            <li>
+              <Link href="https://communa.network/help">
+                What is wallet?
+              </Link>
+            </li>
+          </ul>
+        )}
+      </div>
+    </HeaderSideWrapper >
   )
 }

@@ -19,4 +19,6 @@ export interface IUser {
   instagram: string;
   youtube: string;
   telegram: string;
+  whatsapp: string;
+  github: string;
 }

@@ -217,6 +217,14 @@ a:hover {
     background: #8392eb;
     transform: scale(100%);
   }
+  &.small {
+    text-transform: inherit;
+    font-size: 18px;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+  }
 }
 
 main {

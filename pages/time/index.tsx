@@ -180,7 +180,7 @@ const Time = () => {
         <title>Timesheets - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main id="timesheets">
         <MenuLeft />
@@ -207,12 +207,9 @@ const Time = () => {
             </p>
             <p>
               <Link href={`/activity/newPersonal`}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                >
+                <button className="apply small">
                   Start a project
-                </Button>
+                </button>
               </Link>
             </p>
           </nav>

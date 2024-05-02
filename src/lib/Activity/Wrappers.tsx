@@ -74,6 +74,9 @@ export const ActivityWrapper = styled.div`
       }
     }
   }
+  .apply {
+    margin-top: 30px;
+  }
   @media only screen and (max-width: 700px) {
     article {
       width: 100%;

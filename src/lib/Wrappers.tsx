@@ -204,7 +204,6 @@ export const AuthTimeTrackerWrapper = styled.div`
   }    
 `
 
-
 export const TimeReportWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -304,9 +303,12 @@ export const TimePageWrapper = styled.div`
   main {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 320px auto;
+    background: #000;
     
     > article {
+      border-radius: 25px;
+      background: #fff;
+
       padding: 80px 100px;
       display: flex;
       flex-direction: column;
@@ -408,16 +410,19 @@ export const TimePageWrapper = styled.div`
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
-      width: calc(100vw - 40px);
+      width: calc(100vw);
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      padding-top: 70px;
+      padding: 0;
+
+      header {
+        padding: 10px;
+      }
 
       > article {
         margin: inherit;
         width: 100%;
-        padding: 20px 0;
+        padding: 20px;
         nav {
           h1 {
             font-size: 24px;
@@ -435,13 +440,18 @@ export const PageWrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
+  background: #000;
 
   main {
-    display: grid;
+    display: flex;
     min-height: 100vh;
-    grid-template-columns: 320px auto;
+    flex-direction: column; 
     
     > article {
+      border-radius: 25px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background: #fff;
       padding: 80px 100px;
       display: flex;
       flex-direction: column;
@@ -490,12 +500,12 @@ export const PageWrapper = styled.div`
         &.links {
           margin-bottom: 0;
           a {
-            color: #777;
+            color: #666;
           }
         }
       }
       .noResults {
-        color: #777;
+        color: #fff;
         font-size: 18px;
       }
     }
@@ -560,24 +570,28 @@ export const PageWrapper = styled.div`
       }
     }    
   }
-
-  
   
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
-      width: calc(100vw - 40px);
+      width: calc(100vw);
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      padding-top: 70px;
-      margin-bottom: 100px;
+      margin-bottom: 0;
+      padding-bottom: 0;
+
+      header {
+        padding: 10px;
+      }
 
       nav.actions {
         flex-direction: column;
         align-items: start;
         margin-bottom: 30px;
-
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
         h2 {
           font-size: 24px;
           margin-bottom: 2px;
@@ -586,74 +600,143 @@ export const PageWrapper = styled.div`
     
       > article {
         margin: inherit;
-        width: 100%;
-        padding: 20px 0;
+        width: auto;
+        padding: 20px;
       }
     }
   }
 `;
 
 export const UserPageWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  width: 100%;
-  height: 100vh;
-  overflow-y: scroll;
-
-  main {
-    display: grid;
-    min-height: 100vh;
-    grid-template-columns: 320px auto;
+  h3 {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
     
-    > article {
-      padding: 80px 100px;
+    h2 {
+      font-size: 22px;
+    }
+  }
+  .userProfile {
+    display: flex;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    
+    &.__edit {
+      margin-top: 20px;
+    }
+
+    .fields {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      flex: 1;
-      
+      padding-right: 100px;
+      font-size: 20px;
+
       h3 {
-        margin-top: 20px;
-        font-size: 18px;
-      }
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        
-        h2 {
-          font-size: 22px;
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #555;
+
+        &:first-of-type {
+          margin-top: 0;
         }
-      }      
+      }
+      > p {
+        font-weight: 600;
+      }
+      a {
+        color: #1976d2;
+        font-weight: 600;
+      }
+      .social {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+
+        p {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          svg {
+            margin-right: 10px;
+            font-size: 30px;
+            color: #555;
+          }
+        }
+      }
+    }
+    .bio {
+      flex: 1;
+      background: #eee;
+      padding: 40px;
+      border-radius: 50px;
+
+      h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
     }
   }
 
   @media only screen and (max-width: 700px) {
-    main {
-      margin: 0 auto;
-      width: calc(100vw - 40px);
+    nav {
+      flex-direction: column;
+      align-items: baseline !important;
+      margin-bottom: 0;
+
+      h2 {
+        display: none;
+      }
+    }
+    h2 {
+      font-size: 18px;
+    }
+
+    .userProfile {
+      margin-top: 0;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      padding-top: 70px;
+      padding-right: 0;
 
-      > article {
-        margin: inherit;
-        width: 100%;
-        padding: 20px 0;
-        margin-top: 10px;
-        
-        nav {
-          flex-direction: column;
-          align-items: start;
-          margin-bottom: 0;
+      .fields {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: 0;
 
-          h2 {
-            font-size: 14px;
-            margin-bottom: 20px;
+        p {
+          font-size: 18px;
+        }
+        h3 {
+          font-size: 16px;
+
+          &:first-of-type {
+            margin-top: 0;
           }
         }
+        a {
+          color: #1976d2;
+          text-decoration: underline;
+        }
+        p {
+          max-width: calc(100vw - 70px);
+          overflow: hidden;
+        }
+        .social {
+          margin-top: 20px;
+        }        
+      }
+      .bio {
+        margin-top: 20px;
       }
     }
   }    

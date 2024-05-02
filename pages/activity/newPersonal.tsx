@@ -86,7 +86,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobNew">
         <MenuLeft />

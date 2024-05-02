@@ -69,7 +69,7 @@ const TimeReport = () => {
         <title>Report {activity?.title} - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <nav>

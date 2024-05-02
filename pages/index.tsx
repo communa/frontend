@@ -102,11 +102,11 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
   return (
     <PageWrapper onScroll={(e) => onScroll(e)}>
       <Head>
-        <title>Web3 Jobs - {APP_NAME}</title>
+        <title>Find Work - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={APP_NAME} />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <MenuLeft />

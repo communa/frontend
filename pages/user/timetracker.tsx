@@ -132,7 +132,7 @@ const AuthTimeTracker = () => {
         <title>TimeTracker - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <NextLink href={userAddress ? '/time' : '/'} passHref>
@@ -144,7 +144,7 @@ const AuthTimeTracker = () => {
         <section>
           {body}
           {!userAddress && (
-            <ConnectButton size="largeWhite" />
+            <ConnectButton />
           )}
         </section>
         <p className="note">

@@ -30,7 +30,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
-        <link rel="icon" href="/logo-testnet.png" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <MenuLeft />
