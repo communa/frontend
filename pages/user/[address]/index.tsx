@@ -6,7 +6,7 @@ import {request} from 'src/Utils';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {IUser} from 'src/interface/IUser';
 import {PageWrapper, UserPageWrapper} from 'src/lib/Wrappers';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 import {useAuth} from 'src/contexts/Auth';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -45,7 +45,7 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <MenuLeft />
+        <MainMenu />
         <article>
           <UserPageWrapper>
             <nav className="action">

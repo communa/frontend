@@ -6,7 +6,7 @@ import {Chip} from '@mui/material';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {APP_NAME} from 'src/config/consts'
 import {useAuth} from 'src/contexts/Auth';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 
 const ActivityNew = () => {
   const {userAddress} = useAuth();
@@ -25,7 +25,7 @@ const ActivityNew = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobNew">
-        <MenuLeft />
+        <MainMenu />
         <article>
           <div className="projectType">
             <Link href="/activity/newPersonal">

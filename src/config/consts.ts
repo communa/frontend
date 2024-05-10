@@ -4,6 +4,14 @@ let api = 'http://0.0.0.0:4000'
 api = 'https://app.communa.network';
 // }
 
+
+export const DOWNLOAD = {
+    version: '0.6.1',
+    windows: 'https://assets.communa.network/Communa_TimeTracker_0.6.1-x86_64.exe',
+    linux: 'https://assets.communa.network/Communa_TimeTracker_0.6.1-x86_64.AppImage',
+    mac: 'https://assets.communa.network/Communa_TimeTracker_0.6.1-universal.dmg',
+};
+
 export const API_HOST = api;
 export const APP_NAME = 'Communa Network';
 export const APP_TITLE = 'communa.network';

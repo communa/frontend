@@ -9,16 +9,17 @@ export const ConnectButtonWrapper = styled.div`
     font-size: 16px !important;
     border-radius: 5px;
     display: flex;
-    text-transform: capitalize;
     align-items: center;
     transition: 0.125s ease;
-
     height: 37px;
-    font-size: 14px !important;
+    font-size: 16px !important;
     font-weight: 500;
     padding: 10px 24px;
     transform: none;
     border-radius: 10px;
+    min-width: 200px;
+    align-items: center;
+    justify-content: center;
 
     &:disabled {
       color: #aaa;
@@ -30,13 +31,14 @@ export const ConnectButtonWrapper = styled.div`
       background-color: rgba(19 29 47 / 100%);
     }
     svg {
-      margin-right: 5px;
-      font-size: 18px;      
-    }    
-  }
-  &.largeWhite {
-    button {
-      background: #fff;
+      margin-right: 10px;
+      font-size: 20px;
+    }
+    &.ton {
+      svg {
+        color: #08c;
+        font-size: 34px;
+      }
     }
   }
 `;
@@ -230,7 +232,7 @@ export const HeaderSideWrapper = styled.header`
         p,
         a {
           color: #fff;
-          font-size: 38px;
+          font-size: 32px;
           font-weight: 500;
 
           &:hover {

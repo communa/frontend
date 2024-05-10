@@ -9,7 +9,7 @@ import {IActivitySearch} from 'src/interface/IActivity';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 import {useRouter} from 'next/router';
 import ActivityNavJobs from 'src/lib/Activity/ActivityNavJobs';
 
@@ -109,7 +109,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <MenuLeft />
+        <MainMenu />
         <article>
           <nav className="actions">
             <div>

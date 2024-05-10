@@ -6,7 +6,7 @@ import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import ActivityFull from 'src/lib/Activity/ActivityFull';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
@@ -33,7 +33,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <MenuLeft />
+        <MainMenu />
         <article>
           <ActivityFull activity={activity} />
         </article>

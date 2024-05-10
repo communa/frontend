@@ -31,6 +31,7 @@ import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
+import {TonConnectUIProvider} from '@tonconnect/ui-react';
 
 const {chains, provider} = configureChains(
   [
@@ -160,41 +161,43 @@ function App({Component, pageProps}: AppProps) {
 
   return (
     <MainInterfaceWrapper>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitAuthenticationProvider
-          adapter={authenticationAdapter}
-          status={authStatus}
-        >
-          <RainbowKitProvider
-            coolMode
-            appInfo={appInfo}
-            chains={chains}
-            theme={darkTheme({
-              accentColor: '#1360d3',
-              accentColorForeground: 'white',
-              fontStack: 'system',
-              overlayBlur: 'small',
-            })}
+      <TonConnectUIProvider manifestUrl="http://0.0.0.0:3000/tonconnect-manifest.json">
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitAuthenticationProvider
+            adapter={authenticationAdapter}
+            status={authStatus}
           >
-            <Notifications />
-            <Component {...pageProps} />
+            <RainbowKitProvider
+              coolMode
+              appInfo={appInfo}
+              chains={chains}
+              theme={darkTheme({
+                accentColor: '#1360d3',
+                accentColorForeground: 'white',
+                fontStack: 'system',
+                overlayBlur: 'small',
+              })}
+            >
+              <Notifications />
+              <Component {...pageProps} />
 
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-59QX73S7GV');
-            `}
-            </Script>
+              <Script
+                src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
+                strategy="afterInteractive"
+              />
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){window.dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-59QX73S7GV');
+              `}
+              </Script>
 
-          </RainbowKitProvider>
-        </RainbowKitAuthenticationProvider>
-      </WagmiConfig>
+            </RainbowKitProvider>
+          </RainbowKitAuthenticationProvider>
+        </WagmiConfig>
+      </TonConnectUIProvider>
     </MainInterfaceWrapper>
   );
 }

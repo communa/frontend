@@ -9,13 +9,14 @@ import {IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NextLink from 'next/link';
 
 import {useAuth} from 'src/contexts/Auth';
 import {ConnectButtonWrapper, HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
-import {ConnectButton} from 'src/lib/Layout/ConnectButton';
 import {JOB_KEYWORDS} from 'src/config/consts';
 
-export default function MenuLeft() {
+export default function MainMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState('');
   const {userAddress, userLogOut} = useAuth();
@@ -66,7 +67,13 @@ export default function MenuLeft() {
             </picture>
           </Link>
           <span>
-            <ConnectButton />
+            <ConnectButtonWrapper>
+              <NextLink href="/login">
+                <button>
+                  <AccountCircleIcon /> Log-In | Create an Account
+                </button>
+              </NextLink>
+            </ConnectButtonWrapper>
           </span>
         </div>
         <ul className="desktop">
@@ -147,7 +154,13 @@ export default function MenuLeft() {
                 </button>
               </ConnectButtonWrapper>
             ) : (
-              <ConnectButton />
+              <ConnectButtonWrapper>
+                <NextLink href="/login">
+                  <button>
+                    <AccountCircleIcon /> Log In with Web3
+                  </button>
+                </NextLink>
+              </ConnectButtonWrapper>
             )
           }
         </div>
@@ -206,7 +219,7 @@ export default function MenuLeft() {
             </li>
             <li>
               <Link href="https://communa.network/help">
-                What is wallet?
+                What is Web3 wallet?
               </Link>
             </li>
           </ul>
@@ -362,12 +375,12 @@ export default function MenuLeft() {
             </li>
             <li>
               <Link href="https://communa.network/help">
-                What is wallet?
+                What is Web3 wallet?
               </Link>
             </li>
           </ul>
         )}
       </div>
-    </HeaderSideWrapper >
+    </HeaderSideWrapper>
   )
 }

@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import NextLink from 'next/link';
 import {useRouter} from 'next/router';
 
-import {ConnectButton} from 'src/lib/Layout/ConnectButton';
+import {ConnectButtonEth} from 'src/lib/Layout/ConnectButtonEth';
 import Logo from 'src/lib/Layout/Logo';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
@@ -144,7 +144,7 @@ const AuthTimeTracker = () => {
         <section>
           {body}
           {!userAddress && (
-            <ConnectButton />
+            <ConnectButtonEth />
           )}
         </section>
         <p className="note">

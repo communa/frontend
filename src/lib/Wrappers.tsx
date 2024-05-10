@@ -13,6 +13,216 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
+export const LoginPageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;  
+  align-items: center;
+  background: #212529 !important;
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  height: 100vh;
+
+  .close {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+
+    svg {
+      font-size: 40px;
+      color: #eee;
+    }
+  }
+  main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+    justify-content: space-between;
+    padding: 60px;
+
+    section {
+      padding: 0;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      header {
+        a {
+          color: #eee;
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          text-decoration: underline;
+          font-weight: 600;
+        }
+      }
+      ul {
+        text-align: left;
+        flex-direction: row;
+        display: inline-flex;
+        text-align: center;
+        gap: 50px;
+        color: #fff;
+        margin-top: 20px;
+        
+        li {
+          margin-bottom: 30px;
+          flex-direction: column;
+          display: flex;
+
+          button {
+            min-width: 300px;
+            justify-content: center;
+            height: 60px;
+            text-transform: initial;
+            background: #ccc;
+            color: rgba(var(--color-primary-main),1);
+
+            span {
+              margin-right: 5px !important;
+            }
+            &:disabled {
+              opacity: 0.3;
+              &:hover {
+                opacity: 0.3; 
+              }
+            }
+            &:hover {
+              opacity: 1; 
+              background: #eee;
+            }
+            svg {
+              
+            }
+          }
+          p {
+            margin-top: 15px;
+            color: #aaa;
+          }          
+        }
+      }  
+      .middleHeader {
+        > span {
+          background: #002fed1b;
+          border-radius: 15px;
+          padding-left: 12px;
+          padding-right: 12px;
+          padding-top: 4px;
+          padding-bottom: 4px;
+
+          display: inline-block;
+          color: #504dfd;
+
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 500;
+        }
+        p {
+          max-width: 700px;
+          font-size: 16px;
+          font-style: italic;
+          width: 700px;
+          margin: 0 auto;
+          line-height: 1.5;
+          margin-bottom: 30px;
+          font-style: italic;
+        }
+        h2 {
+          text-align: center;
+          margin: 10px 0 10px;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 36px;    
+        }    
+
+        &.__white {
+          h2 {
+            color: #fff;
+          }
+          p {
+            color: #ccc;
+          }
+        }
+      }
+      .actionButton {
+        background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+        box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
+        color: #fff;
+        font-weight: 500;
+        border-width: 0;
+
+        font-size: 18px;
+        border-radius: 12px;
+        padding: 10px 30px;
+        color: #fff;
+        height: 54px;
+        cursor: pointer;
+        text-transform: inherit;
+        transition: transform 0.125s ease;
+        display: flex;
+        align-items: center;
+        
+        &:hover {
+          transform: scale(101%);
+        }           
+        svg {
+          margin-right: 10px;
+        }
+      }          
+      #ton-connect-button {
+        button {
+          border-radius: 10px;
+          color: #000;
+        }
+      }      
+    }
+    .note {
+      margin-top: 10px;
+      max-width: 460px;
+      color: #aaa;
+      font-size: 12px;
+    }          
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: auto; 
+    
+    main {
+      padding: 20px;
+      width: auto;
+
+      section {
+        padding: 20px;
+        header {
+          p {
+            width: 90%;
+          }
+        }
+        ul {
+          flex-direction: column;
+          gap: 20px;
+          li {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .note {
+      width: 80%;
+    }
+    .close {
+      right: 10px;
+      top: 10px;
+    }
+  }    
+`
 
 export const AuthTimeTrackerWrapper = styled.div`
   display: flex;
@@ -46,7 +256,6 @@ export const AuthTimeTrackerWrapper = styled.div`
     height: 100%;
     justify-content: space-between;
     padding: 60px;
-    /* justify-content: center; */
 
     header {
       margin-top: 30px;
@@ -168,7 +377,7 @@ export const AuthTimeTrackerWrapper = styled.div`
       &:hover {
         transform: scale(101%);
       }      
-    }    
+    }
   }
 
   @media only screen and (max-width: 700px) {
@@ -433,6 +642,35 @@ export const TimePageWrapper = styled.div`
   }  
 `
 
+export const LoginWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+
+  main {
+    display: flex;
+    height: 100vh;
+
+    .login {
+      flex: 1;
+      padding: 60px;
+
+      h2 {
+        font-size: 40px;
+      }
+    }
+    .banner {
+      flex: 1;
+      background: #2a14a6;
+      border-radius: 35px;
+      margin: 60px;
+    }
+  }
+`;
+
 export const PageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -667,7 +905,6 @@ export const UserPageWrapper = styled.div`
 
           svg {
             margin-right: 10px;
-            font-size: 30px;
             color: #555;
           }
         }

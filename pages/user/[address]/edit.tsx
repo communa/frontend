@@ -13,7 +13,7 @@ import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {IUser} from 'src/interface/IUser';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 
 export const getServerSideProps: GetServerSideProps<{
   user: IUser,
@@ -92,7 +92,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="userEdit">
-        <MenuLeft />
+        <MainMenu />
         <article>
           <UserPageWrapper>
             <nav className="actions">

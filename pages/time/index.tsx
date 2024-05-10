@@ -22,7 +22,7 @@ import Collapse from '@mui/material/Collapse';
 import {Button, Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
 
 import {API_HOST, APP_NAME} from 'src/config/consts';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 import {APIContext} from 'src/contexts/Api';
 import {ITime} from 'src/interface/ITime';
 import {useAuth} from 'src/contexts/Auth';
@@ -183,7 +183,7 @@ const Time = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="timesheets">
-        <MenuLeft />
+        <MainMenu />
         <article>
           <nav>
             <p>

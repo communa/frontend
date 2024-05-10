@@ -14,7 +14,7 @@ import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
 import {request} from 'src/Utils';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import MenuLeft from 'src/lib/Layout/MenuLeft';
+import MainMenu from 'src/lib/Layout/MainMenu';
 
 export const getServerSideProps: GetServerSideProps<{
   template: string
@@ -89,7 +89,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobNew">
-        <MenuLeft />
+        <MainMenu />
         <article>
           <form onSubmit={onSaveAndEdit}>
             <nav className="actions">

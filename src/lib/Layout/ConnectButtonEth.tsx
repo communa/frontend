@@ -1,10 +1,11 @@
-import {ConnectButton as CB} from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
-import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
-import {ConnectButtonWrapper} from './Wrappers';
+import {ConnectButton as CB} from '@rainbow-me/rainbowkit';
 import LogoutIcon from '@mui/icons-material/Logout';
+import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
 
-export const ConnectButton = () => {
+import {ConnectButtonWrapper} from './Wrappers';
+
+export const ConnectButtonEth = () => {
   return (
     <ConnectButtonWrapper>
       <CB.Custom>
@@ -53,7 +54,7 @@ export const ConnectButton = () => {
                         width={35}
                         height={35}
                       />
-                      Sign in with Web3
+                      Log In with Ethereum
                     </button>
                   );
                 }
