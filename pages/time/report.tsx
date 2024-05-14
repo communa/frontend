@@ -4,13 +4,13 @@ import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-import {Button} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import PrintIcon from '@mui/icons-material/Print';
 
 import {ITimeTotals} from 'src/interface/ITimeTotals';
 import {ITime} from 'src/interface/ITime';
@@ -52,9 +52,11 @@ const TimeReport = () => {
         Authorization: jwt?.access
       }
     });
-
-    setReport(responseReport.data);
+    
     setActivity(responseActivity.data);
+    setReport(responseReport.data);
+
+    console.log(responseReport.data);
   }
 
   const printReport = () => {
@@ -88,18 +90,18 @@ const TimeReport = () => {
           <div className="heading">
             <h1>{activity?.title}</h1>
             <p>
-              Total: {report?.totals[0].rateTotal} USDT<br />
+              Total: {report?.totals[0]?.rateTotal} USDT<br />
               Wallet: {userAddress} / POLYGON
             </p>
           </div>
           <div className="action">
-            <Button
-              size="small"
-              variant='outlined'
+            <button
+              className="apply small"
               onClick={() => printReport()}
             >
+              <PrintIcon />
               Print | Save as PDF
-            </Button>
+            </button>            
           </div>
         </nav>
         <TableContainer>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.ul`
   position: fixed;
   bottom: 50px;
-  /* right: calc(50% - 250px); */
   display: flex;
   flex-direction: column;
   list-style: none;

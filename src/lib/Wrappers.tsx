@@ -13,6 +13,181 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
+
+export const PageWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: #000;
+
+  main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column; 
+    
+    > article {
+      border-radius: 25px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background: #fff;
+      padding: 80px 100px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      > aside {
+        margin-top: 20px;
+        padding: 20px;
+        background: rgb(238, 238, 238);
+        border-radius: 10px;
+      }
+      ol, ul {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+      }
+      h1 {
+        font-size: 42px;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+      h2 {
+        margin-bottom: 5px;
+        font-size: 36px;
+        margin-bottom: 0;
+        margin-top: 40px;
+      }
+      h3 {
+        font-size: 18px;
+        margin-top: 5px;
+        margin-bottom: 2px;
+      }
+      nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        align-items: center;
+
+        h2 {
+          margin-top: 0;
+        }
+
+        &.actions {
+          justify-content: space-between;
+        }
+        &.links {
+          margin-bottom: 0;
+          a {
+            color: #666;
+          }
+        }
+      }
+      .noResults {
+        color: #fff;
+        font-size: 18px;
+      }
+    }
+    &#jobNew {
+      .projectType {
+        > div {
+          padding: 50px;
+          border-radius: 20px;
+          margin-top: 20px;
+          background: #eee;
+          
+          &.personal {
+            cursor: pointer;
+            &:hover {
+              background: #ddd;
+            }
+          }
+          &.contract {
+            opacity: 0.6;z
+            p {
+              color: #777;
+            }
+          }
+          p {
+            color: #000;
+            font-size: 26px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;            
+          }
+        }
+      }
+    }
+    &#jobPeronal,
+    &#jobContract,
+    &#jobEdit,
+    &#userEdit {
+      article {
+        > h2 {
+          font-size: 36px;
+          margin-bottom: 30px;
+          margin-top: 0;
+        }
+        form {
+          > label {
+            width: 100%;
+            margin-bottom: 10px;
+          }
+          .jobState {
+            > label {
+              color: #666;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    &#timesheets {
+      h3 {
+        margin-top: 20px;
+      }
+    }    
+  }
+  
+  @media only screen and (max-width: 700px) {
+    main {
+      margin: 0 auto;
+      width: calc(100vw);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+      padding-bottom: 0;
+
+      header {
+        padding: 10px;
+      }
+
+      nav.actions {
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        h2 {
+          font-size: 24px;
+          margin-bottom: 2px;
+        }
+      }
+    
+      > article {
+        margin: inherit;
+        width: auto;
+        padding: 20px;
+      }
+    }
+  }
+`;
+
 export const LoginPageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -498,7 +673,7 @@ export const TimeReportWrapper = styled.div`
     button {
       display: none;
     }
-  }    
+  }
 `
 
 export const TimePageWrapper = styled.div`
@@ -510,7 +685,8 @@ export const TimePageWrapper = styled.div`
   overflow-y: scroll;
   
   main {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background: #000;
     
@@ -522,6 +698,7 @@ export const TimePageWrapper = styled.div`
       display: flex;
       flex-direction: column;
       flex: 1;
+      /* min-height: 100vh; */
 
       nav {
         display: flex;
@@ -565,8 +742,7 @@ export const TimePageWrapper = styled.div`
         color: #5586d1;
       }
       .full {
-        padding: 20px 0 50px 60px;
-        margin-right: -12px;
+        padding: 20px 0 0 20px;
 
         .top {
           display: flex;
@@ -574,7 +750,7 @@ export const TimePageWrapper = styled.div`
         }
         .actions {
           display: flex;
-          gap: 30px;
+          gap: 10px;
           align-items: center;
         }
       }
@@ -643,35 +819,6 @@ export const TimePageWrapper = styled.div`
 `
 
 export const LoginWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  flex-grow: 1;
-  width: 100%;
-  height: 100vh;
-  overflow-y: scroll;
-
-  main {
-    display: flex;
-    height: 100vh;
-
-    .login {
-      flex: 1;
-      padding: 60px;
-
-      h2 {
-        font-size: 40px;
-      }
-    }
-    .banner {
-      flex: 1;
-      background: #2a14a6;
-      border-radius: 35px;
-      margin: 60px;
-    }
-  }
-`;
-
-export const PageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
@@ -779,7 +926,6 @@ export const PageWrapper = styled.div`
       }
     }
     &#jobPeronal,
-    &#jobContract,
     &#jobEdit,
     &#userEdit {
       article {
@@ -905,6 +1051,7 @@ export const UserPageWrapper = styled.div`
 
           svg {
             margin-right: 10px;
+            font-size: 30px;
             color: #555;
           }
         }
@@ -922,6 +1069,100 @@ export const UserPageWrapper = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    nav {
+      flex-direction: column;
+      align-items: baseline !important;
+      margin-bottom: 0;
+
+      h2 {
+        display: none;
+      }
+    }
+    h2 {
+      font-size: 18px;
+    }
+
+    .userProfile {
+      margin-top: 0;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      padding-right: 0;
+
+      .fields {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: 0;
+
+        p {
+          font-size: 18px;
+        }
+        h3 {
+          font-size: 16px;
+
+          &:first-of-type {
+            margin-top: 0;
+          }
+        }
+        a {
+          color: #1976d2;
+          text-decoration: underline;
+        }
+        p {
+          max-width: calc(100vw - 70px);
+          overflow: hidden;
+        }
+        .social {
+          margin-top: 20px;
+        }        
+      }
+      .bio {
+        margin-top: 20px;
+      }
+    }
+  }    
+`;
+
+export const ActivitiyEditWrapper = styled.div`
+  display: flex;
+
+  .fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-right: 100px;
+
+    h3 {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    > p {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+  }
+  .description {
+    flex: 1;
+    background: #eee;
+    padding: 30px;
+    border-radius: 30px;
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  }
+
 
   @media only screen and (max-width: 700px) {
     nav {

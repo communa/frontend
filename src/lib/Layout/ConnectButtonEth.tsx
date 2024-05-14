@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import {ConnectButton as CB} from '@rainbow-me/rainbowkit';
 import LogoutIcon from '@mui/icons-material/Logout';
-import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
 
+import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
 import {ConnectButtonWrapper} from './Wrappers';
 
 export const ConnectButtonEth = () => {

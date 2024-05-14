@@ -3,18 +3,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import {request} from 'src/Utils';
-import {API_HOST, APP_NAME} from 'src/config/consts';
+import {API_HOST, APP_DESCRIPTION, APP_NAME} from 'src/config/consts';
 import {IUser} from 'src/interface/IUser';
 import {PageWrapper, UserPageWrapper} from 'src/lib/Wrappers';
-import MainMenu from 'src/lib/Layout/MainMenu';
+import MenuMain from 'src/lib/Layout/MenuMain';
 import {useAuth} from 'src/contexts/Auth';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 
 export const getServerSideProps: GetServerSideProps<{
   user: IUser
@@ -39,13 +39,13 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
     <PageWrapper>
       <Head>
         <title>{user.address} - {APP_NAME}</title>
+        <meta name="description" content={`${user.address} - ${APP_DESCRIPTION}`} />        
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <meta name="description" content={user.address} />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.png" />        
       </Head>
       <main>
-        <MainMenu />
+        <MenuMain />
         <article>
           <UserPageWrapper>
             <nav className="action">
@@ -53,6 +53,7 @@ const UserProfile = ({user}: InferGetServerSidePropsType<typeof getServerSidePro
               {userAddress && (
                 <Link href={`/user/${user.address}/edit`}>
                   <button className="apply small">
+                    <SelfImprovementIcon />
                     Edit profile
                   </button>
                 </Link>

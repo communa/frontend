@@ -2,6 +2,7 @@ import {InferGetServerSidePropsType} from 'next'
 import {GetServerSideProps} from 'next'
 import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
@@ -9,8 +10,8 @@ import {IActivitySearch} from 'src/interface/IActivity';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
-import MainMenu from 'src/lib/Layout/MainMenu';
-import {useRouter} from 'next/router';
+import MenuMain from 'src/lib/Layout/MenuMain';
+
 import ActivityNavJobs from 'src/lib/Activity/ActivityNavJobs';
 
 export const getServerSideProps: GetServerSideProps<{search: IActivitySearch}> = async (context) => {
@@ -109,7 +110,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
         <link rel="icon" href="/logo.png" />
       </Head>
       <main>
-        <MainMenu />
+        <MenuMain />
         <article>
           <nav className="actions">
             <div>
@@ -118,15 +119,6 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
               </h2>
               <ActivityNavJobs />
             </div>
-            {/* <Link href={`/activity/newContract`}>
-              <Button 
-              variant='contained'
-              size='large' 
-              color="primary" 
-              startIcon={<AddIcon />}>
-                Publish job
-              </Button>
-            </Link>             */}
           </nav>
           {activities.map(activity => {
             return <ActivityShort key={activity.id} activity={activity} />

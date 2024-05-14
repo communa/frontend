@@ -13,7 +13,8 @@ export const DOWNLOAD = {
 };
 
 export const API_HOST = api;
-export const APP_NAME = 'Communa Network';
+export const APP_NAME = "Time tracking and Decentralized Freelance Identity - Communa Network";
+export const APP_DESCRIPTION = "Communa is an open-source web3 freelancing platform to connect businesses with talented professionals worldwide on blockchain.";
 export const APP_TITLE = 'communa.network';
 export const TINYMCE_KEY = 'teqsytcw012x616ha2tnna7m814gzz1pwhrp1hj5rxtov90k';
 export const WALLET_CONNECT_PROJECT_ID = 'f72f23676636bdae1b917bd2da168a95';

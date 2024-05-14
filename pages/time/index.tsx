@@ -20,9 +20,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Collapse from '@mui/material/Collapse';
 import {Button, Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import {API_HOST, APP_NAME} from 'src/config/consts';
-import MainMenu from 'src/lib/Layout/MainMenu';
+import MenuMain from 'src/lib/Layout/MenuMain';
 import {APIContext} from 'src/contexts/Api';
 import {ITime} from 'src/interface/ITime';
 import {useAuth} from 'src/contexts/Auth';
@@ -42,8 +43,14 @@ const Time = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
   const {addNotification} = useNotifications();
   const [page, setPage] = useState(0);
-  const {jwt} = useAuth();
+  const {userAddress, jwt} = useAuth();
   const {activityId} = router.query;
+
+  // useEffect(() => {
+  //   if (!userAddress) {
+  //     router.push('/');
+  //   }
+  // });
 
   const onScroll = (e: any) => {
     const {
@@ -183,7 +190,7 @@ const Time = () => {
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="timesheets">
-        <MainMenu />
+        <MenuMain />
         <article>
           <nav>
             <p>
@@ -208,6 +215,7 @@ const Time = () => {
             <p>
               <Link href={`/activity/newPersonal`}>
                 <button className="apply small">
+                  <AccessTimeIcon />
                   Start a project
                 </button>
               </Link>
@@ -217,8 +225,7 @@ const Time = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{borderBottom: "none"}} width="1%" />
-                  <TableCell align="left">Project</TableCell>
+                  <TableCell align="left">Project name</TableCell>
                   <TableCell align="left"></TableCell>
                   <TableCell align="left" className="tooltip">
                     <Tooltip
@@ -291,19 +298,6 @@ const Time = () => {
                         key={activity.id}
                         sx={{'& > *': {borderBottom: 'unset'}}}
                       >
-                        <TableCell sx={{borderBottom: "none"}} width="1%">
-                          <IconButton
-                            aria-label="expand row"
-                            size="small"
-                            onClick={() => onMoreClick(activity.id)}
-                          >
-                            {
-                              open === activity.id
-                                ? <KeyboardArrowUpIcon />
-                                : <KeyboardArrowDownIcon />
-                            }
-                          </IconButton>
-                        </TableCell>
                         <TableCell align="left" className="title">
                           {activity?.title}
                         </TableCell>
@@ -313,6 +307,18 @@ const Time = () => {
                             color="primary"
                             variant="filled"
                           />
+                          <IconButton
+                            style={{marginLeft: 10}}
+                            aria-label="expand row"
+                            size="large"
+                            onClick={() => onMoreClick(activity.id)}
+                          >
+                            {
+                              open === activity.id
+                                ? <KeyboardArrowUpIcon />
+                                : <KeyboardArrowDownIcon />
+                            }
+                          </IconButton>
                         </TableCell>
                         <TableCell align="left">
                           {hoursTotal} hr<br />
@@ -322,10 +328,10 @@ const Time = () => {
                           {hoursActiveTotal} hr<br />
                           {minutesActiveTotal} min<br />
                         </TableCell>
-                        <TableCell align="left">{total.keyboardKeys}</TableCell>
-                        <TableCell align="left">{total.mouseKeys}</TableCell>
-                        <TableCell align="left">{total.mouseDistance}</TableCell>
-                      </TableRow >
+                        <TableCell align="center">{total.keyboardKeys}</TableCell>
+                        <TableCell align="center">{total.mouseKeys}</TableCell>
+                        <TableCell align="center">{total.mouseDistance}</TableCell>
+                      </TableRow>
                       <TableRow>
                         <TableCell
                           sx={{borderBottom: "none"}}
@@ -333,7 +339,7 @@ const Time = () => {
                           colSpan={12}
                         >
                           <Collapse in={open === activity.id} timeout="auto" unmountOnExit>
-                            <Box sx={{margin: 1}}>
+                            <Box >
                               <div className="full">
                                 <div className="top">
                                   <div>
@@ -352,27 +358,28 @@ const Time = () => {
                                     }} />
                                   </div>
                                   <div className="actions">
-                                    <a
-                                      target='_blank'
-                                      href={`/time/report?activityId=${activity?.id}`}
+                                    <Link 
+                                      target='_blank' 
+                                      href={`/time/report?activityId=${activity?.id}`} 
                                     >
-                                      <Button
-                                        size="small"
-                                        variant='text'
-                                        startIcon={<PrintIcon />}>
+                                      <button className="apply small">
+                                        <PrintIcon />
                                         Invoice
-                                      </Button>
-                                    </a>
+                                      </button>                                    
+                                    </Link>                                      
                                     <Link href={`/activity/${activity.id}/edit`}>
-                                      <Button variant='text' color='info' startIcon={<EditIcon />}>
+                                      <button className="apply small">
+                                        <EditIcon />
                                         Edit
-                                      </Button>
-                                    </Link>
-                                    <Button
+                                      </button>                                    
+                                    </Link>      
+                                    <button
+                                      className="apply small"
                                       onClick={() => onDelete(activity)}
-                                      variant='text'
-                                      startIcon={<DeleteIcon />}
-                                    >Delete</Button>
+                                    >
+                                      <DeleteIcon />
+                                      Delete
+                                    </button>                                                
                                   </div>
                                 </div>
                               </div>
@@ -400,7 +407,7 @@ const Time = () => {
               <TableHead>
                 <TableRow>
                   <TableCell align="left">Date (from - to)</TableCell>
-                  <TableCell align="left">Project</TableCell>
+                  <TableCell align="left">Project name</TableCell>
                   <TableCell align="left">Note</TableCell>
                   <TableCell width="10%" align="left">Time active</TableCell>
                   <TableCell width="10%" align="left">Keyboard</TableCell>
@@ -435,7 +442,7 @@ const Time = () => {
           </TableContainer>
         </article>
       </main>
-    </TimePageWrapper >
+    </TimePageWrapper>
   );
 };
 

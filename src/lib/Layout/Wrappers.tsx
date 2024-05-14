@@ -21,6 +21,13 @@ export const ConnectButtonWrapper = styled.div`
     align-items: center;
     justify-content: center;
 
+    height: 37px;
+    font-size: 14px !important;
+    font-weight: 500;
+    padding: 10px 24px;
+    transform: none;
+    border-radius: 10px;
+
     &:disabled {
       color: #aaa;
     }
@@ -31,15 +38,23 @@ export const ConnectButtonWrapper = styled.div`
       background-color: rgba(19 29 47 / 100%);
     }
     svg {
-      margin-right: 10px;
-      font-size: 20px;
+      margin-right: 5px;
+      font-size: 28px;      
+    }    
+  }
+  &.largeWhite {
+    button {
+      background: #fff;
     }
-    &.ton {
-      svg {
-        color: #08c;
-        font-size: 34px;
-      }
-    }
+  }
+  #authLogin {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    animation-name: shakeMe;
+    animation-duration: 3s;
+    animation-delay: 3s;
+    animation-iteration-count: 2;
+    animation-timing-function: linear;
   }
 `;
 
@@ -75,9 +90,9 @@ export const LogoWrapper = styled.div`
   }      
 `;
 
-export const HeaderSideWrapper = styled.header`
+export const MenuMainWrapper = styled.header`
   z-index: 100;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -120,7 +135,6 @@ export const HeaderSideWrapper = styled.header`
         flex: 1;
         padding: 10px 15px;
         display: flex;
-        align-items: center;        
 
         &:hover,
         &.active {
@@ -147,6 +161,13 @@ export const HeaderSideWrapper = styled.header`
             font-size: 20px;
           }
         }
+
+        &.social {
+          padding: 10px 7px;
+        }
+        &.social.first {
+          margin-left: 15px;
+        }        
       }
     }
     .auth {
@@ -207,7 +228,25 @@ export const HeaderSideWrapper = styled.header`
   #downMenu {
     display: flex;
     width: 100%;
+    height: 0px;
+    transition: all 0.3s linear;
+    overflow: hidden;
 
+    &.help {
+      height: 140px;
+    }
+    &.investor {
+      height: 240px;
+    }    
+    &.dashboard {
+      height: 100px;
+    }
+    &.work {
+      height: 170px;
+    }
+    &.developer {
+      height:100px;
+    }            
     ul {
       list-style-type: none;
       font-weight: 400;
@@ -223,6 +262,7 @@ export const HeaderSideWrapper = styled.header`
       margin-top: 3px;
       font-size: 16px;
       padding: 10px 20px 20px 100px;
+      transition: all 2.3s ease;
 
       li {
         list-style-type: none;
@@ -232,7 +272,7 @@ export const HeaderSideWrapper = styled.header`
         p,
         a {
           color: #fff;
-          font-size: 32px;
+          font-size: 26px;
           font-weight: 500;
 
           &:hover {

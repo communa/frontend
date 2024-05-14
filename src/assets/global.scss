@@ -208,6 +208,11 @@ a:hover {
   color: #fff;
   text-transform: capitalize;
   transition: 0.125s ease;
+  align-items: center;
+  svg {
+    margin-right: 5px;
+    font-size: 30px;
+  }
 
   &:hover {
     text-decoration: none;
@@ -241,5 +246,27 @@ main {
         margin-top: 30px;
       }
     }
+  }
+}
+
+@keyframes shakeMe {
+  2%, 18% {
+      transform: translate3d(-2px, 0, 0);
+  }
+
+  4%, 16% {
+      transform: translate3d(2px, 0, 0);
+  }
+
+  6%, 10%, 14% {
+      transform: translate3d(-2px, 0, 0);
+  }
+
+  8%, 12% {
+      transform: translate3d(2px, 0, 0);
+  }
+  
+  18.1% {
+      transform: translate3d(0px, 0, 0);
   }
 }

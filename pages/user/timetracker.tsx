@@ -7,7 +7,7 @@ import {useRouter} from 'next/router';
 
 import {ConnectButtonEth} from 'src/lib/Layout/ConnectButtonEth';
 import Logo from 'src/lib/Layout/Logo';
-import {API_HOST, APP_NAME} from 'src/config/consts';
+import {API_HOST, APP_DESCRIPTION, APP_NAME} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {APIContext} from 'src/contexts/Api';
 import {request} from 'src/Utils';
@@ -129,10 +129,11 @@ const AuthTimeTracker = () => {
   return (
     <AuthTimeTrackerWrapper>
       <Head>
-        <title>TimeTracker - {APP_NAME}</title>
+        <title>Login TimeTracker - {APP_NAME}</title>
+        <meta name="description" content={APP_DESCRIPTION} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.png" />   
       </Head>
       <main>
         <NextLink href={userAddress ? '/time' : '/'} passHref>
@@ -159,7 +160,7 @@ const AuthTimeTracker = () => {
           )}
         </p>
       </main>
-    </AuthTimeTrackerWrapper >
+    </AuthTimeTrackerWrapper>
   )
 };
 

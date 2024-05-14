@@ -9,14 +9,14 @@ import {IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovementRounded';
 import NextLink from 'next/link';
 
 import {useAuth} from 'src/contexts/Auth';
-import {ConnectButtonWrapper, HeaderSideWrapper} from 'src/lib/Layout/Wrappers';
+import {ConnectButtonWrapper, MenuMainWrapper} from 'src/lib/Layout/Wrappers';
 import {JOB_KEYWORDS} from 'src/config/consts';
 
-export default function MainMenu() {
+export default function MenuMain() {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState('');
   const {userAddress, userLogOut} = useAuth();
@@ -53,7 +53,7 @@ export default function MainMenu() {
   }
 
   return (
-    <HeaderSideWrapper className={`${isOpen ? '__open' : ''}`}>
+    <MenuMainWrapper className={`${isOpen ? '__open' : ''}`}>
       <nav>
         <div className="logo">
           <Link href="https://communa.network">
@@ -66,15 +66,6 @@ export default function MainMenu() {
               />
             </picture>
           </Link>
-          <span>
-            <ConnectButtonWrapper>
-              <NextLink href="/login">
-                <button>
-                  <AccountCircleIcon /> Log-In | Create an Account
-                </button>
-              </NextLink>
-            </ConnectButtonWrapper>
-          </span>
         </div>
         <ul className="desktop">
           {userAddress && (
@@ -116,9 +107,9 @@ export default function MainMenu() {
             </Link>
           </li>
           <li
-            onMouseEnter={() => showMenu('marketplace')}
+            onMouseEnter={() => showMenu('work')}
             onMouseLeave={() => hideMenu()}
-            className={menu === 'marketplace' ? 'active' : ''}
+            className={menu === 'work' ? 'active' : ''}
           >
             <Link href="/">
               Marketplace
@@ -129,17 +120,17 @@ export default function MainMenu() {
               Download v0.6.1
             </a>
           </li>
-          <li>
+          <li className="social first">
             <a href="https://github.com/communa" target="_blank" rel="noreferrer">
               <GitHubIcon />
             </a>
           </li>
-          <li>
+          <li className="social">
             <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
               <TwitterIcon />
             </a>
           </li>
-          <li>
+          <li className="social">
             <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
               <TelegramIcon />
             </a>
@@ -157,7 +148,7 @@ export default function MainMenu() {
               <ConnectButtonWrapper>
                 <NextLink href="/login">
                   <button>
-                    <AccountCircleIcon /> Log In with Web3
+                  <SelfImprovementIcon /> Sign In with Web3
                   </button>
                 </NextLink>
               </ConnectButtonWrapper>
@@ -219,7 +210,7 @@ export default function MainMenu() {
             </li>
             <li>
               <Link href="https://communa.network/help">
-                What is Web3 wallet?
+                What is wallet?
               </Link>
             </li>
           </ul>
@@ -286,7 +277,7 @@ export default function MainMenu() {
       )}
 
       <div id="downMenu" className={menu} onMouseEnter={() => showMenu(menu)} onMouseLeave={() => hideMenu()}>
-        {menu === 'marketplace' && (
+        {menu === 'work' && (
           <ul>
             {JOB_KEYWORDS.map((k, i) => {
               return (
@@ -375,12 +366,12 @@ export default function MainMenu() {
             </li>
             <li>
               <Link href="https://communa.network/help">
-                What is Web3 wallet?
+                What is wallet?
               </Link>
             </li>
           </ul>
         )}
       </div>
-    </HeaderSideWrapper>
+    </MenuMainWrapper >
   )
 }

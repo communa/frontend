@@ -7,11 +7,11 @@ import {useRouter} from 'next/router';
 
 import {IActivity} from 'src/interface/IActivity';
 import {request} from 'src/Utils';
-import {PageWrapper} from 'src/lib/Wrappers';
+import {ActivitiyEditWrapper, PageWrapper} from 'src/lib/Wrappers';
 import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
-import MainMenu from 'src/lib/Layout/MainMenu';
+import MenuMain from 'src/lib/Layout/MenuMain';
 import {EActivityType} from 'src/interface/EActivityType';
 
 export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
@@ -50,7 +50,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   });
 
   const onEdit = async () => {
-    const text = editorRef.current.getContent();
+    const text = editorRef.current?.getContent();
 
     await request({
       url: `${API_HOST}/api/activity/${activity.id}`,
@@ -88,92 +88,109 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="jobEdit">
-        <MainMenu />
+        <MenuMain />
         <article>
           <nav className="actions">
             <h2>
-              Editing
+              Project edit
             </h2>
-            <Button variant='contained' onClick={() => onEdit()}>
-              Save Updates
-            </Button>
+            <button
+              className="apply small"
+              onClick={() => onEdit()}
+            >
+              Save changes
+            </button>                   
           </nav>
           <form>
-            <TextField
-              label="ID"
-              variant="outlined"
-              placeholder="Id"
-              defaultValue={activity.id}
-              disabled
-            />
-            <TextField
-              label="Title"
-              variant="outlined"
-              placeholder="Title"
-              defaultValue={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-            <TextField
-              label="Hourly rate / USD"
-              variant="outlined"
-              type='number'
-              placeholder="$20"
-              defaultValue={rateHour}
-              onChange={e => setRateHour(Number(e.target.value))}
-            />
-            {activity.type === EActivityType.HOURLY && (
-              <>
-                <TextField
-                  label="Salary annualy"
-                  variant="outlined"
-                  placeholder="$40000"
-                  defaultValue={salary}
-                  onChange={e => setSalary(e.target.value)}
-                />
-                <TextField
-                  label="Keywords"
-                  variant="outlined"
-                  placeholder="TypeSript, React, AWS"
-                  defaultValue={keywords}
-                  onChange={e => setKeywords(e.target.value)}
-                />
-                <p className="jobState">
-                  <Switch
-                    inputProps={{'aria-label': 'Switch demo'}}
-                    onChange={e => {
-                      if (state === 'published') {
-                        setState('draft');
-                      } else {
-                        setState('published');
-                      }
-                    }}
-                    value={state}
-                  />
-                  <label>
-                    {state}
-                  </label>
+            <ActivitiyEditWrapper>
+              <div className="fields">
+                <p>
+                  You're editing a project for your personal requirements.<br />
+                  Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job.
+                  Additionally, you cannot directly assign a freelancer.<br />          
                 </p>
-              </>
-            )}
-            <Editor
-              apiKey={TINYMCE_KEY}
-              onInit={(evt, editor) => (editorRef.current = editor)}
-              initialValue={text}
-              init={{
-                // height: 300,
-                menubar: false,
-                plugins: [
-                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-                ],
-                toolbar: 'undo redo | blocks | ' +
-                  'bold italic forecolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | help',
-                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-              }}
-            />
+                <TextField
+                  label="ID"
+                  variant="outlined"
+                  placeholder="Id"
+                  defaultValue={activity.id}
+                  disabled
+                />
+                <TextField
+                  label="Title"
+                  variant="outlined"
+                  placeholder="Title"
+                  defaultValue={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+                <TextField
+                  label="Hourly rate / USD"
+                  variant="outlined"
+                  type='number'
+                  placeholder="$20"
+                  defaultValue={rateHour}
+                  onChange={e => setRateHour(Number(e.target.value))}
+                />
+                {activity.type === EActivityType.HOURLY && (
+                  <>
+                    <TextField
+                      label="Salary annualy"
+                      variant="outlined"
+                      placeholder="$40000"
+                      defaultValue={salary}
+                      onChange={e => setSalary(e.target.value)}
+                    />
+                    <TextField
+                      label="Keywords"
+                      variant="outlined"
+                      placeholder="TypeSript, React, AWS"
+                      defaultValue={keywords}
+                      onChange={e => setKeywords(e.target.value)}
+                    />
+                    <p className="jobState">
+                      <Switch
+                        inputProps={{'aria-label': 'Switch demo'}}
+                        onChange={e => {
+                          if (state === 'published') {
+                            setState('draft');
+                          } else {
+                            setState('published');
+                          }
+                        }}
+                        value={state}
+                      />
+                      <label>
+                        {state}
+                      </label>
+                    </p>
+                  </>
+                )}                
+              </div>
+              <div className="description">
+                <h3>
+                  Description
+                </h3>
+                <Editor
+                  apiKey={TINYMCE_KEY}
+                  onInit={(evt, editor) => (editorRef.current = editor)}
+                  initialValue={text}
+                  init={{
+                    // height: 300,
+                    menubar: false,
+                    plugins: [
+                      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                      'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | ' +
+                      'bold italic forecolor | alignleft aligncenter ' +
+                      'alignright alignjustify | bullist numlist outdent indent | ' +
+                      'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                  }}
+                />                
+              </div>
+            </ActivitiyEditWrapper>
           </form>
         </article>
       </main>

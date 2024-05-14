@@ -13,7 +13,7 @@ import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import {IUser} from 'src/interface/IUser';
-import MainMenu from 'src/lib/Layout/MainMenu';
+import MenuMain from 'src/lib/Layout/MenuMain';
 
 export const getServerSideProps: GetServerSideProps<{
   user: IUser,
@@ -55,7 +55,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
   })
 
   const onEdit = async () => {
-    const bio = editorRef.current.getContent();
+    const bio = editorRef.current?.getContent();
 
     await request({
       url: `${API_HOST}/api/user`,
@@ -92,7 +92,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
         <link rel="icon" href="/logo.png" />
       </Head>
       <main id="userEdit">
-        <MainMenu />
+        <MenuMain />
         <article>
           <UserPageWrapper>
             <nav className="actions">
@@ -102,7 +102,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
               </button>
             </nav>
             <form>
-              <div className="userProfile __edit">
+                <div className="userProfile __edit">
                 <div className="fields">
                   <TextField
                     label="Address"
