@@ -18,6 +18,7 @@ import {
 import {configureChains, createClient, useAccount, WagmiConfig} from 'wagmi';
 import {polygon} from 'wagmi/chains';
 import {publicProvider} from 'wagmi/providers/public';
+import {THEME, TonConnectUIProvider} from '@tonconnect/ui-react';
 
 import {AuthContext, AuthProvider, useAuth} from 'src/contexts/Auth';
 import {withProviders} from 'src/lib/Hooks';
@@ -31,14 +32,8 @@ import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
-import {TonConnectUIProvider} from '@tonconnect/ui-react';
 
-const {chains, provider} = configureChains(
-  [
-    polygon,
-  ],
-  [publicProvider()]
-);
+const {chains, provider} = configureChains([polygon], [publicProvider()]);
 
 const {wallets} = getDefaultWallets({
   appName: APP_NAME,
@@ -74,7 +69,7 @@ const connectors = connectorsForWallets([
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider
+  provider,
 });
 
 function App({Component, pageProps}: AppProps) {
@@ -89,7 +84,7 @@ function App({Component, pageProps}: AppProps) {
         method: 'POST',
         data: {
           address,
-        }
+        },
       });
 
       return nonce.data;
@@ -102,17 +97,17 @@ function App({Component, pageProps}: AppProps) {
     },
     verify: async ({message, signature}) => {
       const res = await request({
-        url: `${API_HOST}/api/auth/web3`,
+        url: `${API_HOST}/api/auth/eth`,
         method: 'POST',
         data: {
           address,
           signature,
-        }
+        },
       });
       const tokens = {
         access: res.headers.authorization,
         refresh: res.headers['refresh-token'],
-      }
+      };
 
       userLogIn(address as string, tokens);
 
@@ -131,11 +126,11 @@ function App({Component, pageProps}: AppProps) {
           url: `${API_HOST}/api/auth/status`,
           method: 'GET',
           headers: {
-            Authorization: jwt.access
+            Authorization: jwt.access,
           },
         });
 
-        console.log('auth.user', res.data)
+        console.log('auth.user', res.data);
 
         if (!res.data) {
           userLogOut();
@@ -151,7 +146,7 @@ function App({Component, pageProps}: AppProps) {
           method: 'POST',
           data: {
             refreshToken: jwt.refresh,
-          }
+          },
         });
 
         localStorage.setItem('JWT', JSON.stringify(res.data));
@@ -161,7 +156,11 @@ function App({Component, pageProps}: AppProps) {
 
   return (
     <MainInterfaceWrapper>
-      <TonConnectUIProvider manifestUrl="http://0.0.0.0:3000/tonconnect-manifest.json">
+      <TonConnectUIProvider
+        manifestUrl="https://app.communa.network/tonconnect-manifest.json"
+        // manifestUrl="https://ton-connect.github.io/demo-dapp-with-wallet/tonconnect-manifest.json"
+        uiPreferences={{theme: THEME.DARK}}
+      >
         <WagmiConfig client={wagmiClient}>
           <RainbowKitAuthenticationProvider
             adapter={authenticationAdapter}
@@ -193,7 +192,6 @@ function App({Component, pageProps}: AppProps) {
               gtag('config', 'G-59QX73S7GV');
               `}
               </Script>
-
             </RainbowKitProvider>
           </RainbowKitAuthenticationProvider>
         </WagmiConfig>

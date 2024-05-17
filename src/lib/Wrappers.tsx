@@ -13,7 +13,6 @@ export const MainInterfaceWrapper = styled.div`
   position: relative;
 `;
 
-
 export const PageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -26,8 +25,8 @@ export const PageWrapper = styled.div`
   main {
     display: flex;
     min-height: 100vh;
-    flex-direction: column; 
-    
+    flex-direction: column;
+
     > article {
       border-radius: 25px;
       border-bottom-left-radius: 0;
@@ -44,7 +43,8 @@ export const PageWrapper = styled.div`
         background: rgb(238, 238, 238);
         border-radius: 10px;
       }
-      ol, ul {
+      ol,
+      ul {
         margin-left: 30px;
         margin-bottom: 20px;
         margin-top: 10px;
@@ -97,7 +97,7 @@ export const PageWrapper = styled.div`
           border-radius: 20px;
           margin-top: 20px;
           background: #eee;
-          
+
           &.personal {
             cursor: pointer;
             &:hover {
@@ -105,8 +105,8 @@ export const PageWrapper = styled.div`
             }
           }
           &.contract {
-            opacity: 0.6;z
-            p {
+            opacity: 0.6;
+            z p {
               color: #777;
             }
           }
@@ -116,7 +116,7 @@ export const PageWrapper = styled.div`
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;            
+            gap: 10px;
           }
         }
       }
@@ -149,9 +149,9 @@ export const PageWrapper = styled.div`
       h3 {
         margin-top: 20px;
       }
-    }    
+    }
   }
-  
+
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
@@ -172,13 +172,13 @@ export const PageWrapper = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
-        
+
         h2 {
           font-size: 24px;
           margin-bottom: 2px;
         }
       }
-    
+
       > article {
         margin: inherit;
         width: auto;
@@ -193,11 +193,11 @@ export const LoginPageWrapper = styled.div`
   flex-flow: column nowrap;
   flex-grow: 1;
   width: 100%;
-  height: 100vh;  
+  height: 100vh;
   align-items: center;
   background: #212529 !important;
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
   height: 100vh;
 
   .close {
@@ -246,19 +246,19 @@ export const LoginPageWrapper = styled.div`
         gap: 50px;
         color: #fff;
         margin-top: 20px;
-        
+
         li {
           margin-bottom: 30px;
           flex-direction: column;
           display: flex;
 
           button {
-            min-width: 300px;
+            /* min-width: 300px; */
             justify-content: center;
             height: 60px;
             text-transform: initial;
             background: #ccc;
-            color: rgba(var(--color-primary-main),1);
+            color: rgba(var(--color-primary-main), 1);
 
             span {
               margin-right: 5px !important;
@@ -266,23 +266,22 @@ export const LoginPageWrapper = styled.div`
             &:disabled {
               opacity: 0.3;
               &:hover {
-                opacity: 0.3; 
+                opacity: 0.3;
               }
             }
             &:hover {
-              opacity: 1; 
+              opacity: 1;
               background: #eee;
             }
             svg {
-              
             }
           }
           p {
             margin-top: 15px;
             color: #aaa;
-          }          
+          }
         }
-      }  
+      }
       .middleHeader {
         > span {
           background: #002fed1b;
@@ -314,8 +313,8 @@ export const LoginPageWrapper = styled.div`
           margin: 10px 0 10px;
           font-style: normal;
           font-weight: 700;
-          font-size: 36px;    
-        }    
+          font-size: 36px;
+        }
 
         &.__white {
           h2 {
@@ -327,7 +326,11 @@ export const LoginPageWrapper = styled.div`
         }
       }
       .actionButton {
-        background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+        background: linear-gradient(
+          236.08deg,
+          rgb(52, 60, 48) 12.34%,
+          rgb(0, 0, 0) 86.37%
+        );
         box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
         color: #fff;
         font-weight: 500;
@@ -343,32 +346,38 @@ export const LoginPageWrapper = styled.div`
         transition: transform 0.125s ease;
         display: flex;
         align-items: center;
-        
+
         &:hover {
           transform: scale(101%);
-        }           
+        }
         svg {
           margin-right: 10px;
         }
-      }          
+      }
       #ton-connect-button {
         button {
           border-radius: 10px;
           color: #000;
         }
-      }      
+      }
+    }
+    .connected {
+      background: #fff;
+      padding: 30px;
+      text-shadow: none;
+      border-radius: 20px;
     }
     .note {
       margin-top: 10px;
       max-width: 460px;
       color: #aaa;
       font-size: 12px;
-    }          
+    }
   }
 
   @media only screen and (max-width: 700px) {
-    width: auto; 
-    
+    width: auto;
+
     main {
       padding: 20px;
       width: auto;
@@ -396,19 +405,19 @@ export const LoginPageWrapper = styled.div`
       right: 10px;
       top: 10px;
     }
-  }    
-`
+  }
+`;
 
 export const AuthTimeTrackerWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
   width: 100%;
-  height: 100vh;  
+  height: 100vh;
   align-items: center;
   background: #212529 !important;
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
   height: 100vh;
 
   .close {
@@ -450,19 +459,18 @@ export const AuthTimeTrackerWrapper = styled.div`
         gap: 50px;
         color: #fff;
         margin-top: 20px;
-        
+
         li {
           margin-bottom: 30px;
           flex-direction: column;
           display: flex;
 
           button {
-            width: 200px;
             justify-content: center;
             height: 60px;
             text-transform: initial;
             background: #ccc;
-            color: rgba(var(--color-primary-main),1);
+            color: rgba(var(--color-primary-main), 1);
 
             span {
               margin-right: 5px !important;
@@ -470,30 +478,30 @@ export const AuthTimeTrackerWrapper = styled.div`
             &:disabled {
               opacity: 0.3;
               &:hover {
-                opacity: 0.3; 
+                opacity: 0.3;
               }
             }
             &:hover {
-              opacity: 1; 
+              opacity: 1;
               background: #eee;
             }
           }
           p {
             margin-top: 15px;
             color: #aaa;
-          }          
+          }
         }
-      }  
+      }
     }
     .note {
       margin-top: 10px;
       max-width: 400px;
       color: #aaa;
       font-size: 12px;
-    }          
+    }
     .middleHeader {
       margin-top: 0;
-      
+
       > span {
         background: #002fed1b;
         border-radius: 15px;
@@ -501,10 +509,10 @@ export const AuthTimeTrackerWrapper = styled.div`
         padding-right: 12px;
         padding-top: 4px;
         padding-bottom: 4px;
-    
+
         display: inline-block;
         color: #504dfd;
-    
+
         font-size: 14px;
         line-height: 20px;
         font-weight: 500;
@@ -525,12 +533,16 @@ export const AuthTimeTrackerWrapper = styled.div`
         margin: 10px 0 10px;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;    
+        font-size: 36px;
         color: #fff;
       }
     }
     .actionButton {
-      background: linear-gradient(236.08deg, rgb(52, 60, 48) 12.34%, rgb(0, 0, 0) 86.37%);
+      background: linear-gradient(
+        236.08deg,
+        rgb(52, 60, 48) 12.34%,
+        rgb(0, 0, 0) 86.37%
+      );
       box-shadow: rgba(114, 89, 89, 0.1) 0px 4px 12px 0px;
       color: #fff;
       font-weight: 500;
@@ -551,12 +563,12 @@ export const AuthTimeTrackerWrapper = styled.div`
       }
       &:hover {
         transform: scale(101%);
-      }      
+      }
     }
   }
 
   @media only screen and (max-width: 700px) {
-    width: auto; 
+    width: auto;
 
     main {
       padding: 20px;
@@ -585,8 +597,8 @@ export const AuthTimeTrackerWrapper = styled.div`
       right: 10px;
       top: 10px;
     }
-  }    
-`
+  }
+`;
 
 export const TimeReportWrapper = styled.div`
   display: flex;
@@ -641,7 +653,7 @@ export const TimeReportWrapper = styled.div`
       }
       &.__5 {
         background: rgb(240, 255, 134, 0.5);
-      }      
+      }
       &.__6 {
         background: rgb(239, 255, 65, 0.5);
       }
@@ -656,10 +668,10 @@ export const TimeReportWrapper = styled.div`
       }
       &.__9 {
         background: rgb(130, 251, 91, 0.5);
-      }    
+      }
       &.__10 {
         background: rgb(89, 241, 42, 0.5);
-      }        
+      }
     }
     .note {
       margin-top: 30px;
@@ -674,7 +686,7 @@ export const TimeReportWrapper = styled.div`
       display: none;
     }
   }
-`
+`;
 
 export const TimePageWrapper = styled.div`
   display: flex;
@@ -683,13 +695,13 @@ export const TimePageWrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  
+
   main {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #000;
-    
+
     > article {
       border-radius: 25px;
       background: #fff;
@@ -706,7 +718,7 @@ export const TimePageWrapper = styled.div`
         align-items: center;
         margin-bottom: 40px;
         justify-content: space-between;
-        
+
         h1 {
           font-size: 36px;
           margin-bottom: 0;
@@ -771,7 +783,7 @@ export const TimePageWrapper = styled.div`
     }
     &.__5 {
       background: rgb(240, 255, 134, 0.5);
-    }      
+    }
     &.__6 {
       background: rgb(239, 255, 65, 0.5);
     }
@@ -786,10 +798,10 @@ export const TimePageWrapper = styled.div`
     }
     &.__9 {
       background: rgb(130, 251, 91, 0.5);
-    }    
+    }
     &.__10 {
       background: rgb(89, 241, 42, 0.5);
-    }        
+    }
   }
 
   @media only screen and (max-width: 700px) {
@@ -815,8 +827,8 @@ export const TimePageWrapper = styled.div`
         }
       }
     }
-  }  
-`
+  }
+`;
 
 export const LoginWrapper = styled.div`
   display: flex;
@@ -830,8 +842,8 @@ export const LoginWrapper = styled.div`
   main {
     display: flex;
     min-height: 100vh;
-    flex-direction: column; 
-    
+    flex-direction: column;
+
     > article {
       border-radius: 25px;
       border-bottom-left-radius: 0;
@@ -848,7 +860,8 @@ export const LoginWrapper = styled.div`
         background: rgb(238, 238, 238);
         border-radius: 10px;
       }
-      ol, ul {
+      ol,
+      ul {
         margin-left: 30px;
         margin-bottom: 20px;
         margin-top: 10px;
@@ -901,7 +914,7 @@ export const LoginWrapper = styled.div`
           border-radius: 20px;
           margin-top: 20px;
           background: #eee;
-          
+
           &.personal {
             cursor: pointer;
             &:hover {
@@ -909,8 +922,8 @@ export const LoginWrapper = styled.div`
             }
           }
           &.contract {
-            opacity: 0.6;z
-            p {
+            opacity: 0.6;
+            z p {
               color: #777;
             }
           }
@@ -920,7 +933,7 @@ export const LoginWrapper = styled.div`
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;            
+            gap: 10px;
           }
         }
       }
@@ -952,9 +965,9 @@ export const LoginWrapper = styled.div`
       h3 {
         margin-top: 20px;
       }
-    }    
+    }
   }
-  
+
   @media only screen and (max-width: 700px) {
     main {
       margin: 0 auto;
@@ -975,13 +988,13 @@ export const LoginWrapper = styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
-        
+
         h2 {
           font-size: 24px;
           margin-bottom: 2px;
         }
       }
-    
+
       > article {
         margin: inherit;
         width: auto;
@@ -1001,7 +1014,7 @@ export const UserPageWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    
+
     h2 {
       font-size: 22px;
     }
@@ -1010,7 +1023,7 @@ export const UserPageWrapper = styled.div`
     display: flex;
     margin-top: 60px;
     margin-bottom: 100px;
-    
+
     &.__edit {
       margin-top: 20px;
     }
@@ -1117,13 +1130,13 @@ export const UserPageWrapper = styled.div`
         }
         .social {
           margin-top: 20px;
-        }        
+        }
       }
       .bio {
         margin-top: 20px;
       }
     }
-  }    
+  }
 `;
 
 export const ActivitiyEditWrapper = styled.div`
@@ -1162,7 +1175,6 @@ export const ActivitiyEditWrapper = styled.div`
       margin-bottom: 10px;
     }
   }
-
 
   @media only screen and (max-width: 700px) {
     nav {
@@ -1211,11 +1223,11 @@ export const ActivitiyEditWrapper = styled.div`
         }
         .social {
           margin-top: 20px;
-        }        
+        }
       }
       .bio {
         margin-top: 20px;
       }
     }
-  }    
+  }
 `;

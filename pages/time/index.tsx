@@ -53,17 +53,13 @@ const Time = () => {
   // });
 
   const onScroll = (e: any) => {
-    const {
-      scrollTop,
-      clientHeight,
-      scrollHeight,
-    } = e.nativeEvent.srcElement;
+    const {scrollTop, clientHeight, scrollHeight} = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
 
     if (!canFetch && state !== 'progress') {
       loadTime();
     }
-  }
+  };
 
   useEffect(() => {
     setPage(0);
@@ -78,18 +74,15 @@ const Time = () => {
 
   useEffect(() => {
     if (state === 'ready' && data && data[0] && url === '/api/time/search') {
-      setTime([
-        ...time,
-        ...data[0],
-      ]);
+      setTime([...time, ...data[0]]);
     }
   }, [data]);
 
   const loadTime = () => {
     if (router.query.filter) {
       data.filter = {
-        keywords: [router.query.filter]
-      }
+        keywords: [router.query.filter],
+      };
     }
 
     const filter: any = {};
@@ -102,24 +95,24 @@ const Time = () => {
       url: `/api/time/search`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
+        Authorization: jwt?.access,
       },
       data: {
         filter,
         sort: {createdAt: 'DESC'},
         page,
-      }
+      },
     });
 
     setPage(page + 1);
-  }
+  };
 
   const loadActivities = async () => {
     const response = await request({
       url: `${API_HOST}/api/activity/search/business`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
+        Authorization: jwt?.access,
       },
       data: {
         filter: {
@@ -128,32 +121,31 @@ const Time = () => {
         },
         sort: {createdAt: 'ASC'},
         page: 0,
-      }
+      },
     });
 
     setActivities(response.data[0]);
-  }
+  };
 
   const loadTotals = async () => {
     const response = await request({
       url: `${API_HOST}/api/time/totals`,
       method: 'GET',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
 
     setTotals(response.data);
-  }
-
+  };
 
   const onDelete = async (activity: IActivity) => {
     await request({
       url: `${API_HOST}/api/activity/${activity.id}`,
       method: 'DELETE',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
     addNotification({
       title: 'Your project was removed',
@@ -161,11 +153,11 @@ const Time = () => {
     });
 
     setTimeout(loadActivities, 1000);
-  }
+  };
 
   const onMoreClick = (id: string) => {
     id === open ? setOpen('') : setOpen(id);
-  }
+  };
 
   const onActivityChange = (event: any) => {
     const activityId = event.target.value;
@@ -182,7 +174,7 @@ const Time = () => {
   const activity = activities.find(a => a.id === activityId);
 
   return (
-    <TimePageWrapper onScroll={(e) => onScroll(e)}>
+    <TimePageWrapper onScroll={e => onScroll(e)}>
       <Head>
         <title>Timesheets - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -201,13 +193,9 @@ const Time = () => {
                   value={activityId ? activityId : 0}
                   onChange={onActivityChange}
                 >
-                  <option value="0">
-                    View All
-                  </option>
+                  <option value="0">View All</option>
                   {activities.map(a => {
-                    return (
-                      <option value={a.id}>{a.title}</option>
-                    )
+                    return <option value={a.id}>{a.title}</option>;
                   })}
                 </NativeSelect>
               </FormControl>
@@ -232,7 +220,10 @@ const Time = () => {
                       title="Refers to all the time since the start of the time tracking application"
                       placement="top"
                     >
-                      <span>Time total<InfoIcon /></span>
+                      <span>
+                        Time total
+                        <InfoIcon />
+                      </span>
                     </Tooltip>
                   </TableCell>
                   <TableCell align="left" className="tooltip">
@@ -240,7 +231,10 @@ const Time = () => {
                       title="Represents active time within a ten-minute block of collected data"
                       placement="top"
                     >
-                      <span>Time active<InfoIcon /></span>
+                      <span>
+                        Time active
+                        <InfoIcon />
+                      </span>
                     </Tooltip>
                   </TableCell>
                   <TableCell width="10%" align="left" className="tooltip">
@@ -248,7 +242,9 @@ const Time = () => {
                       title="Accurate measurement of keystrokes to assess typing productivity and time allocation"
                       placement="top"
                     >
-                      <span>Keyboard <InfoIcon /></span>
+                      <span>
+                        Keyboard <InfoIcon />
+                      </span>
                     </Tooltip>
                   </TableCell>
                   <TableCell width="10%" align="left" className="tooltip">
@@ -256,7 +252,10 @@ const Time = () => {
                       title="Monitoring and recording of mouse clicks to evaluate task engagement and time spent on different activities"
                       placement="top"
                     >
-                      <span>Mouse<InfoIcon /></span>
+                      <span>
+                        Mouse
+                        <InfoIcon />
+                      </span>
                     </Tooltip>
                   </TableCell>
                   <TableCell width="15%" align="left" className="tooltip">
@@ -264,14 +263,19 @@ const Time = () => {
                       title="Tracking and analysis of mouse movements to understand workflow patterns and optimize productivity levels"
                       placement="top"
                     >
-                      <span>Mouse distance<InfoIcon /></span>
+                      <span>
+                        Mouse distance
+                        <InfoIcon />
+                      </span>
                     </Tooltip>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {activities.map((activity: IActivity) => {
-                  let total = totals.find((t: ITimeTotals) => t.activityId === activity.id);
+                  let total = totals.find(
+                    (t: ITimeTotals) => t.activityId === activity.id
+                  );
 
                   if (!total) {
                     total = {
@@ -283,14 +287,17 @@ const Time = () => {
                       mouseDistance: 0,
                       rateHour: activity.rateHour,
                       rateTotal: 0,
-                    }
+                    };
                   }
 
-                  const hoursTotal = (total.minutes - (total.minutes % 60)) / 60;
-                  const minutesTotal = total.minutes - (hoursTotal * 60);
+                  const hoursTotal =
+                    (total.minutes - (total.minutes % 60)) / 60;
+                  const minutesTotal = total.minutes - hoursTotal * 60;
                   const minutesActive = total.minutesActive;
-                  const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
-                  const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
+                  const hoursActiveTotal =
+                    (minutesActive - (minutesActive % 60)) / 60;
+                  const minutesActiveTotal =
+                    minutesActive - hoursActiveTotal * 60;
 
                   return (
                     <>
@@ -313,73 +320,88 @@ const Time = () => {
                             size="large"
                             onClick={() => onMoreClick(activity.id)}
                           >
-                            {
-                              open === activity.id
-                                ? <KeyboardArrowUpIcon />
-                                : <KeyboardArrowDownIcon />
-                            }
+                            {open === activity.id ? (
+                              <KeyboardArrowUpIcon />
+                            ) : (
+                              <KeyboardArrowDownIcon />
+                            )}
                           </IconButton>
                         </TableCell>
                         <TableCell align="left">
-                          {hoursTotal} hr<br />
+                          {hoursTotal} hr
+                          <br />
                           {minutesTotal} min <br />
                         </TableCell>
                         <TableCell align="left">
-                          {hoursActiveTotal} hr<br />
-                          {minutesActiveTotal} min<br />
+                          {hoursActiveTotal} hr
+                          <br />
+                          {minutesActiveTotal} min
+                          <br />
                         </TableCell>
-                        <TableCell align="center">{total.keyboardKeys}</TableCell>
+                        <TableCell align="center">
+                          {total.keyboardKeys}
+                        </TableCell>
                         <TableCell align="center">{total.mouseKeys}</TableCell>
-                        <TableCell align="center">{total.mouseDistance}</TableCell>
+                        <TableCell align="center">
+                          {total.mouseDistance}
+                        </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell
-                          sx={{borderBottom: "none"}}
+                          sx={{borderBottom: 'none'}}
                           style={{paddingBottom: 0, paddingTop: 0}}
                           colSpan={12}
                         >
-                          <Collapse in={open === activity.id} timeout="auto" unmountOnExit>
-                            <Box >
+                          <Collapse
+                            in={open === activity.id}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <Box>
                               <div className="full">
                                 <div className="top">
                                   <div>
                                     <p>
-                                      Started at {moment(activity.createdAt).format('LLL')}
+                                      Started at{' '}
+                                      {moment(activity.createdAt).format('LLL')}
                                     </p>
                                     <p>
                                       {activity.state} | {activity.type}
                                     </p>
-                                    <p>
-                                      {activity.rateHour} USD/hr.
-                                    </p>
+                                    <p>{activity.rateHour} USD/hr.</p>
                                     <br />
-                                    <div className="body" dangerouslySetInnerHTML={{
-                                      __html: activity.text
-                                    }} />
+                                    <div
+                                      className="body"
+                                      dangerouslySetInnerHTML={{
+                                        __html: activity.text,
+                                      }}
+                                    />
                                   </div>
                                   <div className="actions">
-                                    <Link 
-                                      target='_blank' 
-                                      href={`/time/report?activityId=${activity?.id}`} 
+                                    <Link
+                                      target="_blank"
+                                      href={`/time/report?activityId=${activity?.id}`}
                                     >
                                       <button className="apply small">
                                         <PrintIcon />
                                         Invoice
-                                      </button>                                    
-                                    </Link>                                      
-                                    <Link href={`/activity/${activity.id}/edit`}>
+                                      </button>
+                                    </Link>
+                                    <Link
+                                      href={`/activity/${activity.id}/edit`}
+                                    >
                                       <button className="apply small">
                                         <EditIcon />
                                         Edit
-                                      </button>                                    
-                                    </Link>      
+                                      </button>
+                                    </Link>
                                     <button
                                       className="apply small"
                                       onClick={() => onDelete(activity)}
                                     >
                                       <DeleteIcon />
                                       Delete
-                                    </button>                                                
+                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -388,20 +410,14 @@ const Time = () => {
                         </TableCell>
                       </TableRow>
                     </>
-                  )
+                  );
                 })}
               </TableBody>
             </Table>
           </TableContainer>
           <br />
           <br />
-          <h2>
-            {
-              activity
-                ? `Worklogs - ${activity.title}`
-                : `Worklogs`
-            }
-          </h2>
+          <h2>{activity ? `Worklogs - ${activity.title}` : `Worklogs`}</h2>
           <TableContainer>
             <Table size="small" aria-label="a dense table">
               <TableHead>
@@ -409,10 +425,18 @@ const Time = () => {
                   <TableCell align="left">Date (from - to)</TableCell>
                   <TableCell align="left">Project name</TableCell>
                   <TableCell align="left">Note</TableCell>
-                  <TableCell width="10%" align="left">Time active</TableCell>
-                  <TableCell width="10%" align="left">Keyboard</TableCell>
-                  <TableCell width="10%" align="left">Mouse</TableCell>
-                  <TableCell width="10%" align="left">Mouse distance</TableCell>
+                  <TableCell width="10%" align="left">
+                    Time active
+                  </TableCell>
+                  <TableCell width="10%" align="left">
+                    Keyboard
+                  </TableCell>
+                  <TableCell width="10%" align="left">
+                    Mouse
+                  </TableCell>
+                  <TableCell width="10%" align="left">
+                    Mouse distance
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

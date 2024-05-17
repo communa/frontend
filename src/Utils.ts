@@ -1,5 +1,5 @@
-import type { MutableRefObject } from 'react';
-import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type {MutableRefObject} from 'react';
+import Axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
 
 export const setStateWithRef = <T>(
   value: T,
@@ -10,7 +10,9 @@ export const setStateWithRef = <T>(
   ref.current = value;
 };
 
-export const request = (config: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
+export const request = (
+  config: AxiosRequestConfig = {}
+): Promise<AxiosResponse> => {
   try {
     return Axios.request(config);
   } catch (e: any) {
@@ -20,4 +22,4 @@ export const request = (config: AxiosRequestConfig = {}): Promise<AxiosResponse>
 
     throw e;
   }
-}
+};

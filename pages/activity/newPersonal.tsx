@@ -1,33 +1,40 @@
 import fs from 'fs';
 import {join} from 'path';
-import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from 'next';
 import {useEffect, useRef, useState} from 'react';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-
 import {TextField} from '@mui/material';
 import {Editor} from '@tinymce/tinymce-react';
 
 import {ActivitiyEditWrapper, PageWrapper} from 'src/lib/Wrappers';
-import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts'
+import {API_HOST, APP_NAME, TINYMCE_KEY} from 'src/config/consts';
 import {request} from 'src/Utils';
 import {useAuth} from 'src/contexts/Auth';
 import {useNotifications} from 'src/contexts/Notifications';
 import MenuMain from 'src/lib/Layout/MenuMain';
 
 export const getServerSideProps: GetServerSideProps<{
-  template: string
+  template: string;
 }> = async (context: GetServerSidePropsContext) => {
-  const template = fs.readFileSync(join(__dirname, '../../../../template-project.html')).toString();
+  const template = fs
+    .readFileSync(join(__dirname, '../../../../template-project.html'))
+    .toString();
 
   return {
     props: {
       template,
     },
-  }
-}
+  };
+};
 
-const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ActivityNew = ({
+  template,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const {addNotification} = useNotifications();
   const editorRef = useRef<any>(null);
@@ -44,7 +51,7 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         title: 'Authorisation is required',
         subtitle: '',
       });
-    };
+    }
   }, []);
 
   const onSaveAndEdit = async (e: React.FormEvent) => {
@@ -55,21 +62,21 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
       url: `${API_HOST}/api/activity`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
+        Authorization: jwt?.access,
       },
       data: {
         title,
         text,
         rateHour,
         state: 'Published',
-        type: 'Personal'
-      }
+        type: 'Personal',
+      },
     });
     console.log(res.headers.location);
     router.push(`/time`);
 
     addNotification({
-      title: 'You\'ve added a new project',
+      title: "You've added a new project",
       subtitle: '',
     });
   };
@@ -92,19 +99,19 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
         <article>
           <form onSubmit={onSaveAndEdit}>
             <nav className="actions">
-              <h2>
-                Project new
-              </h2>
-              <button className="apply small">
-                Save & Continue
-              </button>
+              <h2>Project new</h2>
+              <button className="apply small">Save & Continue</button>
             </nav>
             <ActivitiyEditWrapper>
               <div className="fields">
                 <p>
-                You're initiating a new project for your personal requirements.<br />
-                Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job.
-                Additionally, you cannot directly assign a freelancer.<br />          
+                  You're initiating a new project for your personal
+                  requirements.
+                  <br />
+                  Personal projects are not viewable by freelancers, which
+                  implies they cannot submit applications for your job.
+                  Additionally, you cannot directly assign a freelancer.
+                  <br />
                 </p>
                 <TextField
                   required
@@ -117,16 +124,14 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
                   required
                   label="Rate per hour in USD"
                   variant="outlined"
-                  type='number'
+                  type="number"
                   placeholder="$20"
                   defaultValue={rateHour}
                   onChange={e => setRateHour(Number(e.target.value))}
-                />  
+                />
               </div>
               <div className="description">
-                <h3>
-                  Description
-                </h3>
+                <h3>Description</h3>
                 <Editor
                   apiKey={TINYMCE_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
@@ -136,15 +141,32 @@ const ActivityNew = ({template}: InferGetServerSidePropsType<typeof getServerSid
                     height: 200,
                     menubar: false,
                     plugins: [
-                      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                      'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                      'advlist',
+                      'autolink',
+                      'lists',
+                      'link',
+                      'image',
+                      'charmap',
+                      'preview',
+                      'anchor',
+                      'searchreplace',
+                      'visualblocks',
+                      'code',
+                      'fullscreen',
+                      'insertdatetime',
+                      'media',
+                      'table',
+                      'code',
+                      'help',
+                      'wordcount',
                     ],
-                    toolbar: 'undo redo | blocks | ' +
+                    toolbar:
+                      'undo redo | blocks | ' +
                       'bold italic forecolor | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
                       'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    content_style:
+                      'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                   }}
                 />
               </div>

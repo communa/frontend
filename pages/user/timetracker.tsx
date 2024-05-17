@@ -13,11 +13,13 @@ import {APIContext} from 'src/contexts/Api';
 import {request} from 'src/Utils';
 import {useNotifications} from 'src/contexts/Notifications';
 import {AuthTimeTrackerWrapper} from 'src/lib/Wrappers';
+import {ConnectButtonTon} from 'src/lib/Layout/ConnectButtonTon';
 
 const getTimeTrackerNonceLocalStorage = (nonce: string): Boolean => {
-  const data = typeof window !== "undefined"
-    ? window.localStorage.getItem(`none-${nonce}`)
-    : false;
+  const data =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem(`none-${nonce}`)
+      : false;
 
   return Boolean(data);
 };
@@ -55,8 +57,8 @@ const AuthTimeTracker = () => {
       url: `/api/auth/timetracker/${nonce}`,
       method: 'GET',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
   }, [nonce]);
 
@@ -67,8 +69,8 @@ const AuthTimeTracker = () => {
       url: `${API_HOST}/api/auth/timeTracker/${nonce}/connect`,
       method: 'POST',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
 
     addNotification({
@@ -103,9 +105,8 @@ const AuthTimeTracker = () => {
         <h2>TimeTracker</h2>
         <p>
           {isErrorTimeTracker
-            ? error.message :
-            'TimeTracker is awaiting to be paired with your web3 wallet'
-          }
+            ? error.message
+            : 'TimeTracker is awaiting to be paired with your web3 wallet'}
         </p>
       </header>
     );
@@ -119,9 +120,7 @@ const AuthTimeTracker = () => {
     body = (
       <header className="middleHeader">
         <h2>TimeTracker</h2>
-        <p>
-          Authentication is complete, you may close the window
-        </p>
+        <p>Authentication is complete, you may close the window</p>
       </header>
     );
   }
@@ -133,11 +132,11 @@ const AuthTimeTracker = () => {
         <meta name="description" content={APP_DESCRIPTION} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/logo.png" />   
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <NextLink href={userAddress ? '/time' : '/'} passHref>
-          <IconButton className="close" size='large'>
+          <IconButton className="close" size="large">
             <CloseIcon />
           </IconButton>
         </NextLink>
@@ -145,23 +144,35 @@ const AuthTimeTracker = () => {
         <section>
           {body}
           {!userAddress && (
-            <ConnectButtonEth />
+            <ul>
+              <li>
+                <ConnectButtonEth />
+              </li>
+              <li>
+                <ConnectButtonTon />
+              </li>
+            </ul>
           )}
         </section>
         <p className="note">
-          Login state: {state}<br />
-          Wallet state: {authStatus}<br />
-          Address: {userAddress}<br />
-          Nonce: {nonce}<br />
+          Login state: {state}
+          <br />
+          Wallet state: {authStatus}
+          <br />
+          Address: {userAddress}
+          <br />
+          Nonce: {nonce}
+          <br />
           {error && (
             <>
-              Error: {error?.message}<br />
+              Error: {error?.message}
+              <br />
             </>
           )}
         </p>
       </main>
     </AuthTimeTrackerWrapper>
-  )
+  );
 };
 
 export default AuthTimeTracker;

@@ -24,14 +24,13 @@ export const ConnectButton = () => {
             ready &&
             account &&
             chain &&
-            (!authenticationStatus ||
-              authenticationStatus === 'authenticated');
+            (!authenticationStatus || authenticationStatus === 'authenticated');
 
           return (
             <div
               {...(!ready && {
                 'aria-hidden': true,
-                'style': {
+                style: {
                   opacity: 0,
                   pointerEvents: 'none',
                   userSelect: 'none',
@@ -68,7 +67,11 @@ export const ConnectButton = () => {
 
                 return (
                   <div style={{display: 'flex', gap: 12}}>
-                    <button onClick={openAccountModal} type="button" className="small">
+                    <button
+                      onClick={openAccountModal}
+                      type="button"
+                      className="small"
+                    >
                       <LogoutIcon /> Disconnect {account.displayName}
                     </button>
                   </div>

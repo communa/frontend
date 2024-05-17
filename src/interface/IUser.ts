@@ -1,7 +1,4 @@
-export type IUserSearch = [
-  IUser[],
-  number,
-]
+export type IUserSearch = [IUser[], number];
 
 export interface IUser {
   id: string;

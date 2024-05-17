@@ -41,7 +41,7 @@ export const APIProvider = ({children}: {children: React.ReactNode}) => {
         error,
         state,
         url,
-        query
+        query,
       }}
     >
       {children}

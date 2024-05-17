@@ -13,7 +13,7 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 
 const ActivityShort = ({activity}: ActivityShortProps) => {
   const keywords = [
-    ...activity.keywords ? activity.keywords : [],
+    ...(activity.keywords ? activity.keywords : []),
     ...[
       activity.position,
       activity.employment,
@@ -26,24 +26,16 @@ const ActivityShort = ({activity}: ActivityShortProps) => {
   const isImported = activity.jobUrl && activity.type === EActivityType.IMPORT;
 
   return (
-    <ActivityWrapper className='short'>
+    <ActivityWrapper className="short">
       <article key={activity.id}>
         <ActivityNav activity={activity} />
         <p className="date">
-          <>
-            {moment(activity.createdAt).format('LLL')}
-          </>
+          <>{moment(activity.createdAt).format('LLL')}</>
         </p>
-        <Link href={`/activity/${activity.id}`}>
-          {activity.title}
-        </Link>
+        <Link href={`/activity/${activity.id}`}>{activity.title}</Link>
         {!isPersonal && keywords && (
           <p className="keywords">
-            <Chip
-              label={activity.type}
-              color="success"
-              variant="filled"
-            />
+            <Chip label={activity.type} color="success" variant="filled" />
             {!isImported && (
               <Chip
                 label={`${activity.rateHour} USD`}
@@ -52,17 +44,18 @@ const ActivityShort = ({activity}: ActivityShortProps) => {
               />
             )}
             {keywords.map(k => {
-              return (
-                <span key={k}>{k}</span>
-              );
+              return <span key={k}>{k}</span>;
             })}
           </p>
         )}
-        <div className="body" dangerouslySetInnerHTML={{
-          __html: activity.text
-        }} />
+        <div
+          className="body"
+          dangerouslySetInnerHTML={{
+            __html: activity.text,
+          }}
+        />
       </article>
     </ActivityWrapper>
-  )
-}
+  );
+};
 export default ActivityShort;

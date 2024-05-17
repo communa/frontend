@@ -7,9 +7,7 @@ const ActivityNavJobs = () => {
 
   return (
     <nav className="links">
-      <Link href="/">
-        View All
-      </Link>
+      <Link href="/">View All</Link>
       {JOB_KEYWORDS.map(k => {
         return (
           <Link href={`/?filter=${k}`} key={k}>
@@ -18,6 +16,6 @@ const ActivityNavJobs = () => {
         );
       })}
     </nav>
-  )
-}
+  );
+};
 export default ActivityNavJobs;

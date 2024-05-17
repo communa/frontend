@@ -1,22 +1,28 @@
-
 # Communa - Frontend
-Communa is a web3 platform for freelancing that connects businesses with talented professionals worldwide, making remote work more convenient than ever before. 
+
+Communa is a web3 platform for freelancing that connects businesses with talented professionals worldwide, making remote work more convenient than ever before.
+
 - [https://communa.network/](https://communa.network/)
 - [https://github.com/communa](https://github.com/communa)
 
 ### Development
+
 Clonning and running on a local machine
+
 ```bash
 git clone git@github.com:communa/frontend.git
 npm install
 yarn dev
 ```
+
 Running on a server with PM2
+
 ```bash
 pm2 start npm --name "communa-frontend" -- start
 ```
 
 ## Deployment
+
 ```sh
 cap deploy:setup
 cap deploy production
@@ -24,11 +30,11 @@ cap deploy production
 
 ## Intro
 
-The document provides technical recommendations for frontend for communa platform as the key interface both for freelancers and businesses to interact with the underlying services of the **Communa network**. 
+The document provides technical recommendations for frontend for communa platform as the key interface both for freelancers and businesses to interact with the underlying services of the **Communa network**.
 
 ## UI/UX
 
-We see communna intuitive and user-friendly place for many. The website should be easy to navigate and understand, with clear and concise labeling of all features and functions. The UI should be responsive and optimized for all devices, including desktops, laptops, tablets, and smartphones. The design should be modern and visually appealing, with a consistent color scheme and typography throughout the platform. 
+We see communna intuitive and user-friendly place for many. The website should be easy to navigate and understand, with clear and concise labeling of all features and functions. The UI should be responsive and optimized for all devices, including desktops, laptops, tablets, and smartphones. The design should be modern and visually appealing, with a consistent color scheme and typography throughout the platform.
 
 The user experience of the platform should be seamless and efficient giving the users the required simplicity to complete tasks without any confusion or frustration. The platform should provide clear and concise instructions for all actions and should offer helpful suggestions and recommendations to users based on their preferences and behavior. The UX should be designed to encourage engagement and retention, with features such as gamification and social sharing.
 
@@ -46,7 +52,7 @@ Web3 authentication with Metamask offers several benefits, including enhanced se
 
 ## Registration and Login
 
-The frontend will provide a user-friendly interface for users to register and log in to the website. The registration process will require users to provide basic information such as name, email, and password. 
+The frontend will provide a user-friendly interface for users to register and log in to the website. The registration process will require users to provide basic information such as name, email, and password.
 
 Empty profiles shall not be displayed in search results or directly accessed from a browser.
 
@@ -102,7 +108,7 @@ As a client, I should be able to post a job on the website, and access and edit 
 
 ## **Project** - Proposal submission
 
-Proposals play a crucial role in securing projects on Communa. Proposals serve as the initial point of contact with potential clients, and it's essential to create a proposal that captures their attention. A well-crafted and comprehensive proposal is the key element for successful communication. 
+Proposals play a crucial role in securing projects on Communa. Proposals serve as the initial point of contact with potential clients, and it's essential to create a proposal that captures their attention. A well-crafted and comprehensive proposal is the key element for successful communication.
 
 - Users can create and submit proposals for projects
 - Proposals can include attachments such as portfolios or resumes
@@ -136,7 +142,7 @@ The payment section is where users can manage their payment information and invo
 
 The platform should provide management system to facilitate payments and invoicing between freelancers and clients. The payment system should be integrated with blockchain networks like Ethereum to support wider range of methods. Communa should also provide transparent and detailed transaction histories for both freelancers and clients, with clear information on fees, taxes, and other relevant details.
 
-- Users see sent and receive  payments on platform
+- Users see sent and receive payments on platform
 - Payments shall be made using stable-coins supporting most popular networks
 - Invoices can be generated automatically based on time tracking data
 

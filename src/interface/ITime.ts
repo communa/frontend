@@ -1,9 +1,6 @@
-import {IActivity} from "./IActivity";
+import {IActivity} from './IActivity';
 
-export type ITimeSearch = [
-  ITime[],
-  number,
-]
+export type ITimeSearch = [ITime[], number];
 
 export interface ITime {
   id: string;
@@ -14,5 +11,5 @@ export interface ITime {
   mouseDistance: number;
   fromAt: string;
   toAt: string;
-  activity: IActivity,
+  activity: IActivity;
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import {ConnectButton as CB} from '@rainbow-me/rainbowkit';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import MetaMaskFox from 'src/assets/MetaMask_Fox.svg';
+import EthereumLogo from 'src/assets/ethereum-eth-logo.svg';
 import {ConnectButtonWrapper} from './Wrappers';
 
 export const ConnectButtonEth = () => {
@@ -25,14 +25,13 @@ export const ConnectButtonEth = () => {
             ready &&
             account &&
             chain &&
-            (!authenticationStatus ||
-              authenticationStatus === 'authenticated');
+            (!authenticationStatus || authenticationStatus === 'authenticated');
 
           return (
             <div
               {...(!ready && {
                 'aria-hidden': true,
-                'style': {
+                style: {
                   opacity: 0,
                   pointerEvents: 'none',
                   userSelect: 'none',
@@ -42,19 +41,15 @@ export const ConnectButtonEth = () => {
               {(() => {
                 if (!connected) {
                   return (
-                    <button
-                      id="authLogin"
-                      onClick={openConnectModal}
-                      type="button"
-                    >
+                    <button onClick={openConnectModal} type="button">
                       <Image
                         priority
-                        src={MetaMaskFox}
-                        alt="MetaMask Logo"
+                        src={EthereumLogo}
+                        alt="TON Network Logo"
                         width={35}
                         height={35}
                       />
-                      Log In with Ethereum
+                      Sign In with Ethereum
                     </button>
                   );
                 }
@@ -69,7 +64,11 @@ export const ConnectButtonEth = () => {
 
                 return (
                   <div style={{display: 'flex', gap: 12}}>
-                    <button onClick={openAccountModal} type="button" className="small">
+                    <button
+                      onClick={openAccountModal}
+                      type="button"
+                      className="small"
+                    >
                       <LogoutIcon /> Disconnect {account.displayName}
                     </button>
                   </div>

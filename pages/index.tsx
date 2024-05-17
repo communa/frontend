@@ -1,5 +1,5 @@
-import {InferGetServerSidePropsType} from 'next'
-import {GetServerSideProps} from 'next'
+import {InferGetServerSidePropsType} from 'next';
+import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import {useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
@@ -7,27 +7,27 @@ import {useRouter} from 'next/router';
 import {request} from 'src/Utils';
 import {PageWrapper} from 'src/lib/Wrappers';
 import {IActivitySearch} from 'src/interface/IActivity';
-import {API_HOST, APP_NAME} from 'src/config/consts';
+import {API_HOST, APP_DESCRIPTION, APP_NAME} from 'src/config/consts';
 import {APIContext} from 'src/contexts/Api';
 import ActivityShort from 'src/lib/Activity/ActivityShort';
 import MenuMain from 'src/lib/Layout/MenuMain';
-
 import ActivityNavJobs from 'src/lib/Activity/ActivityNavJobs';
 
-export const getServerSideProps: GetServerSideProps<{search: IActivitySearch}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{
+  search: IActivitySearch;
+}> = async context => {
   const data = {
-    filter: {
-    },
+    filter: {},
     sort: {
-      createdAt: 'DESC'
+      createdAt: 'DESC',
     },
     page: 0,
   };
 
   if (context.query.filter) {
     data.filter = {
-      keywords: [context.query.filter]
-    }
+      keywords: [context.query.filter],
+    };
   }
 
   const response = await request({
@@ -40,10 +40,12 @@ export const getServerSideProps: GetServerSideProps<{search: IActivitySearch}> =
     props: {
       search: response.data,
     },
-  }
-}
+  };
+};
 
-const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({
+  search,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [activities, setActivities] = useState(search[0]);
   const [page, setPage] = useState(0);
   const router = useRouter();
@@ -51,10 +53,7 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
 
   useEffect(() => {
     if (state === 'ready' && data && data[0]) {
-      setActivities([
-        ...activities,
-        ...data[0],
-      ]);
+      setActivities([...activities, ...data[0]]);
     }
   }, [data]);
 
@@ -65,31 +64,26 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
   }, [router.query.filter]);
 
   const onScroll = (e: any) => {
-    const {
-      scrollTop,
-      clientHeight,
-      scrollHeight,
-    } = e.nativeEvent.srcElement;
+    const {scrollTop, clientHeight, scrollHeight} = e.nativeEvent.srcElement;
     const canFetch = scrollTop + clientHeight + 150 < scrollHeight;
 
     if (!canFetch && state !== 'progress') {
       doQuery();
     }
-  }
+  };
   const doQuery = () => {
     const data = {
-      filter: {
-      },
+      filter: {},
       sort: {
-        createdAt: 'DESC'
+        createdAt: 'DESC',
       },
       page: 0,
     };
 
     if (router.query.filter) {
       data.filter = {
-        keywords: [router.query.filter]
-      }
+        keywords: [router.query.filter],
+      };
     }
 
     query({
@@ -98,10 +92,10 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
       data,
     });
     setPage(page + 1);
-  }
+  };
 
   return (
-    <PageWrapper onScroll={(e) => onScroll(e)}>
+    <PageWrapper onScroll={e => onScroll(e)}>
       <Head>
         <title>Find Work - {APP_NAME}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -114,14 +108,12 @@ const Activity = ({search}: InferGetServerSidePropsType<typeof getServerSideProp
         <article>
           <nav className="actions">
             <div>
-              <h2>
-                {router.query.filter ? router.query.filter : "Find work"}
-              </h2>
+              <h2>{router.query.filter ? router.query.filter : 'Find work'}</h2>
               <ActivityNavJobs />
             </div>
           </nav>
           {activities.map(activity => {
-            return <ActivityShort key={activity.id} activity={activity} />
+            return <ActivityShort key={activity.id} activity={activity} />;
           })}
           {activities.length === 0 && (
             <div className="noResults">

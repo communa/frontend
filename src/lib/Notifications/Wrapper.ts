@@ -12,7 +12,7 @@ export const Wrapper = styled.ul`
   display: flex;
   align-items: center;
   width: 100%;
-  
+
   li {
     background: #5586d1;
     margin: 0.4rem 1.2rem;

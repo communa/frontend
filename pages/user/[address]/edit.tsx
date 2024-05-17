@@ -1,7 +1,11 @@
 import fs from 'fs';
 import {join} from 'path';
 import {useEffect, useRef, useState} from 'react';
-import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from 'next';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
@@ -16,15 +20,17 @@ import {IUser} from 'src/interface/IUser';
 import MenuMain from 'src/lib/Layout/MenuMain';
 
 export const getServerSideProps: GetServerSideProps<{
-  user: IUser,
-  template: string
+  user: IUser;
+  template: string;
 }> = async (context: GetServerSidePropsContext) => {
-  const template = fs.readFileSync(join(__dirname, '../../../../../template-profile.html')).toString();
+  const template = fs
+    .readFileSync(join(__dirname, '../../../../../template-profile.html'))
+    .toString();
 
   const {address} = context.query;
   const response = await request({
     url: `${API_HOST}/api/user/${address}/address`,
-    method: 'GET'
+    method: 'GET',
   });
 
   return {
@@ -32,10 +38,13 @@ export const getServerSideProps: GetServerSideProps<{
       user: response.data,
       template,
     },
-  }
-}
+  };
+};
 
-const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const UserProfileEdit = ({
+  user,
+  template,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const editorRef = useRef<any>(null);
   const router = useRouter();
   const {addNotification} = useNotifications();
@@ -52,7 +61,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
     if (userAddress !== user.address) {
       router.push(`/user/${user.address}`);
     }
-  })
+  });
 
   const onEdit = async () => {
     const bio = editorRef.current?.getContent();
@@ -61,7 +70,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
       url: `${API_HOST}/api/user`,
       method: 'PUT',
       headers: {
-        Authorization: jwt?.access
+        Authorization: jwt?.access,
       },
       data: {
         userName,
@@ -70,7 +79,7 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
         linkedIn,
         telegram,
         bio,
-      }
+      },
     });
 
     setBio(bio);
@@ -86,7 +95,9 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
   return (
     <PageWrapper>
       <Head>
-        <title>{userAddress} - Web3 Jobs - {APP_NAME}</title>
+        <title>
+          {userAddress} - Web3 Jobs - {APP_NAME}
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/logo.png" />
@@ -97,12 +108,12 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
           <UserPageWrapper>
             <nav className="actions">
               <h2>Edit profile</h2>
-              <button className="apply small" onClick={() => onEdit()} >
+              <button className="apply small" onClick={() => onEdit()}>
                 Save and Continue
               </button>
             </nav>
             <form>
-                <div className="userProfile __edit">
+              <div className="userProfile __edit">
                 <div className="fields">
                   <TextField
                     label="Address"
@@ -157,15 +168,32 @@ const UserProfileEdit = ({user, template}: InferGetServerSidePropsType<typeof ge
                       // height: 300,
                       menubar: false,
                       plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                        'advlist',
+                        'autolink',
+                        'lists',
+                        'link',
+                        'image',
+                        'charmap',
+                        'preview',
+                        'anchor',
+                        'searchreplace',
+                        'visualblocks',
+                        'code',
+                        'fullscreen',
+                        'insertdatetime',
+                        'media',
+                        'table',
+                        'code',
+                        'help',
+                        'wordcount',
                       ],
-                      toolbar: 'undo redo | blocks | ' +
+                      toolbar:
+                        'undo redo | blocks | ' +
                         'bold italic forecolor | alignleft aligncenter ' +
                         'alignright alignjustify | bullist numlist outdent indent | ' +
                         'removeformat | help',
-                      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                      content_style:
+                        'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                     }}
                   />
                 </div>

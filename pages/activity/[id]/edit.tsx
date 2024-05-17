@@ -1,8 +1,12 @@
-import type {GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType} from 'next';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from 'next';
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
 import {useEffect, useRef, useState} from 'react';
-import {Button, Switch, TextField} from '@mui/material';
+import {Switch, TextField} from '@mui/material';
 import {useRouter} from 'next/router';
 
 import {IActivity} from 'src/interface/IActivity';
@@ -14,21 +18,25 @@ import {useNotifications} from 'src/contexts/Notifications';
 import MenuMain from 'src/lib/Layout/MenuMain';
 import {EActivityType} from 'src/interface/EActivityType';
 
-export const getServerSideProps: GetServerSideProps<{activity: IActivity}> = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps<{
+  activity: IActivity;
+}> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
   const response = await request({
     url: `${API_HOST}/api/activity/${id}`,
-    method: 'GET'
+    method: 'GET',
   });
 
   return {
     props: {
       activity: response.data,
     },
-  }
-}
+  };
+};
 
-const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Activity = ({
+  activity,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const {addNotification} = useNotifications();
   const router = useRouter();
   const {jwt, userAddress} = useAuth();
@@ -56,7 +64,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
       url: `${API_HOST}/api/activity/${activity.id}`,
       method: 'PUT',
       headers: {
-        Authorization: jwt?.access
+        Authorization: jwt?.access,
       },
       data: {
         state,
@@ -65,7 +73,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         salary,
         rateHour,
         keywords: keywords.split(','),
-      }
+      },
     });
 
     setText(text);
@@ -81,7 +89,9 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
   return (
     <PageWrapper>
       <Head>
-        <title>{activity.id} - {APP_NAME}</title>
+        <title>
+          {activity.id} - {APP_NAME}
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content={activity.title} />
@@ -91,23 +101,21 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
         <MenuMain />
         <article>
           <nav className="actions">
-            <h2>
-              Project edit
-            </h2>
-            <button
-              className="apply small"
-              onClick={() => onEdit()}
-            >
+            <h2>Project edit</h2>
+            <button className="apply small" onClick={() => onEdit()}>
               Save changes
-            </button>                   
+            </button>
           </nav>
           <form>
             <ActivitiyEditWrapper>
               <div className="fields">
                 <p>
-                  You're editing a project for your personal requirements.<br />
-                  Personal projects are not viewable by freelancers, which implies they cannot submit applications for your job.
-                  Additionally, you cannot directly assign a freelancer.<br />          
+                  You're editing a project for your personal requirements.
+                  <br />
+                  Personal projects are not viewable by freelancers, which
+                  implies they cannot submit applications for your job.
+                  Additionally, you cannot directly assign a freelancer.
+                  <br />
                 </p>
                 <TextField
                   label="ID"
@@ -126,7 +134,7 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
                 <TextField
                   label="Hourly rate / USD"
                   variant="outlined"
-                  type='number'
+                  type="number"
                   placeholder="$20"
                   defaultValue={rateHour}
                   onChange={e => setRateHour(Number(e.target.value))}
@@ -159,17 +167,13 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
                         }}
                         value={state}
                       />
-                      <label>
-                        {state}
-                      </label>
+                      <label>{state}</label>
                     </p>
                   </>
-                )}                
+                )}
               </div>
               <div className="description">
-                <h3>
-                  Description
-                </h3>
+                <h3>Description</h3>
                 <Editor
                   apiKey={TINYMCE_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
@@ -178,17 +182,34 @@ const Activity = ({activity}: InferGetServerSidePropsType<typeof getServerSidePr
                     // height: 300,
                     menubar: false,
                     plugins: [
-                      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                      'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                      'advlist',
+                      'autolink',
+                      'lists',
+                      'link',
+                      'image',
+                      'charmap',
+                      'preview',
+                      'anchor',
+                      'searchreplace',
+                      'visualblocks',
+                      'code',
+                      'fullscreen',
+                      'insertdatetime',
+                      'media',
+                      'table',
+                      'code',
+                      'help',
+                      'wordcount',
                     ],
-                    toolbar: 'undo redo | blocks | ' +
+                    toolbar:
+                      'undo redo | blocks | ' +
                       'bold italic forecolor | alignleft aligncenter ' +
                       'alignright alignjustify | bullist numlist outdent indent | ' +
                       'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    content_style:
+                      'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                   }}
-                />                
+                />
               </div>
             </ActivitiyEditWrapper>
           </form>

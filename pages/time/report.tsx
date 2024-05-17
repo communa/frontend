@@ -26,8 +26,8 @@ const TimeReport = () => {
 
   const {activityId} = router.query;
   const [report, setReport] = useState<{
-    totals: ITimeTotals[],
-    time: ITime[]
+    totals: ITimeTotals[];
+    time: ITime[];
   }>();
   const [activity, setActivity] = useState<IActivity>();
 
@@ -42,33 +42,33 @@ const TimeReport = () => {
       url: `${API_HOST}/api/time/report/${activityId}`,
       method: 'GET',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
     const responseActivity = await request({
       url: `${API_HOST}/api/activity/${activityId}`,
       method: 'GET',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
-    
+
     setActivity(responseActivity.data);
     setReport(responseReport.data);
 
     console.log(responseReport.data);
-  }
+  };
 
   const printReport = () => {
-    typeof window !== "undefined"
-      ? window.print()
-      : false;
-  }
+    typeof window !== 'undefined' ? window.print() : false;
+  };
 
   return (
     <TimeReportWrapper>
       <Head>
-        <title>Report {activity?.title} - {APP_NAME}</title>
+        <title>
+          Report {activity?.title} - {APP_NAME}
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/logo.png" />
@@ -90,18 +90,16 @@ const TimeReport = () => {
           <div className="heading">
             <h1>{activity?.title}</h1>
             <p>
-              Total: {report?.totals[0]?.rateTotal} USDT<br />
+              Total: {report?.totals[0]?.rateTotal} USDT
+              <br />
               Wallet: {userAddress} / POLYGON
             </p>
           </div>
           <div className="action">
-            <button
-              className="apply small"
-              onClick={() => printReport()}
-            >
+            <button className="apply small" onClick={() => printReport()}>
               <PrintIcon />
               Print | Save as PDF
-            </button>            
+            </button>
           </div>
         </nav>
         <TableContainer>
@@ -116,30 +114,32 @@ const TimeReport = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {report && activity && report.totals.map((t: ITimeTotals) => {
-                const hoursTotal = (t.minutes - (t.minutes % 60)) / 60;
-                const minutesTotal = t.minutes - (hoursTotal * 60);
+              {report &&
+                activity &&
+                report.totals.map((t: ITimeTotals) => {
+                  const hoursTotal = (t.minutes - (t.minutes % 60)) / 60;
+                  const minutesTotal = t.minutes - hoursTotal * 60;
 
-                const minutesActive = t.minutesActive;
-                const hoursActiveTotal = (minutesActive - (minutesActive % 60)) / 60;
-                const minutesActiveTotal = minutesActive - (hoursActiveTotal * 60);
+                  const minutesActive = t.minutesActive;
+                  const hoursActiveTotal =
+                    (minutesActive - (minutesActive % 60)) / 60;
+                  const minutesActiveTotal =
+                    minutesActive - hoursActiveTotal * 60;
 
-                return (
-                  <TableRow
-                    key={t.activityId}
-                  >
-                    <TableCell align="left">
-                      {hoursTotal} hr {minutesTotal} min
-                    </TableCell>
-                    <TableCell align="left">
-                      {hoursActiveTotal} hr {minutesActiveTotal} min
-                    </TableCell>
-                    <TableCell align="left">{t.keyboardKeys}</TableCell>
-                    <TableCell align="left">{t.mouseKeys}</TableCell>
-                    <TableCell align="left">{t.mouseDistance}</TableCell>
-                  </TableRow>
-                )
-              })}
+                  return (
+                    <TableRow key={t.activityId}>
+                      <TableCell align="left">
+                        {hoursTotal} hr {minutesTotal} min
+                      </TableCell>
+                      <TableCell align="left">
+                        {hoursActiveTotal} hr {minutesActiveTotal} min
+                      </TableCell>
+                      <TableCell align="left">{t.keyboardKeys}</TableCell>
+                      <TableCell align="left">{t.mouseKeys}</TableCell>
+                      <TableCell align="left">{t.mouseDistance}</TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -158,35 +158,40 @@ const TimeReport = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {report && activity && report.time.map(t => (
-                <TableRow
-                  key={t.id}
-                  className={`activeMinutes __${t.minutesActive}`}
-                >
-                  <TableCell align="left">
-                    {moment(t.fromAt).format('MMM Do Y HH:mm')}-
-                    {moment(t.toAt).format('HH:mm')}
-                  </TableCell>
-                  <TableCell align="left">{t.minutesActive} min</TableCell>
-                  <TableCell align="left">{t.keyboardKeys}</TableCell>
-                  <TableCell align="left">{t.mouseKeys}</TableCell>
-                  <TableCell align="left">{t.mouseDistance}</TableCell>
-                  <TableCell align="left">{t.note}</TableCell>
-                </TableRow>
-              ))}
+              {report &&
+                activity &&
+                report.time.map(t => (
+                  <TableRow
+                    key={t.id}
+                    className={`activeMinutes __${t.minutesActive}`}
+                  >
+                    <TableCell align="left">
+                      {moment(t.fromAt).format('MMM Do Y HH:mm')}-
+                      {moment(t.toAt).format('HH:mm')}
+                    </TableCell>
+                    <TableCell align="left">{t.minutesActive} min</TableCell>
+                    <TableCell align="left">{t.keyboardKeys}</TableCell>
+                    <TableCell align="left">{t.mouseKeys}</TableCell>
+                    <TableCell align="left">{t.mouseDistance}</TableCell>
+                    <TableCell align="left">{t.note}</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
         <p className="note">
-          This report has been prepared by Communa Network using the Communa time tracking application.<br />
-          We utilize keyboard and mouse activity data to measure active time accurately.
+          This report has been prepared by Communa Network using the Communa
+          time tracking application.
+          <br />
+          We utilize keyboard and mouse activity data to measure active time
+          accurately.
           <br />
           http://communa.network
           <br />
           <br />
         </p>
       </main>
-    </TimeReportWrapper >
+    </TimeReportWrapper>
   );
 };
 

@@ -1,9 +1,6 @@
-import {EActivityType} from "./EActivityType";
+import {EActivityType} from './EActivityType';
 
-export type IActivitySearch = [
-  IActivity[],
-  number,
-]
+export type IActivitySearch = [IActivity[], number];
 
 export interface IActivity {
   id: string;
@@ -18,8 +15,8 @@ export interface IActivity {
   position: string;
   location: string;
   employment: string;
-  createdAt: Date,
-  updatedAt: Date,
-  cancelledAt: Date,
-  user: any
+  createdAt: Date;
+  updatedAt: Date;
+  cancelledAt: Date;
+  user: any;
 }

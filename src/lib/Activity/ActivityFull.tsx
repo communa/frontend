@@ -13,13 +13,15 @@ interface ActivityShortProps extends React.HTMLAttributes<HTMLElement> {
 
 const ActivityFull = ({activity}: ActivityShortProps) => {
   const keywords = [
-    ...activity.keywords ? activity.keywords : [],
+    ...(activity.keywords ? activity.keywords : []),
     ...[
       activity.position,
       activity.employment,
       activity.location,
       activity.salary,
-    ].filter(n => n).flat(),
+    ]
+      .filter(n => n)
+      .flat(),
   ];
 
   const isImported = activity.jobUrl && activity.type === EActivityType.IMPORT;
@@ -32,7 +34,8 @@ const ActivityFull = ({activity}: ActivityShortProps) => {
         <p className="date">
           {activity.user && (
             <>
-              By <Link href={`/user/${activity.user.address}`}>
+              By{' '}
+              <Link href={`/user/${activity.user.address}`}>
                 {activity.user.address}
               </Link>
               <br />
@@ -40,17 +43,11 @@ const ActivityFull = ({activity}: ActivityShortProps) => {
           )}
           {moment(activity.createdAt).format('LLL')}
         </p>
-        <Link href={`/activity/${activity.id}`}>
-          {activity.title}
-        </Link>
+        <Link href={`/activity/${activity.id}`}>{activity.title}</Link>
 
         {!isPersonal && keywords && (
           <p className="keywords">
-            <Chip
-              label={activity.type}
-              color="success"
-              variant="filled"
-            />
+            <Chip label={activity.type} color="success" variant="filled" />
             {!isImported && (
               <p>
                 <Chip
@@ -61,22 +58,28 @@ const ActivityFull = ({activity}: ActivityShortProps) => {
               </p>
             )}
             {keywords.map(k => {
-              return (
-                <span key={k}>{k}</span>
-              );
+              return <span key={k}>{k}</span>;
             })}
           </p>
         )}
-        <div className="body" dangerouslySetInnerHTML={{
-          __html: activity.text
-        }} />
+        <div
+          className="body"
+          dangerouslySetInnerHTML={{
+            __html: activity.text,
+          }}
+        />
       </article>
       {isImported && (
-        <a href={activity.jobUrl} className="apply" target="_blank" rel="noreferrer">
+        <a
+          href={activity.jobUrl}
+          className="apply"
+          target="_blank"
+          rel="noreferrer"
+        >
           Apply Now
         </a>
       )}
-    </ActivityWrapper >
-  )
-}
+    </ActivityWrapper>
+  );
+};
 export default ActivityFull;

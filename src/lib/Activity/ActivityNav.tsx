@@ -32,8 +32,8 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
       url: `/api/activity/${activity.id}`,
       method: 'DELETE',
       headers: {
-        Authorization: jwt?.access
-      }
+        Authorization: jwt?.access,
+      },
     });
 
     addNotification({
@@ -41,17 +41,17 @@ const ActivityNav = ({activity}: ActivityShortProps) => {
       subtitle: '',
     });
     router.push(`/activity?type=Personal&state=Published`);
-  }
+  };
 
   return (
     <nav>
       <Link href={`/activity/${activity.id}/edit`}>
-        <Button variant='outlined'>
-          Edit
-        </Button>
+        <Button variant="outlined">Edit</Button>
       </Link>
-      <Button onClick={() => onDelete()} variant='outlined'>Delete</Button>
-    </nav >
-  )
-}
+      <Button onClick={() => onDelete()} variant="outlined">
+        Delete
+      </Button>
+    </nav>
+  );
+};
 export default ActivityNav;

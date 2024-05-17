@@ -1,10 +1,10 @@
 // Copyright 2023 @paritytech/polkadot-staking-dashboard authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { RefObject } from 'react';
-import React, { useState } from 'react';
-import { defaultTooltipContext } from './defaults';
-import type { TooltipContextInterface } from './types';
+import type {RefObject} from 'react';
+import React, {useState} from 'react';
+import {defaultTooltipContext} from './defaults';
+import type {TooltipContextInterface} from './types';
 
 export const TooltipContext = React.createContext<TooltipContextInterface>(
   defaultTooltipContext
@@ -12,11 +12,7 @@ export const TooltipContext = React.createContext<TooltipContextInterface>(
 
 export const useTooltip = () => React.useContext(TooltipContext);
 
-export const TooltipProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const TooltipProvider = ({children}: {children: React.ReactNode}) => {
   const [open, setOpen] = useState(0);
   const [show, setShow] = useState(0);
   const [text, setText] = useState<string>('');

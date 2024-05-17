@@ -33,7 +33,7 @@ export default function MenuMain() {
   useEffect(() => {
     if (redirect === 'from_website' && !userAddress) {
       document?.getElementById('authLogin')?.click();
-      router.push(`/`);
+      router.push(`/login`);
     }
   }, [redirect]);
 
@@ -41,7 +41,7 @@ export default function MenuMain() {
     isHide = false;
     setMenu(id);
     console.log(id);
-  }
+  };
 
   const hideMenu = () => {
     isHide = true;
@@ -50,7 +50,7 @@ export default function MenuMain() {
         setMenu('');
       }
     }, 1000);
-  }
+  };
 
   return (
     <MenuMainWrapper className={`${isOpen ? '__open' : ''}`}>
@@ -74,9 +74,7 @@ export default function MenuMain() {
               onMouseLeave={() => hideMenu()}
               className={menu === 'dashboard' ? 'active' : ''}
             >
-              <Link href="/time">
-                Dashboard
-              </Link>
+              <Link href="/time">Dashboard</Link>
             </li>
           )}
           <li
@@ -84,9 +82,7 @@ export default function MenuMain() {
             onMouseLeave={() => hideMenu()}
             className={menu === 'help' ? 'active' : ''}
           >
-            <Link href="https://communa.network/help">
-              Help
-            </Link>
+            <Link href="https://communa.network/help">Help</Link>
           </li>
           <li
             onMouseEnter={() => showMenu('investor')}
@@ -102,58 +98,58 @@ export default function MenuMain() {
             onMouseLeave={() => hideMenu()}
             className={menu === 'developer' ? 'active' : ''}
           >
-            <Link href="https://github.com/communa">
-              Developers
-            </Link>
+            <Link href="https://github.com/communa">Developers</Link>
           </li>
           <li
             onMouseEnter={() => showMenu('work')}
             onMouseLeave={() => hideMenu()}
             className={menu === 'work' ? 'active' : ''}
           >
-            <Link href="/">
-              Marketplace
-            </Link>
+            <Link href="/">Marketplace</Link>
           </li>
           <li>
-            <a href="https://communa.network/download">
-              Download v0.6.1
-            </a>
+            <a href="https://communa.network/download">Download v0.6.1</a>
           </li>
           <li className="social first">
-            <a href="https://github.com/communa" target="_blank" rel="noreferrer">
+            <a
+              href="https://github.com/communa"
+              target="_blank"
+              rel="noreferrer"
+            >
               <GitHubIcon />
             </a>
           </li>
           <li className="social">
-            <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+            <a
+              href="https://twitter.com/CommunaNetwork"
+              target="_blank"
+              rel="noreferrer"
+            >
               <TwitterIcon />
             </a>
           </li>
           <li className="social">
-            <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
+            <a href="https://t.me/communanetwork" target="_blank" rel="noreferrer">
               <TelegramIcon />
             </a>
           </li>
         </ul>
         <div className="auth">
-          {
-            addressShort ? (
-              <ConnectButtonWrapper>
-                <button type="button" onClick={() => userLogOut()}>
-                  <LogoutIcon /> Disconnect {addressShort}
-                </button>
-              </ConnectButtonWrapper>
-            ) : (
-              <ConnectButtonWrapper>
-                <NextLink href="/login">
-                  <button>
+          {addressShort ? (
+            <ConnectButtonWrapper>
+              <button type="button" onClick={() => userLogOut()}>
+                <LogoutIcon /> Disconnect {addressShort}
+              </button>
+            </ConnectButtonWrapper>
+          ) : (
+            <ConnectButtonWrapper>
+              <NextLink href="/login">
+                <button>
                   <SelfImprovementIcon /> Sign In with Web3
-                  </button>
-                </NextLink>
-              </ConnectButtonWrapper>
-            )
-          }
+                </button>
+              </NextLink>
+            </ConnectButtonWrapper>
+          )}
         </div>
         <IconButton
           aria-label="delete"
@@ -174,14 +170,10 @@ export default function MenuMain() {
           <h4>Dashboard</h4>
           <ul>
             <li>
-              <Link href={`/time`}>
-                Your projects
-              </Link>
+              <Link href={`/time`}>Your projects</Link>
             </li>
             <li>
-              <Link href={`/user/${userAddress}`}>
-                Profile
-              </Link>
+              <Link href={`/user/${userAddress}`}>Profile</Link>
             </li>
           </ul>
           <h4>Marketplace</h4>
@@ -199,32 +191,22 @@ export default function MenuMain() {
           <h4>Help</h4>
           <ul>
             <li>
-              <Link href="https://communa.network/help">
-                FAQ
-              </Link>
+              <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">
-                How it works?
-              </Link>
+              <Link href="https://communa.network/help">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">
-                What is wallet?
-              </Link>
+              <Link href="https://communa.network/help">What is wallet?</Link>
             </li>
           </ul>
           <h4>Investor</h4>
           <ul>
             <li>
-              <a href="https://communa.network/roadmap">
-                Roadmap
-              </a>
+              <a href="https://communa.network/roadmap">Roadmap</a>
             </li>
             <li>
-              <a href="https://communa.network/litepaper">
-                Litepaper
-              </a>
+              <a href="https://communa.network/litepaper">Litepaper</a>
             </li>
             <li>
               <a href="https://assets.communa.network/PitchDeck.html">
@@ -242,7 +224,11 @@ export default function MenuMain() {
               </a>
             </li>
             <li>
-              <a href="mailto:hello@communa.network" target="_blank" rel="noreferrer">
+              <a
+                href="mailto:hello@communa.network"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Email Us
               </a>
             </li>
@@ -250,12 +236,20 @@ export default function MenuMain() {
           <h4>Social</h4>
           <ul>
             <li>
-              <a href="https://t.me/communajobs" target="_blank" rel="noreferrer">
+              <a
+                href="https://t.me/communanetwork"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Telegram
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/CommunaNetwork" target="_blank" rel="noreferrer">
+              <a
+                href="https://twitter.com/CommunaNetwork"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Twitter / X
               </a>
             </li>
@@ -263,12 +257,20 @@ export default function MenuMain() {
           <h4>Developer</h4>
           <ul>
             <li>
-              <a href="https://app.communa.network/swagger/" target="_blank" rel="noreferrer">
+              <a
+                href="https://app.communa.network/swagger/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 API
               </a>
             </li>
             <li>
-              <a href="https://github.com/communa" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/communa"
+                target="_blank"
+                rel="noreferrer"
+              >
                 GitHub
               </a>
             </li>
@@ -276,7 +278,12 @@ export default function MenuMain() {
         </div>
       )}
 
-      <div id="downMenu" className={menu} onMouseEnter={() => showMenu(menu)} onMouseLeave={() => hideMenu()}>
+      <div
+        id="downMenu"
+        className={menu}
+        onMouseEnter={() => showMenu(menu)}
+        onMouseLeave={() => hideMenu()}
+      >
         {menu === 'work' && (
           <ul>
             {JOB_KEYWORDS.map((k, i) => {
@@ -293,42 +300,30 @@ export default function MenuMain() {
         {menu === 'dashboard' && (
           <ul>
             <li>
-              <Link href={`/time`}>
-                Your projects
-              </Link>
+              <Link href={`/time`}>Your projects</Link>
             </li>
             <li>
-              <Link href={`/user/${userAddress}`}>
-                Profile
-              </Link>
+              <Link href={`/user/${userAddress}`}>Profile</Link>
             </li>
           </ul>
         )}
         {menu === 'developer' && (
           <ul>
             <li>
-              <a href="https://github.com/communa">
-                GitHub
-              </a>
+              <a href="https://github.com/communa">GitHub</a>
             </li>
             <li>
-              <a href="https://app.communa.network/swagger/">
-                API
-              </a>
+              <a href="https://app.communa.network/swagger/">API</a>
             </li>
           </ul>
         )}
         {menu === 'investor' && (
           <ul>
             <li>
-              <a href="https://communa.network/roadmap">
-                Roadmap
-              </a>
+              <a href="https://communa.network/roadmap">Roadmap</a>
             </li>
             <li>
-              <a href="https://communa.network/litepaper">
-                Litepaper
-              </a>
+              <a href="https://communa.network/litepaper">Litepaper</a>
             </li>
             <li>
               <a href="https://assets.communa.network/PitchDeck.html">
@@ -346,7 +341,11 @@ export default function MenuMain() {
               </a>
             </li>
             <li>
-              <a href="mailto:hello@communa.network" target="_blank" rel="noreferrer">
+              <a
+                href="mailto:hello@communa.network"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Email Us
               </a>
             </li>
@@ -355,23 +354,17 @@ export default function MenuMain() {
         {menu === 'help' && (
           <ul>
             <li>
-              <Link href="https://communa.network/help">
-                FAQ
-              </Link>
+              <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">
-                How it works?
-              </Link>
+              <Link href="https://communa.network/help">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">
-                What is wallet?
-              </Link>
+              <Link href="https://communa.network/help">What is wallet?</Link>
             </li>
           </ul>
         )}
       </div>
-    </MenuMainWrapper >
-  )
+    </MenuMainWrapper>
+  );
 }

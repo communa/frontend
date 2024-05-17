@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
-import { defaultNotificationsContext } from './defaults';
+import React, {useRef, useState} from 'react';
+import {defaultNotificationsContext} from './defaults';
 import type {
   NotificationInterface,
   NotificationItem,
   NotificationsContextInterface,
 } from './types';
-import { setStateWithRef } from '../../Utils';
+import {setStateWithRef} from '../../Utils';
 
 export const NotificationsContext =
   React.createContext<NotificationsContextInterface>(

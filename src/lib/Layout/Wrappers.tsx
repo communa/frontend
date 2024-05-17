@@ -17,12 +17,12 @@ export const ConnectButtonWrapper = styled.div`
     padding: 10px 24px;
     transform: none;
     border-radius: 10px;
-    min-width: 200px;
+    /* min-width: 300px; */
     align-items: center;
     justify-content: center;
 
     height: 37px;
-    font-size: 14px !important;
+    font-size: 16px !important;
     font-weight: 500;
     padding: 10px 24px;
     transform: none;
@@ -33,14 +33,14 @@ export const ConnectButtonWrapper = styled.div`
     }
     span {
       margin-right: 5px !important;
-    }              
+    }
     &:hover {
       background-color: rgba(19 29 47 / 100%);
     }
     svg {
       margin-right: 5px;
-      font-size: 28px;      
-    }    
+      font-size: 28px;
+    }
   }
   &.largeWhite {
     button {
@@ -50,6 +50,7 @@ export const ConnectButtonWrapper = styled.div`
   #authLogin {
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
+
     animation-name: shakeMe;
     animation-duration: 3s;
     animation-delay: 3s;
@@ -87,7 +88,7 @@ export const LogoWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0 0 20px 0;
-  }      
+  }
 `;
 
 export const MenuMainWrapper = styled.header`
@@ -98,14 +99,14 @@ export const MenuMainWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  
+
   .menu {
     font-size: 28px;
     color: #fff;
     height: 50px;
     width: 50px;
     line-height: 50px;
-    display:  none;
+    display: none;
   }
   nav {
     display: flex;
@@ -127,7 +128,7 @@ export const MenuMainWrapper = styled.header`
       span {
         display: none;
       }
-    }    
+    }
     ul {
       display: flex;
 
@@ -139,7 +140,7 @@ export const MenuMainWrapper = styled.header`
         &:hover,
         &.active {
           a {
-            color: #aaa;  
+            color: #aaa;
           }
         }
         &.sep {
@@ -167,7 +168,7 @@ export const MenuMainWrapper = styled.header`
         }
         &.social.first {
           margin-left: 15px;
-        }        
+        }
       }
     }
     .auth {
@@ -222,9 +223,9 @@ export const MenuMainWrapper = styled.header`
           }
         }
       }
-    }      
+    }
   }
-  
+
   #downMenu {
     display: flex;
     width: 100%;
@@ -237,7 +238,7 @@ export const MenuMainWrapper = styled.header`
     }
     &.investor {
       height: 240px;
-    }    
+    }
     &.dashboard {
       height: 100px;
     }
@@ -245,8 +246,8 @@ export const MenuMainWrapper = styled.header`
       height: 170px;
     }
     &.developer {
-      height:100px;
-    }            
+      height: 100px;
+    }
     ul {
       list-style-type: none;
       font-weight: 400;
@@ -281,7 +282,7 @@ export const MenuMainWrapper = styled.header`
           }
         }
       }
-    }    
+    }
   }
   .copyright {
     font-style: normal;
@@ -347,7 +348,7 @@ export const MenuMainWrapper = styled.header`
         text-transform: uppercase;
       }
     }
-    
+
     footer {
       position: relative;
 
@@ -360,12 +361,12 @@ export const MenuMainWrapper = styled.header`
 
         cursor: pointer;
         text-transform: inherit;
-        transition: transform 0.125s ease;        
+        transition: transform 0.125s ease;
         font-weight: 500;
         border-width: 0;
         background-color: #fff;
         color: #000;
-        
+
         height: 37px;
         font-size: 14px !important;
         padding: 10px 24px;
@@ -374,9 +375,9 @@ export const MenuMainWrapper = styled.header`
         transform: none;
         width: 235px;
         justify-content: left;
-        
-        &:hover{
-          background-color: rgba(var(--color-primary-main),0.2);
+
+        &:hover {
+          background-color: rgba(var(--color-primary-main), 0.2);
         }
         svg {
           margin-right: 5px;
@@ -392,8 +393,8 @@ export const MenuMainWrapper = styled.header`
         margin-top: 20px;
         color: rgba(var(--color-primary-main), 0.5);
       }
-    }      
-    
+    }
+
     &.__active {
       height: 100vh;
     }
@@ -405,7 +406,7 @@ export const MenuMainWrapper = styled.header`
         }
       }
     }
-  }    
+  }
 `;
 
 export const FaqWrapper = styled.ul`
@@ -452,6 +453,6 @@ export const FaqWrapper = styled.ul`
       p {
         display: block;
       }
-    }    
+    }
   }
 `;

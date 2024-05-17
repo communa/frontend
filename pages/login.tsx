@@ -8,8 +8,11 @@ import {APP_NAME} from 'src/config/consts';
 import Logo from 'src/lib/Layout/Logo';
 import {ConnectButtonEth} from 'src/lib/Layout/ConnectButtonEth';
 import {ConnectButtonTon} from 'src/lib/Layout/ConnectButtonTon';
+import {useAuth} from 'src/contexts/Auth';
 
-const Download = () => {
+const Login = () => {
+  const {userAddress} = useAuth();
+
   return (
     <LoginPageWrapper>
       <Head>
@@ -21,7 +24,7 @@ const Download = () => {
       </Head>
       <main>
         <NextLink href="/" passHref>
-          <IconButton className="close" size='large'>
+          <IconButton className="close" size="large">
             <CloseIcon />
           </IconButton>
         </NextLink>
@@ -30,32 +33,44 @@ const Download = () => {
           <header className="middleHeader __white">
             <h2>Welcome to Communa</h2>
             <p>
-            Join the future of freelancing with authentication powered by Ethereum or Telegram.<br />
-            Say goodbye to passwords and hello to Web3 experiences!
-              <a 
-                href="https://communa.network/help"
-                target='_blank'
-              >
+              Join the future of freelancing with authentication powered by
+              Ethereum and TON.
+              <br />
+              Say goodbye to passwords and hello to Web3 experiences!
+              <a href="https://communa.network/help" target="_blank">
                 What is Web3 Wallet?
               </a>
             </p>
           </header>
-          <ul>
-            <li>
-              <ConnectButtonEth />
-            </li>
-            <li>
-              <ConnectButtonTon />
-            </li>  
-          </ul>
+          {userAddress && (
+            <p className="connected">
+              Connected with: <br />
+              {userAddress}
+            </p>
+          )}
+          {!userAddress && (
+            <ul>
+              <li>
+                <ConnectButtonEth />
+              </li>
+              <li>
+                <ConnectButtonTon />
+              </li>
+            </ul>
+          )}
         </section>
         <p className="note">
-          <b>Ethereum wallets</b>: WalletConnect, Metamask, TrustWallet, Coinbase Wallet, Atomic Wallet, Exodus Wallet, Exodus Wallet, Edge Wallet, Trezor Wallet<br/>
-          <b>TON wallets</b>: Telegram Wallet, Tonkeeper, MyTonWallet, OpenMask, TonHub, DeWallet, XTONWallet, TON Wallet<br/>
+          <b>Ethereum wallets</b>: WalletConnect, Metamask, TrustWallet,
+          Coinbase Wallet, Atomic Wallet, Exodus Wallet, Exodus Wallet, Edge
+          Wallet, Trezor Wallet
+          <br />
+          <b>TON wallets</b>: Telegram Wallet, Tonkeeper, MyTonWallet, OpenMask,
+          TonHub, DeWallet, XTONWallet, TON Wallet
+          <br />
         </p>
       </main>
     </LoginPageWrapper>
   );
 };
 
-export default Download;
+export default Login;

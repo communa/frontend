@@ -19,7 +19,7 @@ export const ActivityWrapper = styled.div`
   article {
     display: flex;
     flex-direction: column;
-    
+
     .body {
       overflow: hidden;
     }
@@ -35,7 +35,7 @@ export const ActivityWrapper = styled.div`
       color: #000;
       text-decoration: none;
       line-height: 1.1;
-      
+
       &:hover {
         text-decoration: underline;
       }
@@ -43,7 +43,9 @@ export const ActivityWrapper = styled.div`
     .body {
       padding: 20px 0 20px;
 
-      h1, h2, h3 {
+      h1,
+      h2,
+      h3 {
         margin-top: 20px;
         margin-bottom: 5px;
       }
