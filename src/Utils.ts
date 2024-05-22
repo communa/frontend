@@ -23,3 +23,5 @@ export const request = (
     throw e;
   }
 };
+
+export const addressToShort = (address: string) => `${address.slice(0, 4)}...${address.slice(38, 44)}`

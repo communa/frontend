@@ -1,4 +1,4 @@
-import {useTonConnectUI, useTonWallet} from '@tonconnect/ui-react';
+import {toUserFriendlyAddress, useTonConnectUI, useTonWallet} from '@tonconnect/ui-react';
 import {useCallback, useContext, useEffect, useState} from 'react';
 import Image from 'next/image';
 
@@ -8,19 +8,35 @@ import {ConnectButtonWrapper} from 'src/lib/Layout/Wrappers';
 import {AuthContext} from 'src/contexts/Auth';
 
 import TonLogo from 'src/assets/toncoin-ton-logo.svg';
-// import {useNotifications} from 'src/contexts/Notifications';
 
 // https://docs.ton.org/develop/dapps/ton-connect/react
 
-export const ConnectButtonTon = () => {
+export const ConnectButtonTon = (
+  { 
+    twaReturnUrl, 
+    label
+  }: { 
+    twaReturnUrl?: `${string}://${string}`,
+    label?: string
+  }
+) => {
   const [tonConnectUI] = useTonConnectUI();
   const {userLogIn} = useContext(AuthContext);
-  // const {addNotification} = useNotifications();
   const wallet = useTonWallet();
   const [nonce, setNonce] = useState('');
 
   const recreateProofPayload = useCallback(async () => {
-    tonConnectUI.setConnectRequestParameters({ state: 'loading' });
+    if (twaReturnUrl) {
+      tonConnectUI.uiOptions = {
+        actionsConfiguration: {
+          twaReturnUrl,
+        }
+      } 
+    }
+
+    tonConnectUI.setConnectRequestParameters({ 
+      state: 'loading' 
+    });
     
     const res = await request({
       url: `${API_HOST}/api/auth/nonce`,
@@ -34,10 +50,6 @@ export const ConnectButtonTon = () => {
       value: {tonProof: res.data},
     });
     setNonce(res.data);
-    // addNotification({
-    //   title: res.data,
-    //   subtitle: '',
-    // });
 	}, [tonConnectUI])
 
   if (!nonce) {
@@ -53,7 +65,7 @@ export const ConnectButtonTon = () => {
         url: `${API_HOST}/api/auth/ton`,
         method: 'POST',
         data: {
-          address: w.account.address,
+          address: toUserFriendlyAddress(w.account.address),
           network: w.account.chain,
           public_key: w.account.publicKey,
           proof: {
@@ -68,7 +80,12 @@ export const ConnectButtonTon = () => {
         refresh: res.headers['refresh-token'],
       };
 
-      userLogIn(w.account.address, tokens);
+      if (twaReturnUrl) {
+        userLogIn(w.account.address, tokens);  
+      } else {
+        userLogIn(w.account.address, tokens, '/time');        
+      }
+
     }
   }),[tonConnectUI, wallet, nonce]);
 
@@ -90,7 +107,7 @@ export const ConnectButtonTon = () => {
           width={35}
           height={35}
         />
-        Sign In with TON
+        {label}
       </button>
     </ConnectButtonWrapper>
   );

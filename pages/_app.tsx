@@ -109,7 +109,7 @@ function App({Component, pageProps}: AppProps) {
         refresh: res.headers['refresh-token'],
       };
 
-      userLogIn(address as string, tokens);
+      userLogIn(address as string, tokens, '/time');
 
       return Promise.resolve(true);
     },
@@ -180,6 +180,7 @@ function App({Component, pageProps}: AppProps) {
               <Notifications />
               <Component {...pageProps} />
 
+              <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
               <Script
                 src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
                 strategy="afterInteractive"

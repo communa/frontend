@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovementRounded';
 import NextLink from 'next/link';
+import {addressToShort} from 'src/Utils';
 
 import {useAuth} from 'src/contexts/Auth';
 import {ConnectButtonWrapper, MenuMainWrapper} from 'src/lib/Layout/Wrappers';
@@ -27,7 +28,7 @@ export default function MenuMain() {
   let isHide = false;
 
   if (userAddress) {
-    addressShort = `${userAddress.slice(0, 4)}...${userAddress.slice(38, 44)}`;
+    addressShort = addressToShort(userAddress);
   }
 
   useEffect(() => {
@@ -291,7 +292,7 @@ export default function MenuMain() {
         {menu === 'dashboard' && (
           <ul>
             <li>
-              <Link href={`/time`}>Your projects</Link>
+              <Link href={`/time`}>Projects</Link>
             </li>
             <li>
               <Link href={`/user/${userAddress}`}>Profile</Link>

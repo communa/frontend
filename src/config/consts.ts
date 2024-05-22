@@ -1,7 +1,7 @@
 let api = 'http://0.0.0.0:4000';
 
 // if (process.env.NODE_ENV === 'production') {
-  api = 'https://app.communa.network';
+api = 'https://app.communa.network';
 // }
 
 export const DOWNLOAD = {

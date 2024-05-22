@@ -59,6 +59,31 @@ export const ConnectButtonWrapper = styled.div`
   }
 `;
 
+export const LogoTelegramWrapper = styled.div`
+  display: flex;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: max-content;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+
+  picture {
+    position: relative;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  }
+`;
+
+
 export const LogoWrapper = styled.div`
   display: flex;
   position: relative;

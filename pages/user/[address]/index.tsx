@@ -6,19 +6,19 @@ import type {
 import Head from 'next/head';
 import Link from 'next/link';
 
-import {request} from 'src/Utils';
-import {API_HOST, APP_DESCRIPTION, APP_NAME} from 'src/config/consts';
-import {IUser} from 'src/interface/IUser';
-import {PageWrapper, UserPageWrapper} from 'src/lib/Wrappers';
-import MenuMain from 'src/lib/Layout/MenuMain';
-import {useAuth} from 'src/contexts/Auth';
-
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
+
+import {addressToShort, request} from 'src/Utils';
+import {API_HOST, APP_DESCRIPTION, APP_NAME} from 'src/config/consts';
+import {IUser} from 'src/interface/IUser';
+import {PageWrapper, UserPageWrapper} from 'src/lib/Wrappers';
+import MenuMain from 'src/lib/Layout/MenuMain';
+import {useAuth} from 'src/contexts/Auth';
 
 export const getServerSideProps: GetServerSideProps<{
   user: IUser;
@@ -60,7 +60,7 @@ const UserProfile = ({
         <article>
           <UserPageWrapper>
             <nav className="action">
-              <h2>{user.address}</h2>
+              <h2>{addressToShort(user.address)}</h2>
               {userAddress && (
                 <Link href={`/user/${user.address}/edit`}>
                   <button className="apply small">
@@ -73,7 +73,9 @@ const UserProfile = ({
             <div className="userProfile">
               <div className="fields">
                 <h3>Address</h3>
-                <p className="address">{user.address}</p>
+                <p className="address">
+                  {user.address}
+                </p>
                 <h3>Username</h3>
                 <p>{user.userName}</p>
                 <h3>Company</h3>

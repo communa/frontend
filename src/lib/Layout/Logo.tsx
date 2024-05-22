@@ -12,7 +12,7 @@ export default function Logo() {
             src="/logo.png"
             width={100}
             height={100}
-            alt="Landscape picture"
+            alt="Communa Network"
           />
         </picture>
       </Link>
