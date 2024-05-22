@@ -167,15 +167,6 @@ export default function MenuMain() {
 
       {isOpen && (
         <div id="mobileMenu">
-          <h4>Dashboard</h4>
-          <ul>
-            <li>
-              <Link href={`/time`}>Your projects</Link>
-            </li>
-            <li>
-              <Link href={`/user/${userAddress}`}>Profile</Link>
-            </li>
-          </ul>
           <h4>Marketplace</h4>
           <ul>
             {JOB_KEYWORDS.map((k, i) => {
@@ -197,7 +188,7 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">What is wallet?</Link>
+              <Link href="https://communa.network/help">What is a wallet?</Link>
             </li>
           </ul>
           <h4>Investor</h4>
@@ -360,7 +351,7 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">What is wallet?</Link>
+              <Link href="https://communa.network/help">What is a wallet?</Link>
             </li>
           </ul>
         )}

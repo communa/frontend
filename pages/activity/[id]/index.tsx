@@ -16,16 +16,23 @@ export const getServerSideProps: GetServerSideProps<{
   activity: IActivity;
 }> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
-  const response = await request({
-    url: `${API_HOST}/api/activity/${id}`,
-    method: 'GET',
-  });
-
-  return {
-    props: {
-      activity: response.data,
-    },
-  };
+  
+  try {
+    const response = await request({
+      url: `${API_HOST}/api/activity/${id}`,
+      method: 'GET',
+    });
+    return {
+      props: {
+        activity: response.data,
+      },
+    };
+  } catch {
+    return {
+      redirect: '/',
+      notFound: true
+    };    
+  }
 };
 
 const Activity = ({
