@@ -59,13 +59,6 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     const user = JSON.parse(localStorage.getItem('user') as string);
 
     if (user && user.address) {
-      const isEth = user.address.length === 42;
-      const isTon = user.address.includes('0:');
-
-      // if (isTon) {
-      //   return toUserFriendlyAddress(user.address);
-      // }
-    
       return user.address;
     }
 
@@ -88,16 +81,19 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     return false;
   };
 
-  const userLogOut = (): void => {
+  const userLogOut = (redirectTo?: string): void => {
     localStorage.clear();
     connect('unauthenticated');
-    router.push('/login');
+
+    if (redirectTo) {
+      router.push('/login');
+    }
   };
 
   const userLogIn = (
-    address: string, 
+    address: string,
     tokens: any,
-    redirectTo?: string,
+    redirectTo?: string
   ): void => {
     localStorage.setItem('user', JSON.stringify(address as string));
     localStorage.setItem('JWT', JSON.stringify(tokens));
@@ -110,8 +106,8 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     connect('authenticated');
 
     if (redirectTo) {
-      router.push('/time');
-      location.href = '/time';
+      router.push(redirectTo);
+      location.href = redirectTo;
     }
   };
 

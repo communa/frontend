@@ -6,10 +6,7 @@ export default function LogoTelegram() {
   return (
     <LogoTelegramWrapper className="logo">
       <picture>
-        <img
-          src="/logo.png"
-          alt="Communa Network"
-        />
+        <img src="/logo.png" alt="Communa Network" />
       </picture>
     </LogoTelegramWrapper>
   );

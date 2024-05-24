@@ -83,7 +83,6 @@ export const LogoTelegramWrapper = styled.div`
   }
 `;
 
-
 export const LogoWrapper = styled.div`
   display: flex;
   position: relative;

@@ -130,7 +130,11 @@ export default function MenuMain() {
             </a>
           </li>
           <li className="social">
-            <a href="https://t.me/communanetwork" target="_blank" rel="noreferrer">
+            <a
+              href="https://t.me/communanetwork"
+              target="_blank"
+              rel="noreferrer"
+            >
               <TelegramIcon />
             </a>
           </li>
@@ -138,7 +142,7 @@ export default function MenuMain() {
         <div className="auth">
           {addressShort ? (
             <ConnectButtonWrapper>
-              <button type="button" onClick={() => userLogOut()}>
+              <button type="button" onClick={() => userLogOut('/login')}>
                 <LogoutIcon /> Disconnect {addressShort}
               </button>
             </ConnectButtonWrapper>
@@ -186,10 +190,10 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">How it works?</Link>
+              <Link href="https://communa.network/help/how-it-works">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">What is a wallet?</Link>
+              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet?</Link>
             </li>
           </ul>
           <h4>Investor</h4>
@@ -201,7 +205,7 @@ export default function MenuMain() {
               <a href="https://communa.network/litepaper">Litepaper</a>
             </li>
             <li>
-              <a href="https://assets.communa.network/PitchDeck.html">
+              <a href="https://communa.network/pitch-deck">
                 Pitch Deck
               </a>
             </li>
@@ -318,7 +322,7 @@ export default function MenuMain() {
               <a href="https://communa.network/litepaper">Litepaper</a>
             </li>
             <li>
-              <a href="https://assets.communa.network/PitchDeck.html">
+              <a href="https://communa.network/pitch-deck">
                 Pitch Deck
               </a>
             </li>
@@ -349,10 +353,10 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">How it works?</Link>
+              <Link href="https://communa.network/help/how-it-works">How it works?</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help">What is a wallet?</Link>
+              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet?</Link>
             </li>
           </ul>
         )}

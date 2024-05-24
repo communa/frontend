@@ -8,6 +8,8 @@ export interface IUser {
 
   userName: string;
   company: string;
+  skills: string;
+  price: number;
 
   bio: string;
   facebook: string;

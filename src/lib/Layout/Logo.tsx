@@ -8,12 +8,7 @@ export default function Logo() {
     <LogoWrapper className="logo">
       <Link href="https://communa.network">
         <picture>
-          <img
-            src="/logo.png"
-            width={100}
-            height={100}
-            alt="Communa Network"
-          />
+          <img src="/logo.png" width={100} height={100} alt="Communa Network" />
         </picture>
       </Link>
     </LogoWrapper>

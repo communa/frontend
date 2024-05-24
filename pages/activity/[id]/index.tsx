@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<{
   activity: IActivity;
 }> = async (context: GetServerSidePropsContext) => {
   const {id} = context.query;
-  
+
   try {
     const response = await request({
       url: `${API_HOST}/api/activity/${id}`,
@@ -30,8 +30,8 @@ export const getServerSideProps: GetServerSideProps<{
   } catch {
     return {
       redirect: '/',
-      notFound: true
-    };    
+      notFound: true,
+    };
   }
 };
 

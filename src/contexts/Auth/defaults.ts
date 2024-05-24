@@ -6,7 +6,7 @@ export interface AuthContextInterface {
   userAddress: string;
   isJwtExpired: boolean;
   jwt: {access: string; refresh: string} | null;
-  userLogOut: () => void;
+  userLogOut: (redirectTo?: string) => void;
   userLogIn: (address: string, tokens: any, redirectTo?: string) => void;
 }
 
@@ -17,6 +17,6 @@ export const defaultAuthContext: AuthContextInterface = {
   isJwtExpired: false,
   // eslint-disable-next-line
   connect: (s: AuthenticationStatus) => {},
-  userLogOut: () => {},
+  userLogOut: (redirectTo?: string) => {},
   userLogIn: (address: string, tokens: any, redirectTo?: string) => {},
 };

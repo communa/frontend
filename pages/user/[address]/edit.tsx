@@ -53,6 +53,9 @@ const UserProfileEdit = ({
   const [bio, setBio] = useState(user.bio || template);
   const [userName, setUserName] = useState(user.userName);
   const [company, setCompany] = useState(user.company);
+  const [price, setPrice] = useState(user.price);
+  const [skills, setSkills] = useState(user.skills);
+
   const [linkedIn, setLinkedIn] = useState(user.linkedIn);
   const [twitter, setTwitter] = useState(user.twitter);
   const [telegram, setTelegram] = useState(user.telegram);
@@ -75,10 +78,13 @@ const UserProfileEdit = ({
       data: {
         userName,
         company,
+        price,
+        skills,
+        bio,
+
         twitter,
         linkedIn,
         telegram,
-        bio,
       },
     });
 
@@ -96,7 +102,7 @@ const UserProfileEdit = ({
     <PageWrapper>
       <Head>
         <title>
-          {userAddress} - Web3 Jobs - {APP_NAME}
+          {userAddress} - {APP_NAME}
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="robots" content="index, follow" />
@@ -137,6 +143,20 @@ const UserProfileEdit = ({
                     onChange={e => setCompany(e.target.value)}
                   />
                   <TextField
+                    label="Price in USDT"
+                    variant="outlined"
+                    placeholder="10.00"
+                    defaultValue={price}
+                    onChange={e => setPrice(Number(e.target.value))}
+                  />
+                  <TextField
+                    label="Skills"
+                    variant="outlined"
+                    placeholder="Skills"
+                    defaultValue={skills}
+                    onChange={e => setSkills(e.target.value)}
+                  />                                    
+                  <TextField
                     label="LinkedIn"
                     variant="outlined"
                     placeholder="LinkedIn"
@@ -159,7 +179,6 @@ const UserProfileEdit = ({
                   />
                 </div>
                 <div className="bio">
-                  <h3>Bio</h3>
                   <Editor
                     apiKey={TINYMCE_KEY}
                     onInit={(evt, editor) => (editorRef.current = editor)}

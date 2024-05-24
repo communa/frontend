@@ -17,7 +17,7 @@ import {ITime} from 'src/interface/ITime';
 import {IActivity} from 'src/interface/IActivity';
 import {API_HOST, APP_NAME} from 'src/config/consts';
 import {useAuth} from 'src/contexts/Auth';
-import {request} from 'src/Utils';
+import {getAddressNetwork, request} from 'src/Utils';
 import {TimeReportWrapper} from 'src/lib/Wrappers';
 
 const TimeReport = () => {
@@ -63,6 +63,8 @@ const TimeReport = () => {
     typeof window !== 'undefined' ? window.print() : false;
   };
 
+  const network = getAddressNetwork(userAddress);
+
   return (
     <TimeReportWrapper>
       <Head>
@@ -82,7 +84,7 @@ const TimeReport = () => {
                   src="/logo.png"
                   width={100}
                   height={100}
-                  alt="Landscape picture"
+                  alt="Communa Network Logo"
                 />
               </picture>
             </Link>
@@ -92,7 +94,7 @@ const TimeReport = () => {
             <p>
               Total: {report?.totals[0]?.rateTotal} USDT
               <br />
-              Wallet: {userAddress} / POLYGON
+              Wallet: {userAddress} ({network})
             </p>
           </div>
           <div className="action">

@@ -260,6 +260,9 @@ export const LoginPageWrapper = styled.div`
             background: #ccc;
             color: rgba(var(--color-primary-main), 1);
 
+            img {
+              margin-right: 10px;
+            }
             span {
               margin-right: 5px !important;
             }
@@ -405,69 +408,6 @@ export const LoginPageWrapper = styled.div`
       right: 10px;
       top: 10px;
     }
-  }
-`;
-
-export const TelegramWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: var(--tg-viewport-stable-height, 100vh);
-  /* pointer-events: none; */
-  flex-grow: 1;
-  justify-content: space-between;
-  align-items: center;
-  justify-content: center;
-  
-  #name {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: #333;
-    padding: 40px;
-
-    .address {
-      color: #1976d2;
-      font-weight: 500;
-    } 
-    h2 {
-      margin: 0;
-      margin-top: 5px;
-      color: #1976d2;
-    }
-    h3 {
-      margin: 0;
-      margin-top: 5px;
-      color: #1976d2;
-    }
-    #social {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
-      color: #1976d2;
-    }    
-  }
-  #bio {
-    flex: 1;
-    display: flex;
-    align-items: center;
-
-    color: #000;
-    background: #ccc;
-    padding: 40px;
-    font-size: 18px;
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  button {
-    padding: 25px 20px;
   }
 `;
 
@@ -1115,6 +1055,11 @@ export const UserPageWrapper = styled.div`
         color: #1976d2;
         font-weight: 600;
       }
+      .skills {
+        display: flex;
+        gap: 2px 3px;
+        flex-wrap: wrap;
+      }
       .social {
         display: flex;
         flex-direction: column;
@@ -1140,8 +1085,18 @@ export const UserPageWrapper = styled.div`
       border-radius: 50px;
 
       h3 {
-        font-size: 20px;
+        font-size: 28px;
         margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        
+        img {
+          margin-right: 10px;
+        }
+      }
+
+      .pay {
+        margin-top: 30px;
       }
     }
   }

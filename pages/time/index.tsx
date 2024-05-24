@@ -19,7 +19,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Collapse from '@mui/material/Collapse';
-import {Button, Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
+import {Chip, FormControl, NativeSelect, Tooltip} from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import {API_HOST, APP_NAME} from 'src/config/consts';

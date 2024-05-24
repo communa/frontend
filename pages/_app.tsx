@@ -19,6 +19,7 @@ import {configureChains, createClient, useAccount, WagmiConfig} from 'wagmi';
 import {polygon} from 'wagmi/chains';
 import {publicProvider} from 'wagmi/providers/public';
 import {THEME, TonConnectUIProvider} from '@tonconnect/ui-react';
+import {AppRoot} from '@telegram-apps/telegram-ui';
 
 import {AuthContext, AuthProvider, useAuth} from 'src/contexts/Auth';
 import {withProviders} from 'src/lib/Hooks';
@@ -32,6 +33,7 @@ import {request} from 'src/Utils';
 
 import 'src/assets/global.scss';
 import '@rainbow-me/rainbowkit/styles.css';
+import '@telegram-apps/telegram-ui/dist/styles.css';
 
 const {chains, provider} = configureChains([polygon], [publicProvider()]);
 
@@ -109,11 +111,11 @@ function App({Component, pageProps}: AppProps) {
         refresh: res.headers['refresh-token'],
       };
 
-      userLogIn(address as string, tokens, '/time');
+      userLogIn(address as string, tokens, `/user/${address}`);
 
       return Promise.resolve(true);
     },
-    signOut: async () => userLogOut(),
+    signOut: async () => userLogOut('/login'),
   });
 
   useEffect(() => {
@@ -133,7 +135,7 @@ function App({Component, pageProps}: AppProps) {
         console.log('auth.user', res.data);
 
         if (!res.data) {
-          userLogOut();
+          userLogOut('/login');
         } else {
           localStorage.setItem('user', JSON.stringify(res.data));
           connect('authenticated');
@@ -156,47 +158,51 @@ function App({Component, pageProps}: AppProps) {
 
   return (
     <MainInterfaceWrapper>
-      <TonConnectUIProvider
-        manifestUrl="https://app.communa.network/tonconnect-manifest.json"
-        // manifestUrl="https://ton-connect.github.io/demo-dapp-with-wallet/tonconnect-manifest.json"
-        uiPreferences={{theme: THEME.DARK}}
-      >
-        <WagmiConfig client={wagmiClient}>
-          <RainbowKitAuthenticationProvider
-            adapter={authenticationAdapter}
-            status={authStatus}
-          >
-            <RainbowKitProvider
-              coolMode
-              appInfo={appInfo}
-              chains={chains}
-              theme={darkTheme({
-                accentColor: '#1360d3',
-                accentColorForeground: 'white',
-                fontStack: 'system',
-                overlayBlur: 'small',
-              })}
+      <AppRoot appearance="light" platform="ios">
+        <TonConnectUIProvider
+          manifestUrl="https://app.communa.network/tonconnect-manifest.json"
+          uiPreferences={{theme: THEME.DARK}}
+        >
+          <WagmiConfig client={wagmiClient}>
+            <RainbowKitAuthenticationProvider
+              adapter={authenticationAdapter}
+              status={authStatus}
             >
-              <Notifications />
-              <Component {...pageProps} />
+              <RainbowKitProvider
+                coolMode
+                appInfo={appInfo}
+                chains={chains}
+                theme={darkTheme({
+                  accentColor: '#1360d3',
+                  accentColorForeground: 'white',
+                  fontStack: 'system',
+                  overlayBlur: 'small',
+                })}
+              >
+                <Notifications />
+                <Component {...pageProps} />
+              </RainbowKitProvider>
+            </RainbowKitAuthenticationProvider>
+          </WagmiConfig>
+        </TonConnectUIProvider>
+      </AppRoot>
 
-              <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
-              <Script
-                src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
-                strategy="afterInteractive"
-              />
-              <Script id="google-analytics" strategy="afterInteractive">
-                {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){window.dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-59QX73S7GV');
-              `}
-              </Script>
-            </RainbowKitProvider>
-          </RainbowKitAuthenticationProvider>
-        </WagmiConfig>
-      </TonConnectUIProvider>
+      <Script
+        src="https://telegram.org/js/telegram-web-app.js"
+        strategy="afterInteractive"
+      />
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-59QX73S7GV"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-59QX73S7GV');
+      `}
+      </Script>
     </MainInterfaceWrapper>
   );
 }

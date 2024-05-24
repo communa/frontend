@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+
 import {defaultNotificationsContext} from './defaults';
 import type {
   NotificationInterface,
