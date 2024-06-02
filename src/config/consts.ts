@@ -29,4 +29,4 @@ export const COMMUNA_WALLET_ADDRESS =
 
 export const JOB_KEYWORDS = ['Web3', 'Ethereum', 'Solidity', 'Rust'];
 
-export const TELEGRAM_BOT_ID = 'https://t.me/communa_network_bot/user';
+export const TELEGRAM_BOT_ID = 'https://t.me/CommunaNetworkBot/app';

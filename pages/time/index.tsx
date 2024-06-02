@@ -3,13 +3,13 @@ import moment from 'moment';
 import {useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
-
+import DownloadingIcon from '@mui/icons-material/Downloading';
 import Box from '@mui/material/Box';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import InfoIcon from '@mui/icons-material/Info';
-import PrintIcon from '@mui/icons-material/Print';
 import EditIcon from '@mui/icons-material/Edit';
+import PrintIcon from '@mui/icons-material/Print';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
@@ -208,7 +208,7 @@ const Time = () => {
                 </button>
               </Link>
             </p>
-          </nav>
+          </nav>    
           <TableContainer>
             <Table>
               <TableHead>
@@ -308,7 +308,7 @@ const Time = () => {
                         <TableCell align="left" className="title">
                           {activity?.title}
                         </TableCell>
-                        <TableCell align="left">
+                        <TableCell align="right">
                           <Chip
                             label={`${total.rateTotal.toFixed(1)} USD`}
                             color="primary"
@@ -379,28 +379,20 @@ const Time = () => {
                                   </div>
                                   <div className="actions">
                                     <Link
+                                      className="smallButton" 
                                       target="_blank"
                                       href={`/time/report?activityId=${activity?.id}`}
                                     >
-                                      <button className="apply small">
-                                        <PrintIcon />
-                                        Invoice
-                                      </button>
+                                      <PrintIcon /> Invoice
                                     </Link>
                                     <Link
+                                      className="smallButton" 
                                       href={`/activity/${activity.id}/edit`}
                                     >
-                                      <button className="apply small">
-                                        <EditIcon />
-                                        Edit
-                                      </button>
+                                      <EditIcon /> Edit
                                     </Link>
-                                    <button
-                                      className="apply small"
-                                      onClick={() => onDelete(activity)}
-                                    >
-                                      <DeleteIcon />
-                                      Delete
+                                    <button className="smallButton" onClick={() => onDelete(activity)}>
+                                      <DeleteIcon /> Delete
                                     </button>
                                   </div>
                                 </div>
@@ -464,6 +456,12 @@ const Time = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          
+          {state === 'progress' && (
+            <div id="loading">
+              <DownloadingIcon />loading ...
+            </div>
+          )}          
         </article>
       </main>
     </TimePageWrapper>

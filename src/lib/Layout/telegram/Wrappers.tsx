@@ -20,7 +20,7 @@ export const TelegramWrapper = styled.div`
     nav {
       &.bottom {
         display: flex;
-        gap: 20px;
+        gap: 10px;
 
         button {
           flex: 1;
@@ -40,17 +40,41 @@ export const TelegramWrapper = styled.div`
       }
     }
   }
+
+  &#about {
+    main {
+      height: auto;
+      justify-content: center; 
+      margin-top: -10px;
+      padding-bottom: 0;
+
+      h2 {
+        margin-top: 20px;
+      }
+    }  
+    footer {
+      padding: 20px;
+      display: flex;
+      button {
+        flex: 1;
+      }
+    }
+  }
   &#welcome {
     main {
-      justify-content: center;
+      justify-content: space-between;
 
       section {
         text-align: center;
-        padding: 20px;
-        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;        
 
         h2 {
           margin-bottom: 10px;
+          margin-top: 10px;
         }
         p {
           font-size: 14px;
@@ -58,7 +82,7 @@ export const TelegramWrapper = styled.div`
         }
       }
       nav {
-        margin-top: 30px;
+        margin-top: 60px;
         justify-content: center;
         display: flex;
 
@@ -66,13 +90,31 @@ export const TelegramWrapper = styled.div`
           padding: 25px 20px;
         }
       }
+      picture {
+        display: flex;
+        justify-content: center;
+      }
     }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      
+      button {
+        display: flex;
+        /* flex: 1; */
+      }
+      #authTon {
+        display: flex;
+        flex: 1;
+      }
+    }    
   }
   &#profile {
     justify-content: start;
     
     main {
-      padding-top: 10px;
+      padding: 10px;
 
       header {
         display: flex;
@@ -126,13 +168,17 @@ export const TelegramWrapper = styled.div`
       }
       .bio {
         color: #444;
-        padding: 0;
-        flex: 4;
+        padding: 0px;
+        flex: 4 1 0%;
         font-size: 18px;
         display: flex;
         text-align: center;
+        -webkit-box-pack: center;
         justify-content: center;
+        -webkit-box-align: start;
         align-items: start;
+        padding: 25px;
+        padding-top: 0;
       }      
     }
   }

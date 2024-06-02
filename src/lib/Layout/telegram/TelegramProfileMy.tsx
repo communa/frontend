@@ -1,13 +1,13 @@
 import {
   Button,
 } from '@telegram-apps/telegram-ui';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import {TelegramWrapper} from './Wrappers';
 import {IUser} from 'src/interface/IUser';
 import {TelegramProfile} from './TelegramProfile';
 import {TELEGRAM_BOT_ID} from 'src/config/consts';
 import {useNotifications} from 'src/contexts/Notifications';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export const TelegramProfileMy = (
   { fnEdit, fnDisconnect, user}: {fnEdit: Function, fnDisconnect: Function, user: IUser}

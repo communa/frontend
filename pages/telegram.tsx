@@ -12,6 +12,7 @@ import {TelegramProfileMy} from 'src/lib/Layout/telegram/TelegramProfileMy';
 import {useAuth} from 'src/contexts/Auth';
 import {TelegramSeller} from 'src/lib/Layout/telegram/TelegramSeller';
 import {TelegramLoading} from 'src/lib/Layout/telegram/TelegramLoading';
+import {TelegramAbout} from 'src/lib/Layout/telegram/TelegramAbout';
 
 declare global {
   interface Window {
@@ -152,8 +153,13 @@ const Telegram = () => {
     );
   }
 
+  if (screen === 'about') {
+    return <TelegramAbout fnBack={() => setScreen('edit')}/>;
+  }
   if (!user || !seller) {
-    return <TelegramWelcome />;
+    return <TelegramWelcome 
+      fnAbout={() => setScreen('about')}
+    />;
   }
 };
 

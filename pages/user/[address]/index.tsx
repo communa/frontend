@@ -9,6 +9,7 @@ import {useEffect, useState} from 'react';
 import {useInterval} from 'usehooks-ts';
 import {useRouter} from 'next/router';
 import {useTonConnectUI} from '@tonconnect/ui-react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import {Chip} from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -16,6 +17,7 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import ShareIcon from '@mui/icons-material/Share';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import PaymentIcon from '@mui/icons-material/Payment';
 
@@ -26,6 +28,7 @@ import {addressToShort, buildTransactionTon, getAddressNetwork, request} from 's
 import {IUser} from 'src/interface/IUser';
 import MenuMain from 'src/lib/Layout/MenuMain';
 import {useAuth} from 'src/contexts/Auth';
+import {useNotifications} from 'src/contexts/Notifications';
 
 export const getServerSideProps: GetServerSideProps<{
   user: IUser;
@@ -53,6 +56,7 @@ const UserProfile = ({user }: InferGetServerSidePropsType<typeof getServerSidePr
   const router = useRouter();
   const {redirect} = router.query;
   const network = getAddressNetwork(user.address);
+  const {addNotification} = useNotifications();
 
   useInterval(() => {
     setTimer((new Date()).getMilliseconds());
@@ -88,6 +92,15 @@ const UserProfile = ({user }: InferGetServerSidePropsType<typeof getServerSidePr
     tonConnectUI?.sendTransaction(transaction);
   }
 
+  const link = '';
+
+  const onCopy = () => {
+    addNotification({
+      title: 'Copied to clipboard',
+      subtitle: '',
+    });
+  }
+  
   return (
     <PageWrapper>
       <Head>
@@ -104,121 +117,125 @@ const UserProfile = ({user }: InferGetServerSidePropsType<typeof getServerSidePr
       </Head>
       <main>
         <MenuMain />
-        <article>
-          <UserPageWrapper>
-            <nav className="action">
-              <h2>{addressToShort(user.address)}</h2>
-              <p>
-                {userAddress && (
-                  <Link href={`/user/${user.address}/edit`}>
-                    <button className="apply small">
-                      <SelfImprovementIcon />
-                      Edit profile
-                    </button>
-                  </Link>
+        <UserPageWrapper>
+          <nav className="action">
+            <h2>{addressToShort(user.address)}</h2>
+            <p>
+              <CopyToClipboard text={link} onCopy={() => onCopy()}>
+                <button className="apply small">
+                  <ShareIcon />
+                  Share
+                </button>
+              </CopyToClipboard>
+              {userAddress && (
+                <Link href={`/user/${user.address}/edit`}>
+                  <button className="apply small">
+                    <SelfImprovementIcon />
+                    Edit profile
+                  </button>
+                </Link>
+              )}
+            </p>
+          </nav>
+          <div className="userProfile">
+            <div className="fields">
+              <h3>Address ({network})</h3>
+              <p className="address">{user.address}</p>
+              <h3>Username</h3>
+              <p>{user.userName}</p>
+              <h3>Company</h3>
+              <p>{user.company}</p>
+              <h3>Skills</h3>
+              <div className="skills">
+                {user.skills && (user.skills.split(',').map(skill => {
+                  return (
+                    <Chip
+                      label={skill}
+                      color="default"
+                      variant="filled"
+                    />
+                  )
+                }))}
+              </div>                
+              <div className="social">
+                {user.twitter && (
+                  <p>
+                    <TwitterIcon />
+                    <a href={user.twitter} target="_blank">
+                      {user.twitter}
+                    </a>
+                  </p>
                 )}
-              </p>
-            </nav>
-            <div className="userProfile">
-              <div className="fields">
-                <h3>Address ({network})</h3>
-                <p className="address">{user.address}</p>
-                <h3>Username</h3>
-                <p>{user.userName}</p>
-                <h3>Company</h3>
-                <p>{user.company}</p>
-                <h3>Skills</h3>
-                <div className="skills">
-                  {user.skills && (user.skills.split(',').map(skill => {
-                    return (
-                      <Chip
-                        label={skill}
-                        color="default"
-                        variant="filled"
-                      />
-                    )
-                  }))}
-                </div>                
-                <div className="social">
-                  {user.twitter && (
-                    <p>
-                      <TwitterIcon />
-                      <a href={user.twitter} target="_blank">
-                        {user.twitter}
-                      </a>
-                    </p>
-                  )}
-                  {user.linkedIn && (
-                    <p>
-                      <LinkedInIcon />
-                      <a href={user.linkedIn} target="_blank">
-                        {user.linkedIn}
-                      </a>
-                    </p>
-                  )}
-                  {user.facebook && (
-                    <p>
-                      <FacebookIcon />
-                      <a href={user.facebook} target="_blank">
-                        {user.facebook}
-                      </a>
-                    </p>
-                  )}
-                  {user.telegram && (
-                    <p>
-                      <TelegramIcon />
-                      <a href={user.telegram} target="_blank">
-                        {user.telegram}
-                      </a>
-                    </p>
-                  )}
-                  {user.github && (
-                    <p>
-                      <GitHubIcon />
-                      <a href={user.github} target="_blank">
-                        {user.github}
-                      </a>
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="bio">
-                <h3>
-                  ${user.price}
-                </h3>
-                <div
-                  className="body"
-                  dangerouslySetInnerHTML={{
-                    __html: user.bio,
-                  }}
-                />
-                {network === 'TON' && (
-                  <>
-                    {userAddress ? (
-                      <button
-                        className="apply small pay" 
-                        onClick={pay}
-                      >
-                        <PaymentIcon />
-                        Pay Now
-                      </button>
-                      ) : (
-                        <ConnectButtonTon 
-                          paymentUrl={`/user/${user.address}?redirect=payment`} 
-                        />
-                    )}
-                  </>
+                {user.linkedIn && (
+                  <p>
+                    <LinkedInIcon />
+                    <a href={user.linkedIn} target="_blank">
+                      {user.linkedIn}
+                    </a>
+                  </p>
                 )}
-                {network === 'EVM' && userAddress && (
-                  <>
-                    <br />
-                    <p>Payment on EVM networks are not yet supported.</p>
-                  </>
+                {user.facebook && (
+                  <p>
+                    <FacebookIcon />
+                    <a href={user.facebook} target="_blank">
+                      {user.facebook}
+                    </a>
+                  </p>
+                )}
+                {user.telegram && (
+                  <p>
+                    <TelegramIcon />
+                    <a href={user.telegram} target="_blank">
+                      {user.telegram}
+                    </a>
+                  </p>
+                )}
+                {user.github && (
+                  <p>
+                    <GitHubIcon />
+                    <a href={user.github} target="_blank">
+                      {user.github}
+                    </a>
+                  </p>
                 )}
               </div>
             </div>
-          </UserPageWrapper>
-        </article>
+            <div className="bio">
+              <h3>
+                ${user.price}
+              </h3>
+              <div
+                className="body"
+                dangerouslySetInnerHTML={{
+                  __html: user.bio,
+                }}
+              />
+              {network === 'TON' && (
+                <>
+                  {userAddress ? (
+                    <button
+                      className="apply small pay" 
+                      onClick={pay}
+                    >
+                      <PaymentIcon />
+                      Pay Now
+                    </button>
+                    ) : (
+                      <ConnectButtonTon 
+                        paymentUrl={`/user/${user.address}?redirect=payment`} 
+                      />
+                  )}
+                </>
+              )}
+              {network === 'EVM' && userAddress && (
+                <>
+                  <br />
+                  <p>Payment on EVM networks are not yet supported.</p>
+                </>
+              )}
+            </div>
+          </div>
+        </UserPageWrapper>
       </main>
     </PageWrapper>
   );

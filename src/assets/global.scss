@@ -236,6 +236,23 @@ a:hover {
   }
 }
 
+.smallButton {
+  background: #1876D1;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  border: 0;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  text-decoration: none !important;
+  &:hover {
+    background: #125291;
+  }
+}
+
 main {
   article {
     form {

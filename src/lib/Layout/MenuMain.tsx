@@ -86,28 +86,28 @@ export default function MenuMain() {
             <Link href="https://communa.network/help">Help</Link>
           </li>
           <li
-            onMouseEnter={() => showMenu('investor')}
-            onMouseLeave={() => hideMenu()}
-            className={menu === 'investor' ? 'active' : ''}
-          >
-            <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
-              Investors
-            </a>
-          </li>
-          <li
-            onMouseEnter={() => showMenu('developer')}
-            onMouseLeave={() => hideMenu()}
-            className={menu === 'developer' ? 'active' : ''}
-          >
-            <Link href="https://github.com/communa">Developers</Link>
-          </li>
-          <li
             onMouseEnter={() => showMenu('work')}
             onMouseLeave={() => hideMenu()}
             className={menu === 'work' ? 'active' : ''}
           >
             <Link href="/">Marketplace</Link>
           </li>
+          <li
+            onMouseEnter={() => showMenu('investor')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'investor' ? 'active' : ''}
+          >
+            <a href="#">
+              Investors
+            </a>
+          </li>     
+          <li
+            onMouseEnter={() => showMenu('developer')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'developer' ? 'active' : ''}
+          >
+            <Link href="https://github.com/communa">Developers</Link>
+          </li>               
           <li>
             <a href="https://communa.network/download">Download v0.6.1</a>
           </li>
@@ -196,7 +196,7 @@ export default function MenuMain() {
               <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet?</Link>
             </li>
           </ul>
-          <h4>Investor</h4>
+          <h4>Investors</h4>
           <ul>
             <li>
               <a href="https://communa.network/roadmap">Roadmap</a>
@@ -229,6 +229,15 @@ export default function MenuMain() {
               </a>
             </li>
           </ul>
+          <h4>Developers</h4>
+          <ul>
+            <li>
+              <a href="https://communa.network/roadmap">Roadmap</a>
+            </li>
+            <li>
+              <a href="https://communa.network/litepaper">Litepaper</a>
+            </li>
+          </ul>
           <h4>Social</h4>
           <ul>
             <li>
@@ -250,7 +259,7 @@ export default function MenuMain() {
               </a>
             </li>
           </ul>
-          <h4>Developer</h4>
+          <h4>Developers</h4>
           <ul>
             <li>
               <a

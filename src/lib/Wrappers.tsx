@@ -71,6 +71,12 @@ export const PageWrapper = styled.div`
         margin-bottom: 30px;
         align-items: center;
 
+        p {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+        }
+
         h2 {
           margin-top: 0;
         }
@@ -699,6 +705,21 @@ export const TimePageWrapper = styled.div`
   height: 100vh;
   overflow-y: scroll;
 
+  #loading {
+    text-align: center;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 11px;
+    font-size: 18px;
+    font-weight: 500;
+    align-items: center;
+    color: #777;
+    svg {
+      font-size: 46px;
+    }
+  }
   main {
     display: flex;
     flex-direction: column;
@@ -1007,7 +1028,8 @@ export const LoginWrapper = styled.div`
   }
 `;
 
-export const UserPageWrapper = styled.div`
+export const UserPageWrapper = styled.article`
+
   h3 {
     margin-top: 20px;
     font-size: 18px;
@@ -1024,11 +1046,15 @@ export const UserPageWrapper = styled.div`
   }
   .userProfile {
     display: flex;
-    margin-top: 60px;
-    margin-bottom: 100px;
+    margin-top: 20px;
+    padding-bottom: 0 !important;
 
     &.__edit {
       margin-top: 20px;
+      
+      .bio {
+        height: fit-content;
+      }
     }
 
     .fields {

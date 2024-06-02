@@ -76,8 +76,8 @@ export const LogoTelegramWrapper = styled.div`
   picture {
     position: relative;
     img {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
     }
   }
@@ -254,7 +254,7 @@ export const MenuMainWrapper = styled.header`
     display: flex;
     width: 100%;
     height: 0px;
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
     overflow: hidden;
 
     &.help {

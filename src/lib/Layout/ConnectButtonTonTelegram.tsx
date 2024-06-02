@@ -87,7 +87,7 @@ export const ConnectButtonTonTelegram = () => {
   };
 
   return (
-    <Button mode="filled" onClick={onLogin}>
+    <Button id="authTon" mode="filled" onClick={onLogin}>
       Connect Wallet
     </Button>
   );
