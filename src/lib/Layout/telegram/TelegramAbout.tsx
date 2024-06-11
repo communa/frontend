@@ -1,50 +1,34 @@
 import {Button} from '@telegram-apps/telegram-ui';
 import {TelegramWrapper} from './Wrappers';
+import LogoTelegram from '../LogoTelegram';
 
 export const TelegramAbout = ({ fnBack}: {fnBack: Function}) => {
   return (
     <TelegramWrapper id="about">
       <main>
-        <h2>Freelancing</h2>
-        <p>
-          In the last decade, there was an explosion of freelancing resulting in millions of people now working as independent contractors. Advances in technology have made it possible to work remotely and connect workers and clients worldwide. As the world becomes more digital, freelancing is becoming an increasingly popular way of earning a living.
-
-          This trend shows no signs of slowing down, having more companies turning to freelancers to fill their staffing needs. <strong>Freelancing now offers a level of flexibility and autonomy that traditional jobs simply cannot match.</strong>
-        </p>
-
-        <h2>Decentralisation</h2>
-        <p>
-          The technical importance of decentralization cannot be overstated, and we are excited to see how blockchain technology is transforming the world. Communa is made to operate borderless where unbiased smart contracts enable freelancers to work with clients directly, without the need for 3rd party services or any other intermediaries.
-
-          Like numerous web2 freelancing platforms, Communa automates the needed business processes directly on the blockchain: time tracking, invoicing, payments, and reputation. Using blockchain we aim not only to reduce costs, and cut the needs for party systems but also to increase trust bringing <strong>a level of autonomy that has never been seen before.</strong>
-        </p>
-
-        <h2>Transparency</h2>
-        <p>
-          We are building Communa with a commitment to transparency and fairness, bringing a suite of tools and resources to help both clients and freelancers manage and truly own their work. With the sources available on GitHub, we <strong>invite the open-source community to join the development of a brand new freelancing platform.</strong>
-
-          Our platform does operate on top of Ethereum, with smart contracts serve agreements between buyer and seller being directly written into lines of code. These lines of code give automation of processes happen on traditional freelancing platforms but give a greater trust and transparent way to store and transfer value. as all transactions and interactions are recorded on the blockchain and can be easily verified.
-
-          Smart contracts let us automate complex processes involving time-tracking, invoicing, and payments resulting in fewer office operations and lower fees. An approach like this not only saves time and money but also <strong>provides a level of transparency that the traditional approach simply cannot give.</strong>
-        </p>
-
-        <h2>Reputation</h2>
-        <p>
-          We all know that a strong reputation is essential in a crowded market, where profiles on social networks like LinkedIn serve as a digital resume.
-
-          Reputation built on blockchain is a new idea that is gaining popularity in the crypto community. The concept can be perfectly applied to freelancing market, be used to verify the authenticity of freelancers profiles and their work history similarly as we verify transitions on etherscan.
-
-          With a job contract published as an NFT on the blockchain where metadata like hourly rate, date started and the references to all the time spent we achieve a system resistant to fraud where smart contracts will contain references to all-time-tracked, invoices, and payments.
-
-          Decentralised reputation this can lead to an autonomous and tamper-proof system, where users could verify their credentials, work history without relying on any centralized authority. By that Communa will enable freelancers to have full control over their reputation, as users <strong>will be really owning their profiles and achievements.</strong>
-        </p>
-
-        <h2>Payments</h2>
-        <p>
-          Fast and reliable payments are crucial for contractors located across the globe with 100+ different currencies circulating. Blockchain networks and stablecoins like USDT and USDC offer the needed global accessibility both for businesses and freelancers, which is also faster, cheaper, and more independent than usual payments.
-
-          We focus on Telegram and Ethereum as the most widely adopted technologies giving us access to major market share and the ability to send and receive payments in stablecoins out of the box. Our smart contracts automate all required processes related to time-tracking, paying, and invoicing in a frictionless manner, <strong>with money released to freelancers in USDT on a daily basis.</strong>
-        </p>  
+        <LogoTelegram />
+        <h2>P2P Freelance Marketplace</h2>
+        <article>
+          <p>
+            Our mini-app offers essential features for freelancers and service providers. Users can log in with a web3 wallet, complete their profiles, and share a link for instant payment for personal services.
+          </p>
+          <br/>
+          <p>
+            You can find the Telegram Wallet in the main menu or use other web3 wallets like Toncoin. Telegram is one of the most popular messengers with a user base of around 1 billion, making our mini-app accessible to a vast audience.
+          </p>
+          <br/>
+          <p>
+          Many web3 wallets support the TON blockchain and can be used alongside the built-in Telegram wallet. The built-in wallet is easy to find in the main menu, ready to use, and highly user-friendly.
+          </p>
+          <br/>
+          <p>
+            The TON blockchain supports smart contracts, leveraging the full benefits of decentralized finance, including secure payments through smart contracts, ensuring safe transactions.
+          </p>
+          <br/>
+          <p>
+            Telegram is continuously evolving, regularly releasing updates, offering more possibilities and a growing audience. This development opens up vast opportunities and motivation for developers to launch and expand mini-apps and dapps
+          </p>
+        </article>  
       </main>  
       <footer>
         <Button mode='bezeled' onClick={() => fnBack()}>

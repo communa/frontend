@@ -11,6 +11,9 @@ export interface IUser {
   skills: string;
   price: number;
 
+  country: string;
+  city: string;  
+
   bio: string;
   facebook: string;
   linkedIn: string;

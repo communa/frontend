@@ -258,10 +258,10 @@ export const MenuMainWrapper = styled.header`
     overflow: hidden;
 
     &.help {
-      height: 140px;
+      height: 170px;
     }
     &.investor {
-      height: 240px;
+      height: 170px;
     }
     &.dashboard {
       height: 100px;

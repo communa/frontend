@@ -6,7 +6,7 @@
   "author": "ivan.proskuryakov",
   "license": "MIT",
   "engines": {
-    "node": "^18"
+    "node": ">=18"
   },
   "scripts": {
     "pm2": "NODE_ENV=production pm2 start yarn --name frontend -- start",

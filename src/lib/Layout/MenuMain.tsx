@@ -86,13 +86,6 @@ export default function MenuMain() {
             <Link href="https://communa.network/help">Help</Link>
           </li>
           <li
-            onMouseEnter={() => showMenu('work')}
-            onMouseLeave={() => hideMenu()}
-            className={menu === 'work' ? 'active' : ''}
-          >
-            <Link href="/">Marketplace</Link>
-          </li>
-          <li
             onMouseEnter={() => showMenu('investor')}
             onMouseLeave={() => hideMenu()}
             className={menu === 'investor' ? 'active' : ''}
@@ -108,6 +101,13 @@ export default function MenuMain() {
           >
             <Link href="https://github.com/communa">Developers</Link>
           </li>               
+          <li
+            onMouseEnter={() => showMenu('work')}
+            onMouseLeave={() => hideMenu()}
+            className={menu === 'work' ? 'active' : ''}
+          >
+            <Link href="/">Marketplace</Link>
+          </li>          
           <li>
             <a href="https://communa.network/download">Download v0.6.1</a>
           </li>
@@ -190,11 +190,14 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help/how-it-works">How it works?</Link>
+              <Link href="https://communa.network/help/how-it-works">How it works</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet?</Link>
+              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet</Link>
             </li>
+            <li>
+              <Link href="https://communa.network/help/telegram-mini-app">Telegram MiniApp</Link>
+            </li>                 
           </ul>
           <h4>Investors</h4>
           <ul>
@@ -207,16 +210,6 @@ export default function MenuMain() {
             <li>
               <a href="https://communa.network/pitch-deck">
                 Pitch Deck
-              </a>
-            </li>
-            <li>
-              <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
-                Business Inquiry
-              </a>
-            </li>
-            <li>
-              <a href="https://docs.google.com/forms/d/1-NVkDj1AU3p6hcUbDprqFAbZ0uj9rkJciwd0eRwZpgA">
-                Utility Token
               </a>
             </li>
             <li>
@@ -336,16 +329,6 @@ export default function MenuMain() {
               </a>
             </li>
             <li>
-              <a href="https://docs.google.com/forms/d/1nBtimLYE6yHDixAnlNhJ2mcB7gzWwlMCXPCdTxGo6lE">
-                Business Inquiry
-              </a>
-            </li>
-            <li>
-              <a href="https://docs.google.com/forms/d/1-NVkDj1AU3p6hcUbDprqFAbZ0uj9rkJciwd0eRwZpgA">
-                Utility Token
-              </a>
-            </li>
-            <li>
               <a
                 href="mailto:hello@communa.network"
                 target="_blank"
@@ -362,11 +345,16 @@ export default function MenuMain() {
               <Link href="https://communa.network/help">FAQ</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help/how-it-works">How it works?</Link>
+              <Link href="https://communa.network/help/how-it-works">How it works</Link>
             </li>
             <li>
-              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet?</Link>
+              <Link href="https://communa.network/help/what-is-a-web3-wallet">What is a wallet</Link>
             </li>
+            <li>
+              <Link href="https://communa.network/help/telegram-mini-app">
+                Telegram MiniApp
+              </Link>
+            </li>            
           </ul>
         )}
       </div>

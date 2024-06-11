@@ -1,11 +1,12 @@
+import {CircularProgress} from '@mui/material';
+
 import {TelegramWrapper} from './Wrappers';
-import LogoTelegram from '../LogoTelegram';
 
 export const TelegramLoading = () => {
   return (
     <TelegramWrapper id="loading">
       <main>
-        <LogoTelegram />
+        <CircularProgress/>
       </main>
     </TelegramWrapper>
   );

@@ -28,6 +28,10 @@ export const request = (
   }
 };
 
+export const isUserAsSellerReady = (user: IUser | null) => {
+  return !user ? false : user.userName && user.bio && user.skills && user.price;
+}
+
 export const getAddressNetwork = (address: string) => {
   const isEth = address.length === 42;
 

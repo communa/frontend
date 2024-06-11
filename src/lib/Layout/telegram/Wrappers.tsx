@@ -6,12 +6,13 @@ export const TelegramWrapper = styled.div`
   left: 0;
   right: 0;
   top: 0;
-  height: var(--tg-viewport-stable-height, 100vh);
+  height: var(--tg-viewport-stable-height);
+  overflow: hidden;
   flex-grow: 1;
   justify-content: space-between;
 
   main {
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -24,39 +25,14 @@ export const TelegramWrapper = styled.div`
 
         button {
           flex: 1;
+
+          &.edit {
+            flex: 3;
+          }
+          &.save {
+            flex: 3;
+          }
         }
-      }
-    }
-  }
-
-  &#loading {
-    main {
-      justify-content: center;
-      align-items: center;
-
-      .logo {
-        animation: rotation 10s infinite linear;
-        /* transform: rotate(360deg); */
-      }
-    }
-  }
-
-  &#about {
-    main {
-      height: auto;
-      justify-content: center; 
-      margin-top: -10px;
-      padding-bottom: 0;
-
-      h2 {
-        margin-top: 20px;
-      }
-    }  
-    footer {
-      padding: 20px;
-      display: flex;
-      button {
-        flex: 1;
       }
     }
   }
@@ -99,10 +75,8 @@ export const TelegramWrapper = styled.div`
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      
       button {
         display: flex;
-        /* flex: 1; */
       }
       #authTon {
         display: flex;
@@ -110,8 +84,106 @@ export const TelegramWrapper = styled.div`
       }
     }    
   }
+  &#wizard {
+    main {
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+
+      .fields {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        > div {
+          margin-bottom: 20px;
+        }
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        
+        button {
+          display: flex;
+          flex: 1;
+        }
+      }    
+    }
+  }
+  &#loading {
+    height: 100vh;
+    overflow: hidden;
+    
+    main {
+      justify-content: center;
+      align-items: center;
+
+      .logo {
+        animation: rotation 10s infinite linear;
+      }
+    }
+  }
+  &#about {
+    overflow: scroll;
+
+    main {
+      height: auto;
+      justify-content: center; 
+      padding-bottom: 0;
+
+      .logo {
+        img {
+          height: 100px;
+          width: 100px;
+        }
+        margin-bottom: 15px;
+      }
+      h2 {
+        text-align: center;
+        font-size: 20px;
+      }
+      article {
+        padding: 10px 0;
+        text-align: justify;
+      }
+    }  
+    footer {
+      padding: 10px;
+      display: flex;
+
+      button {
+        flex: 1;
+      }
+    }
+  }
   &#profile {
     justify-content: start;
+
+    &.inactive {
+      main {
+        section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+          padding: 40px;
+          text-align: center;
+          h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+          }
+          p {
+            font-size: 16px;
+            color: #666;
+          }
+        }
+      }
+    }
     
     main {
       padding: 10px;
@@ -183,16 +255,37 @@ export const TelegramWrapper = styled.div`
     }
   }
   &#edit {
+    /* height: 80vh; */
+    overflow: scroll;
+    
     main {
-      height: 100%;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
+      padding: 0;
+      height: auto;
+      overflow: scroll;
+      min-height: 100%;
+      
       .fields  {
-        > div {
-          margin-bottom: 20px;
+        padding: 10px;
+        padding-bottom: 80px;
+
+        .MuiInput-root {
+          margin-bottom: 10px;
+
+          ::before {
+            border-bottom: 1px solid rgb(150 150 150 / 40%);
+          }
+        }
+        label {
+          color: #999;
+        }
+        .country {
+          margin-bottom: 0;
+          margin-top: 0;
+
+          label {
+            margin-left: -15px;
+            margin-top: 7px;
+          }
         }
       }
       textarea {
@@ -203,15 +296,27 @@ export const TelegramWrapper = styled.div`
         flex-direction: column;
         flex-grow: 1;
       }
+    }
+    footer {
+      z-index: 10;
+      background: #fff;
+      padding: 10px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      right: 0;
       nav {
-        padding: 0;
         display: flex;
-        gap: 20px;
+        gap: 10px;
 
         button {
           flex: 1;
+
+          &.save {
+            flex: 4;
+          }
         }
-      }
+      }    
     }
   }
 `;

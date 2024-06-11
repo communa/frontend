@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react';
-
-import {useTonAddress, useTonConnectUI} from '@tonconnect/ui-react';
+import {useCallback, useContext, useEffect, useState} from 'react';
+import {toUserFriendlyAddress, useTonAddress, useTonConnectUI, useTonWallet} from '@tonconnect/ui-react';
 import { useInterval } from 'usehooks-ts';
 
-import {request} from 'src/Utils';
+import {buildTransactionTon, request} from 'src/Utils';
 import {API_HOST, TELEGRAM_BOT_ID} from 'src/config/consts';
 import {IUser} from 'src/interface/IUser';
+import {IUserUnsafe} from 'src/interface/IUserUnsafe';
 import {TelegramWelcome} from 'src/lib/Layout/telegram/TelegramWelcome';
 import {TelegramProfileEdit} from 'src/lib/Layout/telegram/TelegramProfileEdit';
 import {TelegramProfileMy} from 'src/lib/Layout/telegram/TelegramProfileMy';
-import {useAuth} from 'src/contexts/Auth';
+import {AuthContext, useAuth} from 'src/contexts/Auth';
 import {TelegramSeller} from 'src/lib/Layout/telegram/TelegramSeller';
 import {TelegramLoading} from 'src/lib/Layout/telegram/TelegramLoading';
 import {TelegramAbout} from 'src/lib/Layout/telegram/TelegramAbout';
@@ -30,7 +30,12 @@ const Telegram = () => {
   const [seller, setSeller] = useState<IUser|null>(null);
   const [user, setUser] = useState<IUser|null>(null);
   const [screen, setScreen] = useState<string>('profile');
-  const [isPlaying, setPlaying] = useState<boolean| null>(true)
+  const [isPlaying, setPlaying] = useState<boolean| null>(true);
+  const [userUnsafe, setUserUnsafe] = useState<IUserUnsafe|null>(null);
+
+  const {userLogIn} = useContext(AuthContext);
+  const wallet = useTonWallet();
+  const [nonce, setNonce] = useState('');
 
   let WebApp: any = null;
   let transaction: any = null;
@@ -40,10 +45,19 @@ const Telegram = () => {
   }, isPlaying ? 1000 : null);
 
   useEffect(() => {
+    document.body.classList.add('miniApp');
+    document.body.classList.remove('miniAppEdit');
+  }, [screen]);
+
+  useEffect(() => {
     if (window !== undefined) {
       WebApp = window?.Telegram?.WebApp;
   
       if (WebApp) {
+        setUserUnsafe(WebApp.initDataUnsafe.user);
+
+        console.log('>>>>', userUnsafe, WebApp.initDataUnsafe.user);
+
         setPlaying(null);
         WebApp.ready();
         WebApp.expand();
@@ -74,15 +88,8 @@ const Telegram = () => {
       const seller = response.data;
 
       if (tonAddress) {
-        transaction = {
-          validUntil: Math.floor(Date.now() / 1000) + 360 * 6,
-          messages: [
-              {
-                address,
-                amount: seller?.price * 1000000000
-              }
-          ]
-        };
+        const transaction = await buildTransactionTon(seller, 'Communa');;
+
         WebApp.MainButton.setParams({
           text: 'PAY NOW',
         });
@@ -127,6 +134,68 @@ const Telegram = () => {
     tonConnectUI?.disconnect();
     userLogOut();
   };
+
+
+  const recreateProofPayload = useCallback(async () => {
+    if (tonConnectUI) {
+      tonConnectUI.uiOptions = {
+        actionsConfiguration: {
+          twaReturnUrl: TELEGRAM_BOT_ID,
+        },
+      };
+  
+      tonConnectUI.setConnectRequestParameters({
+        state: 'loading',
+      });
+  
+      const res = await request({
+        url: `${API_HOST}/api/auth/nonce`,
+        method: 'POST',
+        data: {
+          // address: '',
+        },
+      });
+      tonConnectUI.setConnectRequestParameters({
+        state: 'ready',
+        value: {tonProof: res.data},
+      });
+      setNonce(res.data);
+    }
+  }, [tonConnectUI]);
+
+  if (!nonce) {
+    recreateProofPayload();
+  }
+
+  useEffect(
+    () =>
+      tonConnectUI.onStatusChange(async w => {
+        if (w?.connectItems?.tonProof && 'proof' in w?.connectItems.tonProof) {
+          const res = await request({
+            url: `${API_HOST}/api/auth/ton`,
+            method: 'POST',
+            data: {
+              address: toUserFriendlyAddress(w.account.address),
+              network: w.account.chain,
+              public_key: w.account.publicKey,
+              proof: {
+                ...w.connectItems.tonProof.proof,
+                state_init: w.account.walletStateInit,
+              },
+            },
+          });
+
+          const tokens = {
+            access: res.headers.authorization,
+            refresh: res.headers['refresh-token'],
+          };
+
+          userLogIn(w.account.address, tokens);
+        }
+      }),
+    [tonConnectUI, wallet, nonce]
+  );
+
   
   if (isLoading) {
     return <TelegramLoading />;
@@ -136,8 +205,9 @@ const Telegram = () => {
   }
   if (user && screen === 'edit') {
     return (
-      <TelegramProfileEdit 
-        user={user} 
+      <TelegramProfileEdit
+        user={user}
+        userUnsafe={userUnsafe}
         fnLoad={() => loadUser(user.address)} 
         fnClose={() => setScreen('profile')} 
       />
@@ -145,8 +215,9 @@ const Telegram = () => {
   }
   if (user) {
     return (
-      <TelegramProfileMy 
+      <TelegramProfileMy
         user={user} 
+        userUnsafe={userUnsafe}
         fnDisconnect={() => onLogout()} 
         fnEdit={() => setScreen('edit')} 
       />
@@ -160,7 +231,7 @@ const Telegram = () => {
     return <TelegramWelcome 
       fnAbout={() => setScreen('about')}
     />;
-  }
+  } 
 };
 
 export default Telegram;
