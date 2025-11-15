@@ -6,7 +6,7 @@ import type {
 import Head from 'next/head';
 import {Editor} from '@tinymce/tinymce-react';
 import {useEffect, useRef, useState} from 'react';
-import {Switch, TextField} from '@mui/material';
+import {FormControlLabel, Switch, TextField} from '@mui/material';
 import {useRouter} from 'next/router';
 
 import {IActivity} from 'src/interface/IActivity';
@@ -47,6 +47,8 @@ const Activity = ({
   const [text, setText] = useState(activity.text);
   const [state, setState] = useState(activity.state);
   const [title, setTitle] = useState(activity.title);
+  const [trackProcesses, setTrackProcesses] = useState(activity.trackProcesses);
+  const [trackScreenshots, setTrackScreenshots] = useState(activity.trackScreenshots);
   const [rateHour, setRateHour] = useState(activity.rateHour);
   const [salary, setSalary] = useState(activity.salary);
   const [keywords, setKeywords] = useState(kw);
@@ -72,6 +74,8 @@ const Activity = ({
         text,
         salary,
         rateHour,
+        trackProcesses,
+        trackScreenshots,
         keywords: keywords.split(','),
       },
     });
@@ -139,6 +143,30 @@ const Activity = ({
                   defaultValue={rateHour}
                   onChange={e => setRateHour(Number(e.target.value))}
                 />
+                <div className="group">
+                  <FormControlLabel
+                    value="bottom"
+                    control={
+                      <Switch
+                        defaultChecked={trackScreenshots}
+                        onChange={e => setTrackScreenshots(e.target.checked)}
+                      />
+                    }
+                    label="Track screenshots"
+                    labelPlacement="end"
+                  />
+                  <FormControlLabel
+                    value="bottom"
+                    control={
+                      <Switch
+                        defaultChecked={trackProcesses}
+                        onChange={e => setTrackProcesses(e.target.checked)}
+                      />
+                    }
+                    label="Track processes"
+                    labelPlacement="end"
+                  />
+                </div>
                 {activity.type === EActivityType.HOURLY && (
                   <>
                     <TextField

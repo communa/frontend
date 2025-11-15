@@ -6,6 +6,8 @@ export interface IActivity {
   id: string;
   title: string;
   state: string;
+  trackProcesses: boolean;
+  trackScreenshots: boolean;
   type: EActivityType;
   text: string;
   jobUrl: string;

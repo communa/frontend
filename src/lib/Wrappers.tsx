@@ -1186,6 +1186,12 @@ export const UserPageWrapper = styled.article`
 export const ActivitiyEditWrapper = styled.div`
   display: flex;
 
+  .group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
   .fields {
     flex: 1;
     display: flex;
